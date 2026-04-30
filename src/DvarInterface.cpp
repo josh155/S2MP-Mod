@@ -156,6 +156,9 @@ std::string DvarInterface::toUserString(const std::string& engineString) {
 void DvarInterface::addDvarsWithName(const char* name) {
     addMapping(name, name);
 }
+void DvarInterface::addDvarsWithNameDesc(const char* name, const char* description) {
+    addMapping(name, name, description);
+}
 
 
 /**
@@ -331,6 +334,7 @@ void DvarInterface::addAllMappings() {
     addDvarsWithName("fd_pause_update");
     addDvarsWithName("spv_hub_firingrange_kswitch");
     addDvarsWithName("ui_showPaintshop");
+    addDvarsWithName("spv_ui_paintshopInFullHubEnabled");
     addDvarsWithName("dlc4_killswitch");
     addDvarsWithName("mtx12_killswitch");
     addDvarsWithName("mtx11_killswitch");
@@ -354,6 +358,13 @@ void DvarInterface::addAllMappings() {
     addDvarsWithName("allow_hub_vendor_menu");
     addDvarsWithName("r_ssrMaxQuality");
     addDvarsWithName("playercard_fetch_own_enabled");
+    addDvarsWithName("ui_partyUpActive");
+    addDvarsWithName("ui_partyUpEnabled");
+    addDvarsWithName("ui_partyUpDialogRequested");
+    addDvarsWithName("spv_commandoTacInsert_disabled");
+    addDvarsWithName("core_mp_weaponorder_killswitch");
+    addDvarsWithName("spv_sku_details_rollout_majority");
+    addDvarsWithNameDesc("ui_showPaintshop", "Allow paintjobs to be applied to weapons");
 
     //ranked
     addDvarsWithName("rankedPlayLeavePenaltyMasks");
@@ -386,6 +397,7 @@ void DvarInterface::addAllMappings() {
     addMapping("inventory_triggerExchangeOnStoreExit", "1600");
     addMapping("inventory_exchangeClientID", "2327");
     addMapping("inventory_enableRevoke", "4815");
+    addMapping("prelaunchdemo", "1258");
 
     //ranked
     addMapping("rankedLockoutStrikeCooldown", "5754");
@@ -778,8 +790,8 @@ void DvarInterface::addAllMappings() {
     addMapping("log_host_migration_chance", "2574", "The % chance of host migration results telemetry");
     addMapping("max_ping_threshold_good", "4332", "max ping value to be considered as good");
     addMapping("max_ping_threshold_medium", "4760", "max ping value to be considered as medium");
-    addMapping("aci", "160", "anticheat infraction");
-    addMapping("vpte", "5029");
+    //addMapping("anti_cheat_infraction", "160", "anticheat infraction");//removed in 2.20
+    addMapping("validate_playtime_enabled", "5029"); 
     addMapping("zombiesAllowSoloPause", "5353");
     addMapping("dlog_active", "5785");
     addMapping("marketing_refresh_time", "1543", "time in seconds to wait before refreshing marketing messages from demonware");
@@ -813,12 +825,27 @@ void DvarInterface::addAllMappings() {
     addMapping("lui_splitscreenupscaling", "659", "Force splitscreen upscaling off/on (-1 off, 1 on) -- requires map change");
     addMapping("lui_hud_show_turret_ammo", "4329");
     addMapping("lui_draw_hints", "5270");
+    addMapping("IsDiskBuild", "5049");
+    addMapping("IsEmblemEditorEnabled", "1611");
     addMapping("e3demo", "2803");
     addMapping("e3demo_host", "4605");
     addMapping("e3demo_client", "1303");
     addMapping("e3demo_mapset", "4794");
     addMapping("e3demo_show_client_title_screen", "871");
     addMapping("gamescom_build", "2543");
+    addMapping("IsGamescomForceRankedMatch", "5357");
+    addMapping("IsCODPointsEnabled", "4670");
+    addMapping("IsMTX1Enabled", "5955");
+    addMapping("IsMTX2Enabled", "5954");
+    addMapping("IsDLC1Enabled", "5953");
+    addMapping("UsePickTen", "683");
+    addMapping("IsCoDAccountUIEnabled", "565");
+    addMapping("IsEmblemGalleryEnabled", "5952");
+    addMapping("IsdlcDivisionEnabled_RESISTANCE", "6021");
+    addMapping("IsdlcDivisionEnabled_GRENADIER", "6020");
+    addMapping("IsdlcDivisionEnabled_COMMANDO", "6019");
+    addMapping("IsdlcDivisionEnabled_SCOUT", "6018");
+    addMapping("IsdlcDivisionEnabled_ARTILLERY", "6017");
     addMapping("winners_circle_skiplisten", "1810");
     addMapping("winners_circle_length", "5087");
     addMapping("winners_circle_timeout", "5660");
@@ -925,6 +952,7 @@ void DvarInterface::addAllMappings() {
     addMapping("fixedtime", "299", "Use a fixed time rate for each frame");
     addMapping("com_maxFrameTime", "1292", "Time slows down if a frame takes longer than this many milliseconds");
     addMapping("sv_paused", "5351", "Pause the server");
+    addMapping("sv_running", "1080", "Pause the server");
     addMapping("cl_force_paused", "1265", "Force the client to be paused. Can't be overridden by LUA scripts, the start button, etc.");
     addMapping("com_filter_output", "2919");
     addMapping("intro", "2464");
@@ -1017,6 +1045,9 @@ void DvarInterface::addAllMappings() {
     addMapping("fx_draw", "3461", "Toggles drawing of effects after processing");
     addMapping("fx_draw_spotLight", "2157", "Toggles drawing of effects after processing");
     addMapping("fx_draw_omniLight", "5408", "Toggles drawing of effects after processing");
+    addMapping("fx_marks", "4777", "Toggles whether bullet hits leave marks");
+    addMapping("fx_marks_smodels", "4", "Toggles whether bullet hits leave marks on static models");
+    addMapping("fx_marks_ents", "3617", "Toggles whether bullet hits leave marks on entities");
     addMapping("fx_visMinTraceDist", "3344", "Minimum visibility trace size");
     addMapping("fx_drawClouds", "1398", "Toggles the drawing of particle clouds");
     addMapping("fx_deferelem", "452", "Toggles deferred processing of elements instead of effects");
@@ -1070,6 +1101,7 @@ void DvarInterface::addAllMappings() {
     addMapping("camera_thirdPerson", "311");
 
     addMapping("r_warningRepeatDelay", "1371");
+    addMapping("hud_drawHud", "597");
 
 
 
@@ -1238,8 +1270,10 @@ void DvarInterface::addAllMappings() {
     addMapping("tracer_thermalWidthMult", "4930");
     addMapping("cg_marks_ents_player_only", "4775");
     addMapping("cg_landingSounds", "4440");
-    addMapping("cg_footsteps", "4291");
+    addMapping("cg_brass", "3385", "Weapons eject brass");
     addMapping("cg_errordecay", "4391", "Decay for predicted error");
+    addMapping("cg_showmiss", "4645", "Show prediction errors");
+    addMapping("cg_footsteps", "4291", "Play footstep sounds that are NOT sprint");
     addMapping("cg_processImmediateEvents", "2921");
     addMapping("cg_tweenExtrapolationPeriodMs", "5173");
     addMapping("cg_tweenOverrideThresholdMs", "4088");
@@ -1332,17 +1366,6 @@ void DvarInterface::addAllMappings() {
     addMapping("vehAudio_spawnVolumeTime", "141");
     addMapping("aim_accel_turnrate_enabled", "1922");
     
-
-    //ui dvars ig
-    addMapping("ui_netSource", "1639", "The network source where:   0:Local   1:Internet   2:Favorites");
-    addMapping("ui_currentMap", "788", "Current map index");
-    addMapping("ui_onlineRequired", "3556", "UI requires online connection to be present.");
-    addMapping("ui_currentFeederMapIndex", "864", "Currently selected map");
-    addMapping("ui_selectedFeederMap", "264", "Current preview game type");
-    addMapping("ui_missingMapName", "2958", "Name of map to show in missing content error");
-    addMapping("ui_serverStatusTimeOut", "2382", "Time in milliseconds before a server status request times out");
-    addMapping("ui_buildLocation", "549", "Where to draw the build number");
-
     //WSA
     addMapping("dlog_devpointHost", "5138");
 
@@ -1399,7 +1422,6 @@ void DvarInterface::addAllMappings() {
     addMapping("cg_hudSplitscreenOffsetsUseScale", "454");
 
     //4835 disabled game start button
-    //4670 0 removes microtransaction deals from qm menu
     //4660 some render bool
 
     //DS_PingClient
@@ -1427,6 +1449,25 @@ void DvarInterface::addAllMappings() {
     addMapping("perk_quickDrawSpeedScaleSniper", "1587");
     addMapping("perk_fastClimb", "2810");
     addMapping("perk_fastSnipeScale", "364");
+    addMapping("virtualLobbyMap", "5473");
+
+
+    //UI_RegisterDvars
+    addMapping("ui_borderLowLightScale", "5283", "Scales the border color for the lowlight color on certain UI borders");
+    addMapping("ui_showDLCMaps", "880");
+    addMapping("ui_netSource", "1639", "The network source where:   0:Local   1:Internet   2:Favorites");
+    addMapping("ui_currentMap", "788", "Current map index");
+    addMapping("ui_onlineRequired", "3556", "UI requires online connection to be present.");
+    addMapping("ui_currentFeederMapIndex", "864", "Currently selected map");
+    addMapping("ui_selectedFeederMap", "264", "Current preview game type");
+    addMapping("ui_missingMapName", "2958", "Name of map to show in missing content error");
+    addMapping("ui_serverStatusTimeOut", "2382", "Time in milliseconds before a server status request times out");
+    addMapping("ui_buildLocation", "549", "Where to draw the build number");
+    addMapping("ui_buildSize", "3759");
+
+
+    addMapping("localize_strings", "1699");
+
 
 }
 

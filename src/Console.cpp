@@ -18,6 +18,7 @@
 #include "DevDef.h"
 #include <Arxan.hpp>
 #include "LogFile.hpp"
+#include "ConfigManager.h"
 
 //Output to internal console without label
 void Console::printIntCon(std::string text) {
@@ -170,18 +171,10 @@ void setenginemode() {
 }
 #endif
 
-void getntflags() {
-	PPEB pPeb = (PPEB)__readgsqword(0x60);
-	DWORD dwNtGlobalFlag = *(PDWORD)((PBYTE)pPeb + 0xBC);
-	DEV_PRINTF("NtGlobalFlag: %d", dwNtGlobalFlag);
-}
-void setntflags() {
-	PPEB pPeb = (PPEB)__readgsqword(0x60);
-	*reinterpret_cast<PDWORD>(LPSTR(pPeb) + 0xBC) = 112;
-}
 
 void Console::registerCustomCommands() {
 	GameUtil::addCommand("noclip", &Noclip::toggle);
+	GameUtil::addCommand("ufo", &CustomCommands::toggleUfo);
 	GameUtil::addCommand("map_restart", &CustomCommands::mapRestart);
 	GameUtil::addCommand("fast_restart", &CustomCommands::fastRestart);
 	GameUtil::addCommand("god", &CustomCommands::toggleGodmode);
@@ -192,20 +185,30 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("intcondbg", &DevDraw::toggleIntConDebugGui);
 	GameUtil::addCommand("listcmd", &CustomCommands::listAllCmds);
 	GameUtil::addCommand("map", &CustomCommands::changeMap);
-	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 	//GameUtil::addCommand("quit", &CustomCommands::quit);
 	GameUtil::addCommand("clear", &InternalConsole::clearFullConsole);
 	GameUtil::addCommand("r_fullbright", &CustomCommands::tempToggleFullbright);
 	GameUtil::addCommand("r_wireframe", &CustomCommands::tempToggleWireframe);
+	GameUtil::addCommand("r_togglePortals", &CustomCommands::togglePortals);
 	GameUtil::addCommand("unlockall", &CustomCommands::unlockAll);
+	GameUtil::addCommand("listassetpool", &CustomCommands::listAssetPool);
+	GameUtil::addCommand("saveassetpool", &CustomCommands::saveAssetPool);
+	GameUtil::addCommand("dumpAllLuaFiles", &CustomCommands::dumpAllLuaFiles);
+	GameUtil::addCommand("dumpAllCSVFiles", &CustomCommands::dumpAllCSVFiles);
 #ifdef DEVELOPMENT_BUILD
+	//GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 	GameUtil::addCommand("printfNullptr", &printfCrashTest);
-	GameUtil::addCommand("getntflags", &getntflags);
-	GameUtil::addCommand("setntflags", &setntflags);
 	GameUtil::addCommand("enginemode", &setenginemode);
+	//GameUtil::addCommand("repairNtUserStubs", &DebugPatches::repairNtUserStubs);
 	//GameUtil::addCommand("imagetest", &DevPatches::imageTestPt2);
 #endif // DEVELOPMENT_BUILD
 
+
+	//maybe find better spot for this but its good for now
+	if (ConfigManager::readConfigValue("s2mp-mod.cfg", "unlockall", false)) {
+		CustomCommands::unlockAll();//might as well just call it directly
+		Console::infoPrint("Unlock All set");
+	}
 }
 
 void Console::registerCustomDvars() {
@@ -218,6 +221,10 @@ void Console::registerCustomDvars() {
 	DvarInterface::registerBool("g_dumpRawfiles", 0, 0, "Dump RawFiles when they are loaded");
 	DvarInterface::registerBool("printWorldInfo", 0, 0, "Prints GfxWorld build info on load");
 	DvarInterface::registerBool("g_dumpMapEnts", 0, 0, "Dump MapEnts when they are loaded"); //TODO
+
+	//zmcacutils.lua left in a check for a dvar named "unlockAllConsumables" so registering here makes the lua function work lol
+	DvarInterface::registerBool("unlockAllConsumables", 0, 0, "Unlock all zombies consumables. Used by the unlockall command"); 
+	DvarInterface::registerBool("unlockAllPassivePerks", 0, 0, "Unlock all zombies passive perks. Used by the unlockall command"); 
 }
 
 //useful for testing commands and handling non-cmd/non-dvar stuff

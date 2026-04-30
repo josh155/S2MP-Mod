@@ -58,6 +58,9 @@ Load_GfxBuildInfo _Load_GfxBuildInfo = nullptr;
 typedef bool(*LUI_BeginEvent)(LocalClientNum_t localClientNum, const char* eventName, void* luaVM);
 LUI_BeginEvent _LUI_BeginEvent = nullptr;
 
+typedef bool(*CG_NotifyVirtualLobbySceneLoaded)(const char* name);
+CG_NotifyVirtualLobbySceneLoaded _CG_NotifyVirtualLobbySceneLoaded = nullptr;
+
 void hook_CM_LoadMap(const char* name, int* checksum) {
     if (name) {
         Console::printf("Loading Map: %s", name);
@@ -113,7 +116,6 @@ void hook_G_InitGame(int levelTime, unsigned int randomSeed, int restart, int re
 }
 
 void hook_Online_PatchStreamer_va(const char* label, const char* fmt, ...) {
-    Console::devPrint(__FUNCTION__);
     va_list args;
     va_start(args, fmt);
 
@@ -180,42 +182,8 @@ void hook_printf(const char* const Format, ...) {
 
 
 void printGfxBuildInfo(uintptr_t addr) {
-    Console::devPrint(__FUNCTION__);
-    if (addr == 0) {
-        Console::printf("GfxBuildInfo: address is 0");
-        return;
-    }
-    if (addr == 0xFFFFFFFFFFFFFFFFull) { //this happened a couple times
-        Console::printf("GfxBuildInfo: address is -1 (invalid sentinel)");
-        return;
-    }
-
-
     GfxBuildInfo** p = reinterpret_cast<GfxBuildInfo**>(addr);
-    if (!GameUtil::isReadablePtr(p, sizeof(*p))) {
-        Console::printf("GfxBuildInfo: ptr-to-ptr 0x%p is not readable", (void*)p);
-        return;
-    }
-
-
     GfxBuildInfo* info = *p;
-    if (!info) {
-        Console::printf("GfxBuildInfo: *p is null (addr=0x%p)", (void*)addr);
-        return;
-    }
-    const uintptr_t infoV = reinterpret_cast<uintptr_t>(info);
-    if (infoV == 0xFFFFFFFFFFFFFFFFull) {
-        Console::printf("GfxBuildInfo: *p is -1 (invalid sentinel)");
-        return;
-    }
-
-    //validate the struct memory itself before touching fields
-    if (!GameUtil::isReadablePtr(info, sizeof(GfxBuildInfo))) {
-        Console::printf("GfxBuildInfo: struct 0x%p is not readable", (void*)info);
-        return;
-    }
-
-    Console::printf("GfxBuildInfo @ addr=0x%p  p=0x%p  *p=0x%p", (void*)addr, (void*)p, (void*)info);
     Console::printf("bspCommandline   : %s", GameUtil::safeCString(info->bspCommandline));
     Console::printf("lightCommandline : %s", GameUtil::safeCString(info->lightCommandline));
     Console::printf("bspTimestamp     : %s", GameUtil::safeCString(info->bspTimestamp));
@@ -225,19 +193,17 @@ void printGfxBuildInfo(uintptr_t addr) {
 
 
 void hook_Load_GfxBuildInfo(bool atStreamStart) {
-    Console::devPrint(__FUNCTION__);
     _Load_GfxBuildInfo(atStreamStart);
     dvar_t* printWorldInfo = Functions::_Dvar_FindVar("printWorldInfo");
     if (printWorldInfo) {
         if (printWorldInfo->current.enabled) {
-            printGfxBuildInfo(0x9AD3D60_b);
+            printGfxBuildInfo(0x98E17D0_b);
         }
     }
     
 }
 
 void hook_LUI_BeginEvent(LocalClientNum_t localClientNum, const char* eventName, void* luaVM) {
-    Console::devPrint(__FUNCTION__);
     std::string s = std::string(eventName);
 
     if (s != "mousemove" && s != "mouseup" && s != "mousedown") {
@@ -248,8 +214,17 @@ void hook_LUI_BeginEvent(LocalClientNum_t localClientNum, const char* eventName,
     _LUI_BeginEvent(localClientNum, eventName, luaVM);
 }
 
+void CG_NotifyVirtualLobbySceneLoaded_hookfunc(const char* name) {
+    Console::printf("Virtual Lobby: Loaded BSP '%s'", name);
+    _CG_NotifyVirtualLobbySceneLoaded(name);
+}
+
 void PrintPatches::init() {
 	Console::infoPrint(__FUNCTION__);
+
+    //Virtual Lobby: Loaded BSP '%s'
+    MH_CreateHook(reinterpret_cast<void*>(0x41BED0_b), &CG_NotifyVirtualLobbySceneLoaded_hookfunc, reinterpret_cast<void**>(&_CG_NotifyVirtualLobbySceneLoaded));
+    MH_EnableHook(reinterpret_cast<void*>(0x41BED0_b));
 
     //Loading Map:
     MH_CreateHook(reinterpret_cast<void*>(0x63C300_b), &hook_CM_LoadMap, reinterpret_cast<void**>(&_CM_LoadMap));

@@ -42,6 +42,7 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpvReserved) {
 			t1.detach();
 		}
 		CreateThread(0, 0, extConInitWrapper, 0, 0, 0);
+		
 	}
 	return TRUE;
 }

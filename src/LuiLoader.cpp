@@ -18,7 +18,7 @@ static const DWORD OFFSET_GLOBAL_FROM_STATE = 0x10;
 static const DWORD OFFSET_BYTECODE_SHARING_FROM_GLOBAL = 0x1C0;
 static const int   BYTECODE_SHARING_ON = 1;
 
-void dumpLuaFile(const LuaFile* luaFile) {
+void LuiLoader::dumpLuaFile(const LuaFile* luaFile) {
     if (!luaFile || !luaFile->name || !luaFile->buffer || luaFile->len <= 0) {
         Console::printf("Invalid LuaFile passed to %s", __FUNCTION__);
         return;
@@ -49,7 +49,7 @@ static Load_LuaFileAsset_t oLoad_LuaFileAsset = nullptr;
 void __fastcall Load_LuaFileAsset_hookfunc(LuaFile** luaFile) {
     if (luaFile && *luaFile) {
         if (Functions::_Dvar_FindVar("g_dumpLui")->current.enabled) {
-            dumpLuaFile(*luaFile);
+            LuiLoader::dumpLuaFile(*luaFile);
         }
     }
     else {

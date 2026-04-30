@@ -83,7 +83,12 @@ class CustomCommands {
 public:
 	static uintptr_t base;
 	static uintptr_t rawBase;
+
+	static bool ufoActive; //just puttin this here for now
+
 	static void toggleGodmode();
+	static void dumpAllLuaFiles();
+	static void dumpAllCSVFiles();
 	static void listAllCmds();
 	static void toggleHud(bool b);
 	static void toggleHudBlood(bool b);
@@ -94,6 +99,7 @@ public:
 	static void saveAssetPool();
 	static void toggleGun(bool b);
 	static void toggleFog(bool b);
+	static void togglePortals();
 	static void translateString();
 	static void tempToggleFullbright();
 	static void tempToggleWireframe();
@@ -102,6 +108,7 @@ public:
 	static void fastRestart();
 	static void mapRestart();
 	static void quit();
+	static void toggleUfo();
 	static void unlockAll();
 private:
 	static bool isGodmode;

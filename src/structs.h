@@ -721,3 +721,9 @@ struct XAsset
     XAssetType type;
     XAssetHeader header;
 };
+
+struct MapEnts {
+    const char* name;
+    char* entityString;
+
+};

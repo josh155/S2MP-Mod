@@ -131,7 +131,7 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	DvarInterface::init();
 	Loaders::initAssetLoaders();
 	Errors::init();
-	InternalConsole::init(); //mod halts here until renderer ready (for arxan purposes)
+	InternalConsole::init();
 
 	DeleteFileA("ZM");//just in case
 	if (extConsoleMode == 0 || extConsoleMode == 2) {

@@ -160,6 +160,7 @@ typedef struct _SYSTEM_HANDLE_INFORMATION_EX {
 
 class DebugPatches {
 public:
+	static void repairNtUserStubs();//for testing
 	static void earlyInit();
 	static void init();
 	static uintptr_t base;

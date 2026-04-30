@@ -1,15 +1,51 @@
-///////////////////////////////////////////
+﻿///////////////////////////////////////////
 //         Debug Patches
 //	Patching some anti-tamper stuff
 ////////////////////////////////////////////
 #include "pch.h"
 #include "Arxan.hpp"
 #include <winternl.h>
+#include "Hook.hpp"
 
 #pragma intrinsic(_ReturnAddress)
 
 #define THREAD_CREATE_FLAGS_HIDE_FROM_DEBUGGER 0x00000004
 #define ThreadHideFromDebugger 0x11
+#define LOG(...) Logger::write(__VA_ARGS__)
+namespace Logger {
+    inline std::ofstream logFile;
+    inline std::mutex logMutex;
+
+    inline void initUnlocked() {
+        if (!logFile.is_open()) {
+            std::filesystem::create_directories("main");
+            logFile.open("main/startup.log", std::ios::out | std::ios::app);
+        }
+    }
+
+    inline void init() {
+        std::lock_guard<std::mutex> lock(logMutex);
+        initUnlocked();
+    }
+
+    inline void write(const char* fmt, ...) {
+        char buffer[2048];
+
+        va_list args;
+        va_start(args, fmt);
+        vsnprintf(buffer, sizeof(buffer), fmt, args);
+        va_end(args);
+
+        std::lock_guard<std::mutex> lock(logMutex);
+        initUnlocked();
+
+        if (logFile.is_open()) {
+            logFile << buffer << std::endl;
+            logFile.flush();
+        }
+    }
+}
+
 
 std::string DebugPatches::conLabel = "DP";
 uintptr_t DebugPatches::base = (uintptr_t)GetModuleHandle(NULL) + 0x1000;
@@ -40,28 +76,32 @@ NTSTATUS WINAPI HookedNtUserBuildHwndList(HDESK hdesk, HWND hwndParent, BOOL fCh
     return result;
 }
 
+
 void bypassHwndChecks() {
     HMODULE hUser32 = LoadLibraryA("win32u.dll");
     if (!hUser32) {
-        Console::print("Failed to load win32u.dll");
+        LOG("Failed to load win32u.dll");
+
         return;
     }
 
     FARPROC pFunc = GetProcAddress(hUser32, "NtUserBuildHwndList");
     if (!pFunc) {
-        Console::print("Failed to get address of NtUserBuildHwndList");
+        LOG("Failed to get address of NtUserBuildHwndList");
         return;
     }
 
     if (MH_CreateHook(pFunc, &HookedNtUserBuildHwndList, reinterpret_cast<LPVOID*>(&fpNtUserBuildHwndList)) != MH_OK) {
-        Console::print("Failed to create hook");
+        LOG("Failed to create hook");
         return;
     }
 
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook");
+        LOG("Failed to enable hook");
         return;
     }
+
+
 }
 
 using NtClose_t = NTSTATUS(NTAPI*)(HANDLE);
@@ -131,6 +171,7 @@ BOOL WINAPI HookedCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPr
     if (pbDebuggerPresent != nullptr) {
         if (pbDebuggerPresent) {
             Console::labelPrint(DebugPatches::conLabel, "CheckRemoteDebuggerPresent called");
+            LOG("CheckRemoteDebuggerPresent called");
         }
         *pbDebuggerPresent = FALSE;
     }
@@ -144,6 +185,7 @@ NTSTATUS WINAPI HookedNtCreateThreadEx(PHANDLE ThreadHandle, ACCESS_MASK Desired
     if (CreateFlags & THREAD_CREATE_FLAGS_HIDE_FROM_DEBUGGER) {
         CreateFlags &= ~THREAD_CREATE_FLAGS_HIDE_FROM_DEBUGGER;
         Console::labelPrint(DebugPatches::conLabel, "Stripped THREAD_CREATE_FLAGS_HIDE_FROM_DEBUGGER from thread creation");
+        LOG("Stripped THREAD_CREATE_FLAGS_HIDE_FROM_DEBUGGER from thread creation");
     }
 
     return fpNtCreateThreadEx(ThreadHandle, DesiredAccess, ObjectAttributes, ProcessHandle, StartRoutine, Argument, CreateFlags, ZeroBits, StackSize, MaximumStackSize, AttributeList);
@@ -152,23 +194,23 @@ NTSTATUS WINAPI HookedNtCreateThreadEx(PHANDLE ThreadHandle, ACCESS_MASK Desired
 void bypassHiddenThreadCreation() {
     HMODULE hNtdll = GetModuleHandleA("ntdll.dll");
     if (!hNtdll) {
-        Console::print("Failed to get handle for ntdll.dll");
+        LOG("Failed to get handle for ntdll.dll");
         return;
     }
 
     FARPROC pFunc = GetProcAddress(hNtdll, "NtCreateThreadEx");
     if (!pFunc) {
-        Console::print("Failed to get address of NtCreateThreadEx");
+        LOG("Failed to get address of NtCreateThreadEx");
         return;
     }
 
     if (MH_CreateHook(pFunc, &HookedNtCreateThreadEx, reinterpret_cast<LPVOID*>(&fpNtCreateThreadEx)) != MH_OK) {
-        Console::print("Failed to create hook for NtCreateThreadEx");
+        LOG("Failed to create hook for NtCreateThreadEx");
         return;
     }
 
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook for NtCreateThreadEx");
+        LOG("Failed to enable hook for NtCreateThreadEx");
         return;
     }
 }
@@ -183,23 +225,23 @@ NTSTATUS WINAPI HookedNtSetInformationThread(HANDLE ThreadHandle, THREAD_INFORMA
 void bypassThreadHideFromDebugger() {
     HMODULE hNtdll = GetModuleHandleA("ntdll.dll");
     if (!hNtdll) {
-        Console::print("Failed to get handle for ntdll.dll");
+        LOG("Failed to get handle for ntdll.dll");
         return;
     }
 
     FARPROC pFunc = GetProcAddress(hNtdll, "NtSetInformationThread");
     if (!pFunc) {
-        Console::print("Failed to get address of NtSetInformationThread");
+        LOG("Failed to get address of NtSetInformationThread");
         return;
     }
 
     if (MH_CreateHook(pFunc, &HookedNtSetInformationThread, reinterpret_cast<LPVOID*>(&fpNtSetInformationThread)) != MH_OK) {
-        Console::print("Failed to create hook for NtSetInformationThread");
+        LOG("Failed to create hook for NtSetInformationThread");
         return;
     }
 
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook for NtSetInformationThread");
+        LOG("Failed to enable hook for NtSetInformationThread");
         return;
     }
 }
@@ -209,7 +251,7 @@ void hookNtClose() {
     if (hNtDll) {
         pNtQueryObject = (PNTQUERYOBJECT)GetProcAddress(hNtDll, "NtQueryObject");
         if (!pNtQueryObject) {
-            Console::print("Failed to resolve NtQueryObject");
+            LOG("Failed to resolve NtQueryObject");
             return;
         }
         MH_CreateHook(GetProcAddress(hNtDll, "NtClose"), HookedNtClose, reinterpret_cast<LPVOID*>(&fpNtClose));
@@ -217,27 +259,9 @@ void hookNtClose() {
     MH_EnableHook(MH_ALL_HOOKS);
 }
 
-void clearHWBP(void) {
-    CONTEXT ctx{};
-    ZeroMemory(&ctx, sizeof(CONTEXT));
-    ctx.ContextFlags = CONTEXT_DEBUG_REGISTERS;
-
-    HANDLE thread = GetCurrentThread();
-    if (thread != NULL) {
-        GetThreadContext(thread, &ctx);
-        ctx.Dr0 = 0;
-        ctx.Dr1 = 0;
-        ctx.Dr2 = 0;
-        ctx.Dr3 = 0;
-        ctx.Dr6 = 0;
-        ctx.Dr7 = 0;
-        SetThreadContext(thread, &ctx);
-    }
-}
-
 NTSTATUS WINAPI HookedNtQueryInformationThread(HANDLE ThreadHandle, THREAD_INFORMATION_CLASS ThreadInformationClass, PVOID ThreadInformation, ULONG ThreadInformationLength, PULONG ReturnLength) {
     if (ThreadInformationClass == (THREAD_INFORMATION_CLASS)ThreadHideFromDebugger) {
-        Console::print("Blocked NtQueryInformationThread(ThreadHideFromDebugger)");
+        LOG("Blocked NtQueryInformationThread(ThreadHideFromDebugger)");
         return 0xC00000BB; //STATUS_NOT_SUPPORTED
     }
 
@@ -247,23 +271,23 @@ NTSTATUS WINAPI HookedNtQueryInformationThread(HANDLE ThreadHandle, THREAD_INFOR
 void bypassThreadQueryHideFromDebugger() {
     HMODULE hNtdll = GetModuleHandleA("ntdll.dll");
     if (!hNtdll) {
-        Console::print("Failed to get handle for ntdll.dll");
+        LOG("Failed to get handle for ntdll.dll");
         return;
     }
 
     FARPROC pFunc = GetProcAddress(hNtdll, "NtQueryInformationThread");
     if (!pFunc) {
-        Console::print("Failed to get address of NtQueryInformationThread");
+        LOG("Failed to get address of NtQueryInformationThread");
         return;
     }
 
     if (MH_CreateHook(pFunc, &HookedNtQueryInformationThread, reinterpret_cast<LPVOID*>(&fpNtQueryInformationThread)) != MH_OK) {
-        Console::print("Failed to create hook for NtQueryInformationThread");
+        LOG("Failed to create hook for NtQueryInformationThread");
         return;
     }
 
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook for NtQueryInformationThread");
+        LOG("Failed to enable hook for NtQueryInformationThread");
         return;
     }
 }
@@ -271,23 +295,23 @@ void bypassThreadQueryHideFromDebugger() {
 void hookNtQueryInformationProcess() {
     HMODULE hNtdll = GetModuleHandleA("ntdll.dll");
     if (!hNtdll) {
-        Console::print("Failed to get handle for ntdll.dll");
+        LOG("Failed to get handle for ntdll.dll");
         return;
     }
 
     FARPROC pFunc = GetProcAddress(hNtdll, "NtQueryInformationProcess");
     if (!pFunc) {
-        Console::print("Failed to get address of NtQueryInformationProcess");
+        LOG("Failed to get address of NtQueryInformationProcess");
         return;
     }
 
     if (MH_CreateHook(pFunc, &HookedNtQueryInformationProcess, reinterpret_cast<LPVOID*>(&oNtQueryInformationProcess)) != MH_OK) {
-        Console::print("Failed to create hook for NtQueryInformationProcess");
+        LOG("Failed to create hook for NtQueryInformationProcess");
         return;
     }
 
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook for NtQueryInformationProcess");
+        LOG("Failed to enable hook for NtQueryInformationProcess");
         return;
     }
 }
@@ -427,8 +451,8 @@ void freeIdaMutants() {
     size_t closedIda = closeCurrentProcessMutantsContaining(L"IDA ", true, false); //very needed
     size_t closeMisc = closeCurrentProcessMutantsContaining(L"WilStaging_02", true, false); //idk but looked sus
     closeMisc += closeCurrentProcessMutantsContaining(L"WilError_03", true, false); //idk but looked sus
-    DEV_PRINTF("Closed %zu IDA Mutants", closedIda);
-    DEV_PRINTF("Closed %zu Misc Mutants", closeMisc);
+    LOG("Closed %zu IDA Mutants", closedIda);
+    LOG("Closed %zu Misc Mutants", closeMisc);
 }
 
 
@@ -502,17 +526,17 @@ void disableProgramScans() {
     }
     FARPROC pFunc = GetProcAddress(dll, "NtOpenProcess");
     if (!pFunc) {
-        Console::print("Failed to get address of NtOpenProcess");
+        LOG("Failed to get address of NtOpenProcess");
         return;
     }
     
     if (MH_CreateHook(pFunc, &NtOpenProcess_hookfunc, reinterpret_cast<LPVOID*>(&fpNtOpenProcess)) != MH_OK) {
-        Console::print("Failed to create hook for NtOpenProcess");
+        LOG("Failed to create hook for NtOpenProcess");
         return;
     }
     
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook for NtOpenProcess");
+        LOG("Failed to enable hook for NtOpenProcess");
         return;
     }
 }
@@ -520,6 +544,7 @@ void disableProgramScans() {
 
 typedef BOOLEAN(NTAPI* RtlEqualUnicodeString_t)(PUNICODE_STRING, PUNICODE_STRING, BOOLEAN);
 RtlEqualUnicodeString_t fpRtlEqualUnicodeString = nullptr;
+
 void myRtlInitUnicodeString(PUNICODE_STRING dst, PCWSTR src) {
     if (!src) {
         dst->Length = 0;
@@ -527,117 +552,144 @@ void myRtlInitUnicodeString(PUNICODE_STRING dst, PCWSTR src) {
         dst->Buffer = NULL;
         return;
     }
-
     size_t len = wcslen(src) * sizeof(WCHAR);
-
     dst->Length = (USHORT)len;
     dst->MaximumLength = (USHORT)(len + sizeof(WCHAR));
     dst->Buffer = (PWSTR)src;
 }
-__kernel_entry NTSTATUS NtQuerySystemInformation_hookfunc(ULONG SystemInformationClass, PVOID SystemInformation, ULONG SystemInformationLength, PULONG ReturnLength) {
-    NTSTATUS status = fpNtQuerySystemInformation(SystemInformationClass, SystemInformation, SystemInformationLength, ReturnLength);
-    if (!NT_SUCCESS(status) || SystemInformationClass != SystemProcessInformation || SystemInformation == NULL) {
+
+__kernel_entry NTSTATUS NtQuerySystemInformation_hookfunc(
+    ULONG SystemInformationClass,
+    PVOID SystemInformation,
+    ULONG SystemInformationLength,
+    PULONG ReturnLength)
+{
+    NTSTATUS status = fpNtQuerySystemInformation(
+        SystemInformationClass,
+        SystemInformation,
+        SystemInformationLength,
+        ReturnLength);
+
+    if (!NT_SUCCESS(status) ||
+        SystemInformationClass != SystemProcessInformation ||
+        SystemInformation == NULL)
+    {
         return status;
     }
 
+    // Block list (same as before)
     const wchar_t* blockedProcesses[] = {
-        L"OLLYDBG.exe",
-        L"x32dbg.exe",
-        L"x64dbg.exe",
-        L"x96dbg.exe",
-        L"windbg.exe",
-        L"dnSpy.exe",
-        L"HxD.exe",
-        L"ida.exe", //weirdly the ida ones arent needed.
-        L"ida64.exe",
-        L"ImmunityDebugger.exe",
-        L"Scylla_x64.exe",
-        L"Scylla_x86.exe",
-        L"OllyDumpEx_SA32.exe",
-        L"OllyDumpEx_SA64.exe",
-        L"apimonitor-x64.exe",
-        L"apimonitor-x86.exe",
-        L"cheatengine-x86_64.exe",
-        L"Cheat Engine.exe",
-        L"cheatengine-x86_64-SSE4-AVX2.exe",
-        L"cheatengine-i386.exe",
+        L"OLLYDBG.exe", L"x32dbg.exe", L"x64dbg.exe", L"x96dbg.exe",
+        L"windbg.exe", L"dnSpy.exe", L"HxD.exe", L"ida.exe", L"ida64.exe",
+        L"ImmunityDebugger.exe", L"Scylla_x64.exe", L"Scylla_x86.exe",
+        L"OllyDumpEx_SA32.exe", L"OllyDumpEx_SA64.exe", L"apimonitor-x64.exe",
+        L"apimonitor-x86.exe", L"cheatengine-x86_64.exe", L"Cheat Engine.exe",
+        L"cheatengine-x86_64-SSE4-AVX2.exe", L"cheatengine-i386.exe",
+        L"DbgX.Shell.exe", L"EngHost.exe",
     };
-    const size_t numBlockedProcesses = sizeof(blockedProcesses) / sizeof(blockedProcesses[0]);
+    const size_t numBlocked = sizeof(blockedProcesses) / sizeof(blockedProcesses[0]);
+
+    // The maximum buffer size we are allowed to touch
+    ULONG bufferSize = SystemInformationLength;
+    // The actual used size (if ReturnLength is NULL, fallback to bufferSize)
+    ULONG usedSize = (ReturnLength && *ReturnLength <= bufferSize) ? *ReturnLength : bufferSize;
 
     PSYSTEM_PROCESS_INFORMATION spi = (PSYSTEM_PROCESS_INFORMATION)SystemInformation;
     PSYSTEM_PROCESS_INFORMATION prevSpi = NULL;
 
+    // Helper to check if a pointer + offset stays within buffer
+    auto IsOffsetValid = [&](const BYTE* base, ULONG offset) -> bool {
+        return (offset <= (bufferSize - (ULONG)((BYTE*)base - (BYTE*)SystemInformation)));
+        };
+
     while (true) {
+        // Safety: ensure spi is inside buffer and has at least the fixed header size
+        if ((BYTE*)spi - (BYTE*)SystemInformation + sizeof(SYSTEM_PROCESS_INFORMATION) > bufferSize)
+            break;
+
         bool blockedName = false;
 
         if (spi->ImageName.Buffer && spi->ImageName.Length > 0) {
             UNICODE_STRING name = spi->ImageName;
-            for (size_t i = 0; i < numBlockedProcesses; i++) {
+            for (size_t i = 0; i < numBlocked; i++) {
                 UNICODE_STRING blocked;
                 myRtlInitUnicodeString(&blocked, blockedProcesses[i]);
 
-                if (fpRtlEqualUnicodeString(&name, &blocked, TRUE)) {
+                if (fpRtlEqualUnicodeString && fpRtlEqualUnicodeString(&name, &blocked, TRUE)) {
                     blockedName = true;
-                    //DEV_PRINTF("Blocked-name process observed: PID=%lu | Name=%.*ls", (DWORD)(ULONG_PTR)spi->UniqueProcessId, spi->ImageName.Length / sizeof(WCHAR), spi->ImageName.Buffer);
                     break;
                 }
             }
+        }
 
-            if (blockedName) {
-                if (prevSpi == NULL) {
-                    if (spi->NextEntryOffset == 0) {
-                        RtlZeroMemory(SystemInformation, SystemInformationLength);
-                        if (ReturnLength) {
-                            *ReturnLength = 0;
-                        }
-                        return status;
-                    }
-                    else {
-                        PSYSTEM_PROCESS_INFORMATION nextSpi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + spi->NextEntryOffset);
-                        ULONG moveSize = SystemInformationLength - spi->NextEntryOffset;
-                        RtlMoveMemory(SystemInformation, nextSpi, moveSize);
-                        if (ReturnLength) {
-                            *ReturnLength -= spi->NextEntryOffset;
-                        }
-                        spi = (PSYSTEM_PROCESS_INFORMATION)SystemInformation;
-                        prevSpi = NULL;
-                        continue;
-                    }
+        if (blockedName) {
+            // Remove this entry
+            if (prevSpi == NULL) {
+                // First entry in list is blocked
+                if (spi->NextEntryOffset == 0) {
+                    // Only this entry exists – clear entire buffer
+                    RtlZeroMemory(SystemInformation, bufferSize);
+                    if (ReturnLength) *ReturnLength = 0;
+                    return status;
                 }
                 else {
-                    if (spi->NextEntryOffset == 0) {
-                        prevSpi->NextEntryOffset = 0;
-                        if (ReturnLength) {
-                            *ReturnLength -= (ULONG)((BYTE*)spi - (BYTE*)prevSpi);
-                        }
-                        break;
+                    // Remove first entry by moving subsequent data forward
+                    ULONG nextOffset = spi->NextEntryOffset;
+                    if (!IsOffsetValid((BYTE*)spi, nextOffset)) break; // corrupted offset
+
+                    PSYSTEM_PROCESS_INFORMATION nextSpi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + nextOffset);
+                    ULONG bytesToMove = usedSize - nextOffset;
+                    if (bytesToMove <= bufferSize) {
+                        RtlMoveMemory(SystemInformation, nextSpi, bytesToMove);
                     }
-                    else {
-                        PSYSTEM_PROCESS_INFORMATION nextSpi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + spi->NextEntryOffset);
-                        ULONG skipSize = spi->NextEntryOffset;
-                        prevSpi->NextEntryOffset += skipSize;
-                        if (ReturnLength) {
-                            *ReturnLength -= skipSize;
-                        }
-                        spi = nextSpi;
-                        continue;
+                    usedSize -= nextOffset;
+                    if (ReturnLength) {
+                        *ReturnLength = usedSize;
+                        // Zero out the remainder to avoid stale data
+                        if (usedSize < bufferSize)
+                            RtlZeroMemory((BYTE*)SystemInformation + usedSize, bufferSize - usedSize);
                     }
+                    // Restart from the new first entry
+                    spi = (PSYSTEM_PROCESS_INFORMATION)SystemInformation;
+                    prevSpi = NULL;
+                    continue;
+                }
+            }
+            else {
+                // Middle or last entry is blocked
+                if (spi->NextEntryOffset == 0) {
+                    // Last entry – just cut the list
+                    prevSpi->NextEntryOffset = 0;
+                    ULONG removedSize = (ULONG)((BYTE*)spi - (BYTE*)prevSpi);
+                    usedSize -= removedSize;
+                    if (ReturnLength) *ReturnLength = usedSize;
+                    break; // end of list
+                }
+                else {
+                    // Link around the blocked entry
+                    ULONG skipSize = spi->NextEntryOffset;
+                    if (!IsOffsetValid((BYTE*)spi, skipSize)) break;
+                    PSYSTEM_PROCESS_INFORMATION nextSpi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + skipSize);
+                    prevSpi->NextEntryOffset += skipSize;
+                    usedSize -= skipSize;
+                    if (ReturnLength) *ReturnLength = usedSize;
+                    // Zero the removed entry (optional)
+                    RtlZeroMemory(spi, skipSize);
+                    spi = nextSpi;
+                    continue;
                 }
             }
         }
 
+        // Not blocked – advance to next entry
         prevSpi = spi;
-
-        if (spi->NextEntryOffset == 0) {
-            break;
-        }
-
+        if (spi->NextEntryOffset == 0) break;
+        if (!IsOffsetValid((BYTE*)spi, spi->NextEntryOffset)) break;
         spi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + spi->NextEntryOffset);
     }
 
     return status;
 }
-
 
 
 void patchProcessNameChecks() {
@@ -646,29 +698,448 @@ void patchProcessNameChecks() {
     fpRtlEqualUnicodeString = (RtlEqualUnicodeString_t)GetProcAddress(GetModuleHandleA("ntdll.dll"), "RtlEqualUnicodeString");
     HMODULE dll = GetModuleHandleA("ntdll.dll");
     if (!dll) {
+        LOG("Failed to get address of ntdll.dll");
         return;
     }
     FARPROC pFunc = GetProcAddress(dll, "NtQuerySystemInformation");
     if (!pFunc) {
-        Console::print("Failed to get address of NtQuerySystemInformation");
+        LOG("Failed to get address of NtQuerySystemInformation");
         return;
     }
 
     if (MH_CreateHook(pFunc, &NtQuerySystemInformation_hookfunc, reinterpret_cast<LPVOID*>(&fpNtQuerySystemInformation)) != MH_OK) {
-        Console::print("Failed to create hook for NtQuerySystemInformation");
+        LOG("Failed to create hook for NtQuerySystemInformation");
         return;
     }
 
     if (MH_EnableHook(pFunc) != MH_OK) {
-        Console::print("Failed to enable hook for NtQuerySystemInformation");
+        LOG("Failed to enable hook for NtQuerySystemInformation");
+        return;
+    }
+}
+typedef PVOID(NTAPI* AddVectoredExceptionHandler_t)(ULONG First, PVECTORED_EXCEPTION_HANDLER Handler);
+AddVectoredExceptionHandler_t fpAddVectoredExceptionHandler = nullptr;
+
+
+//for (int offset = 0; offset >= -424; offset -= 8) {
+//    uintptr_t addr = rsp + offset;
+//    void* value = *(void**)addr;
+//
+//    LOG("[rsp%+d] @ %p = %p", offset, (void*)addr, value);
+//}
+
+const char* exceptionCodeToString(DWORD code) {
+    switch (code) {
+    case EXCEPTION_ACCESS_VIOLATION:         return "EXCEPTION_ACCESS_VIOLATION";
+    case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:    return "EXCEPTION_ARRAY_BOUNDS_EXCEEDED";
+    case EXCEPTION_BREAKPOINT:               return "EXCEPTION_BREAKPOINT";
+    case EXCEPTION_DATATYPE_MISALIGNMENT:    return "EXCEPTION_DATATYPE_MISALIGNMENT";
+    case EXCEPTION_FLT_DENORMAL_OPERAND:     return "EXCEPTION_FLT_DENORMAL_OPERAND";
+    case EXCEPTION_FLT_DIVIDE_BY_ZERO:       return "EXCEPTION_FLT_DIVIDE_BY_ZERO";
+    case EXCEPTION_FLT_INEXACT_RESULT:       return "EXCEPTION_FLT_INEXACT_RESULT";
+    case EXCEPTION_FLT_INVALID_OPERATION:    return "EXCEPTION_FLT_INVALID_OPERATION";
+    case EXCEPTION_FLT_OVERFLOW:             return "EXCEPTION_FLT_OVERFLOW";
+    case EXCEPTION_FLT_STACK_CHECK:          return "EXCEPTION_FLT_STACK_CHECK";
+    case EXCEPTION_FLT_UNDERFLOW:            return "EXCEPTION_FLT_UNDERFLOW";
+    case EXCEPTION_ILLEGAL_INSTRUCTION:      return "EXCEPTION_ILLEGAL_INSTRUCTION";
+    case EXCEPTION_IN_PAGE_ERROR:            return "EXCEPTION_IN_PAGE_ERROR";
+    case EXCEPTION_INT_DIVIDE_BY_ZERO:       return "EXCEPTION_INT_DIVIDE_BY_ZERO";
+    case EXCEPTION_INT_OVERFLOW:             return "EXCEPTION_INT_OVERFLOW";
+    case EXCEPTION_INVALID_DISPOSITION:      return "EXCEPTION_INVALID_DISPOSITION";
+    case EXCEPTION_NONCONTINUABLE_EXCEPTION: return "EXCEPTION_NONCONTINUABLE_EXCEPTION";
+    case EXCEPTION_PRIV_INSTRUCTION:         return "EXCEPTION_PRIV_INSTRUCTION";
+    case EXCEPTION_SINGLE_STEP:              return "EXCEPTION_SINGLE_STEP";
+    case EXCEPTION_STACK_OVERFLOW:           return "EXCEPTION_STACK_OVERFLOW";
+    default:                                return "UNKNOWN_EXCEPTION";
+    }
+}
+
+//hot damn
+typedef LONG (CALLBACK* ARX_VEH_t)(PEXCEPTION_POINTERS info);
+ARX_VEH_t ARX_VEH = nullptr;
+
+LONG CALLBACK testVectoredHandler(PEXCEPTION_POINTERS info) {
+    //LOG("VEH DEBUG CLEAR");
+    CONTEXT* ctx = info->ContextRecord;
+   // auto originalDr0 = ctx->Dr0;
+   // auto originalDr1 = ctx->Dr1;
+   // auto originalDr2 = ctx->Dr2;
+   // auto originalDr3 = ctx->Dr3;
+   // auto originalDr6 = ctx->Dr6;
+   // auto originalDr7 = ctx->Dr7;
+   // 
+   // ctx->Dr0 = 0;
+   // ctx->Dr1 = 0;
+   // ctx->Dr2 = 0;
+   // ctx->Dr3 = 0;
+   // ctx->Dr6 = 0;
+   // ctx->Dr7 = 0;
+
+    DWORD code = info->ExceptionRecord->ExceptionCode;
+   // LOG("ARXAN VEH TRIGGERED BY [%s]", exceptionCodeToString(code));
+    LONG result = ARX_VEH(info);
+    //LOG("Returned %lu", result);
+    //ctx->Dr0 = originalDr0;
+    //ctx->Dr1 = originalDr1;
+    //ctx->Dr2 = originalDr2;
+    //ctx->Dr3 = originalDr3;
+    //ctx->Dr6 = originalDr6;
+    //ctx->Dr7 = originalDr7;
+    return result;
+}
+
+//fire that this actually works to wrap every veh easily.
+//i need thread safety tho cuz this could EASILY fuck up control flow and die if two threads use the VEH and overwrite the func addr
+PVOID AddVectoredExceptionHandler_hookfunc(ULONG First, PVECTORED_EXCEPTION_HANDLER Handler) {
+    ARX_VEH = Handler;
+    return fpAddVectoredExceptionHandler(First, testVectoredHandler);
+}
+
+void superTestVEH() {
+    DEV_ONLY_FUNCTION();
+    HMODULE dll = GetModuleHandleA("kernel32.dll");
+    if (!dll) {
+        return;
+    }
+    FARPROC pFunc = GetProcAddress(dll, "AddVectoredExceptionHandler");
+    if (!pFunc) {
+        LOG("Failed to get address of AddVectoredExceptionHandler");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &AddVectoredExceptionHandler_hookfunc, reinterpret_cast<LPVOID*>(&fpAddVectoredExceptionHandler)) != MH_OK) {
+        LOG("Failed to create hook for AddVectoredExceptionHandler");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for AddVectoredExceptionHandler");
         return;
     }
 }
 
+typedef BOOL(NTAPI* VirtualProtect_t)(LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect);
+VirtualProtect_t fpVirtualProtect = nullptr;
+
+bool containsAddress(LPCVOID lpAddress, SIZE_T dwSize, const void* target) {
+    auto start = reinterpret_cast<uintptr_t>(lpAddress);
+    auto addr = reinterpret_cast<uintptr_t>(target);
+
+    // Empty range.
+    if (dwSize == 0)
+        return false;
+
+    // Overflow-safe check: addr - start < size, but only after addr >= start.
+    return addr >= start && (addr - start) < dwSize;
+}
+void* dbgBreakPoint = nullptr;
+BOOL VirtualProtect_hookfunc(LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect) {
+   // if (containsAddress(lpAddress, dwSize, dbgBreakPoint)) {
+   //     LOG("RANGE CONTAINS TARGET");
+   //     return fpVirtualProtect(lpAddress, dwSize, PAGE_EXECUTE_READWRITE, lpflOldProtect);
+   // }
+    return fpVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
+}
+
+void vpHook() {
+    DEV_ONLY_FUNCTION();
+    HMODULE ntdll = GetModuleHandleA("ntdll.dll");
+    dbgBreakPoint = GetProcAddress(ntdll, "DbgBreakPoint");
+
+    HMODULE dll = GetModuleHandleA("kernel32.dll");
+    if (!dll) {
+        return;
+    }
+    FARPROC pFunc = GetProcAddress(dll, "VirtualProtect");
+    if (!pFunc) {
+        LOG("Failed to get address of VirtualProtect");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &VirtualProtect_hookfunc, reinterpret_cast<LPVOID*>(&fpVirtualProtect)) != MH_OK) {
+        LOG("Failed to create hook for VirtualProtect");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for VirtualProtect");
+        return;
+    }
+    
+}
+
+typedef NTSTATUS(NTAPI* NtGetContextThread_t)(HANDLE ThreadHandle, PCONTEXT ThreadContext);
+NtGetContextThread_t fpNtGetContextThread = nullptr;
+
+NTSTATUS NtGetContextThread_hookfunc( HANDLE hThread, PCONTEXT lpContext) {
+    NTSTATUS status = fpNtGetContextThread(hThread, lpContext);
+
+    if (!lpContext) {
+        return status;
+    }
+
+    DWORD flags = lpContext->ContextFlags;
+
+    if ((flags & CONTEXT_DEBUG_REGISTERS) == CONTEXT_DEBUG_REGISTERS || (flags & CONTEXT_ALL) == CONTEXT_ALL) {
+       // LOG("NTGCT: Clearing Debug Registers");
+        lpContext->Dr0 = 0;
+        lpContext->Dr1 = 0;
+        lpContext->Dr2 = 0;
+        lpContext->Dr3 = 0;
+        lpContext->Dr6 = 0;
+        lpContext->Dr7 = 0;
+    }
+
+    return status;
+}
+
+void ntgctHook() {
+    DEV_ONLY_FUNCTION();
+    HMODULE dll = GetModuleHandleA("ntdll.dll");
+    if (!dll) {
+        return;
+    }
+    FARPROC pFunc = GetProcAddress(dll, "NtGetContextThread");
+    if (!pFunc) {
+        LOG("Failed to get address of NtGetContextThread");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &NtGetContextThread_hookfunc, reinterpret_cast<LPVOID*>(&fpNtGetContextThread)) != MH_OK) {
+        LOG("Failed to create hook for NtGetContextThread");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for NtGetContextThread");
+        return;
+    }
+}
+
+
+typedef __analysis_noreturn VOID(NTAPI* FatalExit_t)(int ExitCode);
+FatalExit_t fpFatalExit = nullptr;
+
+VOID FatalExit_hookfunc(int ExitCode) {
+    LOG("ARXAN IS UPSET :(");
+    LOG("FatalExit called with exit code %d", ExitCode);
+    LOG("What now?");
+    Sleep(99999999); //this wont work. Maybe force RIP to stick
+}
+
+//can be triggered by those nt functions that get patched with fatalexit
+void fatalExitThing() {
+    DEV_ONLY_FUNCTION(); //this also impacts some normal game exits so dont ship this. Just for testing just like with ceg
+    HMODULE dll = GetModuleHandleA("kernel32.dll");
+    if (!dll) {
+        return;
+    }
+    FARPROC pFunc = GetProcAddress(dll, "FatalExit");
+    if (!pFunc) {
+        LOG("Failed to get address of FatalExit");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &FatalExit_hookfunc, reinterpret_cast<LPVOID*>(&fpFatalExit)) != MH_OK) {
+        LOG("Failed to create hook for FatalExit");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for FatalExit");
+        return;
+    }
+}
+
+
+typedef NTSYSAPI VOID(NTAPI* RtlCaptureContext2_t)(PCONTEXT ContextRecord);
+RtlCaptureContext2_t fpRtlCaptureContext2 = nullptr;
+
+VOID RtlCaptureContext2_hookfunc(PCONTEXT ContextRecord) {
+    //LOG("RCC2: Clearing Debug Registers");
+    fpRtlCaptureContext2(ContextRecord);
+    ContextRecord->Dr0 = 0;
+    ContextRecord->Dr1 = 0;
+    ContextRecord->Dr2 = 0;
+    ContextRecord->Dr3 = 0;
+    ContextRecord->Dr6 = 0;
+    ContextRecord->Dr7 = 0;
+
+}
+
+void captureContextTest() {
+    DEV_ONLY_FUNCTION();
+    HMODULE dll = GetModuleHandleA("ntdll.dll");
+    if (!dll) {
+        return;
+    }
+    //arxan uses the 2 verison
+    FARPROC pFunc = GetProcAddress(dll, "RtlCaptureContext2");
+    if (!pFunc) {
+        LOG("Failed to get address of RtlCaptureContext2");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &RtlCaptureContext2_hookfunc, reinterpret_cast<LPVOID*>(&fpRtlCaptureContext2)) != MH_OK) {
+        LOG("Failed to create hook for RtlCaptureContext2");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for RtlCaptureContext2");
+        return;
+    }
+}
+
+typedef NTSYSAPI VOID(NTAPI* NtContinue_t)(PCONTEXT ThreadContext, BOOLEAN RaiseAlert);
+NtContinue_t fpNtContinue = nullptr;
+
+VOID NtContinue_hookfunc(PCONTEXT ThreadContext, BOOLEAN RaiseAlert) {
+   // LOG("NtContinue %s", RaiseAlert ? "Alert" : "No Alert");
+
+    fpNtContinue(ThreadContext, RaiseAlert);
+
+}
+
+void ntContinueTest() {
+    DEV_ONLY_FUNCTION();
+    HMODULE dll = GetModuleHandleA("ntdll.dll");
+    if (!dll) {
+        return;
+    }
+    //arxan uses the 2 verison
+    FARPROC pFunc = GetProcAddress(dll, "NtContinue");
+    if (!pFunc) {
+        LOG("Failed to get address of NtContinue");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &NtContinue_hookfunc, reinterpret_cast<LPVOID*>(&fpNtContinue)) != MH_OK) {
+        LOG("Failed to create hook for NtContinue");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for NtContinue");
+        return;
+    }
+}
+
+typedef DWORD(NTAPI* ResumeThread_t)(HANDLE hThread);
+ResumeThread_t fpResumeThread = nullptr;
+//looks like my theory was correct >:)
+DWORD ResumeThread_hookfunc(HANDLE hThread) {
+    PVOID startAddress = nullptr;
+    NTSTATUS status = fpNtQueryInformationThread(hThread, static_cast<THREAD_INFORMATION_CLASS>(9), &startAddress, sizeof(startAddress), nullptr);
+    if (reinterpret_cast<uintptr_t>(startAddress) == 0x1BF4E0_b) {//s2_mp64_ship.exe 2.20 specific offset btw so yeah
+        //also like i dont need to suspend this myself the first time cuz it was already suspended by arxan? maybe on startup as a test or something while it patches the nt user stubs
+        return 0; //dont resume
+    }
+    return fpResumeThread(hThread);
+}
+
+//there is one thread that is constantly monitoring the NtDbg functions since it places fatal exits on them.
+//attempting to modify the code is protected by a thread which will kill the game if modification detected.
+//suspending the thread results in it being resumed and the game killed. Theory is that if i dont allow it to resume the thread but also tell it 
+//that the thread was never suspended then we might be bing chillin.
+void resumeThreadHook() {
+    DEV_ONLY_FUNCTION();
+    HMODULE dll = GetModuleHandleA("kernel32.dll");
+    if (!dll) {
+        return;
+    }
+    FARPROC pFunc = GetProcAddress(dll, "ResumeThread");
+    if (!pFunc) {
+        LOG("Failed to get address of ResumeThread");
+        return;
+    }
+
+    if (MH_CreateHook(pFunc, &ResumeThread_hookfunc, reinterpret_cast<LPVOID*>(&fpResumeThread)) != MH_OK) {
+        LOG("Failed to create hook for ResumeThread");
+        return;
+    }
+
+    if (MH_EnableHook(pFunc) != MH_OK) {
+        LOG("Failed to enable hook for ResumeThread");
+        return;
+    }
+}
+
+
+struct SavedStub {
+    const char* name;
+    void* addr;
+    std::vector<BYTE> bytes;
+};
+
+static std::vector<SavedStub> g_savedStubs;
+
+constexpr SIZE_T STUB_SAVE_SIZE = 32;
+
+void captureNtdllDebugStubs() {
+    const char* names[] = {
+        "DbgBreakPoint",
+        "DbgUiContinue",
+        "DbgUiConnectToDbg",
+        "DbgPrintReturnControlC",
+        "DbgPrompt",
+        "DbgUiConvertStateChangeStructure",
+        "DbgUiDebugActiveProcess",
+        "DbgUiGetThreadDebugObject",
+        "DbgUiIssueRemoteBreakin",
+        "DbgUiRemoteBreakin",
+        "DbgUiSetThreadDebugObject",
+        "DbgUiStopDebugging",
+        "DbgUiWaitStateChange",
+        "DbgUserBreakPoint"
+    };
+
+    HMODULE ntdll = GetModuleHandleW(L"ntdll.dll");
+    if (!ntdll) {
+        return;
+    }
+
+    g_savedStubs.clear();
+
+    for (auto name : names) {
+        void* p = GetProcAddress(ntdll, name);
+        if (!p) {
+            continue;
+        }
+
+        SavedStub s;
+        s.name = name;
+        s.addr = p;
+        s.bytes.assign((BYTE*)p, (BYTE*)p + STUB_SAVE_SIZE);
+
+        g_savedStubs.push_back(std::move(s));
+    }
+}
+
+void DebugPatches::repairNtUserStubs() {
+    for (auto& s : g_savedStubs) {
+        DWORD oldProtect;
+
+        if (VirtualProtect(s.addr, s.bytes.size(), PAGE_EXECUTE_READWRITE, &oldProtect)) {
+            memcpy(s.addr, s.bytes.data(), s.bytes.size());
+            FlushInstructionCache(GetCurrentProcess(), s.addr, s.bytes.size());
+
+            DWORD ignored;
+            VirtualProtect(s.addr, s.bytes.size(), oldProtect, &ignored);
+        }
+    }
+}
+
+
 //run from dll main to get pre unpacking hooks set
+//crc checks are not patched at this point so syscalls only!
 void DebugPatches::earlyInit() {
     MH_Initialize();
+    captureNtdllDebugStubs(); //right away
+
+    //this crashes on kpops machine
     patchProcessNameChecks();// run this first cuz of shared fpNtQuerySystemInformation usage
+
     freeIdaMutants(); //works, but how can we prevent it from ever happening
     disableProgramScans();
     bypassHwndChecks();
@@ -676,11 +1147,25 @@ void DebugPatches::earlyInit() {
     bypassHiddenThreadCreation();
     bypassThreadHideFromDebugger();
     bypassThreadQueryHideFromDebugger();
+
+   // superTestVEH();
+    //vpHook();
+    //ntgctHook();
+    //fatalExitThing();
+    
+    //one of these causing zombies lua to die
+    //captureContextTest();
+    //ntContinueTest();
+
+    resumeThreadHook(); //hell yeah
+    
 }
+
+
 
 void DebugPatches::init() {
     DEV_INIT_PRINT();
     freeIdaMutants(); //works, but how can we prevent it from ever happening
     hookNtClose();
-    clearHWBP();
+    repairNtUserStubs();//lovely
 }

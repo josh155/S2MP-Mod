@@ -12,11 +12,11 @@ XAssetHeader hook_DB_FindXAssetHeader(XAssetType type, const char* name, int all
     
     
 #ifdef DEVELOPMENT_BUILD
-    static std::unordered_set<XAssetType> seenTypes;
-    if (seenTypes.find(type) == seenTypes.end()) {
-        seenTypes.insert(type);
-        Console::printf("New XAssetType: %d (first seen with name: %s)", type, name);
-    }
+  //  static std::unordered_set<XAssetType> seenTypes;
+  //  if (seenTypes.find(type) == seenTypes.end()) {
+  //      seenTypes.insert(type);
+  //      Console::printf("New XAssetType: %d (first seen with name: %s)", type, name);
+  //  }
 #endif // DEVELOPMENT_BUILD
     XAssetHeader header{};
 

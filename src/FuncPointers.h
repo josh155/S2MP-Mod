@@ -5,6 +5,9 @@ class Functions {
 public:
 	static void init();
 
+	typedef dvar_t* (*Dvar_RegisterInt)(const char* dvarName, int value, int min, int max, unsigned int flags);
+	static Dvar_RegisterInt _Dvar_RegisterInt;
+
 	typedef void(*Cmd_RemoveCommand)(const char* name);
 	static Cmd_RemoveCommand _Cmd_RemoveCommand;
 

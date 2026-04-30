@@ -32,6 +32,11 @@ std::string GameUtil::sanitizeFileName(const std::string& name) {
     return safe;
 }
 
+bool GameUtil::areWeHost() {
+    dvar_t* sv_running = *(dvar_t**)0x1BD2778_b;
+    return sv_running->current.enabled;
+}
+
 bool GameUtil::isReadablePtr(const void* ptr, size_t bytes = 1) {
     if (!ptr) {
         return false;
