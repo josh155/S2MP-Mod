@@ -147,6 +147,12 @@ struct LocalizeEntry
     const char* name;
 };
 
+struct scr_entref_t
+{
+    unsigned __int16 entnum;
+    unsigned __int16 classnum;
+};
+
 enum XAssetType {
 	ASSET_TYPE_PHYSPRESET = 0x0,
 	ASSET_TYPE_SND_PHYSPRESET = 0x1,
@@ -474,7 +480,15 @@ enum ItemLockStatus
 //WIP
 //SIZE: 0x418
 struct gentity_s {
+    char pad0[0x234];
 
+    float origin[3];         // 0x234
+
+    char pad1[0x4C];
+
+    uint8_t autoPickupFlag;  // 0x28C
+
+    char pad2[0x18B];
 };
 
 //SIZE: 0xA8
@@ -673,6 +687,11 @@ struct AttHybridSettings {
 	float adsViewErrorMin;
 	float adsViewErrorMax;
 	float adsFireAnimFrac;
+};
+
+union Weapon
+{
+    __int32 data;
 };
 
 

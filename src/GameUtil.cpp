@@ -505,3 +505,23 @@ CmdArgs* GameUtil::getCmdArgs() {
 
     return cmdArgs;
 }
+
+bool GameUtil::getPlayerPosition(float* outPos) {
+    if (!outPos) {
+        return false;
+    }
+    //gentity 0
+    std::uintptr_t player = static_cast<std::uintptr_t>(0x9ED3430_b);
+
+    if (!player) {
+        return false;
+    }
+
+    float* origin = reinterpret_cast<float*>(player + 0x234);
+
+    outPos[0] = origin[0];
+    outPos[1] = origin[1];
+    outPos[2] = origin[2];
+
+    return true;
+}

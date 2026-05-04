@@ -7,6 +7,15 @@
 #include "Console.hpp"
 #include "DevDef.h"
 
+Functions::G_Spawn Functions::_G_Spawn = nullptr;
+Functions::G_SpawnItem Functions::_G_SpawnItem = nullptr;
+Functions::G_GetWeaponForName Functions::_G_GetWeaponForName = nullptr;
+Functions::BG_GetWorldModel Functions::_BG_GetWorldModel = nullptr;
+Functions::G_SetOrigin Functions::_G_SetOrigin = nullptr;
+Functions::Touch_Item Functions::_Touch_Item = nullptr;
+Functions::Add_Ammo Functions::_Add_Ammo = nullptr;
+Functions::G_GetEntityPlayerState Functions::_G_GetEntityPlayerState = nullptr;
+Functions::G_TakePlayerWeapon Functions::_G_TakePlayerWeapon = nullptr;
 Functions::SV_StartMap Functions::_SV_StartMap = nullptr;
 Functions::GetStringFromResource Functions::_GetStringFromResource = nullptr;
 Functions::SV_SendServerCommand Functions::_SV_SendServerCommand = nullptr;
@@ -41,6 +50,7 @@ Functions::DB_GetXAssetTypeSize Functions::_DB_GetXAssetTypeSize = nullptr;
 Functions::DB_GetXAssetName Functions::_DB_GetXAssetName = nullptr;
 Functions::hksi_hksL_loadbuffer Functions::_hksi_hksL_loadbuffer = nullptr;
 Functions::Cmd_RemoveCommand Functions::_Cmd_RemoveCommand = nullptr;
+Functions::DB_FindXAssetHeader Functions::_DB_FindXAssetHeader = nullptr;
 
 void Functions::init()
 {
@@ -77,4 +87,14 @@ void Functions::init()
 	_DB_GetXAssetName = (DB_GetXAssetName)(0x4A2EF0_b);
 	_hksi_hksL_loadbuffer = (hksi_hksL_loadbuffer)(0x2D9020_b);
 	_Cmd_RemoveCommand = (Cmd_RemoveCommand)(0x64A830_b);
+	_G_Spawn = (G_Spawn)(0x5C0FC0_b);
+	_G_SpawnItem = (G_SpawnItem)(0x55ACC0_b);
+	_G_GetWeaponForName = (G_GetWeaponForName)(0x5C3C00_b);
+	_G_SetOrigin = (G_SetOrigin)(0x5C0EB0_b);
+	_Touch_Item = (Touch_Item)(0x55B8B0_b);
+	_Add_Ammo = (Add_Ammo)(0x5585E0_b);
+	_G_GetEntityPlayerState = (G_GetEntityPlayerState)(0x5C0020_b);
+	_G_TakePlayerWeapon = (G_TakePlayerWeapon)(0x5C5490_b);
+	_BG_GetWorldModel = (BG_GetWorldModel)(0x3BCD30_b);
+	_DB_FindXAssetHeader = (DB_FindXAssetHeader)(0xA0080_b);
 }

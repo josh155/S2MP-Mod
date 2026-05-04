@@ -455,10 +455,10 @@ void CustomCommands::changeMap() {
 	}
 	else {
 		int* sv_migrate = (int*)0xBB4EE68_b;
-		*sv_migrate = atol(cmdArgs->argv[nest][3]); //TODO: make this safe
+		*sv_migrate = atol(cmdArgs->argv[nest][2]); //TODO: make this safe
 	}
 	
-	Functions::_SV_StartMap(LOCAL_CLIENT_0, cmdArgs->argv[nest][2], isMapPreloaded);
+	Functions::_SV_StartMap(LOCAL_CLIENT_0, cmdArgs->argv[nest][1], isMapPreloaded);
 }
 
 void CustomCommands::fastRestart() {
@@ -501,4 +501,64 @@ void CustomCommands::toggleUfo() {
 		WriteProcessMemory(pHandle, (LPVOID)(0x39C0A2_b), ENABLE_UFO_PATCH_BYTES.data(), ENABLE_UFO_PATCH_BYTES.size(), nullptr);
 	}
 	CustomCommands::ufoActive = !CustomCommands::ufoActive;
+}
+
+void CustomCommands::dropWeapon() {
+
+}
+
+void CustomCommands::give() {
+	CmdArgs* cmdArgs = GameUtil::getCmdArgs();
+	if (!cmdArgs) {
+		return;
+	}
+
+	int nest = cmdArgs->nesting;
+	int count = cmdArgs->argc[nest];
+	if (count != 2) {
+		Console::print("Usage: give <item>");
+		return;
+	}
+
+	if (!GameUtil::areWeHost()) { //yeah not ideal but good enough for testing and preventing crash
+		Console::print("Must be host to use give command"); 
+		return;
+	}
+
+	gentity_s* spawned = Functions::_G_Spawn();
+	if (!spawned) {
+		DEV_PRINTF("G_Spawn() failed in function: %s", __FUNCTION__);
+		return;
+	}
+
+	float pos[3];
+
+	if (!GameUtil::getPlayerPosition(pos)) {
+		DEV_PRINTF("getPlayerPosition failed in function: %s", __FUNCTION__);
+		return;
+	}
+	pos[2] += 10;
+	Functions::_G_SetOrigin(spawned, pos);
+
+	DEV_PRINTF("Giving weapon %s", cmdArgs->argv[nest][1]);
+
+	Weapon weapon{}; //not used since we use result
+	Weapon* result = Functions::_G_GetWeaponForName(&weapon, cmdArgs->argv[nest][1]);
+
+	if (!result) {
+		DEV_PRINTF("G_GetWeaponForName() failed in function: %s", __FUNCTION__);
+		return;
+	}
+
+	//going to take the weapon first
+	void* player0 = reinterpret_cast<void*>(0x9ED3430_b);
+	Functions::_G_TakePlayerWeapon(Functions::_G_GetEntityPlayerState(player0), result);
+
+	Functions::_G_SpawnItem(spawned, result);
+	spawned->autoPickupFlag = 1;
+	Functions::_Touch_Item(spawned, player0, 0, 0);
+	spawned->autoPickupFlag = 0;
+
+	//TODO: add alt+ check
+	Functions::_Add_Ammo(Functions::_G_GetEntityPlayerState(player0), result, false, 998, 1);
 }

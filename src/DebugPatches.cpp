@@ -1137,7 +1137,7 @@ void DebugPatches::earlyInit() {
     MH_Initialize();
     captureNtdllDebugStubs(); //right away
 
-    //this crashes on kpops machine
+    //this crashes on kpops machine & kamas 
     patchProcessNameChecks();// run this first cuz of shared fpNtQuerySystemInformation usage
 
     freeIdaMutants(); //works, but how can we prevent it from ever happening

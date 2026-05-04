@@ -195,12 +195,12 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("saveassetpool", &CustomCommands::saveAssetPool);
 	GameUtil::addCommand("dumpAllLuaFiles", &CustomCommands::dumpAllLuaFiles);
 	GameUtil::addCommand("dumpAllCSVFiles", &CustomCommands::dumpAllCSVFiles);
+	GameUtil::addCommand("give", &CustomCommands::give);
+	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon);
 #ifdef DEVELOPMENT_BUILD
-	//GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 	GameUtil::addCommand("printfNullptr", &printfCrashTest);
 	GameUtil::addCommand("enginemode", &setenginemode);
-	//GameUtil::addCommand("repairNtUserStubs", &DebugPatches::repairNtUserStubs);
-	//GameUtil::addCommand("imagetest", &DevPatches::imageTestPt2);
+	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 #endif // DEVELOPMENT_BUILD
 
 

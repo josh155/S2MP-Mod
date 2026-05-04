@@ -4,6 +4,32 @@
 class Functions {
 public:
 	static void init();
+	typedef gentity_s* (*G_Spawn)();
+	static G_Spawn _G_Spawn;
+
+	typedef void (*G_SpawnItem)(void* gent, Weapon* weapon);
+	static G_SpawnItem _G_SpawnItem;
+
+	typedef Weapon* (*G_GetWeaponForName)(Weapon* outWeapon, const char* weaponName);
+	static G_GetWeaponForName _G_GetWeaponForName;
+
+	typedef void* (*BG_GetWorldModel)(Weapon* weapon, bool isAlternate, int variation);
+	static BG_GetWorldModel _BG_GetWorldModel;
+
+	typedef void (*G_SetOrigin)(void* gentity, const float* origin);
+	static G_SetOrigin _G_SetOrigin;
+
+	typedef void (*Touch_Item)(void* entity, void* player, int idk0, int idk1);
+	static Touch_Item _Touch_Item;
+	
+	typedef int (*Add_Ammo)(void* ps, Weapon* weapon, bool isAlternate, int amount, bool allowOverflow);
+	static Add_Ammo _Add_Ammo;
+
+	typedef void* (*G_GetEntityPlayerState)(void* entity);
+	static G_GetEntityPlayerState _G_GetEntityPlayerState;
+
+	typedef int (*G_TakePlayerWeapon)(void* playerstate, Weapon* weapon);
+	static G_TakePlayerWeapon _G_TakePlayerWeapon;
 
 	typedef dvar_t* (*Dvar_RegisterInt)(const char* dvarName, int value, int min, int max, unsigned int flags);
 	static Dvar_RegisterInt _Dvar_RegisterInt;

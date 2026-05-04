@@ -109,6 +109,8 @@ public:
 	static void mapRestart();
 	static void quit();
 	static void toggleUfo();
+	static void dropWeapon();
+	static void give();
 	static void unlockAll();
 private:
 	static bool isGodmode;

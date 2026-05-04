@@ -226,6 +226,7 @@ void DvarInterface::addAllMappings() {
     addDvarsWithName("r_imageQuality");
     addDvarsWithName("r_vsync");
     addDvarsWithName("sm_cacheSpotShadows");
+    addDvarsWithName("cg_drawVehicleCrosshair");
     addDvarsWithName("sm_cacheSunShadow");
     addDvarsWithName("sm_tileResolution");
     addDvarsWithName("r_skyResolution");
@@ -239,6 +240,7 @@ void DvarInterface::addAllMappings() {
     addDvarsWithName("r_mode");
     addDvarsWithName("r_refreshRate");
     addDvarsWithName("r_ssrQualityLevel");
+    addDvarsWithName("playlist_name");
     addDvarsWithName("r_allowHDR");
     addDvarsWithName("r_ssrEnabled");
     addDvarsWithName("splitscreenMode");
@@ -328,6 +330,13 @@ void DvarInterface::addAllMappings() {
     addDvarsWithName("fighter_vs_fighter_mode");
     addDvarsWithName("player_allowHubOpponentInMP");
     addDvarsWithName("perk_bulletSuperPenetrationMultiplier");
+    addDvarsWithName("cg_altimeterCenter");
+    addDvarsWithName("ui_force_dont_draw_fighter_names");
+    addDvarsWithName("vehCam_chaseFD_camStartLerpDuration");
+    addDvarsWithName("vehCam_chaseFD_camStartMode");
+    addDvarsWithName("ui_raid_hide_fighter");
+    addDvarsWithName("cg_altimeterRange");
+    addDvarsWithName("ui_raid_hide_scorestreaks");
     addDvarsWithName("cg_weapon_charm_killswitch");
     addDvarsWithName("ui_war_last_obj_flipped");
     addDvarsWithName("fd_enable_fbw");
@@ -364,6 +373,11 @@ void DvarInterface::addAllMappings() {
     addDvarsWithName("spv_commandoTacInsert_disabled");
     addDvarsWithName("core_mp_weaponorder_killswitch");
     addDvarsWithName("spv_sku_details_rollout_majority");
+    addDvarsWithName("paintshop_SendPartyState");
+    addDvarsWithName("party_zmXPScale");
+    addDvarsWithName("party_weaponXPScale");
+    addDvarsWithName("party_divisionXPScale");
+    addDvarsWithName("party_rankXPScale");
     addDvarsWithNameDesc("ui_showPaintshop", "Allow paintjobs to be applied to weapons");
 
     //ranked
@@ -421,6 +435,7 @@ void DvarInterface::addAllMappings() {
     addMapping("vendor_overhead_update_proximity", "5950");
     addMapping("nextmap", "4059", "Next map to play");
     addMapping("mapname", "1673");
+    addMapping("playlist_image", "1676");
     //from R_RegisterDvars
     addMapping("r_texFilterDisable", "91", "Disables all texture filtering (uses nearest only.)");
     addMapping("r_characterSceneEnable", "5475");
@@ -615,6 +630,14 @@ void DvarInterface::addAllMappings() {
     addMapping("r_ssaoScriptScale", "212");
     addMapping("r_ssaoStrength", "4361");
     addMapping("r_ssaoPower", "3537");
+    addMapping("r_ssao", "1578");
+    addMapping("r_ssaoDownsample", "4469");
+    addMapping("r_ssaoMultiRes", "1081");
+    addMapping("r_ssaoDebug", "1617");
+    addMapping("r_ssaoDebugMip", "497");
+    addMapping("r_ssaoSampleCount", "1678");
+    addMapping("r_ssaoMinStrengthDepth", "3315", "Depth at which SSAO strength is zero, effectively disabled");
+    addMapping("r_ssaoMaxStrengthDepth", "2937", "Depth at which SSAO strength is at its maximum");
     addMapping("r_aoUseTweaks", "5618");
     addMapping("r_aoStrength", "3697");
     addMapping("r_aoPower", "3888");
@@ -975,6 +998,10 @@ void DvarInterface::addAllMappings() {
     addMapping("band_12players", "3829");
     addMapping("band_18players", "889");
     addMapping("band_lotsplayers", "4342");
+    addMapping("g_TeamName_Allies", "1202");
+    addMapping("g_TeamName_Axis", "2991");
+    addMapping("playlistFilename", "1396");
+    addMapping("playlistAggrFilename", "1415");
 
     addMapping("cg_foliagesnd_alias", "4011", "The sound that plays when an actor or player enters a foliage clip brush.");
     addMapping("cg_broadcasterSkycamDistance", "3119");
@@ -1114,6 +1141,7 @@ void DvarInterface::addAllMappings() {
     addMapping("r_materialLodMin", "3389");
     addMapping("r_materialLod0SizeThreshold", "1099");
     addMapping("r_dynamicSpotLightShadows", "4739");
+    addMapping("r_sceneMipShowOverlay", "802");
 
     //BG_RegisterDvars
     addMapping("bg_shock_soundLoop", "1270");
@@ -1449,7 +1477,17 @@ void DvarInterface::addAllMappings() {
     addMapping("perk_quickDrawSpeedScaleSniper", "1587");
     addMapping("perk_fastClimb", "2810");
     addMapping("perk_fastSnipeScale", "364");
+
+
     addMapping("virtualLobbyMap", "5473");
+    addMapping("virtualLobbyCommon", "1975");
+    addMapping("virtualLobbyOnly", "986");
+    addMapping("virtualLobbyMembers", "1999");
+    addMapping("vl_clan_models_loaded", "3784");
+    addMapping("virtualLobbyReady", "5666");
+    addMapping("virtualLobbyPresentable", "3965");
+    addMapping("hubcamera", "4014");
+    addMapping("bg_bombingRunNoMissileClip", "934");
 
 
     //UI_RegisterDvars
@@ -1468,7 +1506,163 @@ void DvarInterface::addAllMappings() {
 
     addMapping("localize_strings", "1699");
 
+    //Tonemap
+    addMapping("r_tonemapUseCS", "338");
+    addMapping("r_tonemapUseTweaks", "1514" , "Override tone map LightSet settings with tweak dvar values.");
+    addMapping("r_tonemap", "3717", "HDR Tonemapping mode");
+    addMapping("r_tonemapAuto", "4119", "HDR Tonemapping performs auto-exposure");
+    addMapping("r_tonemapBlend", "491", "HDR Tonemapping blends between exposures");
+    addMapping("r_tonemapLockAutoExposureAdjust", "2442", "HDR Tonemapping lock auto exposure adjust");
+    addMapping("r_tonemapAutoExposureAdjust", "4568");
+    addMapping("r_tonemapExposure", "5385");
+    addMapping("r_tonemapExposureAdjust", "1035");
+    addMapping("r_tonemapMaxExposure", "1326");
+    addMapping("r_tonemapAdaptSpeed", "810");
+    addMapping("r_tonemapDarkEv", "162");
+    addMapping("r_tonemapMidEv", "3799");
+    addMapping("r_tonemapLightEv", "4694");
+    addMapping("r_tonemapDarkExposureAdjust", "3613");
+    addMapping("r_tonemapMidExposureAdjust", "1648");
+    addMapping("r_tonemapLightExposureAdjust", "2679");
+    addMapping("r_tonemapMinExposureAdjust", "5773");
+    addMapping("r_tonemapMaxExposureAdjust", "4961");
+    addMapping("r_tonemapBlack", "5761");
+    addMapping("r_tonemapWhite", "3250");
+    addMapping("r_tonemapCrossover", "3201");
+    addMapping("r_tonemapShoulder", "2821");
+    addMapping("r_tonemapToe", "2788");
 
+    //Perceptual
+    addMapping("r_veilUseTweaks", "2707", "Override veil LightSet settings with tweak dvar values.");
+    addMapping("r_veil", "1133", "Apply veiling luminance (HDR glow)");
+    addMapping("r_veilStrength", "5621");
+    addMapping("r_veilBackgroundStrength", "2219");
+    addMapping("r_veilFalloffWeight1", "4397");
+    addMapping("r_veilFalloffWeight2", "3548");
+    addMapping("r_veilRadius", "4456");
+    addMapping("r_veilFalloffScale1", "1538");
+    addMapping("r_veilFalloffScale2", "3060");
+    addMapping("r_veilFilter", "22");
+    addMapping("r_veilPreset", "3810");
+    addMapping("r_veilAntialiasing", "5340");
+
+    //shadowmap
+    addMapping("sm_shadowUseTweaks", "657", "Override shadow LightSet settings with tweak dvar values.");
+    addMapping("sm_sunEnable", "1084", "Enable sun shadow mapping from script");
+    addMapping("sm_sunShadowScale", "3158");
+    addMapping("sm_roundRobinPrioritySpotShadows", "3942");
+    addMapping("sm_spotUpdateLimit", "2225");
+    addMapping("sm_sunSampleSizeNear", "5699");
+    addMapping("sm_sunFilterRadius", "3299");
+    addMapping("sm_spotFilterRadius", "3546");
+
+    addMapping("r_mdaoMinBoneBoundsToOcclude", "2499");
+    addMapping("r_mdaoOccluderFadeOutStartDistance", "661");
+    addMapping("r_mdaoCapsuleStrength", "5085");
+    addMapping("r_mdaoVolumeStrength", "1988");
+    addMapping("r_mdaoOccluderCullDistance", "489");
+    addMapping("r_mdaoBoneInfluenceRadiusScale", "4330");
+    addMapping("r_mdaoAsyncOccluderGen", "449");
+    addMapping("r_mdao", "5153");
+    addMapping("r_mdaoUseTweaks", "2038");
+    addMapping("r_frustumLightProxyExpand", "2893");
+
+
+
+    addMapping("cg_everyoneHearsEveryone", "3724", "If true, all players can all chat together, regardless of team or death");
+    addMapping("cg_deadChatWithDead", "2651", "If true, dead players can all chat together, regardless of team");
+    addMapping("cg_deadHearAllLiving", "558", "If true, dead players can hear all living players talk");
+    addMapping("cg_deadHearTeamLiving", "1176", "If true, dead players can hear living players on their team talk");
+    addMapping("cg_deadChatWithTeam", "3328", "If true, dead players can talk to living players on their team");
+    addMapping("cg_hudGrenadeScreenCornerPadding", "1370");
+    addMapping("cg_hudGrenadeScreenEdgePadding", "2246");
+    addMapping("cg_hudGrenadeIconShowFuse", "4727");
+    addMapping("cg_hudGrenadePointerPivot", "2913");
+    addMapping("cg_hudGrenadeIconMinScale", "2385");
+    addMapping("cg_hudGrenadePointerOffset", "416");
+    addMapping("cg_hudGrenadePointerHeight", "4217");
+    addMapping("cg_hudGrenadePointerWidth", "2777");
+    addMapping("cg_hudGrenadeIconOffset", "2772");
+    addMapping("cg_hudGrenadeIconHeight", "1806");
+    addMapping("cg_hudGrenadeIconWidth", "1310");
+    addMapping("cg_hubZoomEnabled", "4990");
+
+    //weapondvars
+    addMapping("cg_cullBullets", "4949");
+    addMapping("cg_minCullBulletDist", "5562");
+    addMapping("cg_cullBulletAngle", "3507");
+    addMapping("FoFIconScale", "618");
+    addMapping("FoFIconMinSize", "1401");
+    addMapping("FoFIconMaxSize", "3439");
+    addMapping("FoFIconSpawnTimeDelay", "1112");
+    addMapping("FoFIconSpawnTimeFade", "1555");
+    addMapping("cg_maxAttachmentDisplays", "5441");
+
+    //sun
+    addMapping("r_sunsprite_shader", "4843", "name for static sprite; can be any material");
+    addMapping("r_sunsprite_size", "4337");
+    addMapping("r_sunflare_shader", "5654", "name for flare effect; can be any material");
+    addMapping("r_sunflare_min_size", "2938");
+    addMapping("r_sunflare_min_angle", "1834");
+    addMapping("r_sunflare_max_size", "89");
+    addMapping("r_sunflare_max_angle", "3627");
+    addMapping("r_sunflare_max_alpha", "2957");
+    addMapping("r_sunflare_fadein", "371");
+    addMapping("r_sunflare_fadeout", "1615");
+    addMapping("r_sunblind_min_angle", "5397");
+    addMapping("r_sunblind_max_angle", "3858");
+    addMapping("r_sunblind_max_darken", "1590");
+    addMapping("r_sunblind_fadein", "4939");
+    addMapping("r_sunblind_fadeout", "407");
+    addMapping("r_sunglare_min_angle", "3682");
+    addMapping("r_sunglare_max_angle", "970");
+    addMapping("r_sunglare_max_lighten", "4772");
+    addMapping("r_sunglare_fadein", "3538");
+    addMapping("r_sunglare_fadeout", "438");
+    addMapping("r_sun_fx_position", "3196");
+
+    //screenspace shadows
+    addMapping("r_sssEnable", "2954");
+    addMapping("r_sssPreset", "3760");
+    addMapping("r_sssGlobalRadius", "4172");
+    addMapping("r_sssFarScatteringRadius", "4310");
+    addMapping("r_sssNearScatteringRadius", "439");
+    addMapping("r_sssFarToNearBlend", "4099");
+    //not sure what 5275 is for sss
+
+    //aa
+    addMapping("r_fxaaSubpixel", "1917");
+    addMapping("r_smaaCompute", "259");
+    addMapping("r_smaaTemporalGradientAdjust", "1444");
+    addMapping("r_smaaTemporalQuincunx", "205");
+    addMapping("r_smaaFilmicStrength", "3545");
+    addMapping("r_temporalSamplingEnable", "1295");
+    addMapping("r_smaaTemporalUpsampleMode", "2699");
+
+    //motionblur
+    addMapping("r_mbEnable", "712");
+    addMapping("r_mbPreset", "240");
+    addMapping("r_mbVelocityScalar", "4947");
+    addMapping("r_mbCameraRotationInfluence", "5469");
+    addMapping("r_mbCameraTranslationInfluence", "904");
+
+    addMapping("r_velocityPrepass", "237");
+    addMapping("r_velocityPrepassDepthHack", "807");
+
+    addMapping("r_hudFx", "4475");
+    addMapping("r_ignore", "4481", "used for debugging anything (stripped)");
+    addMapping("r_ignoref", "5207");
+
+    addMapping("r_drawSun", "2850", "Enable sun effects");
+    addMapping("sm_usedSunCascadeCountSceneEnt", "5042");
+    addMapping("r_sunInfDist", "3273");
+    addMapping("r_clearColor2", "4318");
+    addMapping("r_clearColor", "5157");
+    addMapping("r_clear", "4996", "Controls how the color buffer is cleared");
+    addMapping("r_frustumLightProxyConsExpand", "3675");
+    addMapping("r_frustumLightProxyUseMeshCheck", "3579");
+    addMapping("r_frustumLightProxyMargin", "2922");
+    addMapping("sv_maxclients", "2299", "Maximum number of clients on the server");
 }
 
 void DvarInterface::init() {

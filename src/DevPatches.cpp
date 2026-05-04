@@ -28,20 +28,27 @@ void imageThing() {
     MH_EnableHook(reinterpret_cast<void*>(0x8978C0_b));
 }
 
-//void DevPatches::imageTestPt2() {
-//
-//}
 
-void tempNewUnlockThing() {
-    Hook::nopMem((void*)0xCE822_b, 2);
+typedef void* (*BG_GetWorldModel_t)(Weapon* weapon, bool isAlternate, int variation);
+static BG_GetWorldModel_t fpBG_GetWorldModel;
 
-    //unlreated to unlockall but need place to test
-   // Hook::nopMem((void*)0x46FCBB_b, 2);
-   // Hook::nopMem((void*)0x46FCC4_b, 2);
+//force missing world models to use defaultweapon to prevent error 560
+void* BG_GetWorldModel_hookfunc(Weapon* weapon, bool isAlternate, int variation) {
+    void* model = fpBG_GetWorldModel(weapon, isAlternate, variation);
+    if (!model) {
+        model = Functions::_DB_FindXAssetHeader(ASSET_TYPE_XMODEL, "defaultweapon", 1).data;
+    }
+    return model;
 }
+
+void BG_GetWorldModel_setup() {
+    MH_CreateHook(reinterpret_cast<void*>(0x3BCD30_b), &BG_GetWorldModel_hookfunc, reinterpret_cast<void**>(&fpBG_GetWorldModel));
+    MH_EnableHook(reinterpret_cast<void*>(0x3BCD30_b));
+}
+
 
 void DevPatches::init()  {
     DEV_INIT_PRINT();
-    imageThing();
-    tempNewUnlockThing();
+    //imageThing();
+    BG_GetWorldModel_setup();
 }

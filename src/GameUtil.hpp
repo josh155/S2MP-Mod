@@ -30,5 +30,7 @@ public:
 
 	static CmdArgs* getCmdArgs();
 
+	static bool getPlayerPosition(float* outPos);
+
 	static std::list<cmd_function_s> cmdHeap;
 };
