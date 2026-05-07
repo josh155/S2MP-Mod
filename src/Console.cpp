@@ -19,6 +19,7 @@
 #include <Arxan.hpp>
 #include "LogFile.hpp"
 #include "ConfigManager.h"
+#include "ImageLoader.hpp"
 
 //Output to internal console without label
 void Console::printIntCon(std::string text) {
@@ -171,8 +172,21 @@ void setenginemode() {
 }
 #endif
 
+//not a dvar or a command
+void setupSpecialLobbyVars() {
+	GameUtil::addCommand("ui_mapname", &CustomCommands::none);
+	GameUtil::addCommand("ui_gametype", &CustomCommands::none);
+	GameUtil::addCommand("party_minplayers", &CustomCommands::none);
+	GameUtil::addCommand("party_maxplayers", &CustomCommands::none);
+	GameUtil::addCommand("party_matchedplayercount", &CustomCommands::none);
+	GameUtil::addCommand("party_minlobbytime", &CustomCommands::none);
+	GameUtil::addCommand("requireOpenNat", &CustomCommands::none);
+	GameUtil::addCommand("matchmaking_allowJoiningListenServer", &CustomCommands::none);
+	GameUtil::addCommand("rankedMatch", &CustomCommands::none);
+}
 
 void Console::registerCustomCommands() {
+	setupSpecialLobbyVars();
 	GameUtil::addCommand("noclip", &Noclip::toggle);
 	GameUtil::addCommand("ufo", &CustomCommands::toggleUfo);
 	GameUtil::addCommand("map_restart", &CustomCommands::mapRestart);
@@ -195,10 +209,13 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("saveassetpool", &CustomCommands::saveAssetPool);
 	GameUtil::addCommand("dumpAllLuaFiles", &CustomCommands::dumpAllLuaFiles);
 	GameUtil::addCommand("dumpAllCSVFiles", &CustomCommands::dumpAllCSVFiles);
+	GameUtil::addCommand("dumpAllScriptFiles", &CustomCommands::dumpAllScriptFiles);
 	GameUtil::addCommand("give", &CustomCommands::give);
-	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon);
+	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon); //not implemented yet
 #ifdef DEVELOPMENT_BUILD
-	GameUtil::addCommand("printfNullptr", &printfCrashTest);
+	//GameUtil::addCommand("modelviewer", &CustomCommands::modelviewer);
+	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);//TODO: rename function
+	//GameUtil::addCommand("printfNullptr", &printfCrashTest);
 	GameUtil::addCommand("enginemode", &setenginemode);
 	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 #endif // DEVELOPMENT_BUILD
@@ -221,6 +238,7 @@ void Console::registerCustomDvars() {
 	DvarInterface::registerBool("g_dumpRawfiles", 0, 0, "Dump RawFiles when they are loaded");
 	DvarInterface::registerBool("printWorldInfo", 0, 0, "Prints GfxWorld build info on load");
 	DvarInterface::registerBool("g_dumpMapEnts", 0, 0, "Dump MapEnts when they are loaded"); //TODO
+	DvarInterface::registerBool("g_dumpImages", 0, 0, "Dump Images when they are loaded. Can be unstable when loading maps. Best to turn off when doing so.");
 
 	//zmcacutils.lua left in a check for a dvar named "unlockAllConsumables" so registering here makes the lua function work lol
 	DvarInterface::registerBool("unlockAllConsumables", 0, 0, "Unlock all zombies consumables. Used by the unlockall command"); 
@@ -228,19 +246,24 @@ void Console::registerCustomDvars() {
 }
 
 //useful for testing commands and handling non-cmd/non-dvar stuff
-bool execCustomDevCmd(std::string& cmd) {
-	std::transform(cmd.begin(), cmd.end(), cmd.begin(), GameUtil::asciiToLower);
+bool execCustomDevCmd(const std::string& cmd) {
 	std::vector<std::string> p = Console::parseCmdToVec(cmd);
+	if (p.empty()) {
+		return false;
+	}
+
+	std::string commandName = p[0];
+	std::transform(commandName.begin(), commandName.end(), commandName.begin(), GameUtil::asciiToLower);
 
 	//--------------------TEMP--------------------
-	if (p[0] == "trans") {
+	if (commandName == "trans") {
 		if (p.size() == 2) {
 			Console::print("Translated String: " + std::string(Functions::_SEH_SafeTranslateString(p[1].c_str())));
 		}
 		return true;
 	}
 	
-	if (p[0] == "send") {
+	if (commandName == "send") {
 		if (p.size() == 2) {
 			std::string str = "%c \"" + p[1] + "\"";
 			Functions::_SV_SendServerCommand(0i64, 0, str.c_str(), 101i64);
@@ -248,26 +271,26 @@ bool execCustomDevCmd(std::string& cmd) {
 		return true;
 	}
 	
-	if (p[0] == "up") {
+	if (commandName == "up") {
 		Functions::_LiveStorage_UploadStats(0);
 		return true;
 	}
 	
-	if (p[0] == "ftest") {
+	if (commandName == "ftest") {
 		Functions::_R_RegisterFont("testfakefont.ttf", 16);
 		return true;
 	}
 	//--------------------------------------------
 
 	
-	if (p[0] == "quit") {
+	if (commandName == "quit") {
 		exit(0);
 		return true;
 	}
 
 
 	
-	if (p[0] == "cg_hudblood") {
+	if (commandName == "cg_hudblood") {
 		if (p.size() >= 2) {
 			CustomCommands::toggleHudBlood(GameUtil::stringToBool(p[1]));
 		}
@@ -275,7 +298,7 @@ bool execCustomDevCmd(std::string& cmd) {
 	}
 	
 	//TODO: register these as dvar?
-	if (p[0] == "r_fog") {
+	if (commandName == "r_fog") {
 		if (p.size() >= 2) {
 			CustomCommands::toggleFog(GameUtil::stringToBool(p[1]));
 		}
@@ -288,12 +311,16 @@ bool execCustomDevCmd(std::string& cmd) {
 //Formats a commands and sends it to the dvar interface. Returns true if successful
 bool setEngineDvar(std::string cmd) {
 	std::vector<std::string> p = Console::parseCmdToVec(cmd);
+	if (p.empty()) {
+		return false;
+	}
+
 	return DvarInterface::setDvar(p[0], p);
 }
 
 //All consoles use this to execute commands. 
 void Console::execCmd(std::string cmd) {
-	if (cmd.length() == 0) {
+	if (cmd.find_first_not_of(" \t\r\n") == std::string::npos) {
 		return;
 	}
 	if (!execCustomDevCmd(cmd) && !setEngineDvar(cmd)) {

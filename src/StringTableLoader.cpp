@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "Loaders.hpp"
+#include "StringTableLoader.hpp"
+#include "Console.hpp"
 
 void StringTableLoader::dump(StringTable* table) {
     if (!table || !table->values || table->rowCount <= 0 || table->columnCount <= 0) {

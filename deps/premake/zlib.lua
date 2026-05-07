@@ -35,6 +35,14 @@ function zlib.project()
 
 		warnings "Off"
 		kind "StaticLib"
+
+		filter "configurations:Debug"
+			runtime "Debug"
+
+		filter "configurations:Release"
+			runtime "Release"
+
+		filter {}
 end
 
 table.insert(dependencies, zlib)

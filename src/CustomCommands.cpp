@@ -11,7 +11,9 @@
 #include "Hook.hpp"
 #include "DevDef.h"
 #include "Noclip.hpp"
-#include "Loaders.hpp"
+#include "LuiLoader.hpp"
+#include "ScriptLoader.hpp"
+#include "StringTableLoader.hpp"
 #include "ConfigManager.h"
 
 #define ASSET_ENTRY_SIZE 32
@@ -40,104 +42,41 @@ void CustomCommands::toggleGodmode() {
 
 
 
+
+void CustomCommands::dumpAllScriptFiles() {
+	AssetPoolStats stats = GameUtil::assetPoolTraverseHelper(ASSET_TYPE_SCRIPTFILE,
+		[](XAsset* asset, const char* name) -> bool {
+			ScriptLoader::dumpScript(asset->header.script);
+			return true; //keep traversing
+		});
+
+	Console::printf("Dumped %u GSC files", stats.count);
+}
+
 void CustomCommands::dumpAllLuaFiles() {
-	unsigned int count = 0;
-	unsigned int totalSize = 0;
-	auto g_assetNames = (const char**)0xF88A60_b;
-	auto db_hashTable = (uint32_t*)0x27D0110_b;
-	auto g_assetEntryPool = (uint8_t*)0x50F50E0_b;
-	constexpr uint32_t HASH_SIZE = 0x48800; //this looks right from ida
-	constexpr uint32_t MAX_ENTRIES = 0x200000; //placeholder
-	const char* typeName = g_assetNames[ASSET_TYPE_LUA_FILE];
-	for (uint32_t hash = 0; hash < HASH_SIZE; ++hash) {
-		uint32_t index = db_hashTable[hash];
+	AssetPoolStats stats = GameUtil::assetPoolTraverseHelper(ASSET_TYPE_LUA_FILE,
+		[](XAsset* asset, const char* name) -> bool {
+			LuiLoader::dumpLuaFile(asset->header.luafile);
+			return true;
+		});
 
-		while (index) {
-			if (index >= MAX_ENTRIES) {
-				break;
-			}
-
-			uint8_t* entry = g_assetEntryPool + (index * 32);
-
-			uint32_t assetType = *(uint32_t*)(entry + 0);
-			uint32_t nextIndex = *(uint32_t*)(entry + 20); //entry[5]
-
-			if (assetType == ASSET_TYPE_LUA_FILE) {
-				const char* assetName = Functions::_DB_GetXAssetName(entry);
-				if (assetName) {
-					XAsset* a = (XAsset*)entry;
-					LuiLoader::dumpLuaFile(a->header.luafile);
-				}
-
-				++count;
-				totalSize += Functions::_DB_GetXAssetTypeSize(assetType);
-			}
-
-			if (nextIndex >= MAX_ENTRIES) {
-				break;
-			}
-
-			index = nextIndex;
-		}
-	}
-	Console::printf("Dumped %u lua files", count);
+	Console::printf("Dumped %u lua files", stats.count);
 }
 
 void CustomCommands::dumpAllCSVFiles() {
-	unsigned int count = 0;
-	unsigned int totalSize = 0;
-	auto g_assetNames = (const char**)0xF88A60_b;
-	auto db_hashTable = (uint32_t*)0x27D0110_b;
-	auto g_assetEntryPool = (uint8_t*)0x50F50E0_b;
-	constexpr uint32_t HASH_SIZE = 0x48800; //this looks right from ida
-	constexpr uint32_t MAX_ENTRIES = 0x200000; //placeholder
-	const char* typeName = g_assetNames[ASSET_TYPE_STRINGTABLE];
-	for (uint32_t hash = 0; hash < HASH_SIZE; ++hash) {
-		uint32_t index = db_hashTable[hash];
+	AssetPoolStats stats = GameUtil::assetPoolTraverseHelper(ASSET_TYPE_STRINGTABLE,
+		[](XAsset* asset, const char* name) -> bool {
+			StringTableLoader::dump(asset->header.table);
+			return true;
+		});
 
-		while (index) {
-			if (index >= MAX_ENTRIES) {
-				break;
-			}
-
-			uint8_t* entry = g_assetEntryPool + (index * 32);
-
-			uint32_t assetType = *(uint32_t*)(entry + 0);
-			uint32_t nextIndex = *(uint32_t*)(entry + 20); //entry[5]
-
-			if (assetType == ASSET_TYPE_STRINGTABLE) {
-				const char* assetName = Functions::_DB_GetXAssetName(entry);
-				if (assetName) {
-					XAsset* a = (XAsset*)entry;
-					StringTableLoader::dump(a->header.table);
-				}
-
-				++count;
-				totalSize += Functions::_DB_GetXAssetTypeSize(assetType);
-			}
-
-			if (nextIndex >= MAX_ENTRIES) {
-				break;
-			}
-
-			index = nextIndex;
-		}
-	}
-	Console::printf("Dumped %u stringtables", count);
+	Console::printf("Dumped %u stringtables", stats.count);
 }
 
-void DB_ListAssetPool(unsigned int targetType, bool saveToFile) {
-	unsigned int count = 0;
-	unsigned int totalSize = 0;
-
+void DB_ListAssetPool(XAssetType targetType, bool saveToFile) {
 	auto g_assetNames = (const char**)0xF88A60_b;
-	auto db_hashTable = (uint32_t*)0x27D0110_b;
-	auto g_assetEntryPool = (uint8_t*)0x50F50E0_b;
 
-	constexpr uint32_t HASH_SIZE = 0x48800; //this looks right from ida
-	constexpr uint32_t MAX_ENTRIES = 0x200000; //placeholder
-
-	if (targetType >= 0x53) {
+	if (targetType > ASSET_TYPE_DLOGROUTES) {
 		Console::printf("Invalid asset type %u", targetType);
 		return;
 	}
@@ -145,9 +84,11 @@ void DB_ListAssetPool(unsigned int targetType, bool saveToFile) {
 	const char* typeName = g_assetNames[targetType];
 
 	std::ofstream outFile;
+
 	if (saveToFile) {
 		std::string filename = "assetpool_" + std::to_string(targetType) + ".txt";
 		outFile.open(filename, std::ios::out);
+
 		if (!outFile.is_open()) {
 			Console::printf("Failed to open file %s for writing.", filename.c_str());
 			saveToFile = false;
@@ -158,48 +99,23 @@ void DB_ListAssetPool(unsigned int targetType, bool saveToFile) {
 		Console::printf("Listing assets in %s pool.", typeName);
 	}
 
-	for (uint32_t hash = 0; hash < HASH_SIZE; ++hash) {
-		uint32_t index = db_hashTable[hash];
-
-		while (index) {
-			if (index >= MAX_ENTRIES) {
-				break;
+	AssetPoolStats stats = GameUtil::assetPoolTraverseHelper(targetType,
+		[&](XAsset* asset, const char* assetName) -> bool {
+			if (saveToFile) {
+				outFile << assetName << '\n';
 			}
-
-			uint8_t* entry = g_assetEntryPool + (index * 32);
-
-			uint32_t assetType = *(uint32_t*)(entry + 0);
-			uint32_t nextIndex = *(uint32_t*)(entry + 20); //entry[5]
-
-			if (assetType == targetType) {
-				const char* assetName = Functions::_DB_GetXAssetName(entry);
-				if (assetName) {
-					if (saveToFile) {
-						outFile << assetName << std::endl;
-					}
-					else {
-						Console::printf("%s", assetName);
-					}
-				}
-
-				++count;
-				totalSize += Functions::_DB_GetXAssetTypeSize(assetType);
+			else {
+				Console::printf("%s", assetName);
 			}
-
-			if (nextIndex >= MAX_ENTRIES) {
-				break;
-			}
-
-			index = nextIndex;
-		}
-	}
+			return true;
+		});
 
 	if (saveToFile) {
 		outFile.close();
-		Console::printf("Saved %u assets in %s pool to file.", count, typeName);
+		Console::printf("Saved %u assets in %s pool to file.", stats.count, typeName);
 	}
 	else {
-		Console::printf("Total of %u assets in %s pool", count, typeName);
+		Console::printf("Total of %u assets in %s pool", stats.count, typeName);
 	}
 }
 
@@ -264,7 +180,7 @@ void CustomCommands::listAssetPool() {
 	const char** args = cmdArgs->argv[nest];
 	unsigned int type = static_cast<unsigned int>(std::strtoul(args[1], nullptr, 10));
 
-	DB_ListAssetPool(type, false);
+	DB_ListAssetPool((XAssetType)type, false);
 }
 
 void CustomCommands::saveAssetPool() {
@@ -283,7 +199,7 @@ void CustomCommands::saveAssetPool() {
 	const char** args = cmdArgs->argv[nest];
 	unsigned int type = static_cast<unsigned int>(std::strtoul(args[1], nullptr, 10));
 
-	DB_ListAssetPool(type, true);
+	DB_ListAssetPool((XAssetType)type, true);
 }
 
 
@@ -416,14 +332,11 @@ void CustomCommands::unlockAll() {
 	}
 	Hook::nopMem((void*)0xCE822_b, 2); //LiveStorage_GetItemLockStateFromStatus (just in case, force "Unlocked")
 
-	MH_CreateHook(reinterpret_cast<void*>(0xCFB10_b), &returnUnlocked, reinterpret_cast<void**>(&_LiveStorage_IsItemUnlockedFromTable));
-	MH_EnableHook(reinterpret_cast<void*>(0xCFB10_b));
+	Hook::create("LiveStorage_IsItemUnlockedFromTable", 0xCFB10_b, &returnUnlocked, &_LiveStorage_IsItemUnlockedFromTable);
 
-	MH_CreateHook(reinterpret_cast<void*>(0xCE850_b), &returnUnlocked, reinterpret_cast<void**>(&_LiveStorage_GetItemLockStatus));
-	MH_EnableHook(reinterpret_cast<void*>(0xCE850_b));
+	Hook::create("LiveStorage_GetItemLockStatus", 0xCE850_b, &returnUnlocked, &_LiveStorage_GetItemLockStatus);
 
-	MH_CreateHook(reinterpret_cast<void*>(0x73E9F0_b), &hook_GetIsItemUnlockedStr, reinterpret_cast<void**>(&_GetIsItemUnlockedStr));
-	MH_EnableHook(reinterpret_cast<void*>(0x73E9F0_b));
+	Hook::create("GetIsItemUnlockedStr", 0x73E9F0_b, &hook_GetIsItemUnlockedStr, &_GetIsItemUnlockedStr);
 
 	constexpr std::array<unsigned char, 5> UNLOCK_CHALLENGES_PATCH = { 0xB8, 0xFF, 0x00, 0x00, 0x00 }; //GetChallengeHelper
 	WriteProcessMemory(GetCurrentProcess(), (LPVOID)(0xCE676_b), UNLOCK_CHALLENGES_PATCH.data(), UNLOCK_CHALLENGES_PATCH.size(), nullptr);
@@ -449,14 +362,8 @@ void CustomCommands::changeMap() {
 		return;
 	}
 
-	if (count <= 3) {
-		int* sv_migrate = (int*)0xBB4EE68_b;
-		*sv_migrate = 0;
-	}
-	else {
-		int* sv_migrate = (int*)0xBB4EE68_b;
-		*sv_migrate = atol(cmdArgs->argv[nest][2]); //TODO: make this safe
-	}
+	int* sv_migrate = (int*)0xBB4EE68_b;
+	*sv_migrate = count >= 3 ? GameUtil::safeStringToInt(cmdArgs->argv[nest][2]) : 0;
 	
 	Functions::_SV_StartMap(LOCAL_CLIENT_0, cmdArgs->argv[nest][1], isMapPreloaded);
 }
@@ -561,4 +468,38 @@ void CustomCommands::give() {
 
 	//TODO: add alt+ check
 	Functions::_Add_Ammo(Functions::_G_GetEntityPlayerState(player0), result, false, 998, 1);
+}
+
+void CustomCommands::modelviewer() {
+	CmdArgs* cmdArgs = GameUtil::getCmdArgs();
+	if (!cmdArgs) {
+		return;
+	}
+
+	int nest = cmdArgs->nesting;
+	int count = cmdArgs->argc[nest];
+	if (count != 2) {
+		Console::print("Usage: modelviewer <modelname>");
+		return;
+	}
+	if (!GameUtil::areWeHost()) { //yeah not ideal but good enough for testing and preventing crash
+		Console::print("Must be host to use give command");
+		return;
+	}
+	gentity_s* spawned = Functions::_G_Spawn();
+	if (!spawned) {
+		DEV_PRINTF("G_Spawn() failed in function: %s", __FUNCTION__);
+		return;
+	}
+	float pos[3];
+	GameUtil::getPlayerPosition(pos);
+	pos[2] += 20;
+	Functions::_G_SetOrigin(spawned, pos);
+	Functions::_G_SetModel(spawned, cmdArgs->argv[nest][1]);
+	Functions::_G_DObjUpdate(spawned, 1);
+	DEV_PRINTF("spawned gentity address: %p", (void*)spawned);
+}
+
+void CustomCommands::none() {
+
 }

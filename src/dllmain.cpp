@@ -12,37 +12,53 @@ const int EXTERNAL_CONSOLE_MODE = 1;
 
 DWORD WINAPI extConInitWrapper(LPVOID) {
 	ExtConsole::extConInit(EXTERNAL_CONSOLE_MODE);
-	return NULL;
+	return 0;
 }
 
 void ExternalConsoleGuiInitWrapper() {
 	ExternalConsoleGui::init(hm, 0, NULL, 1);
 }
 
-BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpvReserved) {
-	hm = hModule;
-	if (dwReason == DLL_PROCESS_ATTACH) 
-	{
-		Logfile::init();
+DWORD WINAPI modInitWrapper(LPVOID module) {
+	hm = static_cast<HMODULE>(module);
+
+	Logfile::init();
 
 #ifdef DEVELOPMENT_BUILD
-		Logfile::setEnabled(true); //always log on dev build
+	Logfile::setEnabled(true); //always log on dev build
 #endif
 
-		utils::hook::detour::detour(); // initialize minhook
-		DebugPatches::earlyInit();
-		if (EXTERNAL_CONSOLE_MODE == 0 || EXTERNAL_CONSOLE_MODE == 2) {
-			AllocConsole();
-			FILE* pFile = nullptr;
-			freopen_s(&pFile, "CONOUT$", "w", stdout);
-			freopen_s(&pFile, "CONIN$", "r", stdin);
+	utils::hook::detour::detour(); //initialize minhook
+	DebugPatches::earlyInit();
+	if (EXTERNAL_CONSOLE_MODE == 0 || EXTERNAL_CONSOLE_MODE == 2) {
+		AllocConsole();
+		FILE* pFile = nullptr;
+		freopen_s(&pFile, "CONOUT$", "w", stdout);
+		freopen_s(&pFile, "CONIN$", "r", stdin);
+	}
+	if (EXTERNAL_CONSOLE_MODE >= 1) {
+		std::thread t1(ExternalConsoleGuiInitWrapper);
+		t1.detach();
+	}
+
+	HANDLE extConsoleThread = CreateThread(nullptr, 0, extConInitWrapper, nullptr, 0, nullptr);
+	if (extConsoleThread) {
+		CloseHandle(extConsoleThread);
+	}
+
+	return 0;
+}
+
+BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpvReserved) {
+	if (dwReason == DLL_PROCESS_ATTACH) 
+	{
+		DisableThreadLibraryCalls(hModule);
+		HANDLE initThread = CreateThread(nullptr, 0, modInitWrapper, hModule, 0, nullptr);
+		if (!initThread) {
+			return FALSE;
 		}
-		if (EXTERNAL_CONSOLE_MODE >= 1) {
-			std::thread t1(ExternalConsoleGuiInitWrapper);
-			t1.detach();
-		}
-		CreateThread(0, 0, extConInitWrapper, 0, 0, 0);
-		
+
+		CloseHandle(initThread);
 	}
 	return TRUE;
 }

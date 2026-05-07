@@ -31,6 +31,14 @@ function gsc_tool.project()
 
     zlib.includes()
 
+    filter "configurations:Debug"
+        runtime "Debug"
+
+    filter "configurations:Release"
+        runtime "Release"
+
+    filter {}
+
     project "xsk-gsc-s2"
     kind "StaticLib"
     language "C++"
@@ -59,6 +67,14 @@ function gsc_tool.project()
     includedirs {
         path.join(gsc_tool.source, "include")
     }
+
+    filter "configurations:Debug"
+        runtime "Debug"
+
+    filter "configurations:Release"
+        runtime "Release"
+
+    filter {}
 end
 
 table.insert(dependencies, gsc_tool)

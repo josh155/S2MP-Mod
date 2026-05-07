@@ -123,16 +123,16 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	DeleteFileA("ZM");//just in case
 	ArxanPatches::init();
 	DebugPatches::init();
-
 	PrintPatches::init();
 	DevPatches::init();
 	Console::registerCustomCommands();
 	Console::registerCustomDvars();
 	DvarInterface::init();
-	Loaders::initAssetLoaders();
+
 	Errors::init();
 	InternalConsole::init();
 
+	Loaders::initAssetLoaders();
 	DeleteFileA("ZM");//just in case
 	if (extConsoleMode == 0 || extConsoleMode == 2) {
 		consoleMainLoop();

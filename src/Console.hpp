@@ -87,6 +87,7 @@ public:
 	static bool ufoActive; //just puttin this here for now
 
 	static void toggleGodmode();
+	static void dumpAllScriptFiles();
 	static void dumpAllLuaFiles();
 	static void dumpAllCSVFiles();
 	static void listAllCmds();
@@ -111,6 +112,8 @@ public:
 	static void toggleUfo();
 	static void dropWeapon();
 	static void give();
+	static void modelviewer();
+	static void none();
 	static void unlockAll();
 private:
 	static bool isGodmode;

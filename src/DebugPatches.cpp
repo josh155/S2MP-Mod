@@ -29,6 +29,10 @@ namespace Logger {
     }
 
     inline void write(const char* fmt, ...) {
+
+        //disabling for now
+        return;
+
         char buffer[2048];
 
         va_list args;

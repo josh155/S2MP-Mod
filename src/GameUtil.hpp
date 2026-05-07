@@ -2,6 +2,16 @@
 #include <string>
 #include <vector>
 #include "structs.h"
+#include "FuncPointers.h"
+#include "Console.hpp"
+
+
+struct AssetPoolStats {
+	unsigned int count = 0;
+	unsigned int totalSize = 0;
+};
+
+
 class GameUtil {
 public:
 	static std::string sanitizeFileName(const std::string& name);
@@ -33,4 +43,61 @@ public:
 	static bool getPlayerPosition(float* outPos);
 
 	static std::list<cmd_function_s> cmdHeap;
+
+	template <typename Callback>
+	static AssetPoolStats assetPoolTraverseHelper(XAssetType targetType, Callback&& callback) {
+		AssetPoolStats stats{};
+
+		auto db_hashTable = (uint32_t*)0x27D0110_b;
+		auto g_assetEntryPool = (uint8_t*)0x50F50E0_b;
+
+		constexpr uint32_t HASH_SIZE = 0x48800;
+		constexpr uint32_t MAX_ENTRIES = 0x200000;
+		constexpr uint32_t ENTRY_SIZE = 32;
+		constexpr uint32_t NEXT_INDEX_OFFSET = 20;
+
+		if (targetType > ASSET_TYPE_DLOGROUTES) {
+			Console::printf("Invalid asset type %u", targetType);
+			return stats;
+		}
+
+		for (uint32_t hash = 0; hash < HASH_SIZE; ++hash) {
+			uint32_t index = db_hashTable[hash];
+
+			while (index) {
+				if (index >= MAX_ENTRIES) {
+					break;
+				}
+
+				uint8_t* entry = g_assetEntryPool + (index * ENTRY_SIZE);
+
+				XAssetType assetType = *(XAssetType*)(entry + 0);
+				uint32_t nextIndex = *(uint32_t*)(entry + NEXT_INDEX_OFFSET);
+
+				if (assetType == targetType) {
+					const char* assetName = Functions::_DB_GetXAssetName(entry);
+
+					if (assetName) {
+						XAsset* asset = reinterpret_cast<XAsset*>(entry);
+
+						if (!callback(asset, assetName)) {
+							return stats;
+						}
+					}
+
+					++stats.count;
+					stats.totalSize += Functions::_DB_GetXAssetTypeSize(assetType);
+				}
+
+				if (nextIndex >= MAX_ENTRIES) {
+					break;
+				}
+
+				index = nextIndex;
+			}
+		}
+
+		return stats;
+	}
 };
+

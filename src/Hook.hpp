@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include <asmjit/core/jitruntime.h>
 #include <asmjit/x86/x86assembler.h>
 
@@ -7,6 +9,30 @@ class Hook {
 public:
 	static void installHook(void* func2hook, void* payloadFunction);
 	static void nopMem(void* addr, int len);
+	/**
+	 * @brief Creates and enables a MinHook hook in one call.
+	 *
+	 * Logs a useful DEV_PRINTF message if hook creation or enabling fails.
+	 *
+	 * @param name A readable hook name used in log messages.
+	 * @param target The engine function address to hook.
+	 * @param detour The replacement function to call.
+	 * @param original Receives the original function pointer from MinHook.
+	 *
+	 * @return true if the hook was created and enabled, otherwise false.
+	 */
+	static bool create(const char* name, void* target, void* detour, void** original);
+
+	template <typename OriginalFn, typename DetourFn>
+	static bool create(const char* name, uintptr_t target, DetourFn detour, OriginalFn* original) {
+		return create(
+			name,
+			reinterpret_cast<void*>(target),
+			reinterpret_cast<void*>(detour),
+			reinterpret_cast<void**>(original)
+		);
+	}
+
 private:
 	static void* allocatePageNearAddress(void* targetAddr);
 	static void writeAbsoluteJump64(void* absJumpMemory, void* addrToJumpTo);

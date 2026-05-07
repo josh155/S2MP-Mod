@@ -1,9 +1,11 @@
 #include "pch.h"
-#include "Loaders.hpp"
+#include "LuiLoader.hpp"
+#include "Console.hpp"
 #include <fstream>
 #include <filesystem>
 #include "FuncPointers.h"
 #include "DevDef.h"
+#include "Hook.hpp"
 
 typedef int(*hks_load)(void* state, void* compiler_options, void* reader, void* reader_data, const char* chunk_name);
 hks_load _hks_load = nullptr;
@@ -60,17 +62,7 @@ void __fastcall Load_LuaFileAsset_hookfunc(LuaFile** luaFile) {
 }
 
 void Hook_Load_LuaFileAsset() {
-    void* target = (void*)(0xD81A0_b);
-
-    if (MH_CreateHook(target, &Load_LuaFileAsset_hookfunc, reinterpret_cast<void**>(&oLoad_LuaFileAsset)) != MH_OK) {
-        DEV_PRINTF("CREATEHOOK FAILURE IN FUNCTION ", __FUNCTION__);
-        return;
-    }
-
-    if (MH_EnableHook(target) != MH_OK) {
-        DEV_PRINTF("ENABLEHOOK FAILURE IN FUNCTION ", __FUNCTION__);
-        return;
-    }
+    Hook::create("Load_LuaFileAsset", 0xD81A0_b, &Load_LuaFileAsset_hookfunc, &oLoad_LuaFileAsset);
 }
 
 //////////////////////////////
@@ -164,16 +156,13 @@ void LuiLoader::init() {
     Hook_Load_LuaFileAsset(); //for loadtime dump
 
     //hks_load
-    MH_CreateHook(reinterpret_cast<void*>(0x2D6D10_b), &hook_hks_load, reinterpret_cast<void**>(&_hks_load));
-    MH_EnableHook(reinterpret_cast<void*>(0x2D6D10_b));
+    Hook::create("hks_load", 0x2D6D10_b, &hook_hks_load, &_hks_load);
 
     //LUI_CoD_Init
-    MH_CreateHook(reinterpret_cast<void*>(0x317A00_b), &hook_LUI_CoD_Init, reinterpret_cast<void**>(&_LUI_CoD_Init));
-    MH_EnableHook(reinterpret_cast<void*>(0x317A00_b));
+    Hook::create("LUI_CoD_Init", 0x317A00_b, &hook_LUI_CoD_Init, &_LUI_CoD_Init);
 
     //LUI_CoD_Shutdown
-    MH_CreateHook(reinterpret_cast<void*>(0x31A6F0_b), &hook_LUI_CoD_Shutdown, reinterpret_cast<void**>(&_LUI_CoD_Shutdown));
-    MH_EnableHook(reinterpret_cast<void*>(0x31A6F0_b));
+    Hook::create("LUI_CoD_Shutdown", 0x31A6F0_b, &hook_LUI_CoD_Shutdown, &_LUI_CoD_Shutdown);
 
 
 

@@ -7,6 +7,10 @@
 #include "Console.hpp"
 #include "DevDef.h"
 
+Functions::Image_GetLevelSize Functions::_Image_GetLevelSize = nullptr;
+Functions::Image_Setup Functions::_Image_Setup = nullptr;
+Functions::G_DObjUpdate Functions::_G_DObjUpdate = nullptr;
+Functions::G_SetModel Functions::_G_SetModel = nullptr;
 Functions::G_Spawn Functions::_G_Spawn = nullptr;
 Functions::G_SpawnItem Functions::_G_SpawnItem = nullptr;
 Functions::G_GetWeaponForName Functions::_G_GetWeaponForName = nullptr;
@@ -97,4 +101,8 @@ void Functions::init()
 	_G_TakePlayerWeapon = (G_TakePlayerWeapon)(0x5C5490_b);
 	_BG_GetWorldModel = (BG_GetWorldModel)(0x3BCD30_b);
 	_DB_FindXAssetHeader = (DB_FindXAssetHeader)(0xA0080_b);
+	_G_SetModel = (G_SetModel)(0x5C0E00_b);
+	_G_DObjUpdate = (G_DObjUpdate)(0x5BDAF0_b);
+	_Image_Setup = (Image_Setup)(0x8978C0_b);
+	_Image_GetLevelSize = (Image_GetLevelSize)(0x897730_b);
 }

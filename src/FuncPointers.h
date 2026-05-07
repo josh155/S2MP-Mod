@@ -4,6 +4,19 @@
 class Functions {
 public:
 	static void init();
+
+	typedef uint32_t(*Image_GetLevelSize)(int format, int width, int height, int depth);
+	static Image_GetLevelSize _Image_GetLevelSize;
+
+	typedef void (*Image_Setup)(GfxImage* image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipCount, uint32_t imageFlags, DXGI_FORMAT imageFormat, const char* name, const void* initData);
+	static Image_Setup _Image_Setup;
+
+	typedef void (*G_DObjUpdate)(gentity_s* entity, int link);
+	static G_DObjUpdate _G_DObjUpdate;
+
+	typedef void (*G_SetModel)(gentity_s* entity, const char* modelName);
+	static G_SetModel _G_SetModel;
+
 	typedef gentity_s* (*G_Spawn)();
 	static G_Spawn _G_Spawn;
 

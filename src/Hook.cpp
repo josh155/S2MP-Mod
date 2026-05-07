@@ -6,6 +6,8 @@
 #include "Hook.hpp"
 #include <cstdint>
 
+#include "Console.hpp"
+#include "DevDef.h"
 #include "memory.h"
 
 //Credit:
@@ -84,6 +86,30 @@ void Hook::installHook(void* func2hook, void* payloadFunction) {
     const uint64_t relAddr = (uint64_t)relayFuncMemory - ((uint64_t)func2hook + sizeof(jmpInstruction));
     memcpy(jmpInstruction + 1, &relAddr, 4);
     memcpy(func2hook, jmpInstruction, sizeof(jmpInstruction));
+}
+
+bool Hook::create(const char* name, void* target, void* detour, void** original) {
+	const char* safeName = name ? name : "<unnamed>";
+
+	if (!target || !detour || !original) {
+		DEV_PRINTF("Hook setup failed for %s: target=%p detour=%p original=%p", safeName, target, detour, original);
+		return false;
+	}
+
+	MH_STATUS status = MH_CreateHook(target, detour, original);
+	if (status != MH_OK && status != MH_ERROR_ALREADY_CREATED) {
+		DEV_PRINTF("MH_CreateHook failed for %s at %p: %s", safeName, target, MH_StatusToString(status));
+		return false;
+	}
+
+	status = MH_EnableHook(target);
+	if (status != MH_OK && status != MH_ERROR_ENABLED) {
+		DEV_PRINTF("MH_EnableHook failed for %s at %p: %s", safeName, target, MH_StatusToString(status));
+		return false;
+	}
+
+	DEV_PRINTF("Installed hook %s at %p", safeName, target);
+	return true;
 }
 
 uint8_t* allocate_somewhere_near(const void* base_address, const size_t size)

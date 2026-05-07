@@ -8,26 +8,13 @@
 #include "Console.hpp"
 #include "FuncPointers.h"
 #include "GameUtil.hpp"
+#include "ImageLoader.hpp"
 #include "memory.h"
 #include <DevDef.h>
 #include <xsk/gsc/engine/s2.hpp>
 #include <Hook.hpp>
 #include <string.h>
-
-typedef void*(*Image_Setup)(GfxImage* image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipCount, uint32_t imageFlags, DXGI_FORMAT imageFormat, const char* name, const void* initData);
-Image_Setup _Image_Setup = nullptr;
-
-void* hook_Image_Setup(GfxImage* image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipCount, uint32_t imageFlags, DXGI_FORMAT imageFormat, const char* name, const void* initData) {
-    //Console::printf("Image_Setup: %s, width: %d, height: %d, depth: %d, mipCount: %d, imageFlags: %d", name, width, height, depth, mipCount, imageFlags);
-    return _Image_Setup(image, width, height, depth, mipCount, imageFlags, imageFormat, name, initData);
- 
-}
-
-void imageThing() {
-    MH_CreateHook(reinterpret_cast<void*>(0x8978C0_b), &hook_Image_Setup, reinterpret_cast<void**>(&_Image_Setup));
-    MH_EnableHook(reinterpret_cast<void*>(0x8978C0_b));
-}
-
+#include "DvarInterface.hpp"
 
 typedef void* (*BG_GetWorldModel_t)(Weapon* weapon, bool isAlternate, int variation);
 static BG_GetWorldModel_t fpBG_GetWorldModel;
@@ -41,14 +28,25 @@ void* BG_GetWorldModel_hookfunc(Weapon* weapon, bool isAlternate, int variation)
     return model;
 }
 
-void BG_GetWorldModel_setup() {
-    MH_CreateHook(reinterpret_cast<void*>(0x3BCD30_b), &BG_GetWorldModel_hookfunc, reinterpret_cast<void**>(&fpBG_GetWorldModel));
-    MH_EnableHook(reinterpret_cast<void*>(0x3BCD30_b));
+typedef void (*Dvar_SetVariant_t)(dvar_t* dvar, DvarValue* value, int source);
+static Dvar_SetVariant_t fpDvar_SetVariant;
+void Dvar_SetVariant_hookfunc(dvar_t* dvar, DvarValue* value, int source) {
+    if (!strcmp(dvar->name, "3078")) {
+        //DEV_PRINTF("cg_fovscale set to %f from source %d", value->value, source);
+        if (source != 1) {
+            return;
+        }
+    }
+
+    fpDvar_SetVariant(dvar, value, source);
 }
 
 
 void DevPatches::init()  {
     DEV_INIT_PRINT();
-    //imageThing();
-    BG_GetWorldModel_setup();
+    //make weapons without world models work
+    Hook::create("BG_GetWorldModel", 0x3BCD30_b, &BG_GetWorldModel_hookfunc, &fpBG_GetWorldModel);
+    Hook::create("Dvar_SetVariant", 0xB20C0_b, &Dvar_SetVariant_hookfunc, &fpDvar_SetVariant);
+
+
 }

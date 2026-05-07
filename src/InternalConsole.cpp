@@ -6,6 +6,8 @@
 #include "GameUtil.hpp"
 #include "DevDef.h"
 #include "DvarInterface.hpp"
+#include "Hook.hpp"
+#include <ImageLoader.hpp>
 
 typedef void (*R_EndFrame_t)(void);
 R_EndFrame_t _EndFrame = nullptr;
@@ -20,6 +22,7 @@ std::vector<unsigned int> outputLogLevel;
 unsigned int outputStackSeekPos = 0;
 unsigned int maxLines = 0;
 unsigned int lineSpacing = 16;
+static std::mutex consoleMutex;
 
 //Main Internal Console
 float colorSecondary[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -70,7 +73,7 @@ struct intConSearchResult {
 float hintBoxColorSecondary[4] = { colorSecondary[0], colorSecondary[1], colorSecondary[2], 1.0f};
 float hintBoxColorPrimary[4] = { colorPrimary[0], colorPrimary[1],colorPrimary[2], 1.0f};
 int lastSearchLength = -1;
-std::vector<const intConSearchResult*> searchResults;
+std::vector<intConSearchResult> searchResults;
 int MAX_SEARCH_RESULTS = 24; //was a const a swear
 int resultCount = 0;
 int searchBoxOffset = 96;
@@ -174,8 +177,8 @@ void InternalConsole::closeConsole() {
 	autoCompleteIndex = 0;
 	autoCompleteTextSize = 0;
 	isAutoCompleteCycling = false;
-	int lastSearchLength = -1;
-	int resultCount = 0;
+	lastSearchLength = -1;
+	resultCount = 0;
 	searchResults.clear();
 	InternalConsole::clearConsole();
 	GameUtil::blockGameInput(false);
@@ -213,7 +216,18 @@ int scrollbarTrackHeight;
 int sliderHeight;
 int sliderOffsetY;
 void drawFullConsoleOutput(int windowWidth, int windowHeight) {
-	int outputStackSizeCrit = outputStack.size();
+	std::vector<std::string> outputStackSnapshot;
+	std::vector<unsigned int> outputLogLevelSnapshot;
+	unsigned int outputStackSeekPosSnapshot = 0;
+
+	{
+		std::lock_guard<std::mutex> lock(consoleMutex);
+		outputStackSnapshot = outputStack;
+		outputLogLevelSnapshot = outputLogLevel;
+		outputStackSeekPosSnapshot = outputStackSeekPos;
+	}
+
+	size_t outputStackSizeCrit = std::min(outputStackSnapshot.size(), outputLogLevelSnapshot.size());
 	int outputBaseX = (margin - borderSize) + 5;
 	int outputBaseY = (margin - borderSize) + consoleHeight + fullConsoleGap + 16;
 	int outputMaxY = windowHeight - margin - 14;
@@ -230,25 +244,27 @@ void drawFullConsoleOutput(int windowWidth, int windowHeight) {
 	sliderOffsetY = 0;
 
 	//Calculating slider height
-	if (outputStack.size() > 0) {
-		sliderHeight = (scrollbarTrackHeight * maxLines) / outputStack.size();
+	if (outputStackSizeCrit > 0) {
+		sliderHeight = static_cast<int>((static_cast<size_t>(scrollbarTrackHeight) * maxLines) / outputStackSizeCrit);
 		if (sliderHeight < 15) {
 			sliderHeight = 15;
 		}
 	}
+	else {
+		sliderHeight = scrollbarTrackHeight;
+	}
 
 	//Calculating slider position
-	if (outputStack.size() - maxLines > 0) {
+	if (outputStackSizeCrit > maxLines) {
 		//position based on top left
-		sliderOffsetY = ((scrollbarTrackHeight - sliderHeight) * outputStackSeekPos) / (outputStack.size() - maxLines);
+		sliderOffsetY = static_cast<int>((static_cast<size_t>(scrollbarTrackHeight - sliderHeight) * outputStackSeekPosSnapshot) / (outputStackSizeCrit - maxLines));
 	}
 
 	//if not enough content to scroll, reset
-	if (maxLines > outputStack.size()) {
+	if (maxLines >= outputStackSizeCrit) {
 		sliderHeight = scrollbarTrackHeight;
 		sliderOffsetY = 0;
 	}
-
 
 	//track bg
 	Functions::_R_AddCmdDrawStretchPic(scrollbarBaseX, scrollbarBaseY, scrollbarWidth, scrollbarTrackHeight, 0.0f, 0.0f, 0.0f, 0.0f, scrollbarTrackColorPrimary, mtl_white);
@@ -261,25 +277,25 @@ void drawFullConsoleOutput(int windowWidth, int windowHeight) {
 	Functions::_R_AddCmdDrawStretchPic(scrollbarBaseX + scrollbarBorderSize, scrollbarBaseY + scrollbarBorderSize + sliderOffsetY, scrollbarWidth - (scrollbarBorderSize * 2), sliderHeight - (scrollbarBorderSize * 2), 0.0f, 0.0f, 0.0f, 0.0f, scrollbarSliderColorPrimary, mtl_white);
 	
 	for (int i = 0; outputBaseY + (i * lineSpacing) < outputMaxY; i++) {
-		
-		if ((outputStackSeekPos + i) >= 0 && (outputStackSeekPos + i) < outputStackSizeCrit) {
-			if (outputStackSeekPos + i >= outputLogLevel.size()) {
-				continue; //failure. Likely due to outputLogLevel not being updated in time.
-			}
-			if (outputLogLevel.at(outputStackSeekPos + i) == 0) {
-				Functions::_R_AddCmdDrawText(outputStack.at(outputStackSeekPos + i).c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, colorWhite, 0.0f);
+		size_t outputIndex = static_cast<size_t>(outputStackSeekPosSnapshot) + static_cast<size_t>(i);
+		if (outputIndex < outputStackSizeCrit) {
+			unsigned int logLevel = outputLogLevelSnapshot[outputIndex];
+			const char* outputText = outputStackSnapshot[outputIndex].c_str();
+
+			if (logLevel == 0) {
+				Functions::_R_AddCmdDrawText(outputText, 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, colorWhite, 0.0f);
 				continue;
 			}
-			if (outputLogLevel.at(outputStackSeekPos + i) == 1) {
-				Functions::_R_AddCmdDrawText(outputStack.at(outputStackSeekPos + i).c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, warningColor, 0.0f);
+			if (logLevel == 1) {
+				Functions::_R_AddCmdDrawText(outputText, 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, warningColor, 0.0f);
 				continue;
 			}
-			if (outputLogLevel.at(outputStackSeekPos + i) == 2) {
-				Functions::_R_AddCmdDrawText(outputStack.at(outputStackSeekPos + i).c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, errorColor, 0.0f);
+			if (logLevel == 2) {
+				Functions::_R_AddCmdDrawText(outputText, 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, errorColor, 0.0f);
 				continue;
 			}
-			if (outputLogLevel.at(outputStackSeekPos + i) == 3) {
-				Functions::_R_AddCmdDrawText(outputStack.at(outputStackSeekPos + i).c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, devColor, 0.0f);
+			if (logLevel == 3) {
+				Functions::_R_AddCmdDrawText(outputText, 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, outputBaseX, outputBaseY + (i * lineSpacing), 1.0f, 1.0f, 0.0f, devColor, 0.0f);
 				continue;
 			}
 		}
@@ -287,8 +303,6 @@ void drawFullConsoleOutput(int windowWidth, int windowHeight) {
 }
 
 
-
-static std::mutex consoleMutex;
 
 // 0 - Info (default)
 // 1 - Warning
@@ -297,41 +311,30 @@ static std::mutex consoleMutex;
 void InternalConsole::addToOutputStack(std::string s, int level) {
 	std::lock_guard<std::mutex> lock(consoleMutex);
 
-	size_t newlinePos = s.find_first_of("\n\r");
-	//v1.2.8-alpha: Internal Console newline fix
-	//if a newline character is found, split the string and recursively call the function
-	if (newlinePos != std::string::npos) {
-		//if the newline is the last character
-		if (newlinePos == s.length() - 1) {
-			s.erase(newlinePos, 1);
-			outputStack.push_back(s);
+	size_t start = 0;
+	while (start <= s.length()) {
+		size_t newlinePos = s.find_first_of("\n\r", start);
+		if (newlinePos == std::string::npos) {
+			outputStack.push_back(s.substr(start));
 			outputLogLevel.push_back(level);
+			break;
 		}
-		else {
-			//add the substring before the newline character to the output stack
-			std::string beforeNewline = s.substr(0, newlinePos);
-			outputStack.push_back(beforeNewline);
-			outputLogLevel.push_back(level);
 
-			//recursively call the function with the remaining string after the newline character
-			std::string remaining = s.substr(newlinePos + 1);
-			consoleMutex.unlock();
-			addToOutputStack(remaining, level);
-			consoleMutex.lock();
-		}
-	}
-	else {
-		//no newline
-		outputStack.push_back(s);
+		outputStack.push_back(s.substr(start, newlinePos - start));
 		outputLogLevel.push_back(level);
+		start = newlinePos + 1;
+
+		if (start == s.length()) {
+			break;
+		}
 	}
 	
 	//stick to bottom if at bottom
-	if (outputStack.size() - 1 > maxLines && outputStack.size() - 1 <= outputStackSeekPos + maxLines) {
+	size_t lastIndex = outputStack.empty() ? 0 : outputStack.size() - 1;
+	if (lastIndex > maxLines && lastIndex <= outputStackSeekPos + maxLines) {
 		outputStackSeekPos++;
 	}
 }
-
 //temp
 material_t* InternalConsole::getMaterialWhite() {
 	return mtl_white;
@@ -373,9 +376,9 @@ void drawSearchBoxResults(int windowWidth, int windowHeight) {
 
 		//draw dvars first
 		for (int i = 0; i < searchResults.size(); i++) {
-			if (searchResults[i]->isDvar) {
+			if (searchResults[i].isDvar) {
 				dvarCount++;
-				dvar_t* dvar = searchResults[i]->entry.dvar;
+				dvar_t* dvar = searchResults[i].entry.dvar;
 				Functions::_R_AddCmdDrawText(DvarInterface::toUserString(dvar->name).c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, margin + searchBoxOffset + 6, margin + consoleHeight + fullConsoleGap + lineSpacing * (dvarCount)+(textStartOffsetGapY / 2) + 1, 1.0f, 1.0f, 0.0f, colorWhite, 0.0f);
 				Functions::_R_AddCmdDrawText(GameUtil::dvarValueToString(dvar, true, false).c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, margin + searchBoxOffset + 6 + valueDisplayOffsetX, margin + consoleHeight + fullConsoleGap + lineSpacing * (dvarCount)+(textStartOffsetGapY / 2) + 1, 1.0f, 1.0f, 0.0f, colorWhite, 0.0f);
 				
@@ -384,17 +387,17 @@ void drawSearchBoxResults(int windowWidth, int windowHeight) {
 		//draw cmd after
 		int cmdCount = 0;
 		for (int i = 0; i < searchResults.size(); i++) {
-			if (!searchResults[i]->isDvar) {
+			if (!searchResults[i].isDvar) {
 				cmdCount++;
-				cmd_function_s* cmd = searchResults[i]->entry.cmd;
+				cmd_function_s* cmd = searchResults[i].entry.cmd;
 				Functions::_R_AddCmdDrawText(cmd->name, 0x7FFFFFFF,InternalConsole::consoleFont,0, 0,InternalConsole::consoleFont->pixelHeight,margin + searchBoxOffset + 6, margin + consoleHeight + fullConsoleGap +lineSpacing * (dvarCount + cmdCount) + (textStartOffsetGapY / 2) + 1, 1.0f, 1.0f, 0.0f, commandColor, 0.0f);
 				
 			}
 		}
 	}
 	if (resultCount == 1) { //do the description draw now
-		if (searchResults.at(0)->isDvar) {
-			drawDescriptionBox(windowWidth, windowHeight, searchResults.at(0)->entry.dvar);
+		if (searchResults.at(0).isDvar) {
+			drawDescriptionBox(windowWidth, windowHeight, searchResults.at(0).entry.dvar);
 		}
 	}
 }
@@ -425,9 +428,9 @@ void findMatchingDvars(const dvar_t* dvar) {
 	}
 	if (GameUtil::toLower(DvarInterface::toUserString(std::string(dvar->name))).find(GameUtil::toLower(noslash)) != std::string::npos) {
 		if (searchResults.size() < MAX_SEARCH_RESULTS) {
-			intConSearchResult* result = new intConSearchResult();
-			result->isDvar = true;
-			result->entry.dvar = const_cast<dvar_t*>(dvar);
+			intConSearchResult result{};
+			result.isDvar = true;
+			result.entry.dvar = const_cast<dvar_t*>(dvar);
 
 			searchResults.push_back(result);
 		}
@@ -447,9 +450,9 @@ void findMatchingCmds(cmd_function_s* cmd) {
 	}
 	if (GameUtil::toLower(std::string(cmd->name)).find(GameUtil::toLower(noslash)) != std::string::npos) {
 		if (searchResults.size() < MAX_SEARCH_RESULTS) {
-			intConSearchResult* result = new intConSearchResult();
-			result->isDvar = false;
-			result->entry.cmd = const_cast<cmd_function_s*>(cmd);
+			intConSearchResult result{};
+			result.isDvar = false;
+			result.entry.cmd = const_cast<cmd_function_s*>(cmd);
 
 			searchResults.push_back(result);
 		}
@@ -531,7 +534,10 @@ void drawConsole() {
 	if (prevWindowWidth != windowWidth || prevWindowHeight != windowHeight) {
 		prevWindowWidth = windowWidth;
 		prevWindowHeight = windowHeight;
-		outputStackSeekPos = 0; //jump to top
+		{
+			std::lock_guard<std::mutex> lock(consoleMutex);
+			outputStackSeekPos = 0; //jump to top
+		}
 		DEV_PRINTF("IntCon Resize Event");
 	}
 
@@ -620,6 +626,7 @@ void InternalConsole::toggleFullConsole() {
 }
 
 void InternalConsole::clearFullConsole() {
+	std::lock_guard<std::mutex> lock(consoleMutex);
 	outputStackSeekPos = 0;
 	outputStack.clear();
 	outputLogLevel.clear();
@@ -639,12 +646,12 @@ void handleKeys(int client, int key, int down) {
 				newIndex = static_cast<int>(searchResults.size()) - 1; //wrap to end
 			}
 			if (newIndex >= 0 && newIndex < static_cast<int>(searchResults.size())) {
-				const intConSearchResult* result = searchResults.at(newIndex);
-				if (result->isDvar) {
-					textBuffer = DvarInterface::toUserString(result->entry.dvar->name);
+				const intConSearchResult& result = searchResults.at(newIndex);
+				if (result.isDvar) {
+					textBuffer = DvarInterface::toUserString(result.entry.dvar->name);
 				}
 				else {
-					textBuffer = std::string(result->entry.cmd->name);
+					textBuffer = std::string(result.entry.cmd->name);
 				}
 				cursorPos = textBuffer.length();
 			}
@@ -685,17 +692,19 @@ void handleKeys(int client, int key, int down) {
 
 	//v1.2.8-alpha: Ctrl + Home Jump to top of output window
 	if (key == 165 && down == 1 && isCtrl && fullConsole) {
+		std::lock_guard<std::mutex> lock(consoleMutex);
 		outputStackSeekPos = 0;
 		return;
 	}
 	//end
 	if (key == 166 && down == 1 && isCtrl && fullConsole) {
-		if (outputStack.size() < maxLines) {
+		std::lock_guard<std::mutex> lock(consoleMutex);
+		size_t outputSize = outputStack.size();
+		if (outputSize < maxLines) {
 			outputStackSeekPos = 0;
 		}
 		else {
-			outputStackSeekPos = outputStack.size() - maxLines;
-			
+			outputStackSeekPos = static_cast<unsigned int>(outputSize - maxLines);
 		}
 
 		return;
@@ -722,8 +731,7 @@ void handleKeys(int client, int key, int down) {
 		return;
 	}
 	// ` or ~ or ²
-	//178 is also F12 on US layout
-	if (key == 96 || key == 126 || key == 178) {
+	if (key == 96 || key == 126) {
 
 		isAutoCompleteCycling = false;
 		if (isShift) {
@@ -739,21 +747,23 @@ void handleKeys(int client, int key, int down) {
 	if (consoleOpen) {
 		//Stack Seeking for Full Int Con
 		if (key == 206 || key == 163) {
+			std::lock_guard<std::mutex> lock(consoleMutex);
+			size_t outputSize = outputStack.size();
 			if (!isCtrl) {
-				if ((outputStackSeekPos)+maxLines < outputStack.size()) {
+				if (outputStackSeekPos + maxLines < outputSize) {
 					outputStackSeekPos++;
 				}
 			}
 			else { //v1.2.8-alpha: Ctrl + Scroll = super scroll
-				if ((outputStackSeekPos)+maxLines + superScrollAmount < outputStack.size()) {
+				if (outputStackSeekPos + maxLines + superScrollAmount < outputSize) {
 					outputStackSeekPos += superScrollAmount;
 				}
 				else {
-					if (outputStack.size() < maxLines) {
+					if (outputSize < maxLines) {
 						outputStackSeekPos = 0;
 					}
 					else {
-						outputStackSeekPos = outputStack.size() - maxLines;
+						outputStackSeekPos = static_cast<unsigned int>(outputSize - maxLines);
 					}
 				}
 			}
@@ -761,13 +771,14 @@ void handleKeys(int client, int key, int down) {
 			return;
 		}
 		if (key == 207 || key == 164) {
+			std::lock_guard<std::mutex> lock(consoleMutex);
 			if (!isCtrl) {
-				if ((outputStackSeekPos) > 0) {
+				if (outputStackSeekPos > 0) {
 					outputStackSeekPos--;
 				}
 			}
 			else { //v1.2.8-alpha: Ctrl + Scroll = super scroll
-				int newPos = (int)outputStackSeekPos - (int)superScrollAmount;
+				int newPos = static_cast<int>(outputStackSeekPos) - superScrollAmount;
 				if (newPos > 0) {
 					outputStackSeekPos -= superScrollAmount;
 				}
@@ -843,11 +854,11 @@ void handleKeys(int client, int key, int down) {
 			}
 
 			didGreenForThisText = false;
-			if (searchResults.at(autoCompleteIndex)->isDvar) {
-				textBuffer = DvarInterface::toUserString(searchResults.at(autoCompleteIndex)->entry.dvar->name);
+			if (searchResults.at(autoCompleteIndex).isDvar) {
+				textBuffer = DvarInterface::toUserString(searchResults.at(autoCompleteIndex).entry.dvar->name);
 			}
 			else {
-				textBuffer = searchResults.at(autoCompleteIndex)->entry.cmd->name;
+				textBuffer = searchResults.at(autoCompleteIndex).entry.cmd->name;
 			}
 			
 			cursorPos = textBuffer.length();
@@ -968,21 +979,18 @@ void R_EndFrame_hookfunc() {
 	if (intConReady) {
 		drawConsole();
 	}
-	
+
 	_EndFrame();
 }
 
 
 void renderHookInit() {
-    void* target = (void*)(0x8BACD0_b); //endframe
     MH_Initialize();
 
-    MH_CreateHook(target, &R_EndFrame_hookfunc, reinterpret_cast<void**>(&_EndFrame));
-    MH_EnableHook(target);
+    Hook::create("R_EndFrame", 0x8BACD0_b, &R_EndFrame_hookfunc, &_EndFrame);
 
     //CL_KeyEvent
-    MH_CreateHook(reinterpret_cast<void*>(0x45CBC0_b), &hook_CL_KeyEvent, reinterpret_cast<void**>(&_CL_KeyEvent));
-    MH_EnableHook(reinterpret_cast<void*>(0x45CBC0_b));
+    Hook::create("CL_KeyEvent", 0x45CBC0_b, &hook_CL_KeyEvent, &_CL_KeyEvent);
 }
 
 bool InternalConsole::DEVONLY_isShift() {
@@ -1001,6 +1009,7 @@ bool InternalConsole::DEVONLY_consoleOpen() {
 	return consoleOpen;
 }
 int InternalConsole::DEVONLY_outputStackSeekPos() {
+	std::lock_guard<std::mutex> lock(consoleMutex);
 	return outputStackSeekPos;
 }
 int InternalConsole::DEVONLY_maxLines() {
@@ -1016,7 +1025,8 @@ int InternalConsole::DEVONLY_sliderHeight() {
 	return sliderHeight;
 }
 int InternalConsole::DEVONLY_outputStackSize() {
-	return outputStack.size();
+	std::lock_guard<std::mutex> lock(consoleMutex);
+	return static_cast<int>(outputStack.size());
 }
 int InternalConsole::DEVONLY_sliderOffsetY() {
 	return sliderOffsetY;

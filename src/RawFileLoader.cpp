@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "Loaders.hpp"
+#include "RawFileLoader.hpp"
+#include "Console.hpp"
 #include <zlib.h>
 #include "DevDef.h"
 
@@ -55,8 +56,8 @@ void RawFileLoader::dump(RawFile* rawfile) {
 #endif
     }
     else {
-        out.write(rawfile->buffer, rawfile->len);
-        Console::printf("Dumped (raw): '%s' (%d bytes)", rawfile->name, rawfile->len);
+        out.write(rawfile->buffer, rawfile->compressedLen);
+        Console::printf("Dumped (raw): '%s' (%d bytes)", rawfile->name, rawfile->compressedLen);
     }
 
     out.close();

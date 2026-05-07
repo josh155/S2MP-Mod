@@ -4,8 +4,7 @@
 /////////////////////////////////////////
 #include "pch.h"
 #include "GameUtil.hpp"
-#include "FuncPointers.h"
-#include "Console.hpp"
+
 #include <sstream>
 #include <algorithm>
 #include <list>
@@ -506,6 +505,7 @@ CmdArgs* GameUtil::getCmdArgs() {
     return cmdArgs;
 }
 
+//TODO: find actual local player since its not always zero like t6sp
 bool GameUtil::getPlayerPosition(float* outPos) {
     if (!outPos) {
         return false;

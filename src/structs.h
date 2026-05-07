@@ -4,7 +4,7 @@
 ///////////////////////////
 #pragma once
 #include <cstdint>
-
+#include <d3d11.h>
 enum DvarFlags : std::uint32_t
 {
     DVAR_FLAG_NONE = 0,
@@ -22,7 +22,7 @@ struct CmdText
 
 enum LocalClientNum_t : __int32
 {
-    LOCAL_CLIENT_INVALID = 0xFFFFFFFF,
+    LOCAL_CLIENT_INVALID = -1,
     LOCAL_CLIENT_0 = 0x0,
     LOCAL_CLIENT_LAST = 0x0,
     LOCAL_CLIENT_COUNT = 0x1,
@@ -238,6 +238,14 @@ enum XAssetType {
 	ASSET_TYPE_DLOGSCHEMA = 0x51,
 	ASSET_TYPE_DLOGROUTES = 0x52,
 };
+
+struct GfxImageGpuHandles
+{
+    void* texture;
+    void* shaderView;
+    void* extraView;
+};
+
 
 //taken from s1
 enum GfxWarningType
@@ -478,18 +486,27 @@ enum ItemLockStatus
 
 
 //WIP
-//SIZE: 0x418
+// SIZE: 0x418
 struct gentity_s {
-    char pad0[0x234];
+    char pad0[0x144];
+
+    int modelIndex;          // 0x144
+
+    char pad1[0xEC];
 
     float origin[3];         // 0x234
 
-    char pad1[0x4C];
+    char pad2[0x4C];
 
     uint8_t autoPickupFlag;  // 0x28C
 
-    char pad2[0x18B];
+    char pad3[0x18B];
 };
+
+static_assert(offsetof(gentity_s, modelIndex) == 0x144);
+static_assert(offsetof(gentity_s, origin) == 0x234);
+static_assert(offsetof(gentity_s, autoPickupFlag) == 0x28C);
+static_assert(sizeof(gentity_s) == 0x418);
 
 //SIZE: 0xA8
 struct ComPrimaryLight {
@@ -623,35 +640,29 @@ struct GfxBuildInfo {
 struct CardMemory {
 	unsigned int platform[1];
 };
-//WIP
+
 struct GfxImage {
-	const char* name; //0x0
-    void* ptr1; //0x8 These two pointers are missing about half the time
-    void* ptr2; //0x10
-    char unknown[0x8]; //0x18
-    void* ptr3; //0x20 very rarely a ptr here
-    unsigned short width; //0x28
-    unsigned short height; //0x2B
-    unsigned short depth;
-    unsigned short unk;
+    const char* name;                    // 0x00
+    ID3D11Texture2D* texture;             // 0x08
+    ID3D11ShaderResourceView* shaderView; // 0x10
 
-    char idk[0x18];
-    int imageFormat;
-    unsigned short w;
-    unsigned short h;
-    unsigned short d;
-    unsigned short height2;//0x52 these are not always used
-    unsigned int cardmemory;
-    //unsigned short mipcount2; //0x56
+    char pad0[0x30];                     // 0x18 - 0x47
 
-    char idk2;
-    unsigned char semantic;
-    unsigned char category;
-    unsigned char flags;
-    unsigned char levelCount;
-    char idk3[3];
+    int imageFormat;                     // 0x48
+    uint16_t w;                          // 0x4C
+    uint16_t h;                          // 0x4E
+    uint16_t d;                          // 0x50
+    uint16_t mipCount;                   // 0x52
+    uint32_t cardMemory;                 // 0x54
+
+    uint8_t type;                        // 0x58
+    uint8_t semantic;                    // 0x59
+    uint8_t category;                    // 0x5A
+    uint8_t flags;                       // 0x5B
+    uint8_t levelCount;                  // 0x5C
+
+    char pad1[3];                        // 0x5D - 0x5F
 };
-
 
 union OmnvarValue
 {

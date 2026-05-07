@@ -9,9 +9,11 @@
 #include "Errors.hpp"
 #include "Console.hpp"
 #include "DevDef.h"
+#include "Hook.hpp"
 
 //TODO: run script errors thru the same error map
 static std::unordered_map<int, std::string> errorMap = {
+    {151, "Could not find animation tree '%s'"},
     {198, "Couldn't load file or file is invalid '%s'"},
     {202, "Couldn't load file or file is invalid '%s'"},
     {219, "Mantle anim [%s] has Z translation %f, should be %f\n"},
@@ -26,9 +28,11 @@ static std::unordered_map<int, std::string> errorMap = {
     {447, "Too many active clients.  You may be missing a \"nosplitscreen\" in a menu."},
     {476, "Fastfile for zone '%s' is out of date (version %d, expecting %d)"},
     {477, "Fastfile for zone '%s' is newer than client executable (version %d, expecting %d)"},
+    {500, "rawfile '%s' exceeded max size. (%d > %d)"},
     {558, "No world model loaded for entity %i with model %s"},
     {560, "weapDef: No world model loaded for entity %i with model %s"},
     {599, "radius not specified for trigger_radius at (%g %g %g)"},
+    {639, "Field: %s"},
     {656, "Save game saved with different script files"},
     {659, "SV_LoadHistoryState: objectivenum out of range (%i, MAX = %i)"},
     {660, "SV_LoadHistoryState: entitynum out of range (%i, MAX = %i)"},
@@ -46,6 +50,8 @@ static std::unordered_map<int, std::string> errorMap = {
     {999, "Trying to set persistent player data while connected to a server (%s, clcState = %i)!"},
     {1000, "Error getting persistent data: see console"},
     {1003, "Error getting persistent data: result type was a %i, expected string; see console"},
+    {1043, "unknown anim tree '%s'"},
+    {1062, "Filename '%s' exceeds maximum length of %d"},
     {1189, "Error: unable to find '%s' secondary alias"},
     {1260, "FS_BuildOSPath: os path length exceeded"},
     {1274, "ERROR: Invalid server value '%s' for '%s'"},
@@ -116,6 +122,7 @@ static std::unordered_map<int, std::string> errorMap = {
     {4563, "Localized string should start with %s"},
     {4704, "not an entity"},
     {4705, "not an entity"},
+    {4706, "Owner entity is not a player"},
     {4751, "Parameter must be a valid client"},
 
     //if anyone finds more just add them here
@@ -177,6 +184,5 @@ void hook_Com_Error(errorParm_t code, const char* fmt, ...) {
 
 void Errors::init() {
     DEV_INIT_PRINT();
-    MH_CreateHook(reinterpret_cast<void*>(0x8F750_b), &hook_Com_Error, reinterpret_cast<void**>(&_Com_Error));
-    MH_EnableHook(reinterpret_cast<void*>(0x8F750_b));
+    Hook::create("Com_Error", 0x8F750_b, &hook_Com_Error, &_Com_Error);
 }

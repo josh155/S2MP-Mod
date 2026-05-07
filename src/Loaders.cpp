@@ -1,23 +1,32 @@
 #include "pch.h"
 #include "Loaders.hpp"
+#include "Console.hpp"
+#include "FontLoader.hpp"
 #include "FuncPointers.h"
-#include <unordered_set>
+#include "Hook.hpp"
+#include "ImageLoader.hpp"
+#include "LuiLoader.hpp"
+#include "RawFileLoader.hpp"
+#include "ScriptLoader.hpp"
+#include "StringTableLoader.hpp"
 #include "DevDef.h"
 
 //dont load from here just dump from here
 //also has the waited for xasset print so ya
 typedef XAssetHeader(*DB_FindXAssetHeader)(XAssetType type, const char* name, int allow_create_default);
 DB_FindXAssetHeader _DB_FindXAssetHeader = nullptr;
+
+static bool IsDvarEnabled(const char* name) {
+    dvar_t* dvar = Functions::_Dvar_FindVar(name);
+    if (!dvar) {
+        DEV_PRINTF("Dvar '%s' was not found during asset load", name);
+        return false;
+    }
+
+    return dvar->current.enabled;
+}
+
 XAssetHeader hook_DB_FindXAssetHeader(XAssetType type, const char* name, int allow_create_default) {
-    
-    
-#ifdef DEVELOPMENT_BUILD
-  //  static std::unordered_set<XAssetType> seenTypes;
-  //  if (seenTypes.find(type) == seenTypes.end()) {
-  //      seenTypes.insert(type);
-  //      Console::printf("New XAssetType: %d (first seen with name: %s)", type, name);
-  //  }
-#endif // DEVELOPMENT_BUILD
     XAssetHeader header{};
 
     //these will never call findxassetheader
@@ -29,8 +38,6 @@ XAssetHeader hook_DB_FindXAssetHeader(XAssetType type, const char* name, int all
         break;
     }
     }
-
-
 
     if (!headerLoaded) {
         auto start = std::chrono::high_resolution_clock::now();
@@ -47,13 +54,13 @@ XAssetHeader hook_DB_FindXAssetHeader(XAssetType type, const char* name, int all
 
     switch (type) {
     case ASSET_TYPE_STRINGTABLE: {
-        if (Functions::_Dvar_FindVar("g_dumpStringTables")->current.enabled) {
+        if (IsDvarEnabled("g_dumpStringTables")) {
             StringTableLoader::dump(header.table);
         }
         break;
     }
     case ASSET_TYPE_RAWFILE: {
-        if (Functions::_Dvar_FindVar("g_dumpRawfiles")->current.enabled) {
+        if (IsDvarEnabled("g_dumpRawfiles")) {
             RawFileLoader::dump(header.rawfile);
         }
         break;
@@ -69,10 +76,10 @@ XAssetHeader hook_DB_FindXAssetHeader(XAssetType type, const char* name, int all
 
 void Loaders::initAssetLoaders() {
 	//DB_FindXAssetHeader hook
-	MH_CreateHook(reinterpret_cast<void*>(0xA0080_b), &hook_DB_FindXAssetHeader, reinterpret_cast<void**>(&_DB_FindXAssetHeader));
-	MH_EnableHook(reinterpret_cast<void*>(0xA0080_b));
+	Hook::create("DB_FindXAssetHeader", 0xA0080_b, &hook_DB_FindXAssetHeader, &_DB_FindXAssetHeader);
 
 	LuiLoader::init();
 	FontLoader::init();
 	ScriptLoader::init();
+    ImageLoader::init();
 }

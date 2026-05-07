@@ -29,8 +29,7 @@ bool Noclip::getNoclipState() {
 
 void Noclip::init() {
 	//PmoveSingle
-	MH_CreateHook(reinterpret_cast<void*>(0x39BA30_b), &hook_PmoveSingle, reinterpret_cast<void**>(&_PmoveSingle));
-	MH_EnableHook(reinterpret_cast<void*>(0x39BA30_b));
+	Hook::create("PmoveSingle", 0x39BA30_b, &hook_PmoveSingle, &_PmoveSingle);
 
 	Console::infoPrint("Noclip::init()");
 }

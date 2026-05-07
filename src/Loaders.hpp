@@ -1,45 +1,8 @@
 #pragma once
-#include "Console.hpp"
 #include "structs.h"
-#include "GameUtil.hpp"
-#include "MinHook.h"
 
 class Loaders {
 public:
 	static void initAssetLoaders();
-};
-
-class LuiLoader {
-public:
-	static void dumpLuaFile(const LuaFile* luaFile);
-	static bool FindXAssetHeader(XAssetType type, const char* name, int allow_create_default, XAssetHeader& header);
-	static bool LUI_CoD_GetRawFile(XAssetHeader& header, const char* name);
-	static void init();
-};
-
-class ScriptLoader {
-public:
-	static void init();
-};
-
-class FontLoader {
-public:
-	static void init();
-};
-
-class StringTableLoader {
-public:
-	static void dump(StringTable* table);
-	static void loadCustom(StringTable* table);
-};
-
-class RawFileLoader {
-public:
-	static void dump(RawFile* rawfile);
-	static void loadCustom(RawFile* rawfile);
-};
-
-class MapEntLoader {
-public:
-	static void dump(RawFile* rawfile);
+	static XAssetHeader DB_FindXAssetHeaderOriginal(XAssetType type, const char* name, int allow_create_default);
 };

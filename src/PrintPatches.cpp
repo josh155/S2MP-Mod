@@ -5,8 +5,8 @@
 #include "pch.h"
 #include "Console.hpp"
 #include "PrintPatches.hpp"
-#include <MinHook.h>
 #include <FuncPointers.h>
+#include "Hook.hpp"
 #include "structs.h"
 #include "GameUtil.hpp"
 
@@ -60,6 +60,9 @@ LUI_BeginEvent _LUI_BeginEvent = nullptr;
 
 typedef bool(*CG_NotifyVirtualLobbySceneLoaded)(const char* name);
 CG_NotifyVirtualLobbySceneLoaded _CG_NotifyVirtualLobbySceneLoaded = nullptr;
+
+typedef int(*Scr_IsValidGameType)(const char* gametype);
+Scr_IsValidGameType _Scr_IsValidGameType = nullptr;
 
 void hook_CM_LoadMap(const char* name, int* checksum) {
     if (name) {
@@ -219,69 +222,66 @@ void CG_NotifyVirtualLobbySceneLoaded_hookfunc(const char* name) {
     _CG_NotifyVirtualLobbySceneLoaded(name);
 }
 
+int Scr_IsValidGameType_hookfunc(const char* gametype) {
+    int result = _Scr_IsValidGameType(gametype);
+    if (!result) {
+        Console::printf("g_gametype %s is not a valid gametype, defaulting to dm", gametype);
+    }
+    return result;
+}
+
 void PrintPatches::init() {
 	Console::infoPrint(__FUNCTION__);
 
     //Virtual Lobby: Loaded BSP '%s'
-    MH_CreateHook(reinterpret_cast<void*>(0x41BED0_b), &CG_NotifyVirtualLobbySceneLoaded_hookfunc, reinterpret_cast<void**>(&_CG_NotifyVirtualLobbySceneLoaded));
-    MH_EnableHook(reinterpret_cast<void*>(0x41BED0_b));
+    Hook::create("CG_NotifyVirtualLobbySceneLoaded", 0x41BED0_b, &CG_NotifyVirtualLobbySceneLoaded_hookfunc, &_CG_NotifyVirtualLobbySceneLoaded);
 
     //Loading Map:
-    MH_CreateHook(reinterpret_cast<void*>(0x63C300_b), &hook_CM_LoadMap, reinterpret_cast<void**>(&_CM_LoadMap));
-    MH_EnableHook(reinterpret_cast<void*>(0x63C300_b));
+    Hook::create("CM_LoadMap", 0x63C300_b, &hook_CM_LoadMap, &_CM_LoadMap);
 
     //----- FS_Startup -----
-    MH_CreateHook(reinterpret_cast<void*>(0x756330_b), &hook_FS_Startup, reinterpret_cast<void**>(&_FS_Startup));
-    MH_EnableHook(reinterpret_cast<void*>(0x756330_b));
+    Hook::create("FS_Startup", 0x756330_b, &hook_FS_Startup, &_FS_Startup);
 
     //----- Server Shutdown -----
-    MH_CreateHook(reinterpret_cast<void*>(0x6DAF50_b), &hook_SV_Shutdown, reinterpret_cast<void**>(&_SV_Shutdown));
-    MH_EnableHook(reinterpret_cast<void*>(0x6DAF50_b));
+    Hook::create("SV_Shutdown", 0x6DAF50_b, &hook_SV_Shutdown, &_SV_Shutdown);
     
     //------ Server Initialization ------
-    MH_CreateHook(reinterpret_cast<void*>(0x6DB350_b), &hook_SV_SpawnServer, reinterpret_cast<void**>(&_SV_SpawnServer));
-    MH_EnableHook(reinterpret_cast<void*>(0x6DB350_b));
+    Hook::create("SV_SpawnServer", 0x6DB350_b, &hook_SV_SpawnServer, &_SV_SpawnServer);
     
     //LUI: Loading LUA File \"%s\""
-    MH_CreateHook(reinterpret_cast<void*>(0xC5150_b), &hook_LUI_LoadLuaFile, reinterpret_cast<void**>(&_LUI_LoadLuaFile));
-    MH_EnableHook(reinterpret_cast<void*>(0xC5150_b));
+    Hook::create("LUI_LoadLuaFile", 0xC5150_b, &hook_LUI_LoadLuaFile, &_LUI_LoadLuaFile);
     
     //LUI: Starting up...
-    MH_CreateHook(reinterpret_cast<void*>(0xC3460_b), &hook_LUI_Init, reinterpret_cast<void**>(&_LUI_Init));
-    MH_EnableHook(reinterpret_cast<void*>(0xC3460_b));
+    Hook::create("LUI_Init", 0xC3460_b, &hook_LUI_Init, &_LUI_Init);
     
     //Loading Zone:
-    MH_CreateHook(reinterpret_cast<void*>(0xABE30_b), &hook_DB_TryLoadXFileInternal, reinterpret_cast<void**>(&_DB_TryLoadXFileInternal));
-    MH_EnableHook(reinterpret_cast<void*>(0xABE30_b));
+    Hook::create("DB_TryLoadXFileInternal", 0xABE30_b, &hook_DB_TryLoadXFileInternal, &_DB_TryLoadXFileInternal);
     
     //Adding fastfile '%s' to queue
-    MH_CreateHook(reinterpret_cast<void*>(0xA48D0_b), &hook_DB_LoadXZone, reinterpret_cast<void**>(&_DB_LoadXZone));
-    MH_EnableHook(reinterpret_cast<void*>(0xA48D0_b));
+    Hook::create("DB_LoadXZone", 0xA48D0_b, &hook_DB_LoadXZone, &_DB_LoadXZone);
     
     //------- Game Initialization -------
-    MH_CreateHook(reinterpret_cast<void*>(0x55EC90_b), &hook_G_InitGame, reinterpret_cast<void**>(&_G_InitGame));
-    MH_EnableHook(reinterpret_cast<void*>(0x55EC90_b));
+    Hook::create("G_InitGame", 0x55EC90_b, &hook_G_InitGame, &_G_InitGame);
     
     //Online_PatchStreamer printing
-    MH_CreateHook(reinterpret_cast<void*>(0x2900F0_b), &hook_Online_PatchStreamer_va, reinterpret_cast<void**>(&_Online_PatchStreamer_va));
-    MH_EnableHook(reinterpret_cast<void*>(0x2900F0_b));
+    Hook::create("Online_PatchStreamer_va", 0x2900F0_b, &hook_Online_PatchStreamer_va, &_Online_PatchStreamer_va);
     
     //fs_debug required
     //Writing to config file '%s' for local client %d
-    MH_CreateHook(reinterpret_cast<void*>(0x9C8E0_b), &hook_Com_WriteConfig_f, reinterpret_cast<void**>(&_Com_WriteConfig_f));
-    MH_EnableHook(reinterpret_cast<void*>(0x9C8E0_b));
+    Hook::create("Com_WriteConfig_f", 0x9C8E0_b, &hook_Com_WriteConfig_f, &_Com_WriteConfig_f);
     
     //fs_debug required
     //Checking if file '%s' exists in %s
-    MH_CreateHook(reinterpret_cast<void*>(0x9FE50_b), &hook_DB_FileExists, reinterpret_cast<void**>(&_DB_FileExists));
-    MH_EnableHook(reinterpret_cast<void*>(0x9FE50_b));
+    Hook::create("DB_FileExists", 0x9FE50_b, &hook_DB_FileExists, &_DB_FileExists);
     
     
     //LUI_Error
-    MH_CreateHook(reinterpret_cast<void*>(0xBD900_b), &hook_LUI_Error, reinterpret_cast<void**>(&_LUI_Error));
-    MH_EnableHook(reinterpret_cast<void*>(0xBD900_b));
+    Hook::create("LUI_Error", 0xBD900_b, &hook_LUI_Error, &_LUI_Error);
     
     //GfxWorld build info
-    MH_CreateHook(reinterpret_cast<void*>(0x4AD840_b), &hook_Load_GfxBuildInfo, reinterpret_cast<void**>(&_Load_GfxBuildInfo));
-    MH_EnableHook(reinterpret_cast<void*>(0x4AD840_b));
+    Hook::create("Load_GfxBuildInfo", 0x4AD840_b, &hook_Load_GfxBuildInfo, &_Load_GfxBuildInfo);
+
+    //Scr_IsValidGameType
+    //g_gametype %s is not a valid gametype, defaulting to dm
+    Hook::create("Scr_IsValidGameType", 0x5AE670_b, &Scr_IsValidGameType_hookfunc, &_Scr_IsValidGameType);
 }
