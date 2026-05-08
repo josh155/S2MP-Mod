@@ -20,6 +20,7 @@
 #include "LogFile.hpp"
 #include "ConfigManager.h"
 #include "ImageLoader.hpp"
+#include "Binds.hpp"
 
 //Output to internal console without label
 void Console::printIntCon(std::string text) {
@@ -147,10 +148,6 @@ std::string toHex(uint32_t value) {
 	return ss.str();
 }
 
-#ifdef DEVELOPMENT_BUILD
-void printfCrashTest() {
-	Console::printf("%s %i %s", nullptr, nullptr, 0);
-}
 
 void setenginemode() {
 	CmdArgs* cmdArgs = GameUtil::getCmdArgs();
@@ -170,7 +167,12 @@ void setenginemode() {
 	int* enginemode = reinterpret_cast<int*>(0xD8AE894_b);
 	*enginemode = mode; //1 - MP | 2 - ZM | I think it has other flags packed in
 }
-#endif
+
+void Console::registerCommandOverrides() {
+	GameUtil::overrideCommand("bind", &Binds::bindCmd);
+	GameUtil::overrideCommand("unbind", &Binds::unbindCmd);
+	GameUtil::overrideCommand("unbindall", &Binds::unbindAllCmd);
+}
 
 //not a dvar or a command
 void setupSpecialLobbyVars() {
@@ -213,11 +215,10 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("give", &CustomCommands::give);
 	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon); //not implemented yet
 #ifdef DEVELOPMENT_BUILD
-	//GameUtil::addCommand("modelviewer", &CustomCommands::modelviewer);
 	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);//TODO: rename function
-	//GameUtil::addCommand("printfNullptr", &printfCrashTest);
 	GameUtil::addCommand("enginemode", &setenginemode);
 	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
+	GameUtil::addCommand("getCmdFuncAddr", &CustomCommands::getCmdFuncAddr);
 #endif // DEVELOPMENT_BUILD
 
 
@@ -323,8 +324,23 @@ void Console::execCmd(std::string cmd) {
 	if (cmd.find_first_not_of(" \t\r\n") == std::string::npos) {
 		return;
 	}
-	if (!execCustomDevCmd(cmd) && !setEngineDvar(cmd)) {
-		Console::printIntCon(cmd);
-		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, (char*)cmd.c_str());
+
+	const std::string originalCmd = cmd;
+
+	if (execCustomDevCmd(cmd)) {
+		return;
 	}
+
+	if (DvarInterface::translatePrefixedCommand(cmd)) {
+		Console::printIntCon(originalCmd);
+		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, cmd);
+		return;
+	}
+
+	if (setEngineDvar(cmd)) {
+		return;
+	}
+
+	Console::printIntCon(originalCmd);
+	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, originalCmd);
 }

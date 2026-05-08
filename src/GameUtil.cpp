@@ -477,6 +477,17 @@ void GameUtil::addCommand(char const* name, void (*func)()) {
 }
 
 /**
+ * @brief Override an exsiting console command with the engine.
+ *
+ * @param name The command name to override.
+ * @param func The function to execute.
+ */
+void GameUtil::overrideCommand(char const* name, void (*func)()) {
+    Functions::_Cmd_RemoveCommand(name);
+    GameUtil::addCommand(name, func);
+}
+
+/**
  * @brief Removes field width specifiers from printf-style format strings.
  *
  * Converts format specifiers like "%10d" into "%d". Very rare use case.

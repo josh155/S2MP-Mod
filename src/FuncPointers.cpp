@@ -7,6 +7,9 @@
 #include "Console.hpp"
 #include "DevDef.h"
 
+Functions::Key_SetBinding Functions::_Key_SetBinding = nullptr;
+Functions::Key_GetBindingForCommand Functions::_Key_GetBindingForCommand = nullptr;
+Functions::Key_StringToKeynum Functions::_Key_StringToKeynum = nullptr;
 Functions::Image_GetLevelSize Functions::_Image_GetLevelSize = nullptr;
 Functions::Image_Setup Functions::_Image_Setup = nullptr;
 Functions::G_DObjUpdate Functions::_G_DObjUpdate = nullptr;
@@ -105,4 +108,7 @@ void Functions::init()
 	_G_DObjUpdate = (G_DObjUpdate)(0x5BDAF0_b);
 	_Image_Setup = (Image_Setup)(0x8978C0_b);
 	_Image_GetLevelSize = (Image_GetLevelSize)(0x897730_b);
+	_Key_StringToKeynum = (Key_StringToKeynum)(0x45ED70_b);
+	_Key_GetBindingForCommand = (Key_GetBindingForCommand)(0x64A460_b);
+	_Key_SetBinding = (Key_SetBinding)(0x45EBC0_b);
 }

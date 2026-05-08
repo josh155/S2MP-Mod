@@ -15,6 +15,7 @@
 #include "ScriptLoader.hpp"
 #include "StringTableLoader.hpp"
 #include "ConfigManager.h"
+#include <sstream>
 
 #define ASSET_ENTRY_SIZE 32
 uintptr_t CustomCommands::base = (uintptr_t)GetModuleHandle(NULL) + 0x1000;
@@ -40,8 +41,26 @@ void CustomCommands::toggleGodmode() {
 	CustomCommands::isGodmode = !CustomCommands::isGodmode;
 }
 
+void CustomCommands::getCmdFuncAddr() {
+	cmd_function_s* cmd = *(cmd_function_s**)0xAA752C8_b;
 
+	while (cmd) {
+		if (IsBadReadPtr(cmd, sizeof(cmd_function_s))) {
+			break;
+		}
 
+		if (cmd->name && !IsBadStringPtrA(cmd->name, 64)) {
+			std::ostringstream ss;
+
+			ss << cmd->name << " -> ";
+			ss << "0x" << std::hex << std::uppercase << reinterpret_cast<uintptr_t>(cmd->function);
+
+			Console::print(ss.str());
+		}
+
+		cmd = cmd->next;
+	}
+}
 
 void CustomCommands::dumpAllScriptFiles() {
 	AssetPoolStats stats = GameUtil::assetPoolTraverseHelper(ASSET_TYPE_SCRIPTFILE,
@@ -503,3 +522,4 @@ void CustomCommands::modelviewer() {
 void CustomCommands::none() {
 
 }
+

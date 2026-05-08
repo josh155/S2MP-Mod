@@ -67,6 +67,10 @@ workspace "s2mp-mod"
                 "src/DebugPatches.cpp",
             },
             ["src/Code"] = {
+                "src/Binds.cpp",
+                "src/Binds.hpp",
+                "src/Dvars.cpp",
+                "src/Dvars.hpp",
                 "src/Noclip.cpp",
                 "src/Noclip.hpp",
                 "src/PrintPatches.cpp",

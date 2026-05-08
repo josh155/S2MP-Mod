@@ -5,6 +5,15 @@ class Functions {
 public:
 	static void init();
 
+	typedef void (*Key_SetBinding)(int localClientNum, int keynum, int bindingIndex);
+	static Key_SetBinding _Key_SetBinding;
+
+	typedef int (*Key_GetBindingForCommand)(const char* command);
+	static Key_GetBindingForCommand _Key_GetBindingForCommand;
+
+	typedef int (*Key_StringToKeynum)(const char* string);
+	static Key_StringToKeynum _Key_StringToKeynum;
+
 	typedef uint32_t(*Image_GetLevelSize)(int format, int width, int height, int depth);
 	static Image_GetLevelSize _Image_GetLevelSize;
 

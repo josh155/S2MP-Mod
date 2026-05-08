@@ -22,6 +22,7 @@ public:
 	static void devPrint(std::string text);
 	static void initPrint(std::string text);
 	static std::vector<std::string> parseCmdToVec(const std::string& cmd);
+	static void registerCommandOverrides();
 	static void registerCustomCommands();
 	static void registerCustomDvars();
 };
@@ -87,6 +88,7 @@ public:
 	static bool ufoActive; //just puttin this here for now
 
 	static void toggleGodmode();
+	static void getCmdFuncAddr();
 	static void dumpAllScriptFiles();
 	static void dumpAllLuaFiles();
 	static void dumpAllCSVFiles();

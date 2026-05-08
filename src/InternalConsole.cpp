@@ -6,8 +6,9 @@
 #include "GameUtil.hpp"
 #include "DevDef.h"
 #include "DvarInterface.hpp"
+#include "Binds.hpp"
 #include "Hook.hpp"
-#include <ImageLoader.hpp>
+#include "ImageLoader.hpp"
 
 typedef void (*R_EndFrame_t)(void);
 R_EndFrame_t _EndFrame = nullptr;
@@ -730,7 +731,7 @@ void handleKeys(int client, int key, int down) {
 	if (down != 1) {
 		return;
 	}
-	// ` or ~ or ²
+	// ` or ~
 	if (key == 96 || key == 126) {
 
 		isAutoCompleteCycling = false;
@@ -961,6 +962,9 @@ void handleKeys(int client, int key, int down) {
 }
 
 void hook_CL_KeyEvent(int client, int key, int down) {
+	if (!consoleOpen) {
+		Binds::execBindForKey(key, down);
+	}
 	handleKeys(client, key, down);
     _CL_KeyEvent(client, key, down);
 }
@@ -1055,7 +1059,6 @@ int InternalConsole::DEVONLY_autoCompleteTextSize() {
 bool InternalConsole::DEVONLY_isAutoCompleteCycling() {
 	return isAutoCompleteCycling;
 }
-
 
 
 void InternalConsole::init() {

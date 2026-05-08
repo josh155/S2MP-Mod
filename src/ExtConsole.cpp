@@ -19,6 +19,8 @@
 #include "DevDef.h"
 #include "Loaders.hpp"
 #include "Errors.hpp"
+#include "Dvars.hpp"
+#include "Binds.hpp"
 
 HANDLE hProcess;
 HINSTANCE hInst;
@@ -42,7 +44,7 @@ void ExtConsole::consoleMainLoop() {
 	while (true) {
 		std::cout << "> ";
 		getline(std::cin, in);
-		//Console::execCmd(in);
+		Console::execCmd(in);
 	}
 }
 
@@ -127,11 +129,12 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	DevPatches::init();
 	Console::registerCustomCommands();
 	Console::registerCustomDvars();
+	Console::registerCommandOverrides();
 	DvarInterface::init();
-
+	Binds::init();
+	Dvars::initPatches();
 	Errors::init();
 	InternalConsole::init();
-
 	Loaders::initAssetLoaders();
 	DeleteFileA("ZM");//just in case
 	if (extConsoleMode == 0 || extConsoleMode == 2) {

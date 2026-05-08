@@ -17,6 +17,64 @@ std::unordered_map<std::string, std::string> DvarInterface::userToEngineMap;
 std::unordered_map<std::string, std::string> DvarInterface::engineToUserMap;
 std::unordered_map<std::string, std::string> DvarInterface::descriptionMap; //so descriptions are no longer stored within the dvar_t structure :/
 
+namespace {
+    std::string normalizeCommandToken(const std::string& token) {
+        std::string normalized = token;
+        if (!normalized.empty() && normalized[0] == '/') {
+            normalized.erase(0, 1);
+        }
+
+        std::transform(normalized.begin(), normalized.end(), normalized.begin(), GameUtil::asciiToLower);
+        return normalized;
+    }
+
+    bool isTranslatableDvarPrefix(const std::string& commandName) {
+        return commandName == "toggle"
+            || commandName == "togglep"
+            || commandName == "set"
+            || commandName == "seta"
+            || commandName == "reset";
+    }
+
+    std::string quoteCommandTokenIfNeeded(const std::string& token) {
+        if (token.empty()) {
+            return "\"\"";
+        }
+
+        if (token.find_first_of(" \t\r\n\"") == std::string::npos) {
+            return token;
+        }
+
+        std::string escapedToken;
+        escapedToken.reserve(token.size());
+
+        for (const char ch : token) {
+            if (ch == '"') {
+                escapedToken += "\\\"";
+            }
+            else {
+                escapedToken.push_back(ch);
+            }
+        }
+
+        return "\"" + escapedToken + "\"";
+    }
+
+    std::string buildCommandString(const std::vector<std::string>& tokens) {
+        std::string rebuiltCommand;
+
+        for (std::size_t i = 0; i < tokens.size(); ++i) {
+            if (i != 0) {
+                rebuiltCommand += ' ';
+            }
+
+            rebuiltCommand += quoteCommandTokenIfNeeded(tokens[i]);
+        }
+
+        return rebuiltCommand;
+    }
+}
+
 /**
  * @brief Sets a Dvar in the engine using the Dvar interface.
  *
@@ -40,13 +98,43 @@ bool DvarInterface::setDvar(std::string& dvarname, std::vector<std::string> cmd)
     if (!var) {
         return false;
     }
-    var->flags = 0;
-    std::string dvarCmd = "set " + engineString;
-    for (int i = 1; i < cmd.size(); ++i) { //skip 0 cuz thats dvarname
-        dvarCmd += " " + cmd[i];
+    
+    cmd[0] = "set";
+    if (cmd.size() >= 2) {
+        cmd[1] = engineString;
+    }
+    else {
+        cmd.push_back(engineString);
     }
 
+    std::string dvarCmd = buildCommandString(cmd);
+
+    int flags = var->flags;
+    var->flags = 0;
     GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, dvarCmd.c_str());
+    var->flags = flags;
+    return true;
+}
+
+bool DvarInterface::translatePrefixedCommand(std::string& cmd) {
+    std::vector<std::string> parsedCmd = Console::parseCmdToVec(cmd);
+    if (parsedCmd.size() < 2) {
+        return false;
+    }
+
+    const std::string normalizedPrefix = normalizeCommandToken(parsedCmd[0]);
+    if (!isTranslatableDvarPrefix(normalizedPrefix)) {
+        return false;
+    }
+
+    const std::string engineString = DvarInterface::toEngineString(parsedCmd[1]);
+    if (!Functions::_Dvar_FindVar(engineString.c_str())) {
+        return false;
+    }
+
+    parsedCmd[0] = normalizedPrefix;
+    parsedCmd[1] = engineString;
+    cmd = buildCommandString(parsedCmd);
     return true;
 }
 

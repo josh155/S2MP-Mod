@@ -36,6 +36,8 @@ public:
 	static bool stringToBool(const std::string& str);
 	static void addCommand(char const* name, void (*func)());
 
+	static void overrideCommand(char const* name, void(*func)());
+
 	static std::string sanitizeFormatWidths(const char* fmt);
 
 	static CmdArgs* getCmdArgs();

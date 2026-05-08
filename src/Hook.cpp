@@ -108,7 +108,7 @@ bool Hook::create(const char* name, void* target, void* detour, void** original)
 		return false;
 	}
 
-	DEV_PRINTF("Installed hook %s at %p", safeName, target);
+	//DEV_PRINTF("Installed hook %s at %p", safeName, target);
 	return true;
 }
 
