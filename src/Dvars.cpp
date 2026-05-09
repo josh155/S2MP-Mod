@@ -5,6 +5,8 @@
 #include "Hook.hpp"
 #include "DevDef.h"
 
+
+
 typedef void (*Dvar_SetVariant_t)(dvar_t* dvar, DvarValue* value, int source);
 static Dvar_SetVariant_t fpDvar_SetVariant;
 

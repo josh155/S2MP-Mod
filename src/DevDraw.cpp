@@ -32,7 +32,7 @@ std::string versionString =
 #endif
 ;
 
-material_t* DevDraw::previewMaterial = nullptr;
+Material* DevDraw::previewMaterial = nullptr;
 
 std::string DevDraw::getDevBuildDate() {
     return devBuildDate;

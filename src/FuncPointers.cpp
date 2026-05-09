@@ -7,6 +7,8 @@
 #include "Console.hpp"
 #include "DevDef.h"
 
+Functions::Dvar_RegisterFloat Functions::_Dvar_RegisterFloat = nullptr;
+Functions::Dvar_RegisterInt Functions::_Dvar_RegisterInt = nullptr;
 Functions::Key_SetBinding Functions::_Key_SetBinding = nullptr;
 Functions::Key_GetBindingForCommand Functions::_Key_GetBindingForCommand = nullptr;
 Functions::Key_StringToKeynum Functions::_Key_StringToKeynum = nullptr;
@@ -111,4 +113,6 @@ void Functions::init()
 	_Key_StringToKeynum = (Key_StringToKeynum)(0x45ED70_b);
 	_Key_GetBindingForCommand = (Key_GetBindingForCommand)(0x64A460_b);
 	_Key_SetBinding = (Key_SetBinding)(0x45EBC0_b);
+	_Dvar_RegisterInt = (Dvar_RegisterInt)(0xAFC70_b);
+	_Dvar_RegisterFloat = (Dvar_RegisterFloat)(0xAFA50_b);
 }

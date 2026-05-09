@@ -71,6 +71,8 @@ workspace "s2mp-mod"
                 "src/Binds.hpp",
                 "src/Dvars.cpp",
                 "src/Dvars.hpp",
+                "src/Exec.cpp",
+                "src/Exec.hpp",
                 "src/Noclip.cpp",
                 "src/Noclip.hpp",
                 "src/PrintPatches.cpp",

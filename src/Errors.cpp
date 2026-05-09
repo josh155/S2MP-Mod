@@ -13,6 +13,9 @@
 
 //TODO: run script errors thru the same error map
 static std::unordered_map<int, std::string> errorMap = {
+    {3, "BG_GetAnimationForIndexCI: animIndex out of bounds"},
+    {4, "%s: (%s, line %i)"},
+    {92, "Couldn't load player animation script %s"},
     {151, "Could not find animation tree '%s'"},
     {198, "Couldn't load file or file is invalid '%s'"},
     {202, "Couldn't load file or file is invalid '%s'"},
@@ -44,6 +47,7 @@ static std::unordered_map<int, std::string> errorMap = {
     {719, "R_RegisterFont: Too many TTF fonts registered (%d)."},
     {759, "Could not find compute shader '%s'"},
     {760, "Could not find material '%s'"},
+    {837, "Failed to allocate from element pool"},
     {840, "LUI: Out of memory"},
     {845, "LUI ERROR: Failed to allocate from %s pool. Restarting the Lua VM"},
     {847, "PMem_Free: pointer %p is not from the PMem stack"},

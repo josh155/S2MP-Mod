@@ -32,7 +32,7 @@ public:
 	static void clearConsole();
 	static void closeConsole();
 	static void addToOutputStack(std::string s, int level);
-	static material_t* getMaterialWhite();
+	static Material* getMaterialWhite();
 	static void toggleConsole();
 	static void toggleFullConsole();
 	static void clearFullConsole();
@@ -87,7 +87,9 @@ public:
 
 	static bool ufoActive; //just puttin this here for now
 
-	static void toggleGodmode();
+	static void god();
+	static void notarget();
+	static void demigod();
 	static void getCmdFuncAddr();
 	static void dumpAllScriptFiles();
 	static void dumpAllLuaFiles();

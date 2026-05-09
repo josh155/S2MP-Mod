@@ -21,6 +21,7 @@
 #include "Errors.hpp"
 #include "Dvars.hpp"
 #include "Binds.hpp"
+#include "Exec.hpp"
 
 HANDLE hProcess;
 HINSTANCE hInst;
@@ -105,8 +106,6 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	Functions::init();
 	Console::print("Sys_Cwd(): " + std::string(Functions::_Sys_Cwd()));
 	
-
-	
 	checkAndSetZombieMode();
 	Console::printf("Setting engine mode to %s", doZombiesMode ? "Zombies" : "Multiplayer");
 	if (doZombiesMode) {
@@ -132,10 +131,14 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	Console::registerCommandOverrides();
 	DvarInterface::init();
 	Binds::init();
+	Exec::init();
 	Dvars::initPatches();
 	Errors::init();
 	InternalConsole::init();
 	Loaders::initAssetLoaders();
+
+	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "exec autoexec");
+
 	DeleteFileA("ZM");//just in case
 	if (extConsoleMode == 0 || extConsoleMode == 2) {
 		consoleMainLoop();

@@ -42,7 +42,15 @@ public:
 
 	static CmdArgs* getCmdArgs();
 
+	static gentity_s* G_getLocalPlayer();
+
 	static bool getPlayerPosition(float* outPos);
+
+	static cg_t* CG_GetLocalClientGlobals();
+
+	static unsigned char CG_GetLocalClientNum();
+
+	static gentity_s* getGentity(int entId);
 
 	static std::list<cmd_function_s> cmdHeap;
 

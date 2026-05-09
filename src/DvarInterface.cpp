@@ -99,15 +99,16 @@ bool DvarInterface::setDvar(std::string& dvarname, std::vector<std::string> cmd)
         return false;
     }
     
-    cmd[0] = "set";
-    if (cmd.size() >= 2) {
-        cmd[1] = engineString;
-    }
-    else {
-        cmd.push_back(engineString);
+    std::vector<std::string> rebuiltCmd;
+    rebuiltCmd.reserve(cmd.size() + 1);
+    rebuiltCmd.push_back("set");
+    rebuiltCmd.push_back(engineString);
+
+    for (std::size_t i = 1; i < cmd.size(); ++i) {
+        rebuiltCmd.push_back(cmd[i]);
     }
 
-    std::string dvarCmd = buildCommandString(cmd);
+    std::string dvarCmd = buildCommandString(rebuiltCmd);
 
     int flags = var->flags;
     var->flags = 0;
@@ -262,6 +263,39 @@ void DvarInterface::registerBool(const char* name, bool val, int flags, const ch
     Functions::_Dvar_RegisterBool(name, val, flags);
     DvarInterface::addMapping(name, name, description); //TODO: make a dedicated function for custom dvars
 }
+
+
+/**
+ * @brief Registers a integer dvar and adds it to the dvar mapping system.
+ *
+ * @param name The name of the dvar.
+ * @param val The default value.
+ * @param min The minimum value.
+ * @param max The maximum value.
+ * @param flags Dvar flags.
+ * @param description A description of the dvar.
+ */
+void DvarInterface::registerInt(const char* name, int val, int min, int max, unsigned int flags, const char* description) {
+    Functions::_Dvar_RegisterInt(name, val, min, max, flags);
+    DvarInterface::addMapping(name, name, description);
+}
+
+/**
+ * @brief Registers a float dvar and adds it to the dvar mapping system.
+ *
+ * @param name The name of the dvar.
+ * @param val The default value.
+ * @param min The minimum value.
+ * @param max The maximum value.
+ * @param flags Dvar flags.
+ * @param description A description of the dvar.
+ */
+void DvarInterface::registerFloat(const char* name, float val, float min, float max, unsigned int flags, const char* description) {
+    Functions::_Dvar_RegisterFloat(name, val, min, max, flags);
+    DvarInterface::addMapping(name, name, description);
+}
+
+
 
 void DvarInterface::addAllMappings() {
     for (const DvarMappingEntry& mapping : DvarMappings::entries) {

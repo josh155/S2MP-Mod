@@ -20,26 +20,77 @@
 #define ASSET_ENTRY_SIZE 32
 uintptr_t CustomCommands::base = (uintptr_t)GetModuleHandle(NULL) + 0x1000;
 uintptr_t CustomCommands::rawBase = (uintptr_t)GetModuleHandle(NULL);
-bool CustomCommands::isGodmode = false;
 
-void CustomCommands::toggleGodmode() {
+
+void CustomCommands::god(){
+	if (!GameUtil::areWeHost()){
+		Console::print("Must be host to use this command");
+		return;
+	}
+
+	gentity_s* player = GameUtil::G_getLocalPlayer();
+	if (!player){
+		Console::print("Local player not found");
+		return;
+	}
+
+	constexpr int FL_GODMODE = 1 << 0;
+
+	player->flags ^= FL_GODMODE;
+
+	const bool enabled = (player->flags & FL_GODMODE) != 0;
+	const char* state = enabled ? "^2ON" : "^1OFF";
+
+	Console::printf("God: %s", state);
+	Functions::_SV_SendServerCommand(0, 0, "%c \"GOD: %s\"", 101, state);
+}
+
+void CustomCommands::notarget() {
 	if (!GameUtil::areWeHost()) {
 		Console::print("Must be host to use this command");
 		return;
 	}
-	int* health = (int*)0x9ED370C_b;
-	if (CustomCommands::isGodmode) {
-		*health = 100;
-		Console::print("God (and Notarget ig): OFF");
-		Functions::_SV_SendServerCommand(0i64, 0, "%c \"God (and Notarget ig): ^1OFF\"", 101i64);
+
+	gentity_s* player = GameUtil::G_getLocalPlayer();
+	if (!player) {
+		Console::print("Local player not found");
+		return;
 	}
-	else {
-		*health = -1;
-		Console::print("God (and Notarget ig): ON");
-		Functions::_SV_SendServerCommand(0i64, 0, "%c \"God (and Notarget ig): ^2ON\"", 101i64);
-	}
-	CustomCommands::isGodmode = !CustomCommands::isGodmode;
+
+	constexpr int FL_NOTARGET = 4 << 0;
+
+	player->flags ^= FL_NOTARGET;
+
+	const bool enabled = (player->flags & FL_NOTARGET) != 0;
+	const char* state = enabled ? "^2ON" : "^1OFF";
+
+	Console::printf("Notarget: %s", state);
+	Functions::_SV_SendServerCommand(0, 0, "%c \"Notarget: %s\"", 101, state);
 }
+
+void CustomCommands::demigod() {
+	if (!GameUtil::areWeHost()) {
+		Console::print("Must be host to use this command");
+		return;
+	}
+
+	gentity_s* player = GameUtil::G_getLocalPlayer();
+	if (!player) {
+		Console::print("Local player not found");
+		return;
+	}
+
+	constexpr int FL_DEMIGOD = 2 << 0;
+
+	player->flags ^= FL_DEMIGOD;
+
+	const bool enabled = (player->flags & FL_DEMIGOD) != 0;
+	const char* state = enabled ? "^2ON" : "^1OFF";
+
+	Console::printf("Demigod: %s", state);
+	Functions::_SV_SendServerCommand(0, 0, "%c \"Demigod: %s\"", 101, state);
+}
+
 
 void CustomCommands::getCmdFuncAddr() {
 	cmd_function_s* cmd = *(cmd_function_s**)0xAA752C8_b;

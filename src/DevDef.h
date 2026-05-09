@@ -60,5 +60,5 @@ public:
 	static void toggleLuaDebugGui();
 	static void toggleAntiCheatDebugGui();
 
-	static material_t* previewMaterial;
+	static Material* previewMaterial;
 };

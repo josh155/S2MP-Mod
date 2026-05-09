@@ -78,10 +78,6 @@ union DvarLimits
     DvarLimits_value floats;
 };
 
-//temp
-struct material_t {
-    const char* name;
-};
 
 //temp
 struct glyph_t {
@@ -102,8 +98,8 @@ struct font_t {
     const char* fontName;
     int pixelHeight;
     int glyphCount;
-    material_t* material;
-    material_t* glowMaterial;
+    void* material;
+    void* glowMaterial;
     glyph_t* glyphs;
 };
 
@@ -483,29 +479,55 @@ enum ItemLockStatus
     ItemLockStatus_Hidden_NotInInventory = 14,
     ItemLockStatus_Hidden_Unknown = 15,
 };
+struct GfxPlacement {
+    float quat[4];
+    float origin[3];
+};
 
+struct GfxScaledPlacement {
+    GfxPlacement base;
+    float scale;
+};
+
+struct cg_t
+{
+    char clientNum;                         // 0x000000
+    char pad_0001[0x1E6E80 - 0x000001];     // 0x000001
+
+    float sunColor[3];                      // 0x1E6E80
+
+    char pad_1E6E8C[0x2615C8 - 0x1E6E8C];   // 0x1E6E8C
+
+    float viewModelAxis[4][3];              // 0x2615C8
+    bool blockDrawViewmodel;                // 0x2615F8
+
+    char pad_2615F9[0x43C600 - 0x2615F9];   // 0x2615F9
+};
+
+static_assert(offsetof(cg_t, clientNum) == 0x000000, "cg_t::clientNum offset mismatch");
+static_assert(offsetof(cg_t, sunColor) == 0x1E6E80, "cg_t::sunColor offset mismatch");
+static_assert(offsetof(cg_t, viewModelAxis) == 0x2615C8, "cg_t::viewModelAxis offset mismatch");
+static_assert(offsetof(cg_t, blockDrawViewmodel) == 0x2615F8, "cg_t::blockDrawViewmodel offset mismatch");
+static_assert(sizeof(cg_t) == 0x43C600, "cg_t size mismatch");
 
 //WIP
 // SIZE: 0x418
 struct gentity_s {
     char pad0[0x144];
-
     int modelIndex;          // 0x144
-
     char pad1[0xEC];
-
     float origin[3];         // 0x234
-
     char pad2[0x4C];
-
     uint8_t autoPickupFlag;  // 0x28C
-
-    char pad3[0x18B];
+    char pad3[0x2B];         // 0x28D - 0x2B7
+    int flags;               // 0x2B8
+    char pad4[0x15C];        // 0x2BC - 0x417
 };
 
 static_assert(offsetof(gentity_s, modelIndex) == 0x144);
 static_assert(offsetof(gentity_s, origin) == 0x234);
 static_assert(offsetof(gentity_s, autoPickupFlag) == 0x28C);
+static_assert(offsetof(gentity_s, flags) == 0x2B8);
 static_assert(sizeof(gentity_s) == 0x418);
 
 //SIZE: 0xA8
@@ -757,3 +779,132 @@ struct MapEnts {
     char* entityString;
 
 };
+
+struct MaterialPassArgDef
+{
+    char data[0x10];
+}; // size 0x10
+
+struct MaterialPass
+{
+    uint64_t unk00;          // +0x00
+    uint64_t unk08;          // +0x08
+    uint64_t unk10;          // +0x10
+    uint64_t unk18;          // +0x18
+    char     unk20[0x09];    // +0x20
+
+    uint8_t  argCount0;      // +0x29
+    uint8_t  argCount1;      // +0x2A
+    uint8_t  argCount2;      // +0x2B
+    uint8_t  argCount3;      // +0x2C
+
+    char     unk2D[0x09];    // +0x2D
+
+    uint16_t unk36;          // +0x36
+
+    char     unk38[0x18];    // +0x38
+
+    MaterialPassArgDef* args; // +0x50
+}; // size 0x58
+
+struct MaterialTechnique
+{
+    const char* name;        // +0x00 XString
+    uint8_t     unk08;       // +0x08
+    uint8_t     unk09;       // +0x09
+    uint16_t    passCount;   // +0x0A
+    uint32_t    unk0C;       // +0x0C
+    MaterialPass passes[];   // +0x10, count passCount
+}; // header size 0x10
+
+struct MaterialTechniqueSet
+{
+    const char* name;                    // +0x000 XString
+    uint64_t    unk08;                   // +0x008
+    MaterialTechnique* techniques[0x72]; // +0x010
+}; // size 0x
+
+struct MaterialInfo
+{
+    const char* name;        // +0x00 XString
+    char        pad08[0x28]; // +0x08
+}; // size 0x30
+
+struct MaterialTextureDef
+{
+    char      pad00[0x08];   // +0x00
+    GfxImage* image;         // +0x08
+}; // size 0x10
+
+struct MaterialConstantDef
+{
+    char data[0x20];         // i only see 0x20 size
+}; // size 0x20
+
+struct MaterialStateBitsOrArgDef
+{
+    char     pad00[0x18];    // +0x00
+    uint16_t unk18;          // +0x18 loaded/processed separately
+    char     pad1A[0x0E];    // +0x1A
+}; // size 0x28
+
+struct MaterialConstantBufferDef
+{
+    uint32_t vsDataSize;     // +0x00
+    uint32_t hsDataSize;     // +0x04
+    uint32_t dsDataSize;     // +0x08
+    uint32_t psDataSize;     // +0x0C
+
+    uint32_t vsUshortCount;  // +0x10
+    uint32_t hsUshortCount;  // +0x14
+    uint32_t dsUshortCount;  // +0x18
+    uint32_t psUshortCount;  // +0x1C
+
+    void* vsData;         // +0x20
+    void* hsData;         // +0x28
+    void* dsData;         // +0x30
+    void* psData;         // +0x38
+
+    uint16_t* vsUshorts;     // +0x40
+    uint16_t* hsUshorts;     // +0x48
+    uint16_t* dsUshorts;     // +0x50
+    uint16_t* psUshorts;     // +0x58
+
+    ID3D11Buffer* vsBuffer;  // +0x60
+    ID3D11Buffer* hsBuffer;  // +0x68
+    ID3D11Buffer* dsBuffer;  // +0x70
+    ID3D11Buffer* psBuffer;  // +0x78
+}; // size 0x80
+
+
+//HEAVILY WIP. DO NOT USE MEMBERS
+struct Material
+{
+    MaterialInfo info;                              // +0x000, size 0x30
+
+    char pad030[0x0A2 - 0x030];                     // +0x030
+
+    uint8_t textureCount;                           // +0x0A2
+    uint8_t constantCount;                          // +0x0A3
+    uint8_t stateBitsOrArgCount;                    // +0x0A4
+
+    char pad0A5[0x0AD - 0x0A5];                     // +0x0A5
+
+    uint8_t constantBufferCount;                    // +0x0AD
+    uint8_t stringCount;                            // +0x0AE
+
+    char pad0AF[0x0B8 - 0x0AF];                     // +0x0AF
+
+    MaterialTechniqueSet* techniqueSet;             // +0x0B8
+
+    MaterialTextureDef* textures;                   // +0x0C0, count textureCount, elem 0x10
+    MaterialConstantDef* constants;                 // +0x0C8, count constantCount, elem 0x20
+    MaterialStateBitsOrArgDef* stateBitsOrArgs;     // +0x0D0, count stateBitsOrArgCount, elem 0x28
+
+    Material* fallbackMaterial;                     // +0x0D8, MaterialHandle
+
+    char pad0E0[0x158 - 0x0E0];                     // +0x0E0
+
+    MaterialConstantBufferDef* constantBuffers;     // +0x158, count constantBufferCount, elem 0x80
+    const char** stringArray;                       // +0x160, count stringCount
+}; // size 0x168

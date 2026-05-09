@@ -16,7 +16,7 @@ R_EndFrame_t _EndFrame = nullptr;
 typedef void(*CL_KeyEvent)(int client, int key, int down);
 CL_KeyEvent _CL_KeyEvent = nullptr;
 font_t* InternalConsole::consoleFont = nullptr;
-material_t* mtl_white = nullptr;
+Material* mtl_white = nullptr;
 
 std::vector<std::string> outputStack;
 std::vector<unsigned int> outputLogLevel;
@@ -337,7 +337,7 @@ void InternalConsole::addToOutputStack(std::string s, int level) {
 	}
 }
 //temp
-material_t* InternalConsole::getMaterialWhite() {
+Material* InternalConsole::getMaterialWhite() {
 	return mtl_white;
 }
 

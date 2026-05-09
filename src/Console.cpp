@@ -21,6 +21,7 @@
 #include "ConfigManager.h"
 #include "ImageLoader.hpp"
 #include "Binds.hpp"
+#include "Exec.hpp"
 
 //Output to internal console without label
 void Console::printIntCon(std::string text) {
@@ -172,6 +173,7 @@ void Console::registerCommandOverrides() {
 	GameUtil::overrideCommand("bind", &Binds::bindCmd);
 	GameUtil::overrideCommand("unbind", &Binds::unbindCmd);
 	GameUtil::overrideCommand("unbindall", &Binds::unbindAllCmd);
+	GameUtil::overrideCommand("exec", &Exec::execCmd);
 }
 
 //not a dvar or a command
@@ -187,13 +189,25 @@ void setupSpecialLobbyVars() {
 	GameUtil::addCommand("rankedMatch", &CustomCommands::none);
 }
 
+void cgt() {
+	void* rd = GameUtil::CG_GetLocalClientGlobals();
+	if (!rd) {
+		DEV_PRINTF("cg_t* is nullptr");
+		return;
+	}
+
+	DEV_PRINTF("cg_t is at 0x%p", rd);
+}
+
 void Console::registerCustomCommands() {
 	setupSpecialLobbyVars();
 	GameUtil::addCommand("noclip", &Noclip::toggle);
 	GameUtil::addCommand("ufo", &CustomCommands::toggleUfo);
 	GameUtil::addCommand("map_restart", &CustomCommands::mapRestart);
 	GameUtil::addCommand("fast_restart", &CustomCommands::fastRestart);
-	GameUtil::addCommand("god", &CustomCommands::toggleGodmode);
+	GameUtil::addCommand("god", &CustomCommands::god);
+	GameUtil::addCommand("notarget", &CustomCommands::notarget);
+	GameUtil::addCommand("demigod", &CustomCommands::demigod);
 	GameUtil::addCommand("trans", &CustomCommands::translateString);
 	GameUtil::addCommand("luidbg", &DevDraw::toggleLuaDebugGui);
 	GameUtil::addCommand("entdbg", &DevDraw::toggleEntityDebugGui);
@@ -215,7 +229,8 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("give", &CustomCommands::give);
 	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon); //not implemented yet
 #ifdef DEVELOPMENT_BUILD
-	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);//TODO: rename function
+	GameUtil::addCommand("cgt", &cgt);
+	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);
 	GameUtil::addCommand("enginemode", &setenginemode);
 	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 	GameUtil::addCommand("getCmdFuncAddr", &CustomCommands::getCmdFuncAddr);
@@ -244,6 +259,10 @@ void Console::registerCustomDvars() {
 	//zmcacutils.lua left in a check for a dvar named "unlockAllConsumables" so registering here makes the lua function work lol
 	DvarInterface::registerBool("unlockAllConsumables", 0, 0, "Unlock all zombies consumables. Used by the unlockall command"); 
 	DvarInterface::registerBool("unlockAllPassivePerks", 0, 0, "Unlock all zombies passive perks. Used by the unlockall command"); 
+
+	DvarInterface::registerFloat("cg_gun_x", 0.0, -3.4028235e38, 3.4028235e38, 0, "Forward position of the viewmodel");
+	DvarInterface::registerFloat("cg_gun_y", 0.0, -3.4028235e38, 3.4028235e38, 0, "Right position of the viewmodel");
+	DvarInterface::registerFloat("cg_gun_z", 0.0, -3.4028235e38, 3.4028235e38, 0, "Up position of the viewmodel");
 }
 
 //useful for testing commands and handling non-cmd/non-dvar stuff

@@ -5,6 +5,12 @@ class Functions {
 public:
 	static void init();
 
+	typedef dvar_t* (*Dvar_RegisterFloat)(const char* name, float defaultValue, float minValue, float maxValue, unsigned int flags);
+	static Dvar_RegisterFloat _Dvar_RegisterFloat;
+
+	typedef dvar_t* (*Dvar_RegisterInt)(const char* name, int defaultValue, int minValue, int maxValue, unsigned int flags);
+	static Dvar_RegisterInt _Dvar_RegisterInt;
+
 	typedef void (*Key_SetBinding)(int localClientNum, int keynum, int bindingIndex);
 	static Key_SetBinding _Key_SetBinding;
 
@@ -52,9 +58,6 @@ public:
 
 	typedef int (*G_TakePlayerWeapon)(void* playerstate, Weapon* weapon);
 	static G_TakePlayerWeapon _G_TakePlayerWeapon;
-
-	typedef dvar_t* (*Dvar_RegisterInt)(const char* dvarName, int value, int min, int max, unsigned int flags);
-	static Dvar_RegisterInt _Dvar_RegisterInt;
 
 	typedef void(*Cmd_RemoveCommand)(const char* name);
 	static Cmd_RemoveCommand _Cmd_RemoveCommand;
@@ -134,7 +137,7 @@ public:
 	typedef bool(__cdecl* SV_Loaded)();
 	static SV_Loaded _SV_Loaded;
 
-	typedef bool(__cdecl* R_AddCmdDrawStretchPic)(float x, float y, float w, float h, float xScale, float yScale, float xay, float yay, float* color, material_t* material);
+	typedef bool(__cdecl* R_AddCmdDrawStretchPic)(float x, float y, float w, float h, float xScale, float yScale, float xay, float yay, float* color, Material* material);
 	static R_AddCmdDrawStretchPic _R_AddCmdDrawStretchPic;
 
 	typedef bool(__cdecl* R_AddCmdDrawTextWithCursor)(const char* text, int max_chars, font_t* font, int unk0, int unk1, int pixel_h, float pos_x, float pos_y, float scale_x, float scale_y, float rotation, const float* color, long long style, int cursorPos, char cursor);
@@ -158,7 +161,7 @@ public:
 	typedef int(__cdecl* hks_HashTable_contiguousArraySize)();
 	static hks_HashTable_contiguousArraySize _hks_HashTable_contiguousArraySize;
 
-	typedef material_t* (__cdecl* Material_RegisterHandle)(const char* name);
+	typedef Material* (__cdecl* Material_RegisterHandle)(const char* name);
 	static Material_RegisterHandle _Material_RegisterHandle;
 
 	typedef void* (__cdecl* Dvar_RegisterBool)(const char* dvarName, bool value, unsigned int flags);

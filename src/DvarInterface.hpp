@@ -13,6 +13,7 @@ private:
 
     static void addDvarsWithNameDesc(const char* name, const char* description);
     
+
     static void addAllMappings();
     static void addMapping(const std::string& userString, const std::string& engineString);
     static void addMapping(const std::string& userString, const std::string& engineString, const std::string& description);
@@ -31,4 +32,6 @@ public:
     static std::string toUserString(const std::string& engineString);
     
     static void registerBool(const char* name, bool val, int flags, const char* description);
+    static void registerInt(const char* name, int defaultValue, int minValue, int maxValue, unsigned int flags, const char* description);
+    static void registerFloat(const char* name, float defaultValue, float minValue, float maxValue, unsigned int flags, const char* description);
 };

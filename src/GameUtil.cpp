@@ -516,19 +516,56 @@ CmdArgs* GameUtil::getCmdArgs() {
     return cmdArgs;
 }
 
-//TODO: find actual local player since its not always zero like t6sp
+
+
+cg_t* GameUtil::CG_GetLocalClientGlobals() {
+    const uintptr_t rd = *reinterpret_cast<uintptr_t*>(0x8AFBB38_b);
+    if (!rd) {
+        return nullptr;
+    }
+    return reinterpret_cast<cg_t*>(rd - 0x1E6C10);
+}
+
+unsigned char GameUtil::CG_GetLocalClientNum() {
+    cg_t* cg = GameUtil::CG_GetLocalClientGlobals();
+    if (!cg) {
+        return 0xFF;
+    }
+    return cg->clientNum;
+}
+
+gentity_s* GameUtil::getGentity(int entId) {
+    if (entId < 0) {
+        return nullptr;
+    }
+    return reinterpret_cast<gentity_s*>(0x9ED3430_b + (entId * sizeof(gentity_s)));
+}
+
+gentity_s* GameUtil::G_getLocalPlayer() {
+    unsigned char clientNum = GameUtil::CG_GetLocalClientNum();
+    if (clientNum == 0xFF) {
+        return nullptr;
+    }
+    return GameUtil::getGentity(clientNum);
+}
+
 bool GameUtil::getPlayerPosition(float* outPos) {
     if (!outPos) {
         return false;
     }
-    //gentity 0
-    std::uintptr_t player = static_cast<std::uintptr_t>(0x9ED3430_b);
+
+    unsigned char clientNum = GameUtil::CG_GetLocalClientNum();
+    if (clientNum == 0xFF) {
+        return false;
+    }
+
+    gentity_s* player = GameUtil::getGentity(clientNum);
 
     if (!player) {
         return false;
     }
 
-    float* origin = reinterpret_cast<float*>(player + 0x234);
+    float* origin = player->origin;
 
     outPos[0] = origin[0];
     outPos[1] = origin[1];
