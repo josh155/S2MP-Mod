@@ -492,7 +492,12 @@ struct GfxScaledPlacement {
 struct cg_t
 {
     char clientNum;                         // 0x000000
-    char pad_0001[0x1E6E80 - 0x000001];     // 0x000001
+
+    char pad_0001[0x1E6C99 - 0x000001];     // 0x000001
+
+    bool opaqueUnlit;                       // 0x1E6C99
+
+    char pad_1E6C9A[0x1E6E80 - 0x1E6C9A];   // 0x1E6C9A
 
     float sunColor[3];                      // 0x1E6E80
 
@@ -787,42 +792,57 @@ struct MaterialPassArgDef
 
 struct MaterialPass
 {
-    uint64_t unk00;          // +0x00
-    uint64_t unk08;          // +0x08
-    uint64_t unk10;          // +0x10
-    uint64_t unk18;          // +0x18
-    char     unk20[0x09];    // +0x20
+    void* vertexDecl;                         // 0x00, loaded via sub_7FF6CCA48D00
+    void* vertexShader;                       // 0x08, loaded via sub_7FF6CCA48B40
+    void* hullShader;                         // 0x10, unknown exact type
+    void* domainShader;                       // 0x18, unknown exact type
+    void* pixelShader;                        // 0x20, unknown exact type
 
-    uint8_t  argCount0;      // +0x29
-    uint8_t  argCount1;      // +0x2A
-    uint8_t  argCount2;      // +0x2B
-    uint8_t  argCount3;      // +0x2C
+    uint8_t pad_028;                          // 0x28
 
-    char     unk2D[0x09];    // +0x2D
+    uint8_t perPrimArgCount;                  // 0x29
+    uint8_t perObjArgCount;                   // 0x2A
+    uint8_t stableArgCount;                   // 0x2B
+    uint8_t customSamplerFlags;               // 0x2C, names not proven
 
-    uint16_t unk36;          // +0x36
+    uint8_t pad_02D[0x36 - 0x2D];             // 0x2D
 
-    char     unk38[0x18];    // +0x38
+    uint16_t zoneIndexOrRuntimeIndex;         // 0x36, patched by sub_7FF6CC668A70
 
-    MaterialPassArgDef* args; // +0x50
-}; // size 0x58
+    uint8_t pad_038[0x50 - 0x38];             // 0x38
+
+    void* args;                               // 0x50, count = bytes[0x29..0x2C] sum, elem size 0x10
+};
+
+static_assert(sizeof(MaterialPass) == 0x58);
+static_assert(offsetof(MaterialPass, args) == 0x50);
 
 struct MaterialTechnique
 {
-    const char* name;        // +0x00 XString
-    uint8_t     unk08;       // +0x08
-    uint8_t     unk09;       // +0x09
-    uint16_t    passCount;   // +0x0A
-    uint32_t    unk0C;       // +0x0C
-    MaterialPass passes[];   // +0x10, count passCount
-}; // header size 0x10
+    const char* name;                         // 0x000 XString
+
+    uint8_t flags;                            // 0x008 likely
+    uint8_t unk09;                            // 0x009
+
+    uint16_t passCount;                       // 0x00A
+
+    uint16_t unk0C;                           // 0x00C
+    uint16_t unk0E;                           // 0x00E
+
+    MaterialPass passes[1];                   // 0x010 variable length, count = passCount
+};
+
+static_assert(offsetof(MaterialTechnique, name) == 0x000);
+static_assert(offsetof(MaterialTechnique, flags) == 0x008);
+static_assert(offsetof(MaterialTechnique, passCount) == 0x00A);
+static_assert(offsetof(MaterialTechnique, passes) == 0x010);
 
 struct MaterialTechniqueSet
 {
-    const char* name;                    // +0x000 XString
-    uint64_t    unk08;                   // +0x008
-    MaterialTechnique* techniques[0x72]; // +0x010
-}; // size 0x
+    const char* name;                         // 0x000 XString
+    uint8_t pad_008[0x08];                    // 0x008 unknown
+    MaterialTechnique* techniques[0x72];      // 0x010
+};
 
 struct MaterialInfo
 {
@@ -830,11 +850,6 @@ struct MaterialInfo
     char        pad08[0x28]; // +0x08
 }; // size 0x30
 
-struct MaterialTextureDef
-{
-    char      pad00[0x08];   // +0x00
-    GfxImage* image;         // +0x08
-}; // size 0x10
 
 struct MaterialConstantDef
 {
@@ -876,35 +891,67 @@ struct MaterialConstantBufferDef
     ID3D11Buffer* psBuffer;  // +0x78
 }; // size 0x80
 
+union MaterialTextureDefInfo
+{
+    GfxImage* image;
+    void* water;
+};
 
-//HEAVILY WIP. DO NOT USE MEMBERS
+struct MaterialTextureDef
+{
+    unsigned int nameHash;
+    char nameStart;
+    char nameEnd;
+    unsigned char samplerState;
+    unsigned char semantic;
+    MaterialTextureDefInfo u;
+};
+
+struct GfxStateBits
+{
+    char data[0x20];
+};
+
 struct Material
 {
-    MaterialInfo info;                              // +0x000, size 0x30
+    MaterialInfo info;                         // 0x000, size 0x30
 
-    char pad030[0x0A2 - 0x030];                     // +0x030
+    char pad_0030[0xA2 - 0x30];        // 0x030
 
-    uint8_t textureCount;                           // +0x0A2
-    uint8_t constantCount;                          // +0x0A3
-    uint8_t stateBitsOrArgCount;                    // +0x0A4
+    char textureCount;                 // 0x0A2
+    char stateBitsCount;               // 0x0A3
+    char constantCount;                // 0x0A4
 
-    char pad0A5[0x0AD - 0x0A5];                     // +0x0A5
+    char pad_00A5[0xAD - 0xA5];        // 0x0A5
 
-    uint8_t constantBufferCount;                    // +0x0AD
-    uint8_t stringCount;                            // +0x0AE
+    char constantBufferCount;          // 0x0AD
+    char layerCount;                   // 0x0AE
 
-    char pad0AF[0x0B8 - 0x0AF];                     // +0x0AF
+    char pad_00AF[0xB8 - 0xAF];        // 0x0AF
 
-    MaterialTechniqueSet* techniqueSet;             // +0x0B8
+    MaterialTechniqueSet* techniqueSet;        // 0x0B8
+    MaterialTextureDef* textureTable;          // 0x0C0
+    GfxStateBits* stateBitsTable;              // 0x0C8
+    MaterialConstantDef* constantTable;         // 0x0D0
+    Material* materialHandle;                  // 0x0D8, name uncertain
 
-    MaterialTextureDef* textures;                   // +0x0C0, count textureCount, elem 0x10
-    MaterialConstantDef* constants;                 // +0x0C8, count constantCount, elem 0x20
-    MaterialStateBitsOrArgDef* stateBitsOrArgs;     // +0x0D0, count stateBitsOrArgCount, elem 0x28
+    char pad_00E0[0x158 - 0xE0];       // 0x0E0
 
-    Material* fallbackMaterial;                     // +0x0D8, MaterialHandle
+    MaterialConstantBufferDef* constantBufferTable; // 0x158
+    const char** subMaterials;                      // 0x160
+};
 
-    char pad0E0[0x158 - 0x0E0];                     // +0x0E0
 
-    MaterialConstantBufferDef* constantBuffers;     // +0x158, count constantBufferCount, elem 0x80
-    const char** stringArray;                       // +0x160, count stringCount
-}; // size 0x168
+
+static_assert(offsetof(Material, textureCount) == 0xA2);
+static_assert(offsetof(Material, stateBitsCount) == 0xA3);
+static_assert(offsetof(Material, constantCount) == 0xA4);
+static_assert(offsetof(Material, constantBufferCount) == 0xAD);
+static_assert(offsetof(Material, layerCount) == 0xAE);
+static_assert(offsetof(Material, techniqueSet) == 0xB8);
+static_assert(offsetof(Material, textureTable) == 0xC0);
+static_assert(offsetof(Material, stateBitsTable) == 0xC8);
+static_assert(offsetof(Material, constantTable) == 0xD0);
+static_assert(offsetof(Material, constantBufferTable) == 0x158);
+static_assert(offsetof(Material, subMaterials) == 0x160);
+static_assert(sizeof(Material) == 0x168);

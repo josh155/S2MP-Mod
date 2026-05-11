@@ -1142,7 +1142,7 @@ void DebugPatches::earlyInit() {
     captureNtdllDebugStubs(); //right away
 
     //this crashes on kpops machine & kamas 
-    patchProcessNameChecks();// run this first cuz of shared fpNtQuerySystemInformation usage
+    //patchProcessNameChecks();// run this first cuz of shared fpNtQuerySystemInformation usage
 
     freeIdaMutants(); //works, but how can we prevent it from ever happening
     disableProgramScans();

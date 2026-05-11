@@ -5,6 +5,9 @@ class Functions {
 public:
 	static void init();
 
+	typedef void (*Cmd_Exec_f)();
+	static Cmd_Exec_f _Cmd_Exec_f;
+
 	typedef dvar_t* (*Dvar_RegisterFloat)(const char* name, float defaultValue, float minValue, float maxValue, unsigned int flags);
 	static Dvar_RegisterFloat _Dvar_RegisterFloat;
 

@@ -232,6 +232,8 @@ void Exec::init() {
 }
 
 void Exec::execCmd() {
+	Functions::_Cmd_Exec_f();
+
 	CmdArgs* cmdArgs = GameUtil::getCmdArgs();
 	if (!cmdArgs) {
 		return;
@@ -245,5 +247,13 @@ void Exec::execCmd() {
 		Console::print("exec <filename> : execute a cfg file from players2");
 		return;
 	}
-	executeCfgFile(args[1] ? args[1] : "");
+
+	const char* filename = args[1] ? args[1] : "";
+
+	if (strncmp(filename, "controls/", 9) == 0) {
+		return;
+	}
+
+	//DEV_PRINTF("+++EXEC: %s", filename);
+	executeCfgFile(filename);
 }

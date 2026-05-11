@@ -228,6 +228,7 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("dumpAllScriptFiles", &CustomCommands::dumpAllScriptFiles);
 	GameUtil::addCommand("give", &CustomCommands::give);
 	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon); //not implemented yet
+	GameUtil::addCommand("execbuiltin", reinterpret_cast<void (*)()>(0x64A2A0_b));
 #ifdef DEVELOPMENT_BUILD
 	GameUtil::addCommand("cgt", &cgt);
 	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);

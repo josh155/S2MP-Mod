@@ -104,8 +104,8 @@ void ExtConsole::extConInit(int extConsoleMode) {
 
 	infoPrintOffsets();
 	Functions::init();
-	Console::print("Sys_Cwd(): " + std::string(Functions::_Sys_Cwd()));
-	
+	//Console::print("Sys_Cwd(): " + std::string(Functions::_Sys_Cwd()));
+
 	checkAndSetZombieMode();
 	Console::printf("Setting engine mode to %s", doZombiesMode ? "Zombies" : "Multiplayer");
 	if (doZombiesMode) {
