@@ -8,14 +8,14 @@ S2MP-Mod is a quality-of-life and debugging focused client modification for Call
 - Internal and external developer consoles
 - Restored access to many stripped or hidden commands and dvars
 - Dvar name mapping, so friendly names can be used instead of engine numeric ids
-- Optional dvar prefixes like `set`, `seta`, `toggle`, `togglep`, and `reset`
-- Bare dvar input support such as `cg_fovscale 1.3`
 - Custom bind system with saved binds stored in `players2/s2mp_custom_binds.dat`
 - `exec` support for cfg files in `players2`
 - Automatic `autoexec.cfg` creation on startup
-- Support for encrypted `system_config_mp.cfg`
 - Protection against cfg files infinitely executing themselves
-- Custom image loading support
+- Custom image support
+- Custom GSC support
+- Custom mapents support
+- Custom LUI support
 - Asset dumping and debugging helpers for LUI, scripts, stringtables, rawfiles, images, and more
 - Multiplayer and Zombies utility commands, including unlock helpers
 
