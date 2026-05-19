@@ -353,7 +353,7 @@ void drawDescriptionBox(int windowWidth, int windowHeight, const dvar_t* dvar) {
 	}
 
 	//Domain
-	std::string domainText = "Domain is PLACEHOLDER"; //+ GameUtil::getDvarDomainAsString(dvar);
+	std::string domainText = GameUtil::getDvarDomainAsString(dvar);
 	Functions::_R_AddCmdDrawText(domainText.c_str(), 0x7FFFFFFF, InternalConsole::consoleFont, 0, 0, InternalConsole::consoleFont->pixelHeight, margin + searchBoxOffset + 6, margin + consoleHeight * 2 + (fullConsoleGap * 2) + lineSpacing * 2 + (textStartOffsetGapY / 2) + 1, 1.0f, 1.0f, 0.0f, commandColor, 0.0f);
 }
 
@@ -1060,6 +1060,12 @@ bool InternalConsole::DEVONLY_isAutoCompleteCycling() {
 	return isAutoCompleteCycling;
 }
 
+void patchLuiFovListMax() {
+	Hook::writeByte(reinterpret_cast<void*>(0x44A12_b), 0xA0);
+	Hook::writeByte(reinterpret_cast<void*>(0x44863_b), 0xA0);
+	Hook::writeByte(reinterpret_cast<void*>(0x449E8_b), 0xA0);
+}
+
 
 void InternalConsole::init() {
 	DEV_INIT_PRINT();
@@ -1110,5 +1116,14 @@ void InternalConsole::init() {
 		}
 
 		intConReady = true;
+
+		//adjust upper bound for cg_fov
+		if (dvar_t* cg_fov = Functions::_Dvar_FindVar("cg_fov")) {
+			if (cg_fov->type == DVAR_TYPE_FLOAT_SECURE) {
+				*reinterpret_cast<float*>(reinterpret_cast<uint8_t*>(cg_fov) + 0x44) = 160.0f;
+			}
+		}
+		patchLuiFovListMax();
+
 		}).detach();
 }

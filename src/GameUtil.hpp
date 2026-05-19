@@ -22,7 +22,11 @@ public:
 	static void setCustomSplashScreen();
 	static void blockGameInput(bool b);
 	static std::string colorToString(const unsigned __int8 color[4]);
+	static bool decodeDvarSecureBool(const dvar_t* dvar);
+	static void setDvarSecureBool(dvar_t* dvar, bool newValue);
+	static void setDvarSecureFloat(dvar_t* dvar, float newValue);
 	static std::string dvarValueToString(const dvar_t* dvar, bool showQuotesAroundStrings, bool truncateFloats);
+	static std::string getDvarDomainAsString(const dvar_t* dvar);
 	static std::string toLower(const std::string& str);
 	static std::string toUpper(const std::string& input);
 	static bool isOnlyWhitespace(const std::string& str);

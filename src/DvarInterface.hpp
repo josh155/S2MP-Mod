@@ -25,6 +25,7 @@ public:
 
     static void init();
     static bool setDvar(std::string& dvarname, std::vector<std::string> cmd);
+    static bool setProtectedDvarFromPrefixedCommand(const std::string& cmd);
     static bool translatePrefixedCommand(std::string& cmd);
     static std::string getDvarDescription(const std::string& engineStr);
     static unsigned int getDvarListSize();

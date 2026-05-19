@@ -60,23 +60,36 @@ struct XZoneInfo
     int allocFlags;
     int freeFlags;
 };
-struct DvarLimits_integer
-{
-    int min;
-    int max;
-};
-
-struct DvarLimits_value
-{
-    float min;
-    float max;
-};
-
 union DvarLimits
 {
-    DvarLimits_integer integer;
-    DvarLimits_value floats;
+    struct
+    {
+        int stringCount;
+        const char** strings;
+    } enumeration;
+
+    struct
+    {
+        int min;
+        int max;
+    } integer;
+
+    struct
+    {
+        float min;
+        float max;
+    } value;
+
+    struct
+    {
+        float min;
+        float max;
+    } vector;
+
+    uint8_t bytes[16];
 };
+
+static_assert(sizeof(DvarLimits) == 0x10);
 
 
 //temp
@@ -128,6 +141,8 @@ struct ScriptFile
     const char* buffer;
     char* bytecode;
 };
+
+static_assert(sizeof(ScriptFile) == 0x28);
 
 struct RawFile
 {
@@ -373,39 +388,13 @@ enum dvarType_t : int8_t
     DVAR_TYPE_ENUM = 0x6,
     DVAR_TYPE_STRING = 0x7,
     DVAR_TYPE_COLOR = 0x8,
-    DVAR_TYPE_COLOR2 = 0x9,
-    DVAR_TYPE_BOOL_AGAIN = 0xA, //
-    DVAR_TYPE_FLOAT_SPECIAL = 0xB, //
-    DVAR_TYPE_COUNT = 0xC,
+    DVAR_TYPE_VEC3_ALT = 0x9,
+    DVAR_TYPE_BOOL_SECURE = 0xA,
+    DVAR_TYPE_FLOAT_SECURE = 0xB,
+    DVAR_TYPE_INT_SECURE = 0xC,
+    DVAR_TYPE_COUNT = 0xD,
 };
 
-struct DvarValueBool
-{
-    bool enabled;
-    char pad[3];
-    int hashedValue;
-};
-
-struct DvarValueInt
-{
-    int integer;
-    int hashedValue;
-};
-
-struct DvarValueEnum
-{
-    int defaultIndex;
-    int hashedValue;
-};
-
-struct DvarValueFloatSpecial
-{
-    float f1; //TODO: figure this out
-    float f2; //TODO: figure this out
-    float f3; //TODO: figure this out
-    float f4; //TODO: figure this out
-    float value;
-};
 
 union DvarValue
 {
@@ -415,26 +404,37 @@ union DvarValue
     float value;
     float vector[4];
     const char* string;
-    unsigned __int8 color[4];
+    unsigned char color[4];
 
-    DvarValueBool boolean_;
-    DvarValueInt integer_;
-    DvarValueEnum enumeration_;
-    DvarValueFloatSpecial floatSpecial;
+    uint8_t bytes[16];
+    uint32_t encoded[4];
 };
 
-//TODO: find proper dvar structure
-struct dvar_t 
+struct dvar_t
 {
-    const char* name;
-    int flags;
-    dvarType_t type; //1 byte
-    bool modified; //0x16
-    DvarValue current;
-    //more stuff
+    const char* name;       // 0x00
+    int flags;             // 0x08
+    dvarType_t type;        // 0x0C
+    bool modified;          // 0x0D
+    char pad_0E[2];         // 0x0E
+
+    DvarValue current;      // 0x10
+    DvarValue latched;      // 0x20
+    DvarValue reset;        // 0x30
+
+    DvarLimits domain;      // 0x40, should be 0x10 bytes
+
+    void* unknown_50;       // 0x50, initialized to 0 in Dvar_RegisterNew
+    dvar_t* hashNext;       // 0x58
 };
 
-
+static_assert(sizeof(DvarValue) == 0x10);
+static_assert(offsetof(dvar_t, current) == 0x10);
+static_assert(offsetof(dvar_t, latched) == 0x20);
+static_assert(offsetof(dvar_t, reset) == 0x30);
+static_assert(offsetof(dvar_t, domain) == 0x40);
+static_assert(offsetof(dvar_t, hashNext) == 0x58);
+static_assert(sizeof(dvar_t) == 0x60);
 
 //making this from scratch
 struct playerState_s
@@ -602,9 +602,9 @@ struct GfxWorld {
 
 enum HksBytecodeSharingMode
 {
-	HKS_BYTECODE_SHARING_OFF = 0x0,
-	HKS_BYTECODE_SHARING_ON = 0x1,
-	HKS_BYTECODE_SHARING_SECURE = 0x2,
+    HKS_BYTECODE_SHARING_OFF = 0x0,
+    HKS_BYTECODE_SHARING_ON = 0x1,
+    HKS_BYTECODE_SHARING_SECURE = 0x2,
 };
 
 enum HksCompilerSettings_IntLiteralOptions
@@ -619,44 +619,89 @@ enum HksCompilerSettings_IntLiteralOptions
 
 struct HksCompilerSettings
 {
-    int m_emitStructCode;
-    int i1;
-    int i2;
-    int i3;
-    int m_emitGlobalMemoization;
-    int _m_isHksGlobalMemoTestingMode;
-    HksBytecodeSharingMode m_bytecodeSharingMode;
-    HksCompilerSettings_IntLiteralOptions m_enableIntLiterals;
-    int(__fastcall* m_debugMap)(const char*, int);
+    int m_emitStructCode;                                   // 0x00
+    int i1;                                                 // 0x04
+    int i2;                                                 // 0x08
+    int i3;                                                 // 0x0C
+    int m_emitGlobalMemoization;                            // 0x10
+    int _m_isHksGlobalMemoTestingMode;                      // 0x14
+    HksBytecodeSharingMode m_bytecodeSharingMode;            // 0x18
+    HksCompilerSettings_IntLiteralOptions m_enableIntLiterals; // 0x1C
+    int(__fastcall* m_debugMap)(const char*, int);           // 0x20
 };
 
-/*
+static_assert(sizeof(HksCompilerSettings) == 0x28);
 
-        struct HksCompilerSettings
-        {
-            int m_emitStructCode;
-            const char** m_stripNames;
-            int m_emitGlobalMemoization;
-            int _m_isHksGlobalMemoTestingMode;
-            HksCompilerSettings_BytecodeSharingFormat m_bytecodeSharingFormat;
-            HksCompilerSettings_IntLiteralOptions m_enableIntLiterals;
-            int(__fastcall* m_debugMap)(const char*, int);
-        };
-        */
+struct HksGlobal
+{
+    void* allocator;                  // 0x000
+    void* allocatorUserData;           // 0x008
 
-struct HksGlobal {
-    __int64 idk0;
-    __int64 idk1;
-    __int64 idk2;
-    HksBytecodeSharingMode m_bytecodeSharingMode;
-    char pad[0x53C];
-    HksCompilerSettings m_compilerSettings;
+    std::uint64_t unk_010;             // 0x010
+    std::uint64_t memUsed;             // 0x018
+    std::uint64_t memHighWatermark;    // 0x020
+
+    char pad_0028[0x158 - 0x028];
+
+    void* compilerContext;             // 0x158, temporarily replaced in hks__CompilerFunc
+
+    char pad_0160[0x1B8 - 0x160];
+
+    void* currentLoadContext;          // 0x1B8
+
+    HksBytecodeSharingMode m_bytecodeSharingMode; // 0x1C0
+
+    char pad_01C4[0x558 - 0x1C4];
+
+    HksCompilerSettings m_compilerSettings;       // 0x558
 };
 
-struct lua_State {
-	HksGlobal* m_global;
+static_assert(offsetof(HksGlobal, compilerContext) == 0x158);
+static_assert(offsetof(HksGlobal, currentLoadContext) == 0x1B8);
+static_assert(offsetof(HksGlobal, m_bytecodeSharingMode) == 0x1C0);
+static_assert(offsetof(HksGlobal, m_compilerSettings) == 0x558);
+static_assert(offsetof(HksGlobal, m_compilerSettings.m_emitStructCode) == 0x558);
+static_assert(offsetof(HksGlobal, m_compilerSettings.m_emitGlobalMemoization) == 0x568);
+static_assert(offsetof(HksGlobal, m_compilerSettings.m_bytecodeSharingMode) == 0x570);
 
+struct HksObject
+{
+    int type;        // 0x00
+    int pad04;       // 0x04
+    uint64_t value;  // 0x08
 };
+
+
+namespace hks
+{
+    struct ApiStack
+    {
+        HksObject* top;   // 0x00
+        HksObject* base;  // 0x08
+        HksObject* end;   // 0x10
+    };
+
+    static_assert(sizeof(ApiStack) == 0x18);
+}
+
+struct lua_State
+{
+    char pad_0000[0x10];
+
+    HksGlobal* global;   // 0x10
+
+    char pad_0018[0x30];        // 0x18
+
+    hks::ApiStack m_apistack;   // 0x48
+
+    char pad_0060[0x10];
+
+    HksObject globals;          // 0x70
+};
+
+static_assert(offsetof(lua_State, global) == 0x10);
+static_assert(offsetof(lua_State, m_apistack) == 0x48);
+static_assert(offsetof(lua_State, globals) == 0x70);
 
 struct GfxBuildInfo {
 	const char* bspCommandline;
@@ -763,6 +808,8 @@ struct WeaponAttachment {
 	BOOL adsSceneBlur;
 	BOOL automaticAttachment;
 };
+struct MapEnts;
+
 union XAssetHeader {
     ScriptFile* script;
     RawFile* rawfile;
@@ -770,6 +817,7 @@ union XAssetHeader {
     LocalizeEntry* localize;
     GfxImage* image;
     LuaFile* luafile;
+    MapEnts* mapents;
     void* data;
 };
 
@@ -779,11 +827,236 @@ struct XAsset
     XAssetHeader header;
 };
 
-struct MapEnts {
-    const char* name;
-    char* entityString;
-
+struct TriggerHull
+{
+    char data[0x10];
 };
+
+struct TriggerSlab
+{
+    char data[0x28];
+};
+
+struct TriggerWinding
+{
+    char data[0x14];
+};
+
+struct MapTriggers
+{
+    int count;                  // 0x00
+    int pad04;                 // 0x04
+    TriggerHull* hulls;         // 0x08, count * 0x10
+    int slabCount;              // 0x10
+    int pad14;                 // 0x14
+    TriggerSlab* slabs;         // 0x18, slabCount * 0x28
+    int windingCount;           // 0x20
+    int pad24;                 // 0x24
+    TriggerWinding* windings;   // 0x28, windingCount * 0x14
+};
+
+struct ClientTriggerUnknown1C
+{
+    char data[0x1C];
+};
+
+struct ClientTriggerUnknown0C
+{
+    char data[0x0C];
+};
+
+struct ClientTriggerNested
+{
+    uint32_t* values;           // 0x00, count * 4
+    int count;                  // 0x08
+    int pad0C;                 // 0x0C
+};
+
+struct ClientTriggers
+{
+    MapTriggers triggers;                 // 0x00
+    uint16_t unknown1CCount;              // 0x30
+    char pad32[0x06];                    // 0x32
+    ClientTriggerUnknown1C* unknown1C;    // 0x38, unknown1CCount * 0x1C
+    int unknownCharCount;                 // 0x40
+    int pad44;                           // 0x44
+    char* unknownChars;                   // 0x48, unknownCharCount bytes
+    int* triggerType;                     // 0x50, triggers.count * 4
+    int* unknown58;                       // 0x58, triggers.count * 4
+    int* unknown60;                       // 0x60, triggers.count * 4
+    uint16_t* unknown68;                  // 0x68, triggers.count * 2
+    ClientTriggerUnknown0C* unknown70;    // 0x70, triggers.count * 0x0C
+    int* unknown78;                       // 0x78, triggers.count * 4
+    uint16_t* unknown80;                  // 0x80, triggers.count * 2
+    uint16_t* unknown88;                  // 0x88, triggers.count * 2
+    uint16_t* unknown90;                  // 0x90, triggers.count * 2
+    uint16_t* unknown98;                  // 0x98, triggers.count * 2
+    uint16_t* unknownA0;                  // 0xA0, triggers.count * 2
+    ClientTriggerNested* unknownA8;       // 0xA8, triggers.count * 0x10
+};
+
+struct MapEntsUnknown1C
+{
+    char data[0x1C];
+};
+
+struct MapEntsUnknown1CArray
+{
+    uint16_t count;               // 0x00
+    char pad02[0x06];            // 0x02
+    MapEntsUnknown1C* entries;    // 0x08, count * 0x1C
+};
+
+struct MapEntsUnknown2C
+{
+    uint32_t unknown00;           // 0x00
+    uint32_t remap04;             // 0x04, remapped during load
+    uint32_t remap08;             // 0x08, remapped during load
+    uint32_t remap0C;             // 0x0C, remapped during load
+    uint32_t remap10;             // 0x10, remapped during load
+    char pad14[0x18];            // 0x14
+};
+
+struct MapEntsUnknown2CArray
+{
+    uint16_t count;               // 0x00
+    char pad02[0x06];            // 0x02
+    MapEntsUnknown2C* entries;    // 0x08, count * 0x2C
+};
+
+struct MapEntsUnknown48
+{
+    char pad00[0x08];             // 0x00
+    char* fixedString40;          // 0x08, fixed 0x40-byte buffer
+    char pad10[0x28];             // 0x10
+    void* unknown30;              // 0x38, fixed 0x30-byte buffer
+    void* unknown24;              // 0x40, fixed 0x24-byte buffer
+};
+
+struct MapEntsUnknown48List
+{
+    uint16_t count;               // 0x00
+    char pad02[0x06];            // 0x02
+    MapEntsUnknown48* entries;    // 0x08, count * 0x48
+};
+
+struct MapEntsUnknown48Root
+{
+    uint16_t count;                   // 0x00
+    char pad02[0x06];                // 0x02
+    MapEntsUnknown48List* entries;    // 0x08, count * 0x10
+};
+
+struct MapEntsComplexRecord4C
+{
+    char pad00[0x48];             // 0x00
+    uint32_t remap48;             // 0x48, remapped during load
+};
+
+struct MapEntsComplexC8
+{
+    void* asset;                              // 0x00
+    char* data08;                            // 0x08, sized from asset byte 0x36
+    MapEntsComplexRecord4C* records4C;        // 0x10, byte 0x52 * 0x4C
+    char pad18[0x30];                        // 0x18
+    uint32_t remap48;                         // 0x48, remapped during load
+    char pad4C[0x0C];                        // 0x4C
+    uint32_t* table58;                        // 0x58, asset word 0x2E * 4
+    char* data60;                            // 0x60, sized from asset byte 0x35
+    char pad68[0x48];                        // 0x68
+    char* dataB0;                            // 0xB0, sized from asset byte 0x39
+    uint16_t* valuesB8;                       // 0xB8, asset byte 0x38 * 2
+    uint16_t* valuesC0;                       // 0xC0, byte 0xAB * 2
+};
+
+struct MapEntsComplexString
+{
+    const char* name;             // 0x00, XString
+    char pad08[0x08];            // 0x08
+};
+
+struct MapEntsComplex30
+{
+    char pad00[0x04];                 // 0x00
+    int recordCount;                  // 0x04
+    char pad08[0x08];                // 0x08
+    MapEntsComplexC8* records;        // 0x10, recordCount * 0xC8
+    int stringCount;                  // 0x18
+    int pad1C;                       // 0x1C
+    MapEntsComplexString* strings;    // 0x20, stringCount * 0x10
+    char pad28[0x08];                // 0x28
+};
+
+struct MapEntsUnknown50
+{
+    uint32_t remap00;             // 0x00, remapped during load
+    uint32_t remap04;             // 0x04, remapped during load
+    uint32_t remap08;             // 0x08, remapped during load
+    uint32_t remap0C;             // 0x0C, remapped during load
+    char pad10[0x40];            // 0x10
+};
+
+struct MapEntsUnknown50Array
+{
+    uint16_t count;               // 0x00
+    char pad02[0x06];            // 0x02
+    MapEntsUnknown50* entries;    // 0x08, count * 0x50
+};
+
+struct MapEntsUnknown10
+{
+    char data[0x10];
+};
+
+struct MapEntsUnknown10Array
+{
+    uint32_t count;               // 0x00
+    uint32_t pad04;               // 0x04
+    MapEntsUnknown10* entries;    // 0x08, count * 0x10
+};
+
+struct MapEnts
+{
+    const char* name;                         // 0x000, XString
+    char* entityString;                       // 0x008
+    int numEntityChars;                       // 0x010
+    int pad014;                              // 0x014
+    MapTriggers triggers;                     // 0x018
+    ClientTriggers clientTriggers;            // 0x048
+    MapEntsUnknown1CArray unknown0F8;         // 0x0F8
+    MapEntsUnknown2CArray unknown108;         // 0x108
+    MapEntsUnknown48Root unknown118;          // 0x118
+    MapEntsComplex30 unknown128;              // 0x128
+    MapEntsUnknown50Array unknown158;         // 0x158
+    MapEntsUnknown10Array unknown168;         // 0x168
+};
+
+static_assert(sizeof(TriggerHull) == 0x10);
+static_assert(sizeof(TriggerSlab) == 0x28);
+static_assert(sizeof(TriggerWinding) == 0x14);
+static_assert(sizeof(MapTriggers) == 0x30);
+static_assert(sizeof(ClientTriggers) == 0xB0);
+static_assert(sizeof(MapEntsUnknown1CArray) == 0x10);
+static_assert(sizeof(MapEntsUnknown2CArray) == 0x10);
+static_assert(sizeof(MapEntsUnknown48) == 0x48);
+static_assert(sizeof(MapEntsUnknown48List) == 0x10);
+static_assert(sizeof(MapEntsUnknown48Root) == 0x10);
+static_assert(sizeof(MapEntsComplexRecord4C) == 0x4C);
+static_assert(sizeof(MapEntsComplexC8) == 0xC8);
+static_assert(sizeof(MapEntsComplexString) == 0x10);
+static_assert(sizeof(MapEntsComplex30) == 0x30);
+static_assert(sizeof(MapEntsUnknown50) == 0x50);
+static_assert(sizeof(MapEntsUnknown50Array) == 0x10);
+static_assert(sizeof(MapEntsUnknown10Array) == 0x10);
+static_assert(offsetof(MapEnts, triggers) == 0x18);
+static_assert(offsetof(MapEnts, clientTriggers) == 0x48);
+static_assert(offsetof(MapEnts, unknown0F8) == 0xF8);
+static_assert(offsetof(MapEnts, unknown108) == 0x108);
+static_assert(offsetof(MapEnts, unknown118) == 0x118);
+static_assert(offsetof(MapEnts, unknown128) == 0x128);
+static_assert(offsetof(MapEnts, unknown158) == 0x158);
+static_assert(offsetof(MapEnts, unknown168) == 0x168);
+static_assert(sizeof(MapEnts) == 0x178);
 
 struct MaterialPassArgDef
 {

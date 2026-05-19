@@ -11,6 +11,7 @@
 
 namespace {
 	std::unordered_set<std::string> g_activeExecFiles;
+	std::mutex g_autoexecMutex;
 
 	std::string trimLine(const std::string& line) {
 		const std::size_t first = line.find_first_not_of(" \t\r\n");
@@ -152,7 +153,7 @@ namespace {
 				}
 			}
 
-			Console::execCmd(trimmedLine);
+			Console::execCmd(trimmedLine, false);
 		}
 	}
 
@@ -205,6 +206,31 @@ namespace {
 		executeCfgText(cfgText);
 		return true;
 	}
+
+	bool isDvarAutoexecLine(const std::string& line, const std::string& dvarName) {
+		const std::string trimmedLine = trimLine(line);
+		if (trimmedLine.empty() || trimmedLine.rfind("//", 0) == 0 || trimmedLine[0] == '#') {
+			return false;
+		}
+
+		std::vector<std::string> parsedLine = Console::parseCmdToVec(trimmedLine);
+		if (parsedLine.empty()) {
+			return false;
+		}
+
+		const std::string commandName = GameUtil::toLower(parsedLine[0]);
+		const std::string targetDvarName = GameUtil::toLower(dvarName);
+
+		if (commandName == targetDvarName) {
+			return true;
+		}
+
+		if ((commandName == "set" || commandName == "seta") && parsedLine.size() >= 2) {
+			return GameUtil::toLower(parsedLine[1]) == targetDvarName;
+		}
+
+		return false;
+	}
 }
 
 void Exec::init() {
@@ -229,6 +255,60 @@ void Exec::init() {
 	}
 
 	autoexecFile << "// put dvars and commands here to execute each time the game starts\n";
+}
+
+bool Exec::updateAutoexecDvar(const std::string& dvarName, const std::string& value) {
+	const std::lock_guard<std::mutex> lock(g_autoexecMutex);
+
+	const std::filesystem::path players2Path = getPlayers2Path();
+	const std::filesystem::path autoexecPath = players2Path / "autoexec.cfg";
+
+	std::error_code createDirsError;
+	std::filesystem::create_directories(players2Path, createDirsError);
+	if (createDirsError) {
+		Console::printf("Failed to create players2 folder for autoexec: %s", players2Path.string().c_str());
+		return false;
+	}
+
+	std::vector<std::string> lines;
+	{
+		std::ifstream autoexecFile(autoexecPath);
+		std::string line;
+
+		while (std::getline(autoexecFile, line)) {
+			if (!line.empty() && line.back() == '\r') {
+				line.pop_back();
+			}
+
+			lines.push_back(line);
+		}
+	}
+
+	const std::string updatedLine = dvarName + " " + value;
+	bool updatedExistingLine = false;
+
+	for (std::string& line : lines) {
+		if (isDvarAutoexecLine(line, dvarName)) {
+			line = updatedLine;
+			updatedExistingLine = true;
+		}
+	}
+
+	if (!updatedExistingLine) {
+		lines.push_back(updatedLine);
+	}
+
+	std::ofstream autoexecFile(autoexecPath, std::ios::out | std::ios::trunc);
+	if (!autoexecFile.is_open()) {
+		Console::printf("Failed to update autoexec.cfg: %s", autoexecPath.string().c_str());
+		return false;
+	}
+
+	for (const std::string& line : lines) {
+		autoexecFile << line << '\n';
+	}
+
+	return autoexecFile.good();
 }
 
 void Exec::execCmd() {

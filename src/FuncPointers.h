@@ -8,6 +8,10 @@ public:
 	typedef void (*Cmd_Exec_f)();
 	static Cmd_Exec_f _Cmd_Exec_f;
 
+	typedef void (*UnitQuatToAxis)(const float quat[4], float axis[3][3]);
+	static UnitQuatToAxis _UnitQuatToAxis;
+
+
 	typedef dvar_t* (*Dvar_RegisterFloat)(const char* name, float defaultValue, float minValue, float maxValue, unsigned int flags);
 	static Dvar_RegisterFloat _Dvar_RegisterFloat;
 
@@ -67,6 +71,30 @@ public:
 
 	typedef XAssetHeader(*DB_FindXAssetHeader)(XAssetType type, const char* name, int allow_create_default);
 	static DB_FindXAssetHeader _DB_FindXAssetHeader;
+
+	typedef unsigned int(__cdecl* Scr_LoadScript)(const char* scriptName);
+	static Scr_LoadScript _Scr_LoadScript;
+
+	typedef int(__cdecl* Scr_GetFunctionHandle)(const char* scriptName, unsigned int functionName);
+	static Scr_GetFunctionHandle _Scr_GetFunctionHandle;
+
+	typedef unsigned int(__cdecl* Scr_ExecThread)(int handle, unsigned int paramCount);
+	static Scr_ExecThread _Scr_ExecThread;
+
+	typedef void(__cdecl* Scr_FreeThread)(unsigned int threadId);
+	static Scr_FreeThread _Scr_FreeThread;
+
+	typedef int(__cdecl* Scr_GetNumParam)();
+	static Scr_GetNumParam _Scr_GetNumParam;
+
+	typedef const char* (__cdecl* Scr_GetString)(unsigned int paramIndex);
+	static Scr_GetString _Scr_GetString;
+
+	typedef void(__cdecl* Scr_Error)(const char* fmt, ...);
+	static Scr_Error _Scr_Error;
+
+	typedef void(__cdecl* Scr_ParamError)(int paramIndex, const char* fmt, ...);
+	static Scr_ParamError _Scr_ParamError;
 
 	typedef int (__cdecl* hksi_hksL_loadbuffer)(void* s, const void* options, const char* buff, unsigned __int64 sz, const char* name);
 	static hksi_hksL_loadbuffer _hksi_hksL_loadbuffer;
@@ -160,6 +188,18 @@ public:
 
 	typedef int(__cdecl* LUI_CoD_GetFreeMemoryBytes)();
 	static LUI_CoD_GetFreeMemoryBytes _LUI_CoD_GetFreeMemoryBytes;
+
+	typedef void(__fastcall* Load_LuaFileAsset)(LuaFile** luaFile);
+	static Load_LuaFileAsset _Load_LuaFileAsset;
+
+	typedef int(*Hks_Load)(void* state, void* compilerOptions, void* reader, void* readerData, const char* chunkName);
+	static Hks_Load _Hks_Load;
+
+	typedef void(*LUI_CoD_Init)(bool frontend, bool immediate);
+	static LUI_CoD_Init _LUI_CoD_Init;
+
+	typedef void(*LUI_CoD_Shutdown)();
+	static LUI_CoD_Shutdown _LUI_CoD_Shutdown;
 
 	typedef int(__cdecl* hks_HashTable_contiguousArraySize)();
 	static hks_HashTable_contiguousArraySize _hks_HashTable_contiguousArraySize;

@@ -9,6 +9,109 @@
 #include "Hook.hpp"
 #include "structs.h"
 #include "GameUtil.hpp"
+#include <cctype>
+#include <cstring>
+
+namespace {
+    bool isMeaningfulCString(const char* value) {
+        if (!value) {
+            return false;
+        }
+
+        return std::strcmp(value, "<null>") != 0
+            && std::strcmp(value, "<invalid>") != 0
+            && std::strcmp(value, "<unreadable>") != 0
+            && std::strcmp(value, "<unterminated>") != 0
+            && std::strcmp(value, "<unterminated/unreadable>") != 0;
+    }
+
+    bool looksLikeText(const char* value) {
+        if (!isMeaningfulCString(value) || !*value) {
+            return false;
+        }
+
+        size_t inspected = 0;
+        size_t printable = 0;
+
+        for (; value[inspected] != '\0' && inspected < 160; ++inspected) {
+            const unsigned char ch = static_cast<unsigned char>(value[inspected]);
+            if (std::isprint(ch) || std::isspace(ch)) {
+                ++printable;
+            }
+        }
+
+        return inspected > 0 && printable >= (inspected * 3) / 4;
+    }
+
+    void logHksStringCandidates(const HksObject* object) {
+        if (!object || object->value == 0) {
+            return;
+        }
+
+        const uintptr_t valueAddress = static_cast<uintptr_t>(object->value);
+        const size_t offsets[] = { 0x0, 0x8, 0x10, 0x18, 0x20, 0x28, 0x30 };
+        bool printedCandidate = false;
+
+        for (const size_t offset : offsets) {
+            const uintptr_t address = valueAddress + offset;
+
+            const char* inlineText = GameUtil::safeCString(reinterpret_cast<const char*>(address), 1024);
+            if (looksLikeText(inlineText)) {
+                Console::printf("LUI VM error text [value+0x%zX]: %s", offset, inlineText);
+                printedCandidate = true;
+            }
+
+            if (!GameUtil::isReadablePtr(reinterpret_cast<const void*>(address), sizeof(const char*))) {
+                continue;
+            }
+
+            const char* indirectText = *reinterpret_cast<const char* const*>(address);
+            indirectText = GameUtil::safeCString(indirectText, 1024);
+            if (looksLikeText(indirectText)) {
+                Console::printf("LUI VM error text [*(value+0x%zX)]: %s", offset, indirectText);
+                printedCandidate = true;
+            }
+        }
+
+        if (!printedCandidate) {
+            Console::print("LUI VM error text: no readable string candidates found");
+        }
+    }
+
+    void logLuiVmState(void* luiVm) {
+        if (!luiVm) {
+            Console::print("LUI VM snapshot: null");
+            return;
+        }
+
+        lua_State* state = reinterpret_cast<lua_State*>(luiVm);
+        if (!GameUtil::isReadablePtr(state, sizeof(lua_State))) {
+            Console::printf("LUI VM snapshot unreadable: %p", luiVm);
+            return;
+        }
+
+        HksObject* base = state->m_apistack.base;
+        HksObject* top = state->m_apistack.top;
+        HksObject* end = state->m_apistack.end;
+
+        Console::printf("LUI VM stack: base=%p top=%p end=%p", base, top, end);
+
+        if (!top || !base || top <= base) {
+            Console::print("LUI VM stack is empty at error time");
+            return;
+        }
+
+        const HksObject* topObject = top - 1;
+        if (!GameUtil::isReadablePtr(topObject, sizeof(HksObject))) {
+            Console::printf("LUI VM top object unreadable: %p", topObject);
+            return;
+        }
+
+        Console::printf("LUI VM top object: type=%d value=%p", topObject->type, reinterpret_cast<void*>(topObject->value));
+
+        logHksStringCandidates(topObject);
+    }
+}
 
 typedef void(*CM_LoadMap)(const char* name, int* checksum);
 CM_LoadMap _CM_LoadMap = nullptr;
@@ -163,7 +266,20 @@ void hook_DB_FileExists(const char* zoneName, FF_DIR source) {
 }
 
 void hook_LUI_Error(const char* error, void* luiVm) {
-    Console::printf("LUI Error: %s", Functions::_SEH_SafeTranslateString(error));
+    const char* rawError = GameUtil::safeCString(error);
+    const char* translatedError = error;
+
+    if (Functions::_SEH_SafeTranslateString && error) {
+        translatedError = GameUtil::safeCString(Functions::_SEH_SafeTranslateString(error));
+    }
+
+    Console::printf("LUI Error (raw): %s", rawError);
+
+    if (translatedError && std::strcmp(rawError, translatedError) != 0) {
+        Console::printf("LUI Error (translated): %s", translatedError);
+    }
+
+    logLuiVmState(luiVm);
     _LUI_Error(error, luiVm);
 }
 

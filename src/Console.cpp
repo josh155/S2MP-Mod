@@ -201,6 +201,7 @@ void cgt() {
 
 void Console::registerCustomCommands() {
 	setupSpecialLobbyVars();
+	//GameUtil::addCommand("setviewpos", &CustomCommands::setViewPos);
 	GameUtil::addCommand("noclip", &Noclip::toggle);
 	GameUtil::addCommand("ufo", &CustomCommands::toggleUfo);
 	GameUtil::addCommand("map_restart", &CustomCommands::mapRestart);
@@ -212,14 +213,15 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("luidbg", &DevDraw::toggleLuaDebugGui);
 	GameUtil::addCommand("entdbg", &DevDraw::toggleEntityDebugGui);
 	GameUtil::addCommand("acdbg", &DevDraw::toggleAntiCheatDebugGui);
+	GameUtil::addCommand("posdbg", &DevDraw::togglePlayerOriginDebugGui);
+	GameUtil::addCommand("gscdbg", &DevDraw::toggleGscDebugGui);
 	GameUtil::addCommand("intcondbg", &DevDraw::toggleIntConDebugGui);
 	GameUtil::addCommand("listcmd", &CustomCommands::listAllCmds);
 	GameUtil::addCommand("map", &CustomCommands::changeMap);
-	//GameUtil::addCommand("quit", &CustomCommands::quit);
 	GameUtil::addCommand("clear", &InternalConsole::clearFullConsole);
 	GameUtil::addCommand("r_fullbright", &CustomCommands::tempToggleFullbright);
 	GameUtil::addCommand("r_wireframe", &CustomCommands::tempToggleWireframe);
-	GameUtil::addCommand("r_togglePortals", &CustomCommands::togglePortals);
+	GameUtil::addCommand("r_togglePortals", &CustomCommands::togglePortals); //TODO
 	GameUtil::addCommand("unlockall", &CustomCommands::unlockAll);
 	GameUtil::addCommand("listassetpool", &CustomCommands::listAssetPool);
 	GameUtil::addCommand("saveassetpool", &CustomCommands::saveAssetPool);
@@ -228,10 +230,11 @@ void Console::registerCustomCommands() {
 	GameUtil::addCommand("dumpAllScriptFiles", &CustomCommands::dumpAllScriptFiles);
 	GameUtil::addCommand("give", &CustomCommands::give);
 	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon); //not implemented yet
-	GameUtil::addCommand("execbuiltin", reinterpret_cast<void (*)()>(0x64A2A0_b));
-#ifdef DEVELOPMENT_BUILD
-	GameUtil::addCommand("cgt", &cgt);
+	GameUtil::addCommand("execbuiltin", reinterpret_cast<void (*)()>(0x64A2A0_b));//in-engine exec command
 	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);
+#ifdef DEVELOPMENT_BUILD
+	GameUtil::addCommand("dumpgscfunctions", &CustomCommands::dumpGscFunctions);
+	GameUtil::addCommand("cgt", &cgt);
 	GameUtil::addCommand("enginemode", &setenginemode);
 	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
 	GameUtil::addCommand("getCmdFuncAddr", &CustomCommands::getCmdFuncAddr);
@@ -246,20 +249,20 @@ void Console::registerCustomCommands() {
 }
 
 void Console::registerCustomDvars() {
-#ifdef DEVELOPMENT_BUILD
-	DvarInterface::registerBool("testBool", 1, 0, "S2MP-Mod custom bool test");
-#endif // DEVELOPMENT_BUILD
 	DvarInterface::registerBool("g_dumpLui", 0, 0, "Dump LUI files on map load");
-	DvarInterface::registerBool("g_dumpScripts", 0, 0, "Dump script files on map load");
 	DvarInterface::registerBool("g_dumpStringTables", 0, 0, "Dump StringTables when they are loaded");
 	DvarInterface::registerBool("g_dumpRawfiles", 0, 0, "Dump RawFiles when they are loaded");
 	DvarInterface::registerBool("printWorldInfo", 0, 0, "Prints GfxWorld build info on load");
-	DvarInterface::registerBool("g_dumpMapEnts", 0, 0, "Dump MapEnts when they are loaded"); //TODO
+	DvarInterface::registerBool("g_dumpMapEnts", 0, 0, "Dump MapEnts when they are loaded");
 	DvarInterface::registerBool("g_dumpImages", 0, 0, "Dump Images when they are loaded. Can be unstable when loading maps. Best to turn off when doing so.");
 
 	//zmcacutils.lua left in a check for a dvar named "unlockAllConsumables" so registering here makes the lua function work lol
 	DvarInterface::registerBool("unlockAllConsumables", 0, 0, "Unlock all zombies consumables. Used by the unlockall command"); 
 	DvarInterface::registerBool("unlockAllPassivePerks", 0, 0, "Unlock all zombies passive perks. Used by the unlockall command"); 
+
+	//for gsc and any other system that still checks for this dvar
+	Functions::_Dvar_RegisterInt("850", 0, 0, 4, 0); //force_ranking
+	Functions::_Dvar_RegisterInt("5357", 0, 0, 1, 0); //isGamescomForceRankedMatch
 
 	DvarInterface::registerFloat("cg_gun_x", 0.0, -3.4028235e38, 3.4028235e38, 0, "Forward position of the viewmodel");
 	DvarInterface::registerFloat("cg_gun_y", 0.0, -3.4028235e38, 3.4028235e38, 0, "Right position of the viewmodel");
@@ -340,7 +343,7 @@ bool setEngineDvar(std::string cmd) {
 }
 
 //All consoles use this to execute commands. 
-void Console::execCmd(std::string cmd) {
+void Console::execCmd(std::string cmd, bool echoCommand) {
 	if (cmd.find_first_not_of(" \t\r\n") == std::string::npos) {
 		return;
 	}
@@ -351,8 +354,14 @@ void Console::execCmd(std::string cmd) {
 		return;
 	}
 
+	if (DvarInterface::setProtectedDvarFromPrefixedCommand(cmd)) {
+		return;
+	}
+
 	if (DvarInterface::translatePrefixedCommand(cmd)) {
-		Console::printIntCon(originalCmd);
+		if (echoCommand) {
+			Console::printIntCon(originalCmd);
+		}
 		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, cmd);
 		return;
 	}
@@ -361,6 +370,8 @@ void Console::execCmd(std::string cmd) {
 		return;
 	}
 
-	Console::printIntCon(originalCmd);
+	if (echoCommand) {
+		Console::printIntCon(originalCmd);
+	}
 	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, originalCmd);
 }

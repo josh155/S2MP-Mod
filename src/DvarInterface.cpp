@@ -9,8 +9,10 @@
 #include "DvarMappings.hpp"
 #include "Console.hpp"
 #include "GameUtil.hpp"
+#include "Exec.hpp"
 #include "FuncPointers.h"
 #include <algorithm>
+#include <iomanip>
 #include "DevDef.h"
 
 std::unordered_map<std::string, std::string> DvarInterface::userToEngineMap;
@@ -34,6 +36,22 @@ namespace {
             || commandName == "set"
             || commandName == "seta"
             || commandName == "reset";
+    }
+
+    bool hasProtectedSetter(dvarType_t type) {
+        return type == DVAR_TYPE_FLOAT_SECURE;
+    }
+
+    bool tryParseFloat(const std::string& text, float& outValue) {
+        char* end = nullptr;
+        outValue = std::strtof(text.c_str(), &end);
+        return end != text.c_str() && *end == '\0';
+    }
+
+    std::string floatToConfigString(float value) {
+        std::ostringstream stream;
+        stream << std::setprecision(9) << value;
+        return stream.str();
     }
 
     std::string quoteCommandTokenIfNeeded(const std::string& token) {
@@ -73,6 +91,52 @@ namespace {
 
         return rebuiltCommand;
     }
+
+    bool setProtectedDvarValue(dvar_t* dvar, const std::string& engineString, const std::string& value) {
+        if (!dvar || !hasProtectedSetter(dvar->type)) {
+            return false;
+        }
+
+        std::vector<std::string> directSetCmd;
+        directSetCmd.push_back(engineString);
+        directSetCmd.push_back(value);
+
+        std::string dvarName = engineString;
+        return DvarInterface::setDvar(dvarName, directSetCmd);
+    }
+
+    bool setProtectedDvarToggle(dvar_t* dvar, const std::string& engineString, const std::vector<std::string>& parsedCmd) {
+        if (parsedCmd.size() < 3) {
+            return false;
+        }
+
+        if (dvar->type != DVAR_TYPE_FLOAT_SECURE) {
+            return false;
+        }
+
+        float currentValue = 0.0f;
+        if (!tryParseFloat(GameUtil::dvarValueToString(dvar, false, false), currentValue)) {
+            return false;
+        }
+
+        std::size_t nextValueIndex = 2;
+        for (std::size_t i = 2; i < parsedCmd.size(); ++i) {
+            float toggleValue = 0.0f;
+            if (!tryParseFloat(parsedCmd[i], toggleValue)) {
+                return false;
+            }
+
+            if (std::fabs(currentValue - toggleValue) <= 0.0001f) {
+                nextValueIndex = i + 1;
+                if (nextValueIndex >= parsedCmd.size()) {
+                    nextValueIndex = 2;
+                }
+                break;
+            }
+        }
+
+        return setProtectedDvarValue(dvar, engineString, parsedCmd[nextValueIndex]);
+    }
 }
 
 /**
@@ -98,7 +162,80 @@ bool DvarInterface::setDvar(std::string& dvarname, std::vector<std::string> cmd)
     if (!var) {
         return false;
     }
-    
+
+    //will use direct writes for protected dvars to ensure full control
+    switch (var->type)
+    {
+    case DVAR_TYPE_FLOAT_SECURE:
+    {
+        if (cmd.size() < 2) {
+            return false;
+        }
+
+        char* end = nullptr;
+        const float value = std::strtof(cmd[1].c_str(), &end);
+
+        if (end == cmd[1].c_str() || *end != '\0') {
+            return false;
+        }
+
+        GameUtil::setDvarSecureFloat(var, value);
+        if (GameUtil::toLower(engineString) == "cg_fov") {
+            Exec::updateAutoexecDvar("cg_fov", cmd[1]);
+        }
+        return true;
+    }
+
+    case DVAR_TYPE_BOOL_SECURE:
+    {
+        if (cmd.size() < 2) {
+            return false;
+        }
+        
+        const std::string valueLower = [&]() {
+            std::string s = cmd[1];
+            std::transform(s.begin(), s.end(), s.begin(), GameUtil::asciiToLower);
+            return s;
+        }();
+        
+        bool value;
+        
+        if (valueLower == "1" || valueLower == "true" || valueLower == "on" || valueLower == "yes") {
+            value = true;
+        }
+        else if (valueLower == "0" || valueLower == "false" || valueLower == "off" || valueLower == "no") {
+            value = false;
+        }
+        else {
+            return false;
+        }
+        
+        GameUtil::setDvarSecureBool(var, value);
+        return true;
+    }
+
+    case DVAR_TYPE_INT_SECURE:
+    {
+        //if (cmd.size() < 2) {
+        //    return false;
+        //}
+        //
+        //char* end = nullptr;
+        //const long value = std::strtol(cmd[1].c_str(), &end, 10);
+        //
+        //if (end == cmd[1].c_str() || *end != '\0') {
+        //    return false;
+        //}
+        //
+        //GameUtil::setDvarSecureInt(var, static_cast<int>(value));
+        //return true;
+    }
+
+    default:
+        break;
+    }
+
+    // Normal dvar path.
     std::vector<std::string> rebuiltCmd;
     rebuiltCmd.reserve(cmd.size() + 1);
     rebuiltCmd.push_back("set");
@@ -114,7 +251,48 @@ bool DvarInterface::setDvar(std::string& dvarname, std::vector<std::string> cmd)
     var->flags = 0;
     GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, dvarCmd.c_str());
     var->flags = flags;
+
     return true;
+}
+
+bool DvarInterface::setProtectedDvarFromPrefixedCommand(const std::string& cmd) {
+    std::vector<std::string> parsedCmd = Console::parseCmdToVec(cmd);
+    if (parsedCmd.size() < 2) {
+        return false;
+    }
+
+    const std::string normalizedPrefix = normalizeCommandToken(parsedCmd[0]);
+    if (!isTranslatableDvarPrefix(normalizedPrefix)) {
+        return false;
+    }
+
+    const std::string engineString = DvarInterface::toEngineString(parsedCmd[1]);
+    dvar_t* var = Functions::_Dvar_FindVar(engineString.c_str());
+    if (!var || !hasProtectedSetter(var->type)) {
+        return false;
+    }
+
+    if (normalizedPrefix == "set" || normalizedPrefix == "seta") {
+        if (parsedCmd.size() < 3) {
+            return false;
+        }
+
+        return setProtectedDvarValue(var, engineString, parsedCmd[2]);
+    }
+
+    if (normalizedPrefix == "toggle" || normalizedPrefix == "togglep") {
+        return setProtectedDvarToggle(var, engineString, parsedCmd);
+    }
+
+    if (normalizedPrefix == "reset") {
+        GameUtil::setDvarSecureFloat(var, var->reset.value);
+        if (GameUtil::toLower(engineString) == "cg_fov") {
+            Exec::updateAutoexecDvar("cg_fov", floatToConfigString(var->reset.value));
+        }
+        return true;
+    }
+
+    return false;
 }
 
 bool DvarInterface::translatePrefixedCommand(std::string& cmd) {
@@ -189,14 +367,14 @@ void DvarInterface::addMapping(const std::string& userString, const std::string&
  *
  * @param engineStr The engine-facing dvar name.
  *
- * @return The dvar description if found; otherwise "undefined".
+ * @return The dvar description if found; otherwise uses a placeholder
  */
 std::string DvarInterface::getDvarDescription(const std::string& engineStr) {
     auto it = descriptionMap.find(engineStr);
     if (it != descriptionMap.end()) {
         return it->second;
     }
-    return "undefined"; //couldnt find
+    return "No Description for this Dvar"; //couldnt find
 }
 
 /**

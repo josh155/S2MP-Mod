@@ -2,8 +2,20 @@
 #include "FuncPointers.h"
 #include "Dvars.hpp"
 #include "Console.hpp"
+#include "Exec.hpp"
+#include "GameUtil.hpp"
 #include "Hook.hpp"
 #include "DevDef.h"
+
+#include <iomanip>
+
+namespace {
+    std::string floatToConfigString(float value) {
+        std::ostringstream stream;
+        stream << std::setprecision(9) << value;
+        return stream.str();
+    }
+}
 
 
 
@@ -11,12 +23,25 @@ typedef void (*Dvar_SetVariant_t)(dvar_t* dvar, DvarValue* value, int source);
 static Dvar_SetVariant_t fpDvar_SetVariant;
 
 void Dvar_SetVariant_hookfunc(dvar_t* dvar, DvarValue* value, int source) {
-    if (!strcmp(dvar->name, "3078")) {
+    bool persistCgFovToAutoexec = false;
+
+    if (!strcmp(dvar->name, "3078")) { //cg_fovscale
         if (source != 1) {
             return;
         }
     }
+    if (!strcmp(dvar->name, "cg_fov")) { //cg_fov
+        if (source != 2) { //lua options
+            return;
+        }
+
+        persistCgFovToAutoexec = true;
+    }
     fpDvar_SetVariant(dvar, value, source);
+
+    if (persistCgFovToAutoexec) {
+        Exec::updateAutoexecDvar("cg_fov", floatToConfigString(value ? value->value : GameUtil::safeStringToFloat(GameUtil::dvarValueToString(dvar, false, false))));
+    }
 }
 
 void setBoolDvar(const char* dvarName, bool value) {
@@ -62,5 +87,7 @@ void Dvars::initPatches() {
     setIntDvar("telemetry_error_killswitch", 1);
     setIntDvar("telemetry_active", 0);
     std::strcpy((char*)0xB9D9D8_b, "nothankyou"); //replace dloguploader name
+
+
 
 }

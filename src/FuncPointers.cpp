@@ -7,6 +7,7 @@
 #include "Console.hpp"
 #include "DevDef.h"
 
+Functions::UnitQuatToAxis Functions::_UnitQuatToAxis = nullptr;
 Functions::Cmd_Exec_f Functions::_Cmd_Exec_f = nullptr;
 Functions::Dvar_RegisterFloat Functions::_Dvar_RegisterFloat = nullptr;
 Functions::Dvar_RegisterInt Functions::_Dvar_RegisterInt = nullptr;
@@ -53,6 +54,10 @@ Functions::Cmd_AddCommandInternal Functions::_Cmd_AddCommandInternal = nullptr;
 
 Functions::LUI_CoD_GetMaxMemory Functions::_LUI_CoD_GetMaxMemory = nullptr;
 Functions::LUI_CoD_GetFreeMemoryBytes Functions::_LUI_CoD_GetFreeMemoryBytes = nullptr;
+Functions::Load_LuaFileAsset Functions::_Load_LuaFileAsset = nullptr;
+Functions::Hks_Load Functions::_Hks_Load = nullptr;
+Functions::LUI_CoD_Init Functions::_LUI_CoD_Init = nullptr;
+Functions::LUI_CoD_Shutdown Functions::_LUI_CoD_Shutdown = nullptr;
 Functions::hks_HashTable_contiguousArraySize Functions::_hks_HashTable_contiguousArraySize = nullptr;
 Functions::Material_RegisterHandle Functions::_Material_RegisterHandle = nullptr;
 Functions::Dvar_RegisterBool Functions::_Dvar_RegisterBool = nullptr;
@@ -61,6 +66,14 @@ Functions::DB_GetXAssetName Functions::_DB_GetXAssetName = nullptr;
 Functions::hksi_hksL_loadbuffer Functions::_hksi_hksL_loadbuffer = nullptr;
 Functions::Cmd_RemoveCommand Functions::_Cmd_RemoveCommand = nullptr;
 Functions::DB_FindXAssetHeader Functions::_DB_FindXAssetHeader = nullptr;
+Functions::Scr_LoadScript Functions::_Scr_LoadScript = nullptr;
+Functions::Scr_GetFunctionHandle Functions::_Scr_GetFunctionHandle = nullptr;
+Functions::Scr_ExecThread Functions::_Scr_ExecThread = nullptr;
+Functions::Scr_FreeThread Functions::_Scr_FreeThread = nullptr;
+Functions::Scr_GetNumParam Functions::_Scr_GetNumParam = nullptr;
+Functions::Scr_GetString Functions::_Scr_GetString = nullptr;
+Functions::Scr_Error Functions::_Scr_Error = nullptr;
+Functions::Scr_ParamError Functions::_Scr_ParamError = nullptr;
 
 void Functions::init()
 {
@@ -91,12 +104,24 @@ void Functions::init()
 	_Cmd_AddCommandInternal = (Cmd_AddCommandInternal)(0x6496B0_b);
 	_LUI_CoD_GetMaxMemory = (LUI_CoD_GetMaxMemory)(0x180CA0_b);
 	_LUI_CoD_GetFreeMemoryBytes = (LUI_CoD_GetFreeMemoryBytes)(0x180C90_b);
+	_Load_LuaFileAsset = (Load_LuaFileAsset)(0xD81A0_b);
+	_Hks_Load = (Hks_Load)(0x2D6D10_b);
+	_LUI_CoD_Init = (LUI_CoD_Init)(0x317A00_b);
+	_LUI_CoD_Shutdown = (LUI_CoD_Shutdown)(0x31A6F0_b);
 	_hks_HashTable_contiguousArraySize = (hks_HashTable_contiguousArraySize)(0x2CA7D0_b);
 	_Material_RegisterHandle = (Material_RegisterHandle)(0x8AB5F0_b);
 	_DB_GetXAssetTypeSize = (DB_GetXAssetTypeSize)(0x4A2F20_b);
 	_DB_GetXAssetName = (DB_GetXAssetName)(0x4A2EF0_b);
 	_hksi_hksL_loadbuffer = (hksi_hksL_loadbuffer)(0x2D9020_b);
 	_Cmd_RemoveCommand = (Cmd_RemoveCommand)(0x64A830_b);
+	_Scr_LoadScript = (Scr_LoadScript)(0x684B10_b);
+	_Scr_GetFunctionHandle = (Scr_GetFunctionHandle)(0x6849A0_b);
+	_Scr_ExecThread = (Scr_ExecThread)(0x68F1F0_b);
+	_Scr_FreeThread = (Scr_FreeThread)(0x68F2D0_b);
+	_Scr_GetNumParam = (Scr_GetNumParam)(0x68F9E0_b);
+	_Scr_GetString = (Scr_GetString)(0x68FC00_b);
+	_Scr_Error = (Scr_Error)(0x68F0F0_b);
+	_Scr_ParamError = (Scr_ParamError)(0x690660_b);
 	_G_Spawn = (G_Spawn)(0x5C0FC0_b);
 	_G_SpawnItem = (G_SpawnItem)(0x55ACC0_b);
 	_G_GetWeaponForName = (G_GetWeaponForName)(0x5C3C00_b);
@@ -117,4 +142,5 @@ void Functions::init()
 	_Dvar_RegisterInt = (Dvar_RegisterInt)(0xAFC70_b);
 	_Dvar_RegisterFloat = (Dvar_RegisterFloat)(0xAFA50_b);
 	_Cmd_Exec_f = (Cmd_Exec_f)(0x64A2A0_b);
+	_UnitQuatToAxis = (UnitQuatToAxis)(0x75CBB0_b);
 }

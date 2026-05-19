@@ -88,6 +88,21 @@ void Hook::installHook(void* func2hook, void* payloadFunction) {
     memcpy(func2hook, jmpInstruction, sizeof(jmpInstruction));
 }
 
+void Hook::writeByte(void* address, std::uint8_t value) {
+	auto* addr = reinterpret_cast<std::uint8_t*>(address);
+
+	DWORD oldProtect = 0;
+	if (!VirtualProtect(addr, 1, PAGE_EXECUTE_READWRITE, &oldProtect)){
+		return;
+	}
+
+	*addr = value;
+
+	DWORD temp = 0;
+	VirtualProtect(addr, 1, oldProtect, &temp);
+	FlushInstructionCache(GetCurrentProcess(), addr, 1);
+}
+
 bool Hook::create(const char* name, void* target, void* detour, void** original) {
 	const char* safeName = name ? name : "<unnamed>";
 

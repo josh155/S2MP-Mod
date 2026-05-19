@@ -108,6 +108,7 @@ workspace "s2mp-mod"
                 "src/Loaders.hpp",
                 "src/LuiLoader.cpp",
                 "src/LuiLoader.hpp",
+                "src/MapEntLoader.cpp",
                 "src/MapEntLoader.hpp",
                 "src/RawFileLoader.cpp",
                 "src/RawFileLoader.hpp",

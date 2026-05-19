@@ -168,6 +168,233 @@ std::string GameUtil::colorToString(const unsigned __int8 color[4]) {
     return oss.str();
 }
 
+bool GameUtil::decodeDvarSecureBool(const dvar_t* dvar) {
+    if (!dvar || dvar->type != DVAR_TYPE_BOOL_SECURE) {
+        Console::printf("non secure bool '%s' passed into decodeDvarSecureBool", dvar->name);
+        return false;
+    }
+
+    const uint32_t K0 = *reinterpret_cast<uint32_t*>(0xD8F124_b);
+    const uint32_t K1 = *reinterpret_cast<uint32_t*>(0xD8F148_b);
+    const uint32_t K2 = *reinterpret_cast<uint32_t*>(0xD8F14C_b);
+    const uint32_t K3 = *reinterpret_cast<uint32_t*>(0xD8F150_b);
+
+    const uint32_t BOOL_OFFSET = *reinterpret_cast<uint32_t*>(0x14DA5E0_b);
+
+    const uint32_t p = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(dvar) + 0x10);
+
+    const uint32_t e0 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x10);
+    const uint32_t e1 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x14);
+    const uint32_t e2 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x18);
+    const uint32_t e3 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x1C);
+
+    uint32_t decoded[4];
+
+    decoded[0] = ~K0 ^ p ^ e2;
+    decoded[1] = p ^ e0 ^ e2 ^ K1;
+    decoded[2] = p ^ e3 ^ e0 ^ K2;
+    decoded[3] = p ^ e1 ^ e3 ^ K3;
+    return *(reinterpret_cast<const uint8_t*>(decoded) + BOOL_OFFSET) != 0;
+}
+void GameUtil::setDvarSecureBool(dvar_t* dvar, bool newValue) {
+    if (!dvar || dvar->type != DVAR_TYPE_BOOL_SECURE) {
+        return;
+    }
+
+    const uint32_t K0 = *reinterpret_cast<uint32_t*>(0xD8F124_b);
+    const uint32_t K1 = *reinterpret_cast<uint32_t*>(0xD8F148_b);
+    const uint32_t K2 = *reinterpret_cast<uint32_t*>(0xD8F14C_b);
+    const uint32_t K3 = *reinterpret_cast<uint32_t*>(0xD8F150_b);
+
+    const uint32_t BOOL_OFFSET = *reinterpret_cast<uint32_t*>(0x14DA5E0_b);
+
+    const uint32_t p = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(dvar) + 0x10);
+
+    uint32_t e0 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x10);
+    uint32_t e1 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x14);
+    uint32_t e2 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x18);
+    uint32_t e3 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x1C);
+
+    uint32_t decoded[4];
+
+    decoded[0] = ~K0 ^ p ^ e2;
+    decoded[1] = p ^ e0 ^ e2 ^ K1;
+    decoded[2] = p ^ e3 ^ e0 ^ K2;
+    decoded[3] = p ^ e1 ^ e3 ^ K3;
+
+    const uint8_t encodedBoolValue = newValue ? 1 : 0;
+
+    std::memcpy(reinterpret_cast<uint8_t*>(decoded) + BOOL_OFFSET, &encodedBoolValue, sizeof(encodedBoolValue));
+
+    e2 = decoded[0] ^ ~K0 ^ p;
+    e0 = decoded[1] ^ p ^ e2 ^ K1;
+    e3 = decoded[2] ^ p ^ e0 ^ K2;
+    e1 = decoded[3] ^ p ^ e3 ^ K3;
+
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x10) = e0;
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x14) = e1;
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x18) = e2;
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x1C) = e3;
+
+    dvar->modified = true;
+}
+
+float decodeDvarSecureFloat(const dvar_t* dvar) {
+    const uint32_t K0 = *reinterpret_cast<uint32_t*>(0xD8F164_b);
+    const uint32_t K1 = *reinterpret_cast<uint32_t*>(0xD8F168_b);
+    const uint32_t K2 = *reinterpret_cast<uint32_t*>(0xD8F16C_b);
+    const uint32_t K3 = *reinterpret_cast<uint32_t*>(0xD8F170_b);
+    const uint32_t FLOAT_OFFSET = *reinterpret_cast<uint32_t*>(0x14DA5E8_b);
+    const uint32_t p = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(dvar) + 0x10);
+    const uint32_t e0 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x10);
+    const uint32_t e1 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x14);
+    const uint32_t e2 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x18);
+    const uint32_t e3 = *reinterpret_cast<const uint32_t*>(reinterpret_cast<const uint8_t*>(dvar) + 0x1C);
+
+    uint32_t decoded[4];
+
+    decoded[0] = ~K0 ^ p ^ e2;
+    decoded[1] = p ^ e0 ^ e2 ^ K1;
+    decoded[2] = p ^ e3 ^ e0 ^ K2;
+    decoded[3] = p ^ e1 ^ e3 ^ K3;
+
+    uint32_t raw;
+    std::memcpy(&raw, reinterpret_cast<const uint8_t*>(decoded) + FLOAT_OFFSET, sizeof(raw));
+
+    float out;
+    std::memcpy(&out, &raw, sizeof(out));
+    return out;
+}
+
+void GameUtil::setDvarSecureFloat(dvar_t* dvar, float newValue) {
+    if (!dvar || dvar->type != DVAR_TYPE_FLOAT_SECURE) {
+        return;
+    }
+
+    const float minValue = dvar->domain.value.min;
+    const float maxValue = dvar->domain.value.max;
+
+    if (newValue < minValue) {
+        newValue = minValue;
+    }
+    else if (newValue > maxValue) {
+        newValue = maxValue;
+    }
+
+    const uint32_t K0 = *reinterpret_cast<uint32_t*>(0xD8F164_b);
+    const uint32_t K1 = *reinterpret_cast<uint32_t*>(0xD8F168_b);
+    const uint32_t K2 = *reinterpret_cast<uint32_t*>(0xD8F16C_b);
+    const uint32_t K3 = *reinterpret_cast<uint32_t*>(0xD8F170_b);
+
+    const uint32_t FLOAT_OFFSET = *reinterpret_cast<uint32_t*>(0x14DA5E8_b);
+
+    const uint32_t p = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(dvar) + 0x10);
+
+    uint32_t e0 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x10);
+    uint32_t e1 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x14);
+    uint32_t e2 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x18);
+    uint32_t e3 = *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x1C);
+
+    uint32_t decoded[4];
+
+    decoded[0] = ~K0 ^ p ^ e2;
+    decoded[1] = p ^ e0 ^ e2 ^ K1;
+    decoded[2] = p ^ e3 ^ e0 ^ K2;
+    decoded[3] = p ^ e1 ^ e3 ^ K3;
+
+    std::memcpy(reinterpret_cast<uint8_t*>(decoded) + FLOAT_OFFSET, &newValue, sizeof(newValue));
+
+    e2 = decoded[0] ^ ~K0 ^ p;
+    e0 = decoded[1] ^ p ^ e2 ^ K1;
+    e3 = decoded[2] ^ p ^ e0 ^ K2;
+    e1 = decoded[3] ^ p ^ e3 ^ K3;
+
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x10) = e0;
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x14) = e1;
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x18) = e2;
+    *reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(dvar) + 0x1C) = e3;
+
+    dvar->modified = true;
+}
+
+std::string GameUtil::getDvarDomainAsString(const dvar_t* dvar) {
+    if (!dvar) {
+        return "Domain is <null dvar>";
+    }
+
+    auto floatToString = [](float value) -> std::string {
+        std::ostringstream stream;
+        stream << std::setprecision(9) << value;
+        return stream.str();
+        };
+
+    auto floatRangeToString = [&](const char* typeName, const DvarLimits& domain) -> std::string {
+        return std::string("Domain is ") + typeName + ": " +
+            floatToString(domain.value.min) + " to " + floatToString(domain.value.max);
+        };
+
+    auto vectorRangeToString = [&](const char* typeName, const DvarLimits& domain) -> std::string {
+        return std::string("Domain is ") + typeName + ": each component " +
+            floatToString(domain.vector.min) + " to " + floatToString(domain.vector.max);
+        };
+
+    auto intRangeToString = [](const char* typeName, const DvarLimits& domain) -> std::string {
+        return std::string("Domain is ") + typeName + ": " +
+            std::to_string(domain.integer.min) + " to " + std::to_string(domain.integer.max);
+        };
+
+    switch (dvar->type)
+    {
+    case DVAR_TYPE_BOOL:
+        return "Domain is bool: 0 or 1";
+
+    case DVAR_TYPE_BOOL_SECURE:
+        return "Domain is secure bool: 0 or 1";
+
+    case DVAR_TYPE_FLOAT:
+        return floatRangeToString("float", dvar->domain);
+
+    case DVAR_TYPE_FLOAT_SECURE:
+        return floatRangeToString("secure float", dvar->domain);
+
+    case DVAR_TYPE_FLOAT_2:
+        return vectorRangeToString("vec2", dvar->domain);
+
+    case DVAR_TYPE_FLOAT_3:
+        return vectorRangeToString("vec3", dvar->domain);
+
+    case DVAR_TYPE_FLOAT_4:
+        return vectorRangeToString("vec4", dvar->domain);
+
+    case DVAR_TYPE_INT:
+        return intRangeToString("int", dvar->domain);
+
+    case DVAR_TYPE_INT_SECURE:
+        return intRangeToString("secure int", dvar->domain);
+
+    case DVAR_TYPE_ENUM:
+    {
+        const int maxIndex = dvar->domain.enumeration.stringCount - 1;
+        if (maxIndex < 0) {
+            return "Domain is enum: <empty>";
+        }
+
+        return "Domain is enum: 0 to " + std::to_string(maxIndex);
+    }
+
+    case DVAR_TYPE_STRING:
+        return "Domain is string: any text";
+
+    case DVAR_TYPE_COLOR:
+        return vectorRangeToString("color", dvar->domain);
+
+    case DVAR_TYPE_VEC3_ALT:
+        return vectorRangeToString("vec3", dvar->domain);
+
+    default:
+        return "Domain is unsupported type: " + std::to_string(static_cast<int>(dvar->type));
+    }
+}
 /**
  * @brief Converts a dvar value to string.
  *
@@ -179,64 +406,94 @@ std::string GameUtil::colorToString(const unsigned __int8 color[4]) {
  * @return A string representation of the dvar's current value.
  */
 std::string GameUtil::dvarValueToString(const dvar_t* dvar, bool showQuotesAroundStrings, bool truncateFloats) {
-    if (dvar->type == DVAR_TYPE_BOOL || dvar->type == DVAR_TYPE_BOOL_AGAIN) {
+    if (!dvar) {
+        return "<null dvar>";
+    }
+    auto floatToString = [truncateFloats](float value) -> std::string {
+        if (truncateFloats) {
+            std::ostringstream stream;
+            stream << std::fixed << std::setprecision(1) << value;
+            return stream.str();
+        }
+
+        return std::to_string(value);
+        };
+
+    switch (dvar->type)
+    {
+    case DVAR_TYPE_BOOL:
         return dvar->current.enabled ? "1" : "0";
-    }
-    if (dvar->type == DVAR_TYPE_FLOAT) {
-        if (truncateFloats) {
-            std::ostringstream stream;
-            stream << std::fixed << std::setprecision(1) << dvar->current.value;
-            std::string result = stream.str();
-            return result;
-        }
-        return std::to_string(dvar->current.value);
-    }
-    if (dvar->type == DVAR_TYPE_FLOAT_2) {
-        return std::to_string(dvar->current.value) + " " + std::to_string(dvar->current.vector[1]);
-    }
-    if (dvar->type == DVAR_TYPE_FLOAT_3) {
-        return std::to_string(dvar->current.value) + " " + std::to_string(dvar->current.vector[1]) + " " + std::to_string(dvar->current.vector[2]);
-    }
-    if (dvar->type == DVAR_TYPE_FLOAT_4) {
-        return std::to_string(dvar->current.value) + " " + std::to_string(dvar->current.vector[1]) + " " + std::to_string(dvar->current.vector[2]) + " " + std::to_string(dvar->current.vector[3]);
-    }
-    if (dvar->type == DVAR_TYPE_INT || dvar->type == DVAR_TYPE_COUNT) {
+
+    case DVAR_TYPE_BOOL_SECURE:
+        return decodeDvarSecureBool(dvar) ? "1" : "0";
+
+    case DVAR_TYPE_FLOAT:
+        return floatToString(dvar->current.value);
+
+    case DVAR_TYPE_FLOAT_2:
+        return floatToString(dvar->current.vector[0]) + " " +
+            floatToString(dvar->current.vector[1]);
+
+    case DVAR_TYPE_FLOAT_3:
+        return floatToString(dvar->current.vector[0]) + " " +
+            floatToString(dvar->current.vector[1]) + " " +
+            floatToString(dvar->current.vector[2]);
+
+    case DVAR_TYPE_FLOAT_4:
+        return floatToString(dvar->current.vector[0]) + " " +
+            floatToString(dvar->current.vector[1]) + " " +
+            floatToString(dvar->current.vector[2]) + " " +
+            floatToString(dvar->current.vector[3]);
+
+    case DVAR_TYPE_INT:
         return std::to_string(dvar->current.integer);
-    }
-    if (dvar->type == DVAR_TYPE_ENUM) {
-        //if (!dvar->domain.enumeration.stringCount) {
-            return "PLACEHOLDER: ENUM";
-        //}
-        //else {
-            //for (int i = 0; i < dvar->domain.enumeration.stringCount; i++) {
-            //	possible += dvar->domain.enumeration.strings[i];
-            //	if (i + 1 != dvar->domain.enumeration.stringCount) {
-            //		possible += ", ";
-            //	}
-            //}
-          //  return *(const char**)(dvar->domain.integer.max + 4 * dvar->current.integer);
-       // }
-    }
-    if (dvar->type == DVAR_TYPE_FLOAT_SPECIAL) {
-        if (truncateFloats) {
-            std::ostringstream stream;
-            stream << std::fixed << std::setprecision(1) << dvar->current.floatSpecial.value;
-            std::string result = stream.str();
-            return result;
-        }
-        return std::to_string(dvar->current.floatSpecial.value);
-    }
-    if (dvar->type == DVAR_TYPE_STRING) {
-        if (showQuotesAroundStrings) {
-            return "\"" + std::string(dvar->current.string) + "\"";
-        }
-        return dvar->current.string;
-    }
-    if (dvar->type == DVAR_TYPE_COLOR || dvar->type == DVAR_TYPE_COLOR2) {
-        return colorToString(dvar->current.color);
+
+    case DVAR_TYPE_INT_SECURE:
+        return "UNKNOWN TYPE. Send this dvar to Rattpak please!";
+
+    case DVAR_TYPE_FLOAT_SECURE:
+        return floatToString(decodeDvarSecureFloat(dvar));
+
+    case DVAR_TYPE_ENUM:
+    {
+        // Best placeholder until your DvarLimits enum layout is confirmed.
+        return "PLACEHOLDER: ENUM";
+
+        /*
+        if (!dvar->domain.enumeration.stringCount)
+            return "";
+
+        const int index = dvar->current.integer;
+
+        if (index < 0 || index >= dvar->domain.enumeration.stringCount)
+            return "";
+
+        return dvar->domain.enumeration.strings[index];
+        */
     }
 
-    return "Unsupported type: " + std::to_string(dvar->type);
+    case DVAR_TYPE_STRING:
+    {
+        const char* str = dvar->current.string ? dvar->current.string : "";
+
+        if (showQuotesAroundStrings)
+            return "\"" + std::string(str) + "\"";
+
+        return str;
+    }
+
+    case DVAR_TYPE_COLOR:
+        return colorToString(dvar->current.color);
+
+    case DVAR_TYPE_VEC3_ALT:
+        // Type 0x9 used the same 3-float storage path as FLOAT_3 in RegisterNew.
+        return floatToString(dvar->current.vector[0]) + " " +
+            floatToString(dvar->current.vector[1]) + " " +
+            floatToString(dvar->current.vector[2]);
+
+    default:
+        return "Unsupported type: " + std::to_string(static_cast<int>(dvar->type));
+    }
 }
 
 /**
@@ -519,11 +776,26 @@ CmdArgs* GameUtil::getCmdArgs() {
 
 
 cg_t* GameUtil::CG_GetLocalClientGlobals() {
-    const uintptr_t rd = *reinterpret_cast<uintptr_t*>(0x8AFBB38_b);
+    const auto* rendererData = reinterpret_cast<const uintptr_t*>(0x8AFBB38_b);
+    if (!GameUtil::isReadablePtr(rendererData, sizeof(*rendererData))) {
+        return nullptr;
+    }
+
+    const uintptr_t rd = *rendererData;
     if (!rd) {
         return nullptr;
     }
-    return reinterpret_cast<cg_t*>(rd - 0x1E6C10);
+
+    if (rd < 0x1E6C10) {
+        return nullptr;
+    }
+
+    cg_t* cg = reinterpret_cast<cg_t*>(rd - 0x1E6C10);
+    if (!GameUtil::isReadablePtr(cg, sizeof(cg->clientNum))) {
+        return nullptr;
+    }
+
+    return cg;
 }
 
 unsigned char GameUtil::CG_GetLocalClientNum() {
@@ -531,16 +803,26 @@ unsigned char GameUtil::CG_GetLocalClientNum() {
     if (!cg) {
         return 0xFF;
     }
+
+    if (!GameUtil::isReadablePtr(&cg->clientNum, sizeof(cg->clientNum))) {
+        return 0xFF;
+    }
+
     return cg->clientNum;
 }
 
 gentity_s* GameUtil::getGentity(int entId) {
-    if (entId < 0) {
+    if (entId < 0 || entId >= 2046) {
         return nullptr;
     }
-    return reinterpret_cast<gentity_s*>(0x9ED3430_b + (entId * sizeof(gentity_s)));
-}
 
+    gentity_s* entity = reinterpret_cast<gentity_s*>(0x9ED3430_b + (entId * sizeof(gentity_s)));
+    if (!GameUtil::isReadablePtr(entity, sizeof(gentity_s))) {
+        return nullptr;
+    }
+
+    return entity;
+}
 gentity_s* GameUtil::G_getLocalPlayer() {
     unsigned char clientNum = GameUtil::CG_GetLocalClientNum();
     if (clientNum == 0xFF) {
@@ -559,6 +841,11 @@ bool GameUtil::getPlayerPosition(float* outPos) {
         return false;
     }
 
+    const auto* entityCount = reinterpret_cast<const int*>(0xA0E40D0_b);
+    if (!GameUtil::isReadablePtr(entityCount, sizeof(*entityCount)) || *entityCount <= clientNum) {
+        return false;
+    }
+
     gentity_s* player = GameUtil::getGentity(clientNum);
 
     if (!player) {
@@ -566,6 +853,9 @@ bool GameUtil::getPlayerPosition(float* outPos) {
     }
 
     float* origin = player->origin;
+    if (!GameUtil::isReadablePtr(origin, sizeof(float) * 3)) {
+        return false;
+    }
 
     outPos[0] = origin[0];
     outPos[1] = origin[1];

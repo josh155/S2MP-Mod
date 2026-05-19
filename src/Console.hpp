@@ -13,7 +13,7 @@ public:
 		dev,
 	};
 
-	static void execCmd(std::string cmd);
+	static void execCmd(std::string cmd, bool echoCommand = true);
 	static void printIntCon(std::string text);
 	static void print(const std::string& text);
 	static void printf(const char* fmt, ...);
@@ -90,7 +90,9 @@ public:
 	static void god();
 	static void notarget();
 	static void demigod();
+	static void setViewPos();
 	static void getCmdFuncAddr();
+	static void dumpGscFunctions();
 	static void dumpAllScriptFiles();
 	static void dumpAllLuaFiles();
 	static void dumpAllCSVFiles();

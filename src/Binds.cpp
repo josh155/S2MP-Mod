@@ -189,6 +189,10 @@ void Binds::execBindForKey(int keyNum, int down) {
 	}
 
 	std::string translatedCmd = cmd;
+	if (DvarInterface::setProtectedDvarFromPrefixedCommand(translatedCmd)) {
+		return;
+	}
+
 	if (DvarInterface::translatePrefixedCommand(translatedCmd)) {
 		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, translatedCmd);
 		return;

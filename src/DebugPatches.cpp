@@ -799,6 +799,7 @@ PVOID AddVectoredExceptionHandler_hookfunc(ULONG First, PVECTORED_EXCEPTION_HAND
     return fpAddVectoredExceptionHandler(First, testVectoredHandler);
 }
 
+#ifdef DEVELOPMENT_BUILD
 void superTestVEH() {
     DEV_ONLY_FUNCTION();
     HMODULE dll = GetModuleHandleA("kernel32.dll");
@@ -821,6 +822,7 @@ void superTestVEH() {
         return;
     }
 }
+#endif
 
 typedef BOOL(NTAPI* VirtualProtect_t)(LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect);
 VirtualProtect_t fpVirtualProtect = nullptr;
@@ -845,6 +847,7 @@ BOOL VirtualProtect_hookfunc(LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect
     return fpVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
 }
 
+#ifdef DEVELOPMENT_BUILD
 void vpHook() {
     DEV_ONLY_FUNCTION();
     HMODULE ntdll = GetModuleHandleA("ntdll.dll");
@@ -871,6 +874,7 @@ void vpHook() {
     }
     
 }
+#endif
 
 typedef NTSTATUS(NTAPI* NtGetContextThread_t)(HANDLE ThreadHandle, PCONTEXT ThreadContext);
 NtGetContextThread_t fpNtGetContextThread = nullptr;
@@ -897,6 +901,7 @@ NTSTATUS NtGetContextThread_hookfunc( HANDLE hThread, PCONTEXT lpContext) {
     return status;
 }
 
+#ifdef DEVELOPMENT_BUILD
 void ntgctHook() {
     DEV_ONLY_FUNCTION();
     HMODULE dll = GetModuleHandleA("ntdll.dll");
@@ -919,8 +924,9 @@ void ntgctHook() {
         return;
     }
 }
+#endif
 
-
+#ifdef DEVELOPMENT_BUILD
 typedef __analysis_noreturn VOID(NTAPI* FatalExit_t)(int ExitCode);
 FatalExit_t fpFatalExit = nullptr;
 
@@ -954,7 +960,7 @@ void fatalExitThing() {
         return;
     }
 }
-
+#endif
 
 typedef NTSYSAPI VOID(NTAPI* RtlCaptureContext2_t)(PCONTEXT ContextRecord);
 RtlCaptureContext2_t fpRtlCaptureContext2 = nullptr;
@@ -970,7 +976,7 @@ VOID RtlCaptureContext2_hookfunc(PCONTEXT ContextRecord) {
     ContextRecord->Dr7 = 0;
 
 }
-
+#ifdef DEVELOPMENT_BUILD
 void captureContextTest() {
     DEV_ONLY_FUNCTION();
     HMODULE dll = GetModuleHandleA("ntdll.dll");
@@ -994,6 +1000,7 @@ void captureContextTest() {
         return;
     }
 }
+#endif
 
 typedef NTSYSAPI VOID(NTAPI* NtContinue_t)(PCONTEXT ThreadContext, BOOLEAN RaiseAlert);
 NtContinue_t fpNtContinue = nullptr;
@@ -1004,7 +1011,7 @@ VOID NtContinue_hookfunc(PCONTEXT ThreadContext, BOOLEAN RaiseAlert) {
     fpNtContinue(ThreadContext, RaiseAlert);
 
 }
-
+#ifdef DEVELOPMENT_BUILD
 void ntContinueTest() {
     DEV_ONLY_FUNCTION();
     HMODULE dll = GetModuleHandleA("ntdll.dll");
@@ -1028,6 +1035,7 @@ void ntContinueTest() {
         return;
     }
 }
+#endif
 
 typedef DWORD(NTAPI* ResumeThread_t)(HANDLE hThread);
 ResumeThread_t fpResumeThread = nullptr;
@@ -1047,7 +1055,6 @@ DWORD ResumeThread_hookfunc(HANDLE hThread) {
 //suspending the thread results in it being resumed and the game killed. Theory is that if i dont allow it to resume the thread but also tell it 
 //that the thread was never suspended then we might be bing chillin.
 void resumeThreadHook() {
-    DEV_ONLY_FUNCTION();
     HMODULE dll = GetModuleHandleA("kernel32.dll");
     if (!dll) {
         return;

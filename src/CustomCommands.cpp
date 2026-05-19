@@ -15,11 +15,187 @@
 #include "ScriptLoader.hpp"
 #include "StringTableLoader.hpp"
 #include "ConfigManager.h"
+#include "xsk/gsc/engine/s2.hpp"
+#include <algorithm>
+#include <cerrno>
+#include <cctype>
+#include <cmath>
+#include <cstdlib>
+#include <iomanip>
 #include <sstream>
 
 #define ASSET_ENTRY_SIZE 32
 uintptr_t CustomCommands::base = (uintptr_t)GetModuleHandle(NULL) + 0x1000;
 uintptr_t CustomCommands::rawBase = (uintptr_t)GetModuleHandle(NULL);
+
+namespace xsk::gsc::s2 {
+	extern std::array<std::pair<u16, char const*>, func_count> const func_list;
+	extern std::array<std::pair<u16, char const*>, meth_count> const meth_list;
+}
+
+namespace {
+	constexpr std::uint16_t GSC_HIGH_BUILTIN_BASE_ID = 0x8000;
+	constexpr std::size_t GSC_LOW_BUILTIN_COUNT = 0x1E30 / sizeof(std::uintptr_t);
+	constexpr std::size_t GSC_HIGH_BUILTIN_COUNT = 0x36B0 / sizeof(std::uintptr_t);
+
+	struct GscBuiltinDumpStats {
+		std::size_t printed = 0;
+		std::size_t resolved = 0;
+		std::size_t nullAddress = 0;
+		std::size_t outOfRange = 0;
+	};
+
+	std::string toLowerCopy(std::string value) {
+		std::transform(value.begin(), value.end(), value.begin(), [](unsigned char ch) {
+			return static_cast<char>(std::tolower(ch));
+		});
+		return value;
+	}
+
+	std::string trimHexPrefix(std::string value) {
+		if (value.size() > 2 && value[0] == '0' && (value[1] == 'x' || value[1] == 'X')) {
+			value.erase(0, 2);
+		}
+		return value;
+	}
+
+	bool matchesGscDumpFilter(std::uint16_t id, const char* name, const std::string& filterLower) {
+		if (filterLower.empty()) {
+			return true;
+		}
+
+		const std::string nameLower = toLowerCopy(name ? name : "");
+		if (nameLower.find(filterLower) != std::string::npos) {
+			return true;
+		}
+
+		std::ostringstream hexId;
+		hexId << std::hex << std::nouppercase << id;
+		return hexId.str().find(trimHexPrefix(filterLower)) != std::string::npos;
+	}
+
+	bool getGameModuleRange(std::uintptr_t& moduleStart, std::uintptr_t& moduleEnd) {
+		moduleStart = CustomCommands::rawBase;
+		if (!moduleStart) {
+			return false;
+		}
+
+		const auto* dosHeader = reinterpret_cast<const IMAGE_DOS_HEADER*>(moduleStart);
+		if (dosHeader->e_magic != IMAGE_DOS_SIGNATURE) {
+			return false;
+		}
+
+		const auto* ntHeaders = reinterpret_cast<const IMAGE_NT_HEADERS*>(moduleStart + dosHeader->e_lfanew);
+		if (ntHeaders->Signature != IMAGE_NT_SIGNATURE) {
+			return false;
+		}
+
+		moduleEnd = moduleStart + ntHeaders->OptionalHeader.SizeOfImage;
+		return moduleEnd > moduleStart;
+	}
+
+	const char* getBuiltinTableName(std::uint16_t id) {
+		return id >= GSC_HIGH_BUILTIN_BASE_ID ? "high" : "low";
+	}
+
+	std::uintptr_t getLowBuiltinTable() {
+		return 0xAC9AE40_b; // qword_7FF6D722BE40
+	}
+
+	std::uintptr_t getHighBuiltinTable() {
+		return 0xAC9CC70_b; // qword_7FF6D722DC70
+	}
+
+	bool resolveGscBuiltinAddress(std::uint16_t id, std::uintptr_t& address) {
+		address = 0;
+
+		if (id >= GSC_HIGH_BUILTIN_BASE_ID) {
+			const std::size_t index = id - GSC_HIGH_BUILTIN_BASE_ID;
+			if (index >= GSC_HIGH_BUILTIN_COUNT) {
+				return false;
+			}
+
+			address = reinterpret_cast<const std::uintptr_t*>(getHighBuiltinTable())[index];
+			return true;
+		}
+
+		if (id == 0) {
+			return false;
+		}
+
+		const std::size_t index = id - 1;
+		if (index >= GSC_LOW_BUILTIN_COUNT) {
+			return false;
+		}
+
+		address = reinterpret_cast<const std::uintptr_t*>(getLowBuiltinTable())[index];
+		return true;
+	}
+
+	std::string formatGscBuiltinAddress(std::uintptr_t address) {
+		if (!address) {
+			return "0x0";
+		}
+
+		std::ostringstream ss;
+		ss << "0x" << std::uppercase << std::hex << std::setw(16) << std::setfill('0') << address;
+
+		std::uintptr_t moduleStart = 0;
+		std::uintptr_t moduleEnd = 0;
+		if (getGameModuleRange(moduleStart, moduleEnd) && address >= CustomCommands::base && address < moduleEnd) {
+			ss << " (0x" << std::uppercase << std::hex << (address - CustomCommands::base) << "_b)";
+		}
+
+		return ss.str();
+	}
+
+	void printGscBuiltinEntry(const char* kind, std::uint16_t id, const char* name, const std::string& filterLower, GscBuiltinDumpStats& stats) {
+		if (!matchesGscDumpFilter(id, name, filterLower)) {
+			return;
+		}
+
+		std::uintptr_t address = 0;
+		const bool inRange = resolveGscBuiltinAddress(id, address);
+
+		std::ostringstream line;
+		line << kind << " 0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << id;
+		line << " " << (name ? name : "<null>");
+		line << " [" << getBuiltinTableName(id) << "]";
+
+		if (inRange) {
+			line << " -> " << formatGscBuiltinAddress(address);
+			if (address) {
+				++stats.resolved;
+			}
+			else {
+				++stats.nullAddress;
+			}
+		}
+		else {
+			line << " -> <no dispatch slot>";
+			++stats.outOfRange;
+		}
+
+		++stats.printed;
+		Console::print(line.str());
+	}
+
+	bool tryParseFloatArgument(const char* text, float& outValue) {
+		if (!text || text[0] == '\0') {
+			return false;
+		}
+
+		errno = 0;
+		char* end = nullptr;
+		const float value = std::strtof(text, &end);
+		if (end == text || *end != '\0' || errno == ERANGE || !std::isfinite(value)) {
+			return false;
+		}
+
+		outValue = value;
+		return true;
+	}
+}
 
 
 void CustomCommands::god(){
@@ -91,6 +267,47 @@ void CustomCommands::demigod() {
 	Functions::_SV_SendServerCommand(0, 0, "%c \"Demigod: %s\"", 101, state);
 }
 
+void CustomCommands::setViewPos() {
+	CmdArgs* cmdArgs = GameUtil::getCmdArgs();
+	if (!cmdArgs) {
+		return;
+	}
+
+	int nest = cmdArgs->nesting;
+	int count = cmdArgs->argc[nest];
+	if (count != 4) {
+		Console::printf("Usage: setviewpos <x> <y> <z>");
+		return;
+	}
+
+	if (!GameUtil::areWeHost()) {
+		Console::print("Must be host to use this command");
+		return;
+	}
+
+	gentity_s* player = GameUtil::G_getLocalPlayer();
+	if (!player) {
+		Console::print("Local player not found");
+		return;
+	}
+
+	const char** args = cmdArgs->argv[nest];
+	if (!args) {
+		Console::printf("Usage: setviewpos <x> <y> <z>");
+		return;
+	}
+
+	std::array<float, 3> origin{};
+	for (std::size_t i = 0; i < origin.size(); ++i) {
+		if (!tryParseFloatArgument(args[i + 1], origin[i])) {
+			Console::printf("Invalid coordinate '%s'. Usage: setviewpos <x> <y> <z>", args[i + 1] ? args[i + 1] : "<null>");
+			return;
+		}
+	}
+
+	Functions::_G_SetOrigin(player, origin.data());
+	Console::printf("Set origin to %.2f %.2f %.2f", origin[0], origin[1], origin[2]);
+}
 
 void CustomCommands::getCmdFuncAddr() {
 	cmd_function_s* cmd = *(cmd_function_s**)0xAA752C8_b;
@@ -110,6 +327,93 @@ void CustomCommands::getCmdFuncAddr() {
 		}
 
 		cmd = cmd->next;
+	}
+}
+
+void CustomCommands::dumpGscFunctions() {
+	CmdArgs* cmdArgs = GameUtil::getCmdArgs();
+
+	bool dumpFunctions = true;
+	bool dumpMethods = true;
+	std::string filter;
+
+	if (cmdArgs) {
+		const int nest = cmdArgs->nesting;
+		const int count = cmdArgs->argc[nest];
+		const char** args = cmdArgs->argv[nest];
+
+		if (count >= 2 && args[1]) {
+			const std::string mode = toLowerCopy(args[1]);
+			if (mode == "help" || mode == "?") {
+				Console::print("Usage: dumpgscfuncs [functions|methods] [name_or_id_filter]");
+				Console::print("Examples: dumpgscfuncs, dumpgscfuncs methods enableplayeruse, dumpgscfuncs 800c");
+				return;
+			}
+
+			if (mode == "func" || mode == "funcs" || mode == "function" || mode == "functions") {
+				dumpMethods = false;
+				if (count >= 3 && args[2]) {
+					filter = args[2];
+				}
+			}
+			else if (mode == "meth" || mode == "meths" || mode == "method" || mode == "methods") {
+				dumpFunctions = false;
+				if (count >= 3 && args[2]) {
+					filter = args[2];
+				}
+			}
+			else {
+				filter = args[1];
+			}
+		}
+	}
+
+	if (IsBadReadPtr(reinterpret_cast<const void*>(getLowBuiltinTable()), GSC_LOW_BUILTIN_COUNT * sizeof(std::uintptr_t)) ||
+		IsBadReadPtr(reinterpret_cast<const void*>(getHighBuiltinTable()), GSC_HIGH_BUILTIN_COUNT * sizeof(std::uintptr_t))) {
+		Console::print("GSC builtin dispatch tables are not readable.");
+		return;
+	}
+
+	const std::string filterLower = toLowerCopy(filter);
+	GscBuiltinDumpStats stats{};
+
+	Console::printf(
+		"GSC builtin tables: low=%s entries=%zu, high=%s entries=%zu",
+		formatGscBuiltinAddress(getLowBuiltinTable()).c_str(),
+		GSC_LOW_BUILTIN_COUNT,
+		formatGscBuiltinAddress(getHighBuiltinTable()).c_str(),
+		GSC_HIGH_BUILTIN_COUNT);
+
+	if (!filter.empty()) {
+		Console::printf("GSC builtin dump filter: %s", filter.c_str());
+	}
+
+	if (dumpFunctions) {
+		for (const auto& entry : xsk::gsc::s2::func_list) {
+			printGscBuiltinEntry("func", entry.first, entry.second, filterLower, stats);
+		}
+	}
+
+	if (dumpMethods) {
+		for (const auto& entry : xsk::gsc::s2::meth_list) {
+			printGscBuiltinEntry("meth", entry.first, entry.second, filterLower, stats);
+		}
+	}
+
+	if (stats.printed == 0) {
+		Console::print("No GSC builtins matched the requested filter.");
+		return;
+	}
+
+	std::ostringstream summary;
+	summary << "GSC builtin dump complete: printed=" << stats.printed;
+	summary << " resolved=" << stats.resolved;
+	summary << " null=" << stats.nullAddress;
+	summary << " out_of_range=" << stats.outOfRange;
+	Console::print(summary.str());
+
+	if (stats.resolved == 0 && stats.nullAddress > 0) {
+		Console::print("No builtin addresses were resolved. The dispatch tables may not be initialized yet; load into a lobby or game and run the command again.");
 	}
 }
 
@@ -573,4 +877,3 @@ void CustomCommands::modelviewer() {
 void CustomCommands::none() {
 
 }
-

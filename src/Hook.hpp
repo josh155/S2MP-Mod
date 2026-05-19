@@ -8,6 +8,7 @@
 class Hook {
 public:
 	static void installHook(void* func2hook, void* payloadFunction);
+	static void writeByte(void* address, std::uint8_t value);
 	static void nopMem(void* addr, int len);
 	/**
 	 * @brief Creates and enables a MinHook hook in one call.

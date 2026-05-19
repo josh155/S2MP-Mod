@@ -54,6 +54,7 @@ void CG_AddPlayerWeapon_hookfunc(int localClientNum, const GfxScaledPlacement* p
         cg_gun_z = Functions::_Dvar_FindVar("cg_gun_z");
     }
 
+
     if (!placement || !cg_gun_x || !cg_gun_y || !cg_gun_z) {
         fpCG_AddPlayerWeapon(localClientNum, placement, ps, cent, isViewModel);
         return;
@@ -63,11 +64,56 @@ void CG_AddPlayerWeapon_hookfunc(int localClientNum, const GfxScaledPlacement* p
     if (!globals) {
         fpCG_AddPlayerWeapon(localClientNum, placement, ps, cent, isViewModel);
         return;
+    }    
+    
+    if (!GameUtil::decodeDvarSecureBool(*(dvar_t**)0x8B0CA90_b) || globals->blockDrawViewmodel) {
+        return;
     }
+
 
     GfxScaledPlacement modified = *placement;
     applyLocalOffset(modified.base.origin, globals->viewModelAxis, cg_gun_x->current.value, cg_gun_y->current.value, cg_gun_z->current.value);
     fpCG_AddPlayerWeapon(localClientNum, &modified, ps, cent, isViewModel);
+}
+
+typedef bool (*BG_AISystemEnabled_t)();
+static BG_AISystemEnabled_t fpBG_AISystemEnabled;
+
+bool BG_AISystemEnabled_hookfunc() {
+    return true;
+}
+
+typedef bool (*BG_BotSystemEnabled_t)();
+static BG_BotSystemEnabled_t fpBG_BotSystemEnabled;
+
+bool BG_BotSystemEnabled_hookfunc() {
+    return true;
+}
+
+typedef bool (*BG_AgentSystemEnabled_t)(int a);
+static BG_AgentSystemEnabled_t fpBG_AgentSystemEnabled;
+
+bool BG_AgentSystemEnabled_hookfunc(int a) {
+    return true;
+}
+
+
+typedef void (*Scr_Error_t)(const char* format, ...);
+static Scr_Error_t fpScr_Error;
+
+void Scr_Error_hookfunc(const char* format, ...) {
+    char buffer[1024];
+
+    va_list args;
+    va_start(args, format);
+
+    vsnprintf(buffer, sizeof(buffer), format, args);
+
+    va_end(args);
+
+    Console::printf("%s", buffer);
+
+    fpScr_Error(buffer);
 }
 
 void DevPatches::init()  {
@@ -81,4 +127,13 @@ void DevPatches::init()  {
    // Hook::create("Crypto_TransformBufferInPlace", 0x15DC0_b, &Crypto_TransformBufferInPlace_hookfunc, &fpCrypto_TransformBufferInPlace);
    // Hook::create("ctr_setiv", 0x92BD90_b, &ctr_setiv_hookfunc, &fpctr_setiv);
    // Hook::create("ctr_start", 0x92BAB0_b, &ctr_start_hookfunc, &fpctr_start);
+
+    //Bot Testing
+    Hook::create("BG_AISystemEnabled", 0x3869A0_b, &BG_AISystemEnabled_hookfunc, &fpBG_AISystemEnabled);
+    Hook::create("BG_BotSystemEnabled", 0x387180_b, &BG_BotSystemEnabled_hookfunc, &fpBG_BotSystemEnabled);
+    Hook::create("BG_AgentSystemEnabled", 0x386BC0_b, &BG_AgentSystemEnabled_hookfunc, &fpBG_AgentSystemEnabled);
+
+
+    //Hook::create("Scr_Error", 0x68F0F0_b, &Scr_Error_hookfunc, &fpScr_Error);
+
 }
