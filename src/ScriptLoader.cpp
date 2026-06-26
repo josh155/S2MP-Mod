@@ -128,3 +128,21 @@ void ScriptLoader::loadCustomScripts() {
 void ScriptLoader::init() {
 
 }
+
+// STUB: custom scriptfile asset loading not yet implemented.
+// Returning false makes the caller fall back to the original engine lookup.
+bool ScriptLoader::FindXAssetHeader(XAssetType type, const char* name, int allow_create_default, XAssetHeader& header) {
+    (void)type; (void)name; (void)allow_create_default; (void)header;
+    return false;
+}
+
+// STUB: scriptfile asset bookkeeping not yet implemented.
+void ScriptLoader::noteScriptFileAsset(ScriptFile* script) {
+    (void)script;
+}
+
+// STUB: force-non-default override not yet implemented.
+bool ScriptLoader::ShouldForceNonDefault(XAssetType type, const char* name) {
+    (void)type; (void)name;
+    return false;
+}

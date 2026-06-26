@@ -74,6 +74,9 @@ Functions::Scr_GetNumParam Functions::_Scr_GetNumParam = nullptr;
 Functions::Scr_GetString Functions::_Scr_GetString = nullptr;
 Functions::Scr_Error Functions::_Scr_Error = nullptr;
 Functions::Scr_ParamError Functions::_Scr_ParamError = nullptr;
+Functions::Sys_Milliseconds Functions::_Sys_Milliseconds = nullptr;
+Functions::Com_TimeScaleMsec Functions::_Com_TimeScaleMsec = nullptr;
+Functions::Dvar_GetString Functions::_Dvar_GetString = nullptr;
 
 void Functions::init()
 {
@@ -143,4 +146,9 @@ void Functions::init()
 	_Dvar_RegisterFloat = (Dvar_RegisterFloat)(0xAFA50_b);
 	_Cmd_Exec_f = (Cmd_Exec_f)(0x64A2A0_b);
 	_UnitQuatToAxis = (UnitQuatToAxis)(0x75CBB0_b);
+
+	// Demo system (verified via IDA MCP against s2x_dump: _b = RVA - 0x1000)
+	_Sys_Milliseconds = (Sys_Milliseconds)(0x7B0290_b);   // RVA 0x7B1290, named Sys_Milliseconds
+	_Com_TimeScaleMsec = (Com_TimeScaleMsec)(0x9B090_b);  // RVA 0x9C090, uses PlaybackSpeedScale
+	_Dvar_GetString = (Dvar_GetString)(0xAED20_b);        // RVA 0xAFD20
 }

@@ -22,6 +22,9 @@
 #include "Dvars.hpp"
 #include "Binds.hpp"
 #include "Exec.hpp"
+#include "DemoRecorder.hpp"
+#include "DemoPlayback.hpp"
+#include "Demonware.hpp"
 
 HANDLE hProcess;
 HINSTANCE hInst;
@@ -136,6 +139,13 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	Errors::init();
 	InternalConsole::init();
 	Loaders::initAssetLoaders();
+
+	// Demo system (MP only — record/playback hooks use MP addresses)
+	if (!doZombiesMode) {
+		demonware::init();   // theater loopback server + WinSock hooks (playback)
+		demo::init();
+		demo_playback::init();
+	}
 
 	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "exec autoexec");
 

@@ -209,4 +209,14 @@ public:
 
 	typedef void* (__cdecl* Dvar_RegisterBool)(const char* dvarName, bool value, unsigned int flags);
 	static Dvar_RegisterBool _Dvar_RegisterBool;
+
+	// ===== Demo system (verified via IDA: RVA - 0x1000) =====
+	typedef int (__cdecl* Sys_Milliseconds)();
+	static Sys_Milliseconds _Sys_Milliseconds;
+
+	typedef int (__cdecl* Com_TimeScaleMsec)(int msec);
+	static Com_TimeScaleMsec _Com_TimeScaleMsec;
+
+	typedef const char* (__cdecl* Dvar_GetString)(const char* dvarName);
+	static Dvar_GetString _Dvar_GetString;
 };

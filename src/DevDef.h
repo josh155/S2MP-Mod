@@ -59,6 +59,8 @@ public:
 	static void renderDevGui(std::vector<std::string>& list, int xPos, int yPos, int wWid, int wHei, float* color, font_t* font);
 	static void toggleLuaDebugGui();
 	static void toggleAntiCheatDebugGui();
+	static void togglePlayerOriginDebugGui(); // STUB: not yet implemented
+	static void toggleGscDebugGui();          // STUB: not yet implemented
 
 	static Material* previewMaterial;
 };

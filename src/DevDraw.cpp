@@ -241,6 +241,18 @@ void DevDraw::toggleIntConDebugGui() {
     drawIntConDbg = !drawIntConDbg;
 }
 
+// STUB: player origin debug GUI not yet implemented
+bool debugPlayerOriginGui = false;
+void DevDraw::togglePlayerOriginDebugGui() {
+    debugPlayerOriginGui = !debugPlayerOriginGui;
+}
+
+// STUB: GSC debug GUI not yet implemented
+bool debugGscGui = false;
+void DevDraw::toggleGscDebugGui() {
+    debugGscGui = !debugGscGui;
+}
+
 void renderMaterialPreview() {
     if (DevDraw::previewMaterial != nullptr) {
         float white[4] = { 1, 1, 1, 1 };

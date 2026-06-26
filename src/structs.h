@@ -436,6 +436,55 @@ static_assert(offsetof(dvar_t, domain) == 0x40);
 static_assert(offsetof(dvar_t, hashNext) == 0x58);
 static_assert(sizeof(dvar_t) == 0x60);
 
+// ===== Networking structs (ported from s2-mod for the demo system) =====
+enum netadrtype_t : int
+{
+    NA_BOT = 0x0,
+    NA_BAD = 0x1,
+    NA_LOOPBACK = 0x2,
+    NA_RAWIP = 0x3,
+    NA_IP = 0x4,
+};
+
+enum netsrc_t : int
+{
+    NS_CLIENT1 = 0x0,
+    NS_MAXCLIENTS = 0x1,
+    NS_SERVER = 0x2,
+    NS_PACKET = 0x3,
+    NS_INVALID_NETSRC = 0x4,
+};
+
+struct netadr_s
+{
+    netadrtype_t type;
+    union
+    {
+        uint8_t ip[4];
+        uint32_t addr;
+    };
+    uint16_t port;
+    netsrc_t localNetID;
+    uint32_t addrHandleIndex;
+};
+
+struct msg_t
+{
+    int overflowed;             // 0x00
+    int readOnly;               // 0x04
+    char* data;                 // 0x08
+    char* splitData;            // 0x10
+    int maxsize;                // 0x18
+    int cursize;                // 0x1C
+    int splitSize;              // 0x20
+    int readcount;              // 0x24
+    int bit;                    // 0x28
+    int lastEntityRef;          // 0x2C
+    netsrc_t targetLocalNetID;  // 0x30
+    int useZlib;                // 0x34
+};
+static_assert(sizeof(msg_t) == 0x38, "msg_t size mismatch");
+
 //making this from scratch
 struct playerState_s
 {
