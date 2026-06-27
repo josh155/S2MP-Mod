@@ -48,9 +48,10 @@ namespace
 	{
 		g_demos.clear();
 		std::error_code ec;
-		if (std::filesystem::exists("demos", ec))
+		// Native demos live in "demo/" (cl_demo_play reads from there).
+		if (std::filesystem::exists("demo", ec))
 		{
-			for (const auto& entry : std::filesystem::directory_iterator("demos", ec))
+			for (const auto& entry : std::filesystem::directory_iterator("demo", ec))
 			{
 				if (entry.is_regular_file(ec) && entry.path().extension() == ".demo")
 				{
@@ -107,7 +108,7 @@ namespace
 
 		if (g_demos.empty())
 		{
-			ImGui::TextUnformatted("No demos found in demos/");
+			ImGui::TextUnformatted("No demos found in demo/");
 		}
 		else
 		{
@@ -132,14 +133,16 @@ namespace
 
 			ImGui::Spacing();
 
+			// Native playback: cl_demo_play reads demo/<name> and enters the engine's
+			// built-in demo connection (state 5). No theater/loopback needed.
 			if (ImGui::Button("Play", ImVec2(110.0f, 0.0f)))
 			{
-				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_play " + g_demos[g_selected] + "\n");
+				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "cl_demo_play " + g_demos[g_selected] + "\n");
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Stop", ImVec2(110.0f, 0.0f)))
 			{
-				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_stop\n");
+				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "disconnect\n");
 			}
 		}
 
