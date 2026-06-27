@@ -228,6 +228,7 @@ namespace demonware
 			if (args.argc[args.nesting] > 0)
 			{
 				const auto* command = args.argv[args.nesting][0];
+				Console::printf("[demo] theater OOB <- '%s'", command);
 				if (std::strcmp("getInfo", command) == 0)
 				{
 					this->handle_get_info(endpoint, packet);
@@ -240,6 +241,14 @@ namespace demonware
 				{
 					this->handle_connect(endpoint, packet);
 				}
+				else
+				{
+					Console::printf("[demo] theater: UNHANDLED OOB cmd '%s'", command);
+				}
+			}
+			else
+			{
+				Console::printf("[demo] theater: OOB packet with no command (raw='%s')", str.c_str());
 			}
 
 			reinterpret_cast<SV_Cmd_EndTokenizedString_t>(0x64B030_b)();
@@ -271,11 +280,17 @@ namespace demonware
 
 			if (endpoint && reader)
 			{
+				int fed = 0;
 				while (true)
 				{
 					auto msg = reader->dequeue_server_message();
 					if (!msg) break;
 					this->send(*endpoint, *msg);
+					++fed;
+				}
+				if (fed > 0)
+				{
+					Console::printf("[demo] theater: fed %d recorded packet(s) to client", fed);
 				}
 			}
 
@@ -345,6 +360,8 @@ namespace demonware
 					return _getaddrinfo(name, service, hints, res);
 				}
 
+				Console::printf("[demo] getaddrinfo('%s') -> theater (addr=0x%08X)", name, server->get_address());
+
 				auto* address = new sockaddr{};
 				auto* ai = new addrinfo{};
 
@@ -398,6 +415,8 @@ namespace demonware
 				{
 					return _gethostbyname(name);
 				}
+
+				Console::printf("[demo] gethostbyname('%s') -> theater (addr=0x%08X)", name, server->get_address());
 
 				static thread_local in_addr address{};
 				address.s_addr = server->get_address();
@@ -476,6 +495,38 @@ namespace demonware
 			}
 		}
 
+		// FIX: WWII's NET_StringToAdr (RVA 0x75FC10 -> 0x75EC10_b) hardcodes netadr
+		// type 4 (NA_IP) for every resolved host. Sys_SendPacket then routes type-4
+		// over the Steam-datagram path (sub_8022C0/CL_Demo_StreamCall), bypassing our
+		// sendto/recvfrom hooks. Force type 3 (NA_RAWIP) for OUR theater address so the
+		// connection uses raw UDP, which we intercept. netadr layout: +0 type, +4 addr.
+		utils::hook::detour net_string_to_adr_hook;
+		__int64 net_string_to_adr_stub(const char* name, void* netadr)
+		{
+			const auto result = net_string_to_adr_hook.invoke<__int64>(name, netadr);
+			if (result && netadr)
+			{
+				auto* type = reinterpret_cast<uint32_t*>(netadr);
+				const auto addr = *reinterpret_cast<uint32_t*>(reinterpret_cast<char*>(netadr) + 4);
+				if (find_udp_server(addr))
+				{
+					*type = 3; // NA_RAWIP -> Sys_SendPacket uses sendto (hooked)
+					Console::printf("[demo] NET_StringToAdr('%s'): forced netadr type ->3 (theater)", name ? name : "");
+				}
+			}
+			return result;
+		}
+
+		// DIAGNOSTIC: log every connection-FSM state transition so we can see exactly
+		// how far `connect demo` advances (and where it times out). CL_ConnectFsmEnter
+		// = RVA 0x1967C0 -> 0x1957C0_b, sig (fsm*, int newState, uint reason).
+		utils::hook::detour cl_connectfsm_enter_hook;
+		void cl_connectfsm_enter_stub(void* fsm, int new_state, unsigned int reason)
+		{
+			Console::printf("[demo] CL_ConnectFsm -> state %d (reason %u)", new_state, reason);
+			cl_connectfsm_enter_hook.invoke<void>(fsm, new_state, reason);
+		}
+
 		void server_main()
 		{
 			while (!exit_server)
@@ -492,10 +543,8 @@ namespace demonware
 		void hook_ws(HMODULE ws, const char* name, void* stub, T* original)
 		{
 			auto* proc = reinterpret_cast<void*>(GetProcAddress(ws, name));
-			if (!proc || !Hook::create(name, proc, stub, reinterpret_cast<void**>(original)))
-			{
-				DEV_PRINTF("[demo] failed to hook ws2_32!%s", name);
-			}
+			const bool ok = proc && Hook::create(name, proc, stub, reinterpret_cast<void**>(original));
+			Console::printf("[demo] hook ws2_32!%s: %s", name, ok ? "OK" : "FAILED");
 		}
 	}
 
@@ -503,7 +552,9 @@ namespace demonware
 	{
 		// register the local "demo" theater server
 		auto server = std::make_unique<theater::theater_server>("demo");
-		udp_servers[server->get_address()] = std::move(server);
+		const auto demo_addr = server->get_address();
+		udp_servers[demo_addr] = std::move(server);
+		Console::printf("[demo] demonware init: theater 'demo' registered (addr=0x%08X)", demo_addr);
 
 		HMODULE ws = GetModuleHandleA("ws2_32.dll");
 		if (!ws) ws = LoadLibraryA("ws2_32.dll");
@@ -520,6 +571,13 @@ namespace demonware
 		hook_ws(ws, "recvfrom", &io::recvfrom_stub, &io::_recvfrom);
 		hook_ws(ws, "closesocket", &io::closesocket_stub, &io::_closesocket);
 		hook_ws(ws, "ioctlsocket", &io::ioctlsocket_stub, &io::_ioctlsocket);
+
+		// FIX: force theater connection onto the raw-UDP path (see stub).
+		net_string_to_adr_hook.create(0x75EC10_b, &net_string_to_adr_stub);
+
+		// DIAGNOSTIC: trace connect-FSM transitions during `connect demo`.
+		cl_connectfsm_enter_hook.create(0x1957C0_b, &cl_connectfsm_enter_stub);
+		Console::printf("[demo] demonware init complete (NET_StringToAdr + FSM hooks installed)");
 
 		std::thread(&server_main).detach();
 	}

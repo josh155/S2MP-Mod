@@ -25,6 +25,7 @@
 #include "DemoRecorder.hpp"
 #include "DemoPlayback.hpp"
 #include "Demonware.hpp"
+#include "DemoUI.hpp"
 
 HANDLE hProcess;
 HINSTANCE hInst;
@@ -145,6 +146,7 @@ void ExtConsole::extConInit(int extConsoleMode) {
 		demonware::init();   // theater loopback server + WinSock hooks (playback)
 		demo::init();
 		demo_playback::init();
+		DemoUI::init();      // in-game ImGui demo picker (INSERT / "demo_menu")
 	}
 
 	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "exec autoexec");

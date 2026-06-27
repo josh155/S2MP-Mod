@@ -421,6 +421,9 @@ namespace demo_playback
 			return;
 		}
 
+		const std::string mapName = reader->get_map_name();
+		const std::string modeName = reader->get_mode();
+
 		{
 			std::lock_guard<std::mutex> lock(reader_mutex);
 			current_reader = std::move(reader);
@@ -431,6 +434,7 @@ namespace demo_playback
 
 		// Drive the match through the normal connection path; the demonware theater
 		// server answers "connect demo" and feeds the recorded messages back.
+		Console::printf("[demo] issuing 'connect demo' (map=%s mode=%s)", mapName.c_str(), modeName.c_str());
 		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "connect demo\n");
 	}
 

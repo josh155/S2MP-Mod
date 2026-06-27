@@ -8,6 +8,7 @@
 #include "Console.hpp"
 #include "GameUtil.hpp"
 #include "Hook.hpp"
+#include "DvarInterface.hpp"
 
 #include <optional>
 #include <fstream>
@@ -44,7 +45,10 @@ namespace demo
 
 		std::string get_dvar_string(const std::string& dvar)
 		{
-			const auto* value = Functions::_Dvar_GetString ? Functions::_Dvar_GetString(dvar.data()) : nullptr;
+			// WWII strips dvar names to numeric IDs; translate friendly->engine
+			// (e.g. "mapname" -> "1673") before the lookup, like the rest of the mod.
+			const std::string engineName = DvarInterface::toEngineString(dvar);
+			const auto* value = Functions::_Dvar_GetString ? Functions::_Dvar_GetString(engineName.c_str()) : nullptr;
 			return value ? std::string(value) : std::string();
 		}
 
@@ -114,7 +118,7 @@ namespace demo
 		{
 			std::filesystem::create_directory("demos");
 
-			auto map = get_dvar_string("ui_mapname");
+			auto map = get_dvar_string("mapname");
 			auto type = get_dvar_string("g_gametype");
 			if (map.empty()) map = "unknown";
 			if (type.empty()) type = "war";
@@ -160,13 +164,13 @@ namespace demo
 	utils::hook::detour cl_connectionlesspacket_hook;
 	utils::hook::detour cl_save_predicted_player_information_for_server_time_hook;
 
-	// s2-mod uses mp::virtualLobby_Loaded @ RVA 0x1BD36F8 -> 0x1BD26F8_b. The s2x_dump
-	// DB labels that address cl_demoKillServerFlag, but every s2-mod address has
-	// verified correct by behavior, so we trust it here (non-critical guard).
-	// TODO: confirm against the live build.
+	// virtualLobby-active flag @ 0x1BD26F8_b. Confirmed: DevDraw.cpp:126 already reads
+	// this same address as "Virtual lobby active" (the s2x_dump DB mislabels it
+	// cl_demoKillServerFlag). Matches the known-good usage elsewhere in the mod.
 	bool virtual_lobby_loaded()
 	{
-		return *reinterpret_cast<int*>(0x1BD26F8_b) != 0;
+		bool g_virtualLobbyActive = *(bool*)(0x1BD26F8_b);
+		return g_virtualLobbyActive;
 	}
 
 	void begin_recording()
@@ -195,6 +199,9 @@ namespace demo
 	// CL_Demo_ParseSnapshotMsg (0x4639D0_b) - per in-band server message.
 	void cl_parseservermessage_stub(int localClientNum, msg_t* message)
 	{
+		static bool logged = false;
+		if (!logged) { logged = true; Console::printf("[demo] HOOK FIRED: ParseSnapshotMsg (in-band)"); }
+
 		cl_parseservermessage_hook.invoke<void>(localClientNum, message);
 
 		if (demo_playback::is_playing() || !message || message->overflowed)
@@ -215,6 +222,13 @@ namespace demo
 		if (message && message->data && message->cursize > 0)
 		{
 			data.assign(message->data, message->cursize);
+		}
+
+		// DIAGNOSTIC: log every OOB packet's leading command so we can see whether
+		// connectResponse/getInfo etc. actually flow through this hook during play.
+		if (data.size() > 4)
+		{
+			Console::printf("[demo] HOOK FIRED: connectionless OOB <- '%.32s'", data.c_str() + 4);
 		}
 
 		const auto result = cl_connectionlesspacket_hook.invoke<int>(localClientNum, from, message, time);
@@ -257,6 +271,9 @@ namespace demo
 	// local player's predicted state, captured for the playback view.
 	int cl_save_predicted_player_information_for_server_time_stub(void* clientActive, int serverTime)
 	{
+		static bool logged = false;
+		if (!logged) { logged = true; Console::printf("[demo] HOOK FIRED: SavePredictedPlayerInfo (client data)"); }
+
 		const auto result = cl_save_predicted_player_information_for_server_time_hook.invoke<int>(clientActive, serverTime);
 
 		if (recorder && clientActive)
