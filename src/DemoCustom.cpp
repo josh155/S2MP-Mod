@@ -39,8 +39,10 @@ namespace demo_custom
 		};
 		static_assert(sizeof(demo_msg_t) == 0x30, "demo_msg_t");
 
-		enum : unsigned { W2DR_MAGIC = 0x52443257u, W2DR_VERSION = 6 };
-		enum recType : unsigned { REC_MAPINFO = 1, REC_GAMESTATE = 3, REC_SNAPSHOT = 4, REC_DISPATCH = 5, REC_CLIENTDATA = 6 };
+		enum : unsigned { W2DR_MAGIC = 0x52443257u, W2DR_VERSION = 8 };
+		enum recType : unsigned { REC_MAPINFO = 1, REC_GAMESTATE = 3, REC_SNAPSHOT = 4, REC_DISPATCH = 5, REC_CLIENTDATA = 6, REC_USERCMD = 7, REC_ARCHIVE = 8 };
+		constexpr unsigned USERCMD_SIZE = 128; // usercmd_s (CL_CreateNewCommands strides 128)
+		constexpr unsigned ARCHIVE_SIZE = 128; // CL_Demo_UpdateStatsRing builds a 128-byte stats/view blob
 
 #pragma pack(push, 1)
 		struct W2DRHeader { unsigned magic, version, headerSize, flags; char map[128]; char mode[64]; };
@@ -61,9 +63,20 @@ namespace demo_custom
 		utils::hook::detour g_execMenuHook;
 		utils::hook::detour g_savePredictedHook;
 		utils::hook::detour g_getPredictedHook;
+		utils::hook::detour g_createCmdHook;
+		utils::hook::detour g_updateStatsHook;
 
 		// recorded predicted-player-state ring, indexed by serverTime & 255
 		client_data_t g_clientFrames[256] = {};
+
+		// recorded local usercmd ring (drives view angles + buttons + weapon on replay)
+		struct cmd_rec { int serverTime; unsigned char cmd[USERCMD_SIZE]; };
+		cmd_rec g_cmdFrames[256] = {};
+
+		// recorded 128-byte view/stats archive blob (CL_Demo_UpdateStatsRing) - the
+		// authoritative view state during rendering; the live build is blank in playback.
+		struct archive_rec { int serverTime; unsigned char blob[ARCHIVE_SIZE]; };
+		archive_rec g_archiveFrames[256] = {};
 
 		// pacing: feed pairs at their recorded wall-clock spacing
 		int g_pbWallStart = 0;
@@ -116,6 +129,15 @@ namespace demo_custom
 			return (b && a >= b) ? (a - b) : a;
 		}
 		int sys_ms() { return Functions::_Sys_Milliseconds ? Functions::_Sys_Milliseconds() : 0; }
+
+		// cl_serverTime (0xC5EA44_b) - the smooth server tick the engine interpolates by.
+		// Used as the record timestamp so playback paces to server time, not jittery
+		// packet-arrival wall-clock.
+		int server_time()
+		{
+			__try { return *reinterpret_cast<int*>(0xC5EA44_b); }
+			__except (EXCEPTION_EXECUTE_HANDLER) { return 0; }
+		}
 
 		bool is_gamestate_isplaying_site(uintptr_t rva); // defined below
 
@@ -335,7 +357,9 @@ namespace demo_custom
 			unsigned rb, unsigned bit, unsigned flags, unsigned seq, unsigned lastEnt)
 		{
 			if (!g_recFile || !data || !size) return;
-			W2DRRecord r{ type, static_cast<unsigned>(client), static_cast<unsigned>(state), size, rb, bit, flags, seq, lastEnt, static_cast<unsigned>(sys_ms()) };
+			// Timestamp by cl_serverTime (smooth server tick the engine interpolates by),
+			// not packet-arrival wall-clock, so playback pacing has no network jitter.
+			W2DRRecord r{ type, static_cast<unsigned>(client), static_cast<unsigned>(state), size, rb, bit, flags, seq, lastEnt, static_cast<unsigned>(server_time()) };
 			fwrite(&r, 1, sizeof(r), g_recFile);
 			fwrite(data, 1, size, g_recFile);
 			fflush(g_recFile);
@@ -440,13 +464,29 @@ namespace demo_custom
 		unsigned g_pbExceptions = 0;
 		unsigned g_pbApplied = 0;
 
-		void store_client_data(const W2DRRecord& r, void* payload)
+		// Store an auxiliary (non snapshot/dispatch) record into its ring. Returns true
+		// if it consumed the record.
+		bool store_aux_record(const W2DRRecord& r, void* payload)
 		{
-			if (r.size >= sizeof(client_data_t))
+			if (r.type == REC_CLIENTDATA && r.size >= sizeof(client_data_t))
 			{
 				auto* d = reinterpret_cast<client_data_t*>(payload);
 				g_clientFrames[d->serverTime & 255] = *d;
+				return true;
 			}
+			if (r.type == REC_USERCMD && r.size >= sizeof(cmd_rec))
+			{
+				auto* c = reinterpret_cast<cmd_rec*>(payload);
+				g_cmdFrames[c->serverTime & 255] = *c;
+				return true;
+			}
+			if (r.type == REC_ARCHIVE && r.size >= sizeof(archive_rec))
+			{
+				auto* ar = reinterpret_cast<archive_rec*>(payload);
+				g_archiveFrames[ar->serverTime & 255] = *ar;
+				return true;
+			}
+			return false;
 		}
 
 		// Read records (populating the predicted-state ring from REC_CLIENTDATA) until a
@@ -461,7 +501,7 @@ namespace demo_custom
 			for (;;)
 			{
 				if (!read_record(g_pbFile, snapR, snapP)) { close_playback("eof"); return false; }
-				if (snapR.type == REC_CLIENTDATA) { store_client_data(snapR, snapP); free(snapP); continue; }
+				if (store_aux_record(snapR, snapP)) { free(snapP); continue; }
 				if (snapR.type == REC_SNAPSHOT) break;
 				free(snapP); // skip gamestate/other
 			}
@@ -470,7 +510,7 @@ namespace demo_custom
 			for (;;)
 			{
 				if (!read_record(g_pbFile, dispR, dispP)) { free(snapP); close_playback("missing dispatch"); return false; }
-				if (dispR.type == REC_CLIENTDATA) { store_client_data(dispR, dispP); free(dispP); continue; }
+				if (store_aux_record(dispR, dispP)) { free(dispP); continue; }
 				break;
 			}
 			if (dispR.type != REC_DISPATCH)
@@ -671,6 +711,67 @@ namespace demo_custom
 			return ret;
 		}
 
+		// CL_CreateCmd (0x6C6090_b): builds the local usercmd from input (view angles,
+		// buttons, weapon). We record it during a match and replay it during playback so
+		// the camera looks the right way and the viewmodel/weapon is correct.
+		__int64 createcmd_hook(__int64 cl, void* cmd)
+		{
+			__int64 ret = 0;
+			__try { ret = g_createCmdHook.invoke<__int64>(cl, cmd); }
+			__except (EXCEPTION_EXECUTE_HANDLER) {}
+
+			if (cmd)
+			{
+				__try
+				{
+					const int st = *reinterpret_cast<int*>(cmd); // usercmd_s.serverTime @ 0
+					if (!g_playing && g_recording && g_seenUseful && !g_driving)
+					{
+						cmd_rec rec{}; rec.serverTime = st;
+						memcpy(rec.cmd, cmd, USERCMD_SIZE);
+						write_record(REC_USERCMD, 0, st, &rec, sizeof(rec), 0, 0, 0, static_cast<unsigned>(st), 0);
+					}
+					// NOTE: usercmd REPLAY is intentionally disabled — it drives Pmove and
+					// fights the directly-injected predicted origin/velocity (movement
+					// desync). The archive blob (CL_Demo_UpdateStatsRing) drives the view.
+				}
+				__except (EXCEPTION_EXECUTE_HANDLER) {}
+			}
+			return ret;
+		}
+
+		// CL_Demo_UpdateStatsRing (0x9CC60_b): builds the 128-byte view/stats blob each
+		// rendered frame (from CG_DrawActive). In playback the live build is blank, so we
+		// record the real blob during the match and inject it back, keyed by cl_serverTime
+		// (0xC5EA44_b). This is what corrects the view angles / on-screen state.
+		__int64 updatestats_hook(__int64 a1, int a2)
+		{
+			__int64 ret = 0;
+			__try { ret = g_updateStatsHook.invoke<__int64>(a1, a2); }
+			__except (EXCEPTION_EXECUTE_HANDLER) {}
+
+			if (a1)
+			{
+				__try
+				{
+					const int st = *reinterpret_cast<int*>(0xC5EA44_b); // cl_serverTime
+					if (!g_playing && g_recording && g_seenUseful && !g_driving)
+					{
+						archive_rec rec{}; rec.serverTime = st;
+						memcpy(rec.blob, reinterpret_cast<void*>(a1), ARCHIVE_SIZE);
+						write_record(REC_ARCHIVE, a2, st, &rec, sizeof(rec), 0, 0, 0, static_cast<unsigned>(st), 0);
+					}
+					else if (g_playing)
+					{
+						const archive_rec& r = g_archiveFrames[st & 255];
+						if (r.serverTime != 0) memcpy(reinterpret_cast<void*>(a1), r.blob, ARCHIVE_SIZE);
+					}
+				}
+				__except (EXCEPTION_EXECUTE_HANDLER) {}
+			}
+			return ret;
+		}
+
 		bool isplaying_hook(int client)
 		{
 			const uintptr_t caller = ptr_to_rva(_ReturnAddress());
@@ -742,6 +843,8 @@ namespace demo_custom
 		g_pbNextTick = sys_ms();
 		g_pbHaveFirstTime = false;
 		memset(g_clientFrames, 0, sizeof(g_clientFrames));
+		memset(g_cmdFrames, 0, sizeof(g_cmdFrames));
+		memset(g_archiveFrames, 0, sizeof(g_archiveFrames));
 
 		// Pairs are fed by the CL_Demo_RunFrame hook, paced to their recorded times.
 		Console::printf("[demo] armed; paced playback (state=%d)", read_state(0));
@@ -760,6 +863,8 @@ namespace demo_custom
 		g_execMenuHook.create(0x91D310_b, &execmenu_hook);
 		g_savePredictedHook.create(0x464580_b, &save_predicted_hook);
 		g_getPredictedHook.create(0x461650_b, &get_predicted_hook);
+		g_createCmdHook.create(0x6C6090_b, &createcmd_hook);
+		g_updateStatsHook.create(0x9CC60_b, &updatestats_hook);
 
 		GameUtil::addCommand("demo_play", []
 		{
