@@ -48,12 +48,12 @@ namespace
 	{
 		g_demos.clear();
 		std::error_code ec;
-		// Native demos live in "demo/" (cl_demo_play reads from there).
-		if (std::filesystem::exists("demo", ec))
+		// Custom demos live in "demos/" as .w2dr files.
+		if (std::filesystem::exists("demos", ec))
 		{
-			for (const auto& entry : std::filesystem::directory_iterator("demo", ec))
+			for (const auto& entry : std::filesystem::directory_iterator("demos", ec))
 			{
-				if (entry.is_regular_file(ec) && entry.path().extension() == ".demo")
+				if (entry.is_regular_file(ec) && entry.path().extension() == ".w2dr")
 				{
 					g_demos.push_back(entry.path().filename().string());
 				}
@@ -133,16 +133,15 @@ namespace
 
 			ImGui::Spacing();
 
-			// Native playback: cl_demo_play reads demo/<name> and enters the engine's
-			// built-in demo connection (state 5). No theater/loopback needed.
+			// Custom playback: demo_play loads the map and replays recorded messages.
 			if (ImGui::Button("Play", ImVec2(110.0f, 0.0f)))
 			{
-				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "cl_demo_play " + g_demos[g_selected] + "\n");
+				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_play " + g_demos[g_selected] + "\n");
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Stop", ImVec2(110.0f, 0.0f)))
 			{
-				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "disconnect\n");
+				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_stop\n");
 			}
 		}
 

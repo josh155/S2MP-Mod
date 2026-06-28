@@ -22,9 +22,7 @@
 #include "Dvars.hpp"
 #include "Binds.hpp"
 #include "Exec.hpp"
-#include "DemoRecorder.hpp"
-#include "DemoPlayback.hpp"
-#include "Demonware.hpp"
+#include "DemoCustom.hpp"
 #include "DemoUI.hpp"
 
 HANDLE hProcess;
@@ -141,11 +139,10 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	InternalConsole::init();
 	Loaders::initAssetLoaders();
 
-	// Demo system (MP only — record/playback hooks use MP addresses)
+	// Custom demo system (MP only — parser hooks use MP addresses).
+	// Auto-records real matches; play with "demo_play <file>" or the ImGui menu.
 	if (!doZombiesMode) {
-		demonware::init();   // theater loopback server + WinSock hooks (playback)
-		demo::init();
-		demo_playback::init();
+		demo_custom::init();
 		DemoUI::init();      // in-game ImGui demo picker (INSERT / "demo_menu")
 	}
 
