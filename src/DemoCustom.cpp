@@ -39,7 +39,7 @@ namespace demo_custom
 		};
 		static_assert(sizeof(demo_msg_t) == 0x30, "demo_msg_t");
 
-		enum : unsigned { W2DR_MAGIC = 0x52443257u, W2DR_VERSION = 8 };
+		enum : unsigned { W2DR_MAGIC = 0x52443257u, W2DR_VERSION = 10 };
 		enum recType : unsigned { REC_MAPINFO = 1, REC_GAMESTATE = 3, REC_SNAPSHOT = 4, REC_DISPATCH = 5, REC_CLIENTDATA = 6, REC_USERCMD = 7, REC_ARCHIVE = 8 };
 		constexpr unsigned USERCMD_SIZE = 128; // usercmd_s (CL_CreateNewCommands strides 128)
 		constexpr unsigned ARCHIVE_SIZE = 128; // CL_Demo_UpdateStatsRing builds a 128-byte stats/view blob
@@ -48,13 +48,18 @@ namespace demo_custom
 		struct W2DRHeader { unsigned magic, version, headerSize, flags; char map[128]; char mode[64]; };
 		struct W2DRRecord { unsigned type, client, state, size, readByte, readBit, flags, seq, lastEntityRef, time; };
 		// recorded local-player predicted state (fixes view origin/angles + viewmodel)
-		struct client_data_t { int serverTime; float origin[3]; float velocity[3]; float viewAngles[3]; int bobCycle; int movementDir; };
+		struct client_data_t { int serverTime; float origin[3]; float velocity[3]; float viewAngles[3]; int bobCycle; int movementDir; int weapon; int offHand; int weapFlags; };
 #pragma pack(pop)
 
 		// clientActive offsets (verified): origin +25704, velocity +25716, viewAngles +25728.
 		// playerState offsets (verified): origin +132, velocity +144.
 		constexpr size_t CA_ORIGIN = 25704, CA_VELOCITY = 25716, CA_VIEWANGLES = 25728;
 		constexpr size_t PS_ORIGIN = 132, PS_VELOCITY = 144;
+		// cg = CL_GetClientGlobals(c) (0x785D0_b); cg.predictedPlayerState.weapCommon found at
+		// runtime: offHand @ cg+0xCC, weapon @ cg+0xD8, weapFlags @ cg+0xDC. The viewmodel
+		// (CG_AddViewWeapon) reads cg+0xD8 each render frame; null in playback = no gun.
+		constexpr size_t CG_OFFHAND = 0xCC, CG_WEAPON = 0xD8, CG_WEAPFLAGS = 0xDC;
+		inline char* get_cg(int client) { return reinterpret_cast<char* (*)(int)>(0x785D0_b)(client); }
 
 		// hooks
 		utils::hook::detour g_gamestateHook, g_snapshotHook, g_dispatchHook, g_isPlayingHook, g_comErrorHook;
@@ -678,6 +683,20 @@ namespace demo_custom
 					memcpy(d.origin, ca + CA_ORIGIN, sizeof(d.origin));
 					memcpy(d.velocity, ca + CA_VELOCITY, sizeof(d.velocity));
 					memcpy(d.viewAngles, ca + CA_VIEWANGLES, sizeof(d.viewAngles));
+
+					// record the local viewmodel weapon from cg.predictedPlayerState.
+					// KNOWN LIMITATION: weapon MODELS (local viewmodel + other players' held
+					// weapons) don't render in playback. Confirmed NOT a value problem (cg+0xD8
+					// already holds the right weapon in playback) nor a demo-mode problem
+					// (hud/free/freecam all 0). The model build/stream/attach is skipped in the
+					// custom-playback render path (WWII dump is name-stripped+obfuscated, so the
+					// exact gate isn't located yet). Weapon data is recorded here for when it is.
+					if (char* cg = get_cg(0))
+					{
+						d.weapon = *reinterpret_cast<int*>(cg + CG_WEAPON);
+						d.offHand = *reinterpret_cast<int*>(cg + CG_OFFHAND);
+						d.weapFlags = *reinterpret_cast<int*>(cg + CG_WEAPFLAGS);
+					}
 				}
 				__except (EXCEPTION_EXECUTE_HANDLER) {}
 				write_record(REC_CLIENTDATA, 0, read_state(0), &d, sizeof(d), 0, 0, 0, static_cast<unsigned>(serverTime), 0);
