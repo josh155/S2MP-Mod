@@ -146,6 +146,15 @@ void ExtConsole::extConInit(int extConsoleMode) {
 		DemoUI::init();      // in-game ImGui demo picker (INSERT / "demo_menu")
 	}
 
+	// Kill leftover native-demo test harness markers. An older WIP would run the first
+	// line of autotest.txt via Cbuf ~30s after boot (used to drive cl_demo_play headlessly).
+	if (DeleteFileA("autotest.txt")) {
+		Console::printf("[demo] deleted leftover autotest.txt (was used to auto-fire cl_demo_play)");
+	}
+
+	// Also strip any cl_demo_play / demo_play lines left in players2/autoexec.cfg from testing.
+	Exec::scrubDemoAutostartFromAutoexec();
+
 	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "exec autoexec");
 
 	DeleteFileA("ZM");//just in case
