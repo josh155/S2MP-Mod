@@ -1,0 +1,951 @@
+{
+ "strong": [
+  {
+   "binding": "FadeSound",
+   "s2_marsh": "0x1092d0",
+   "s2_worker": "0x74e610",
+   "s2_size": 42,
+   "aw_name": "SND_FadeLocalSoundAliasById",
+   "aw_worker": "0x82207250",
+   "aw_size": 112
+  },
+  {
+   "binding": "StopMusic",
+   "s2_marsh": "0x109700",
+   "s2_worker": "0x722080",
+   "s2_size": 69,
+   "aw_name": "SND_StopBackground",
+   "aw_worker": "0x8220f2e0",
+   "aw_size": 248
+  },
+  {
+   "binding": "RemoveKeyCatcherSubscriber",
+   "s2_marsh": "0x109f30",
+   "s2_worker": "0x31ae90",
+   "s2_size": 66,
+   "aw_name": "LUI_CoD_RemoveKeyCatcherSubscriber",
+   "aw_worker": "0x8271db40",
+   "aw_size": 108
+  },
+  {
+   "binding": "GetDvarFloat",
+   "s2_marsh": "0x10add0",
+   "s2_worker": "0xafbc0",
+   "s2_size": 77,
+   "aw_name": "Dvar_GetFloat",
+   "aw_worker": "0x8237de80",
+   "aw_size": 112
+  },
+  {
+   "binding": "SetDvarFloat",
+   "s2_marsh": "0x10b910",
+   "s2_worker": "0xb2800",
+   "s2_size": 150,
+   "aw_name": "Dvar_SetFloatFromSource",
+   "aw_worker": "0x8237f8f0",
+   "aw_size": 148
+  },
+  {
+   "binding": "UserCanPlayOnline",
+   "s2_marsh": "0x10d530",
+   "s2_worker": "0x788a30",
+   "s2_size": 90,
+   "aw_name": "Live_CanUserPlayOnline",
+   "aw_worker": "0x82352a60",
+   "aw_size": 268
+  },
+  {
+   "binding": "UserCanAccessMPLiveMenu",
+   "s2_marsh": "0x10d690",
+   "s2_worker": "0x8532c0",
+   "s2_size": 211,
+   "aw_name": "Live_CanAccessMPLiveMenu",
+   "aw_worker": "0x822ce780",
+   "aw_size": 160
+  },
+  {
+   "binding": "UserCanAccessSystemLinkMenu",
+   "s2_marsh": "0x10d750",
+   "s2_worker": "0x8533d0",
+   "s2_size": 38,
+   "aw_name": "Live_CanAccessSystemLinkMenu",
+   "aw_worker": "0x822cc4b8",
+   "aw_size": 92
+  },
+  {
+   "binding": "AddAchievement",
+   "s2_marsh": "0x10e270",
+   "s2_worker": "0x789890",
+   "s2_size": 8,
+   "aw_name": "Live_GiveAchievement",
+   "aw_worker": "0x82357c28",
+   "aw_size": 288
+  },
+  {
+   "binding": "SetAndEnableCustomClanTag",
+   "s2_marsh": "0x10eff0",
+   "s2_worker": "0x74e380",
+   "s2_size": 261,
+   "aw_name": "UI_ClanKeyboard_callback",
+   "aw_worker": "0x823a1370",
+   "aw_size": 896
+  },
+  {
+   "binding": "ResetStatsCancel",
+   "s2_marsh": "0x10fb50",
+   "s2_worker": "0xd3250",
+   "s2_size": 104,
+   "aw_name": "LiveStorage_ResetStatsCancel",
+   "aw_worker": "0x82492848",
+   "aw_size": 296
+  },
+  {
+   "binding": "ToggleAutoMantle",
+   "s2_marsh": "0x111bd0",
+   "s2_worker": "0x46d8b0",
+   "s2_size": 157,
+   "aw_name": "GamerProfile_ToggleAutoMantle",
+   "aw_worker": "0x825e5ac8",
+   "aw_size": 140
+  },
+  {
+   "binding": "MenuDvarsSetup",
+   "s2_marsh": "0x112610",
+   "s2_worker": "0x46bd60",
+   "s2_size": 525,
+   "aw_name": "GamerProfile_OptionsMenuDvarsSetup",
+   "aw_worker": "0x825e4728",
+   "aw_size": 280
+  },
+  {
+   "binding": "MenuDvarsFinish",
+   "s2_marsh": "0x112690",
+   "s2_worker": "0x46ba30",
+   "s2_size": 394,
+   "aw_name": "GamerProfile_OptionsMenuDvarsFinish",
+   "aw_worker": "0x825e1220",
+   "aw_size": 164
+  },
+  {
+   "binding": "InLoadingScreen",
+   "s2_marsh": "0x1146c0",
+   "s2_worker": "0x856df0",
+   "s2_size": 56,
+   "aw_name": "Live_InLoadingScreen",
+   "aw_worker": "0x822ccc08",
+   "aw_size": 132
+  },
+  {
+   "binding": "ClearError",
+   "s2_marsh": "0x114770",
+   "s2_worker": "0x74e180",
+   "s2_size": 171,
+   "aw_name": "UIScript_ClearError",
+   "aw_worker": "0x8239d3a8",
+   "aw_size": 228
+  },
+  {
+   "binding": "ReportMemory",
+   "s2_marsh": "0x114990",
+   "s2_worker": "0xcb700",
+   "s2_size": 89,
+   "aw_name": "LUI_ReportMemoryUsage",
+   "aw_worker": "0x8272a6c8",
+   "aw_size": 92
+  },
+  {
+   "binding": "GetUI3DWindowAspectRatio",
+   "s2_marsh": "0x115d20",
+   "s2_worker": "0x26ecb0",
+   "s2_size": 71,
+   "aw_name": "R_UI3D_GetTextureWindowAspectRatio",
+   "aw_worker": "0x82791ae8",
+   "aw_size": 120
+  },
+  {
+   "binding": "IsProfanity",
+   "s2_marsh": "0x118950",
+   "s2_worker": "0x49f790",
+   "s2_size": 57,
+   "aw_name": "Xenon_ProfanityFilter_IsBadWord",
+   "aw_worker": "0x827eba90",
+   "aw_size": 260
+  },
+  {
+   "binding": "CollectGarbage",
+   "s2_marsh": "0x118dd0",
+   "s2_worker": "0x316f30",
+   "s2_size": 49,
+   "aw_name": "LUI_CoD_CollectGarbage",
+   "aw_worker": "0x82721f80",
+   "aw_size": 128
+  },
+  {
+   "binding": "GetMaterialAspectRatio",
+   "s2_marsh": "0x119360",
+   "s2_worker": "0x31f670",
+   "s2_size": 61,
+   "aw_name": "LUI_Interface_GetMaterialAspectRatio",
+   "aw_worker": "0x8271cce0",
+   "aw_size": 120
+  },
+  {
+   "binding": "ToUpperCase",
+   "s2_marsh": "0x11a420",
+   "s2_worker": "0x9c610",
+   "s2_size": 758,
+   "aw_name": "Com_UTF8_ToUpperCase",
+   "aw_worker": "0x820f0390",
+   "aw_size": 132
+  },
+  {
+   "binding": "GetBuildNumber",
+   "s2_marsh": "0x11a4e0",
+   "s2_worker": "0x74e6c0",
+   "s2_size": 176,
+   "aw_name": "UI_FormattedBuildNumber",
+   "aw_worker": "0x823a12e8",
+   "aw_size": 136
+  },
+  {
+   "binding": "UsingSplitscreenUpscaling",
+   "s2_marsh": "0x11bb20",
+   "s2_worker": "0x31bd60",
+   "s2_size": 82,
+   "aw_name": "CL_IsSplitscreenInGame",
+   "aw_worker": "0x825b0cc8",
+   "aw_size": 140
+  },
+  {
+   "binding": "Inventory_GetItemQuantity",
+   "s2_marsh": "0x11deb0",
+   "s2_worker": "0x279480",
+   "s2_size": 98,
+   "aw_name": "Inventory_GetItemQuantity",
+   "aw_worker": "0x82789398",
+   "aw_size": 124
+  },
+  {
+   "binding": "Inventory_ConvertItemToXP",
+   "s2_marsh": "0x11ea90",
+   "s2_worker": "0x27bfe0",
+   "s2_size": 491,
+   "aw_name": "Inventory_ConvertItemToXP",
+   "aw_worker": "0x8278b3d0",
+   "aw_size": 292
+  },
+  {
+   "binding": "Inventory_ConsumeItem",
+   "s2_marsh": "0x11f090",
+   "s2_worker": "0x278480",
+   "s2_size": 547,
+   "aw_name": "Inventory_ConsumePlayerInventoryItems",
+   "aw_worker": "0x8278b098",
+   "aw_size": 308
+  },
+  {
+   "binding": "Inventory_GetItemExpirationDateTime",
+   "s2_marsh": "0x11f470",
+   "s2_worker": "0x279010",
+   "s2_size": 219,
+   "aw_name": "Inventory_GetItemExpirationDateTime",
+   "aw_worker": "0x827874c0",
+   "aw_size": 92
+  },
+  {
+   "binding": "MarketingReportMessageViewed",
+   "s2_marsh": "0x125390",
+   "s2_worker": "0x372a70",
+   "s2_size": 595,
+   "aw_name": "Marketing_ReportMessageViewed",
+   "aw_worker": "0x826dfc88",
+   "aw_size": 144
+  },
+  {
+   "binding": "CacheMaterial",
+   "s2_marsh": "0x126e30",
+   "s2_worker": "0x745b70",
+   "s2_size": 10,
+   "aw_name": "UI_AddCachedMaterial",
+   "aw_worker": "0x823ad058",
+   "aw_size": 240
+  },
+  {
+   "binding": "IsFriendInvitable",
+   "s2_marsh": "0x130410",
+   "s2_worker": "0x84b020",
+   "s2_size": 40,
+   "aw_name": "FriendsMenu_FeederFriendInvitable",
+   "aw_worker": "0x822dac08",
+   "aw_size": 176
+  },
+  {
+   "binding": "IsFriendJoinable",
+   "s2_marsh": "0x1304e0",
+   "s2_worker": "0x84b050",
+   "s2_size": 40,
+   "aw_name": "FriendsMenu_FeederFriendJoinable",
+   "aw_worker": "0x822dab40",
+   "aw_size": 196
+  },
+  {
+   "binding": "JoinOnlineFriend",
+   "s2_marsh": "0x1305b0",
+   "s2_worker": "0x84b1a0",
+   "s2_size": 247,
+   "aw_name": "FriendsMenu_FeederOnJoinRequest",
+   "aw_worker": "0x822db0a8",
+   "aw_size": 128
+  },
+  {
+   "binding": "InviteOnlineFriend",
+   "s2_marsh": "0x130630",
+   "s2_worker": "0x84b080",
+   "s2_size": 274,
+   "aw_name": "FriendsMenu_FeederOnInviteRequest",
+   "aw_worker": "0x822daee8",
+   "aw_size": 232
+  },
+  {
+   "binding": "InviteRecentPlayer",
+   "s2_marsh": "0x131330",
+   "s2_worker": "0x84c020",
+   "s2_size": 33,
+   "aw_name": "MeetPlayer_Invite",
+   "aw_worker": "0x822d9d48",
+   "aw_size": 164
+  },
+  {
+   "binding": "JoinRecentPlayer",
+   "s2_marsh": "0x1313b0",
+   "s2_worker": "0x84c050",
+   "s2_size": 107,
+   "aw_name": "MeetPlayer_Join",
+   "aw_worker": "0x822d9e20",
+   "aw_size": 228
+  },
+  {
+   "binding": "ShowRecentPlayerGroups",
+   "s2_marsh": "0x1317d0",
+   "s2_worker": "0x84c0d0",
+   "s2_size": 54,
+   "aw_name": "MeetPlayer_FeederOnShowGroups",
+   "aw_worker": "0x822d9cc8",
+   "aw_size": 128
+  },
+  {
+   "binding": "RequestRecentPlayerAsFriend",
+   "s2_marsh": "0x131860",
+   "s2_worker": "0x84bfd0",
+   "s2_size": 67,
+   "aw_name": "MeetPlayer_FeederOnFriendRequest",
+   "aw_worker": "0x822d8b40",
+   "aw_size": 156
+  },
+  {
+   "binding": "IsRecentPlayerAFriend",
+   "s2_marsh": "0x131900",
+   "s2_worker": "0x84c570",
+   "s2_size": 50,
+   "aw_name": "MeetPlayer_IsPlatformFriend",
+   "aw_worker": "0x822d89e8",
+   "aw_size": 100
+  },
+  {
+   "binding": "GetEliteClanFriendPresence",
+   "s2_marsh": "0x131f00",
+   "s2_worker": "0x840540",
+   "s2_size": 195,
+   "aw_name": "EliteClan_GetPresenceForSlot",
+   "aw_worker": "0x822e98d8",
+   "aw_size": 188
+  },
+  {
+   "binding": "InviteEliteClanFriend",
+   "s2_marsh": "0x132870",
+   "s2_worker": "0x83f170",
+   "s2_size": 405,
+   "aw_name": "EliteClan_FeederOnInvite",
+   "aw_worker": "0x822ec450",
+   "aw_size": 444
+  },
+  {
+   "binding": "JoinEliteClanFriend",
+   "s2_marsh": "0x1328f0",
+   "s2_worker": "0x83f310",
+   "s2_size": 237,
+   "aw_name": "EliteClan_FeederOnJoin",
+   "aw_worker": "0x822ecb70",
+   "aw_size": 408
+  },
+  {
+   "binding": "ShowEliteClanFriendGamercard",
+   "s2_marsh": "0x132b60",
+   "s2_worker": "0x83f400",
+   "s2_size": 3,
+   "aw_name": "EliteClan_FeederOnShowCard",
+   "aw_worker": "0x822e7790",
+   "aw_size": 260
+  },
+  {
+   "binding": "IsEliteClanPlayerAFriend",
+   "s2_marsh": "0x132be0",
+   "s2_worker": "0x840e10",
+   "s2_size": 230,
+   "aw_name": "EliteClan_IsPlatformFriend",
+   "aw_worker": "0x822e6950",
+   "aw_size": 204
+  },
+  {
+   "binding": "RequestEliteClanPlayerAsFriend",
+   "s2_marsh": "0x132c70",
+   "s2_worker": "0x83ef70",
+   "s2_size": 503,
+   "aw_name": "EliteClan_FeederOnFriendRequest",
+   "aw_worker": "0x822e7c40",
+   "aw_size": 316
+  },
+  {
+   "binding": "IsFacebookAllowed",
+   "s2_marsh": "0x132f40",
+   "s2_worker": "0x846e00",
+   "s2_size": 132,
+   "aw_name": "Facebook_IsAllowed",
+   "aw_worker": "0x822e1158",
+   "aw_size": 208
+  },
+  {
+   "binding": "LoadMatchRulesDataDefault",
+   "s2_marsh": "0x133310",
+   "s2_worker": "0x74db20",
+   "s2_size": 225,
+   "aw_name": "LoadMatchRulesDataDefaults",
+   "aw_worker": "0x823a2130",
+   "aw_size": 244
+  },
+  {
+   "binding": "AreMatchRulesDefaultFromFF",
+   "s2_marsh": "0x133540",
+   "s2_worker": "0x925200",
+   "s2_size": 221,
+   "aw_name": "AreMatchRulesDefaultFromFF",
+   "aw_worker": "0x82244080",
+   "aw_size": 224
+  },
+  {
+   "binding": "WeaponIsRestricted",
+   "s2_marsh": "0x1341e0",
+   "s2_worker": "0x926cf0",
+   "s2_size": 636,
+   "aw_name": "MatchRules_ValidateWeapon",
+   "aw_worker": "0x822449f8",
+   "aw_size": 388
+  },
+  {
+   "binding": "SaveDataToHistory",
+   "s2_marsh": "0x1344f0",
+   "s2_worker": "0x927810",
+   "s2_size": 1045,
+   "aw_name": "SaveMatchRulesToDiskAppendToFront",
+   "aw_worker": "0x82244b80",
+   "aw_size": 612
+  },
+  {
+   "binding": "GetMotto",
+   "s2_marsh": "0x311740",
+   "s2_worker": "0x83f9e0",
+   "s2_size": 64,
+   "aw_name": "EliteClan_GetClanMotto",
+   "aw_worker": "0x822e96b0",
+   "aw_size": 96
+  },
+  {
+   "binding": "AcceptClanProposal",
+   "s2_marsh": "0x312510",
+   "s2_worker": "0x83df30",
+   "s2_size": 5,
+   "aw_name": "EliteClan_AcceptClanProposal",
+   "aw_worker": "0x822ea0c0",
+   "aw_size": 416
+  },
+  {
+   "binding": "DeclineClanProposal",
+   "s2_marsh": "0x312600",
+   "s2_worker": "0x83ed00",
+   "s2_size": 5,
+   "aw_name": "EliteClan_DeclineClanProposal",
+   "aw_worker": "0x822e9f20",
+   "aw_size": 416
+  },
+  {
+   "binding": "KickMemberFromClan",
+   "s2_marsh": "0x312790",
+   "s2_worker": "0x840f00",
+   "s2_size": 5,
+   "aw_name": "EliteClan_KickMemberFromClan",
+   "aw_worker": "0x822ea260",
+   "aw_size": 432
+  },
+  {
+   "binding": "LeaveClan",
+   "s2_marsh": "0x312be0",
+   "s2_worker": "0x841110",
+   "s2_size": 5,
+   "aw_name": "EliteClan_LeaveClan",
+   "aw_worker": "0x822ea410",
+   "aw_size": 420
+  },
+  {
+   "binding": "StartAccountCreation",
+   "s2_marsh": "0x3216f0",
+   "s2_worker": "0x727230",
+   "s2_size": 303,
+   "aw_name": "CODAnywhere_StartAccountCreation",
+   "aw_worker": "0x823d9940",
+   "aw_size": 696
+  },
+  {
+   "binding": "StartAccountLinking",
+   "s2_marsh": "0x321830",
+   "s2_worker": "0x727360",
+   "s2_size": 188,
+   "aw_name": "CODAnywhere_StartAccountLinking",
+   "aw_worker": "0x823d9870",
+   "aw_size": 208
+  },
+  {
+   "binding": "ShouldShowLinkCreatePopup",
+   "s2_marsh": "0x321a10",
+   "s2_worker": "0x726f10",
+   "s2_size": 214,
+   "aw_name": "CODAnywhere_ShouldShowLinkCreatePopup",
+   "aw_worker": "0x823d9680",
+   "aw_size": 216
+  },
+  {
+   "binding": "ShouldShowLinkUCDPopup",
+   "s2_marsh": "0x321b10",
+   "s2_worker": "0x726ff0",
+   "s2_size": 225,
+   "aw_name": "CODAnywhere_ShouldShowLinkUCDPopup",
+   "aw_worker": "0x823d9588",
+   "aw_size": 244
+  },
+  {
+   "binding": "DownloadNonUCDPlatforms",
+   "s2_marsh": "0x321c10",
+   "s2_worker": "0x724fe0",
+   "s2_size": 244,
+   "aw_name": "CODAnywhere_DownloadNonUCDPlatforms",
+   "aw_worker": "0x823da588",
+   "aw_size": 296
+  },
+  {
+   "binding": "GetPlatformDescriptionString",
+   "s2_marsh": "0x321d40",
+   "s2_worker": "0x7251b0",
+   "s2_size": 834,
+   "aw_name": "CODAnywhere_GetPlatformString",
+   "aw_worker": "0x823dcfc0",
+   "aw_size": 460
+  },
+  {
+   "binding": "GetPlayerStockAmmo",
+   "s2_marsh": "0x323630",
+   "s2_worker": "0x3c9de0",
+   "s2_size": 335,
+   "aw_name": "CG_GetPlayerWeaponAmmoStock",
+   "aw_worker": "0x827edd88",
+   "aw_size": 172
+  },
+  {
+   "binding": "GetPlayerFragAmmo",
+   "s2_marsh": "0x323670",
+   "s2_worker": "0x459ca0",
+   "s2_size": 70,
+   "aw_name": "CG_UIGetLethalAmmo",
+   "aw_worker": "0x826074e8",
+   "aw_size": 120
+  },
+  {
+   "binding": "GetPlayerIsSelectedWeaponEquipped",
+   "s2_marsh": "0x3236b0",
+   "s2_worker": "0x4a230",
+   "s2_size": 139,
+   "aw_name": "CG_IsSelectedWeaponEquipped",
+   "aw_worker": "0x82658250",
+   "aw_size": 120
+  },
+  {
+   "binding": "GetPlayerSmokeAmmo",
+   "s2_marsh": "0x323700",
+   "s2_worker": "0x459cf0",
+   "s2_size": 70,
+   "aw_name": "CG_UIGetTacticalAmmo",
+   "aw_worker": "0x82607470",
+   "aw_size": 120
+  },
+  {
+   "binding": "GetPlayerActionSlotMaterial",
+   "s2_marsh": "0x3239d0",
+   "s2_worker": "0x32ce80",
+   "s2_size": 595,
+   "aw_name": "Game_GetPlayerActionSlotMaterial",
+   "aw_worker": "0x8271ac78",
+   "aw_size": 632
+  },
+  {
+   "binding": "GetPlayerActionSlotAmmo",
+   "s2_marsh": "0x324050",
+   "s2_worker": "0x32cc70",
+   "s2_size": 527,
+   "aw_name": "Game_GetPlayerActionSlotAmmo",
+   "aw_worker": "0x82717db8",
+   "aw_size": 472
+  },
+  {
+   "binding": "GetPlayerWeaponName",
+   "s2_marsh": "0x325250",
+   "s2_worker": "0x49080",
+   "s2_size": 187,
+   "aw_name": "CG_GetWeaponName",
+   "aw_worker": "0x826181e8",
+   "aw_size": 176
+  },
+  {
+   "binding": "GetPlayerWeaponGreebleName",
+   "s2_marsh": "0x325380",
+   "s2_worker": "0x48fa0",
+   "s2_size": 216,
+   "aw_name": "CG_GetWeaponGreebleName",
+   "aw_worker": "0x8260efa8",
+   "aw_size": 188
+  },
+  {
+   "binding": "IsWeaponAltModeUsable",
+   "s2_marsh": "0x3253e0",
+   "s2_worker": "0x3c86a0",
+   "s2_size": 270,
+   "aw_name": "CG_ActionSlotIsUsable",
+   "aw_worker": "0x827edc58",
+   "aw_size": 304
+  },
+  {
+   "binding": "GetActionSlotIsSelected",
+   "s2_marsh": "0x325a80",
+   "s2_worker": "0x3c9d00",
+   "s2_size": 224,
+   "aw_name": "CG_GetActionSlotIsSelected",
+   "aw_worker": "0x827ed768",
+   "aw_size": 256
+  },
+  {
+   "binding": "UnderWater",
+   "s2_marsh": "0x326150",
+   "s2_worker": "0x447e40",
+   "s2_size": 168,
+   "aw_name": "CG_ClientInWaterTriggerBelowWater",
+   "aw_worker": "0x82631c90",
+   "aw_size": 220
+  },
+  {
+   "binding": "GetClientnumForTalkerSlot",
+   "s2_marsh": "0x3261d0",
+   "s2_worker": "0x7444b0",
+   "s2_size": 104,
+   "aw_name": "UI_GetTalkerClientNum",
+   "aw_worker": "0x823acad0",
+   "aw_size": 236
+  },
+  {
+   "binding": "CanChangePlayerMute",
+   "s2_marsh": "0x32a270",
+   "s2_worker": "0x467980",
+   "s2_size": 140,
+   "aw_name": "CL_CanChangePlayerMute",
+   "aw_worker": "0x825e6d20",
+   "aw_size": 232
+  },
+  {
+   "binding": "StartBlur",
+   "s2_marsh": "0x32adc0",
+   "s2_worker": "0x3cc240",
+   "s2_size": 153,
+   "aw_name": "CG_Blur",
+   "aw_worker": "0x826939a0",
+   "aw_size": 196
+  },
+  {
+   "binding": "HowManyPlayersCanWeHost",
+   "s2_marsh": "0x335080",
+   "s2_worker": "0x663bf0",
+   "s2_size": 247,
+   "aw_name": "Live_HowManyPlayersCanWeHost",
+   "aw_worker": "0x8247ce98",
+   "aw_size": 96
+  },
+  {
+   "binding": "GetSearchStatus",
+   "s2_marsh": "0x336ca0",
+   "s2_worker": "0x47d380",
+   "s2_size": 476,
+   "aw_name": "Party_GetLobbySearchParams",
+   "aw_worker": "0x825d27c8",
+   "aw_size": 188
+  },
+  {
+   "binding": "IsItemOfTypeUnlocked",
+   "s2_marsh": "0x337180",
+   "s2_worker": "0x73f8f0",
+   "s2_size": 246,
+   "aw_name": "GetIsItemOfTypeUnlockedStr",
+   "aw_worker": "0x823c56c0",
+   "aw_size": 356
+  },
+  {
+   "binding": "UnlockedItemCount",
+   "s2_marsh": "0x337510",
+   "s2_worker": "0x73fa70",
+   "s2_size": 197,
+   "aw_name": "GetNumUnlockedItems",
+   "aw_worker": "0x823c5b00",
+   "aw_size": 236
+  },
+  {
+   "binding": "UpdateServerDisplayList",
+   "s2_marsh": "0x3377e0",
+   "s2_worker": "0x741930",
+   "s2_size": 25,
+   "aw_name": "UI_DoServerRefresh",
+   "aw_worker": "0x823b2318",
+   "aw_size": 184
+  },
+  {
+   "binding": "GetDLCMapCount",
+   "s2_marsh": "0x337e30",
+   "s2_worker": "0x74e770",
+   "s2_size": 123,
+   "aw_name": "UI_GetAvailableDlcMapCount",
+   "aw_worker": "0x823964b8",
+   "aw_size": 168
+  },
+  {
+   "binding": "SelectedMember_IsAway",
+   "s2_marsh": "0x33c690",
+   "s2_worker": "0x73fc00",
+   "s2_size": 139,
+   "aw_name": "UI_IsSelectedPlayerAway",
+   "aw_worker": "0x823bf838",
+   "aw_size": 124
+  },
+  {
+   "binding": "SelectedMember_ShowGamerCard",
+   "s2_marsh": "0x33c6e0",
+   "s2_worker": "0x74fed0",
+   "s2_size": 3,
+   "aw_name": "UI_ShowGamerCard",
+   "aw_worker": "0x8239ed28",
+   "aw_size": 208
+  },
+  {
+   "binding": "SelectedMember_TryKick",
+   "s2_marsh": "0x33c7c0",
+   "s2_worker": "0x74ec20",
+   "s2_size": 328,
+   "aw_name": "UI_GetKickPlayerQuestionString",
+   "aw_worker": "0x8239ebe8",
+   "aw_size": 316
+  },
+  {
+   "binding": "SelectedMember_Kick",
+   "s2_marsh": "0x33c880",
+   "s2_worker": "0x74f4e0",
+   "s2_size": 160,
+   "aw_name": "UI_KickPlayer",
+   "aw_worker": "0x823a2cc0",
+   "aw_size": 252
+  },
+  {
+   "binding": "SelectedMember_MigrateHost",
+   "s2_marsh": "0x33ca30",
+   "s2_worker": "0x74f6f0",
+   "s2_size": 34,
+   "aw_name": "UI_MakeHost",
+   "aw_worker": "0x823a2bc0",
+   "aw_size": 256
+  },
+  {
+   "binding": "SelectedMember_FetchClan",
+   "s2_marsh": "0x33cb70",
+   "s2_worker": "0x83f660",
+   "s2_size": 119,
+   "aw_name": "EliteClan_FetchRemoteClan",
+   "aw_worker": "0x822e6320",
+   "aw_size": 152
+  },
+  {
+   "binding": "GetPreselectedCategory",
+   "s2_marsh": "0x341a30",
+   "s2_worker": "0x74bb30",
+   "s2_size": 156,
+   "aw_name": "PlaylistFeeder_GetPreselectedPlaylistCategory",
+   "aw_worker": "0x823aabf0",
+   "aw_size": 272
+  },
+  {
+   "binding": "GetPreselectedIndexInCategory",
+   "s2_marsh": "0x341a60",
+   "s2_worker": "0x74bc80",
+   "s2_size": 159,
+   "aw_name": "PlaylistFeeder_GetPreselectedPlaylistIndexInCategory",
+   "aw_worker": "0x823aaad8",
+   "aw_size": 280
+  },
+  {
+   "binding": "GetPreselectedCategoryClass",
+   "s2_marsh": "0x341a90",
+   "s2_worker": "0x74bbd0",
+   "s2_size": 173,
+   "aw_name": "PlaylistFeeder_GetPreselectedPlaylistCategoryClass",
+   "aw_worker": "0x823aa9b0",
+   "aw_size": 292
+  },
+  {
+   "binding": "GetCategoryParent",
+   "s2_marsh": "0x341ac0",
+   "s2_worker": "0x74b6e0",
+   "s2_size": 153,
+   "aw_name": "PlaylistFeeder_GetCategoryParent",
+   "aw_worker": "0x823a99d0",
+   "aw_size": 144
+  },
+  {
+   "binding": "GetPlaylistCount",
+   "s2_marsh": "0x341b20",
+   "s2_worker": "0x655420",
+   "s2_size": 118,
+   "aw_name": "Playlist_GetPlaylistCount",
+   "aw_worker": "0x82495820",
+   "aw_size": 52
+  },
+  {
+   "binding": "GetActivePlayersCount",
+   "s2_marsh": "0x341dc0",
+   "s2_worker": "0x74c6f0",
+   "s2_size": 267,
+   "aw_name": "Playlist_GetActivePlayersCount",
+   "aw_worker": "0x823ab8f0",
+   "aw_size": 264
+  },
+  {
+   "binding": "GetPlayerLimits",
+   "s2_marsh": "0x341e70",
+   "s2_worker": "0x74ccf0",
+   "s2_size": 195,
+   "aw_name": "Playlist_GetPlayerLimits",
+   "aw_worker": "0x823a9eb0",
+   "aw_size": 160
+  },
+  {
+   "binding": "GetPartyLimits",
+   "s2_marsh": "0x341f40",
+   "s2_worker": "0x74cc20",
+   "s2_size": 195,
+   "aw_name": "Playlist_GetPartyLimits",
+   "aw_worker": "0x823a9e10",
+   "aw_size": 160
+  },
+  {
+   "binding": "GetItemCategoryClass",
+   "s2_marsh": "0x3420b0",
+   "s2_worker": "0x74c880",
+   "s2_size": 131,
+   "aw_name": "Playlist_GetItemCategoryClass",
+   "aw_worker": "0x823aa1f8",
+   "aw_size": 100
+  },
+  {
+   "binding": "GetCategory",
+   "s2_marsh": "0x342210",
+   "s2_worker": "0x74c800",
+   "s2_size": 89,
+   "aw_name": "Playlist_GetCategory",
+   "aw_worker": "0x823aa260",
+   "aw_size": 68
+  },
+  {
+   "binding": "ClearContentCache",
+   "s2_marsh": "0x36ea20",
+   "s2_worker": "0x273640",
+   "s2_size": 8,
+   "aw_name": "InGameStore_ClearCachedContent",
+   "aw_worker": "0x8278d5e0",
+   "aw_size": 100
+  }
+ ],
+ "weak": [
+  {
+   "binding": "DepthFromViewZ",
+   "s2_marsh": "0x11c230",
+   "s2_worker": "0x36e1c0",
+   "s2_size": 227,
+   "aw_name": "LUI_Matrix_MultiplyVector",
+   "aw_worker": "0x826e0a38",
+   "aw_size": 212
+  },
+  {
+   "binding": "AnyoneHasSeasonPass",
+   "s2_marsh": "0x126880",
+   "s2_worker": "0x766160",
+   "s2_size": 49,
+   "aw_name": "Content_GetAvailableContentPacks",
+   "aw_worker": "0x82381948",
+   "aw_size": 72
+  },
+  {
+   "binding": "SetTag",
+   "s2_marsh": "0x312820",
+   "s2_worker": "0x842230",
+   "s2_size": 37,
+   "aw_name": "EliteClan_SetClanTag",
+   "aw_worker": "0x822e9eb0",
+   "aw_size": 112
+  },
+  {
+   "binding": "GetMemberBackground",
+   "s2_marsh": "0x331ca0",
+   "s2_worker": "0xd6b50",
+   "s2_size": 39,
+   "aw_name": "LiveStorage_PlayerDataGetIntByName",
+   "aw_worker": "0x8248f870",
+   "aw_size": 116
+  },
+  {
+   "binding": "GetServerData",
+   "s2_marsh": "0x337950",
+   "s2_worker": "0x743530",
+   "s2_size": 1376,
+   "aw_name": "UI_FeederItemText",
+   "aw_worker": "0x823b88a0",
+   "aw_size": 1996
+  },
+  {
+   "binding": "GetMapNameByIndex",
+   "s2_marsh": "0x337e70",
+   "s2_worker": "0x74e640",
+   "s2_size": 128,
+   "aw_name": "UI_FeederItemText_Maps",
+   "aw_worker": "0x82399ff0",
+   "aw_size": 212
+  },
+  {
+   "binding": "SetThirdPerson",
+   "s2_marsh": "0x33ff40",
+   "s2_worker": "0x3f7fd0",
+   "s2_size": 156,
+   "aw_name": "SetSpectatorPersoness",
+   "aw_worker": "0x827ec480",
+   "aw_size": 240
+  }
+ ]
+}

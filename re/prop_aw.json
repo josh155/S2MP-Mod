@@ -1,0 +1,42 @@
+[
+ {
+  "s2_func": "0x59f1f0",
+  "name": "Scr_SetFog",
+  "seeds": 1,
+  "via": [
+   "Scr_SetAtmosphericFogDvarsOnly"
+  ],
+  "size": 3405,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x2e31a0",
+  "name": "?luaL_error@@YAHPAUlua_State@@PBDZZ",
+  "seeds": 1,
+  "via": [
+   "hks__profile_tick"
+  ],
+  "size": 124,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x2dd9c0",
+  "name": "hks::getDefaultFile",
+  "seeds": 1,
+  "via": [
+   "hks__io_read"
+  ],
+  "size": 451,
+  "gen": 2
+ },
+ {
+  "s2_func": "0x2e2eb0",
+  "name": "?luaL_checkoption@@YAHPAUlua_State@@HPBDQBQBD@Z",
+  "seeds": 1,
+  "via": [
+   "hks__compiler_settings"
+  ],
+  "size": 308,
+  "gen": 2
+ }
+]

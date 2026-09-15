@@ -1,0 +1,933 @@
+__int64 __fastcall MSG_ReadDeltaPlayerstate(
+        unsigned int a1,
+        char *a2,
+        unsigned int a3,
+        _BYTE *a4,
+        __int64 a5,
+        char a6,
+        __m128 _XMM0,
+        __m128 _XMM1,
+        double a9)
+{
+  int v13; // ecx
+  int v14; // r8d
+  int v15; // r9d
+  int v16; // eax
+  int v18; // r15d
+  __int64 v19; // rsi
+  __int64 v20; // rcx
+  int v21; // r8d
+  int v22; // r9d
+  int Bits; // r14d
+  char v24; // al
+  __int64 v25; // rdi
+  int v26; // r8d
+  int v27; // r9d
+  char *v29; // rbx
+  int v30; // eax
+  int v31; // r14d
+  __int64 v32; // r12
+  int v33; // ecx
+  int v34; // r8d
+  int v35; // r9d
+  unsigned int v36; // r15d
+  __int64 *v37; // r13
+  int v38; // ebx
+  __int16 v39; // ax
+  __int64 v40; // r13
+  __int16 v41; // ax
+  int v42; // r15d
+  char v43; // al
+  char v44; // al
+  char v45; // al
+  __int64 *v46; // r12
+  __int64 *v47; // rbx
+  __int16 v49; // dx
+  int v51; // ecx
+  int v52; // edx
+  __int16 *v54; // r15
+  int v55; // ecx
+  int v56; // eax
+  int v57; // r8d
+  char v58; // r9
+  int v59; // ebx
+  unsigned int v60; // ebx
+  int v61; // r12d
+  __int64 *v62; // r14
+  int v63; // r14d
+  char *v64; // r13
+  __int64 *v65; // rbx
+  char v66; // r9
+  __int64 v67; // rdi
+  int v68; // edx
+  int v69; // r8d
+  char v72; // r9
+  __int64 v73; // rdi
+  __int64 v74; // rax
+  __int64 v75; // r15
+  __int64 v76; // r12
+  __int64 v77; // rdx
+  int v78; // ecx
+  int v79; // r8d
+  int v80; // r9d
+  char v81; // bl
+  __int64 v82; // r14
+  int v83; // ebx
+  int v84; // eax
+  bool v85; // zf
+  __int64 v86; // rbx
+  _DWORD *v89; // r12
+  int v90; // eax
+  char v91; // r9
+  bool v92; // al
+  __int64 v94; // rdx
+  int Long; // eax
+  int v96; // eax
+  char Byte; // r14
+  __int64 v98; // rdi
+  int WeaponName; // eax
+  int v100; // edx
+  int v101; // r8d
+  int v102; // r9d
+  char v103; // al
+  int v104; // r14d
+  int v105; // ebx
+  int v106; // eax
+  __int64 v107; // rbx
+  char *v108; // r14
+  __int64 v109; // rbx
+  _DWORD *v110; // r13
+  __int64 *v111; // r15
+  char *v112; // rdi
+  __int64 v113; // r12
+  int v114; // r14d
+  int v115; // r15d
+  __int64 v116; // rdx
+  __int64 v117; // rcx
+  int v118; // eax
+  __int64 result; // rax
+  _BYTE *v120; // [rsp+0h] [rbp-4C28h]
+  __int64 v121; // [rsp+0h] [rbp-4C28h]
+  __int64 v122; // [rsp+30h] [rbp-4BF8h]
+  __int16 *v124; // [rsp+40h] [rbp-4BE8h]
+  int v125; // [rsp+4Ch] [rbp-4BDCh]
+  int v126; // [rsp+50h] [rbp-4BD8h]
+  _DWORD *v128; // [rsp+58h] [rbp-4BD0h]
+  bool v129; // [rsp+60h] [rbp-4BC8h]
+  int Bit; // [rsp+68h] [rbp-4BC0h]
+  int v132; // [rsp+6Ch] [rbp-4BBCh]
+  int NumFieldsSkipped; // [rsp+70h] [rbp-4BB8h]
+  __int64 v134; // [rsp+70h] [rbp-4BB8h]
+  char *v135; // [rsp+78h] [rbp-4BB0h]
+  char *v136; // [rsp+78h] [rbp-4BB0h]
+  unsigned int v137; // [rsp+80h] [rbp-4BA8h]
+  int v138; // [rsp+84h] [rbp-4BA4h]
+  int v139; // [rsp+88h] [rbp-4BA0h]
+  _BYTE *v140; // [rsp+90h] [rbp-4B98h]
+  char v141; // [rsp+9Fh] [rbp-4B89h]
+  char v142; // [rsp+9Fh] [rbp-4B89h]
+  __int64 *v143; // [rsp+A0h] [rbp-4B88h]
+  int v144; // [rsp+A8h] [rbp-4B80h]
+  int v145; // [rsp+A8h] [rbp-4B80h]
+  __int128 v146; // [rsp+B0h] [rbp-4B78h] BYREF
+  _BYTE v147[32]; // [rsp+C0h] [rbp-4B68h] BYREF
+  _BYTE v148[32]; // [rsp+E0h] [rbp-4B48h] BYREF
+  _BYTE v149[28]; // [rsp+100h] [rbp-4B28h] BYREF
+  __int16 v151; // [rsp+12Ch] [rbp-4AFCh]
+  __int16 v152; // [rsp+12Eh] [rbp-4AFAh]
+  __int16 v153; // [rsp+134h] [rbp-4AF4h]
+  __int16 v154; // [rsp+136h] [rbp-4AF2h]
+  int v155; // [rsp+168h] [rbp-4AC0h]
+  int v156; // [rsp+1A4h] [rbp-4A84h]
+  int v157; // [rsp+1A8h] [rbp-4A80h]
+  int v158; // [rsp+1ACh] [rbp-4A7Ch]
+  int v159; // [rsp+1B4h] [rbp-4A74h]
+  int v160; // [rsp+1C8h] [rbp-4A60h]
+  __int16 v161; // [rsp+1D8h] [rbp-4A50h]
+  int v162; // [rsp+34Ch] [rbp-48DCh]
+  int v163; // [rsp+35Ch] [rbp-48CCh]
+  int v164; // [rsp+360h] [rbp-48C8h]
+  int v165; // [rsp+5E4h] [rbp-4644h]
+  int v166; // [rsp+5E8h] [rbp-4640h]
+  int v167; // [rsp+5ECh] [rbp-463Ch]
+  int v168; // [rsp+2030h] [rbp-2BF8h]
+  int v169; // [rsp+2048h] [rbp-2BE0h]
+  int v170; // [rsp+204Ch] [rbp-2BDCh]
+  int v171; // [rsp+2058h] [rbp-2BD0h]
+  __int16 v173; // [rsp+2080h] [rbp-2BA8h]
+  __int16 v174; // [rsp+20A4h] [rbp-2B84h]
+  __int16 v175; // [rsp+20C8h] [rbp-2B60h]
+  __int16 v176; // [rsp+20ECh] [rbp-2B3Ch]
+  __int16 v177; // [rsp+2110h] [rbp-2B18h]
+  __int16 v178; // [rsp+2134h] [rbp-2AF4h]
+  __int16 v179; // [rsp+2158h] [rbp-2AD0h]
+  __int16 v180; // [rsp+217Ch] [rbp-2AACh]
+  __int16 v181; // [rsp+21A0h] [rbp-2A88h]
+  __int16 v182; // [rsp+21C4h] [rbp-2A64h]
+  __int16 v183; // [rsp+21E8h] [rbp-2A40h]
+  __int16 v184; // [rsp+220Ch] [rbp-2A1Ch]
+  __int16 v185; // [rsp+2230h] [rbp-29F8h]
+  __int16 v186; // [rsp+2254h] [rbp-29D4h]
+  __int16 v187; // [rsp+2278h] [rbp-29B0h]
+  __int16 v188; // [rsp+229Ch] [rbp-298Ch]
+  __int16 v189; // [rsp+22C0h] [rbp-2968h]
+  __int16 v190; // [rsp+22E4h] [rbp-2944h]
+  __int16 v191; // [rsp+2308h] [rbp-2920h]
+  __int16 v192; // [rsp+232Ch] [rbp-28FCh]
+  __int16 v193; // [rsp+2350h] [rbp-28D8h]
+  __int16 v194; // [rsp+2374h] [rbp-28B4h]
+  __int16 v195; // [rsp+2398h] [rbp-2890h]
+  __int16 v196; // [rsp+23BCh] [rbp-286Ch]
+  __int16 v197; // [rsp+23E0h] [rbp-2848h]
+  __int16 v198; // [rsp+2404h] [rbp-2824h]
+  __int16 v199; // [rsp+2428h] [rbp-2800h]
+  __int16 v200; // [rsp+244Ch] [rbp-27DCh]
+  __int16 v201; // [rsp+2470h] [rbp-27B8h]
+  __int16 v202; // [rsp+2494h] [rbp-2794h]
+  __int16 v203; // [rsp+24B8h] [rbp-2770h]
+  __int16 v204; // [rsp+24DCh] [rbp-274Ch]
+  char v205[1024]; // [rsp+47C0h] [rbp-468h] BYREF
+  __int64 v206; // [rsp+4BC0h] [rbp-68h]
+
+  v206 = *(_QWORD *)COMMON; /*0x72560f*/
+  if ( !unk_337EDC0 ) /*0x72561c*/
+    MyAssertHandler( /*0x72563c*/
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+      1198,
+      0,
+      (unsigned int)"%s",
+      (unsigned int)"clientConnections",
+      a6);
+  if ( dword_337EDB0[0] <= a1 ) /*0x72564e*/
+    MyAssertHandler( /*0x72566d*/
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+      1200,
+      0,
+      (unsigned int)"localClientNum doesn't index MAX_LOCAL_CLIENTS\n\t%i not in [0, %i)",
+      a1,
+      LOBYTE(dword_337EDB0[0]));
+  v122 = (int)a1; /*0x72567e*/
+  v141 = *(_BYTE *)(unk_337EDC0 + 333288LL * (int)a1 + 4); /*0x725691*/
+  if ( !a4 ) /*0x725698*/
+  {
+    a4 = v149; /*0x72569e*/
+    PLmemset(v149, 0, 18048); /*0x7256b0*/
+    __asm /*0x7256b5*/
+    {
+      vmovdqa xmm0, cs:xmmword_F9B9A0
+      vmovaps ymm1, cs:ymmword_F9B9C0
+    }
+    v152 = 2047; /*0x7256c5*/
+    v149[15] = 15; /*0x7256cf*/
+    v153 = 2047; /*0x7256d7*/
+    v151 = 2047; /*0x7256e1*/
+    v161 = 2047; /*0x7256eb*/
+    v157 = 0; /*0x7256f5*/
+    __asm { vmovdqu [rsp+4C28h+var_4B0C], xmm0 } /*0x725700*/
+    v169 = 1086324736; /*0x725709*/
+    v170 = 1072064102; /*0x725714*/
+    v171 = 0; /*0x72571f*/
+    __asm { vmovups [rsp+4C28h+var_2BCC], ymm1 } /*0x72572a*/
+    v173 = 2047; /*0x725733*/
+    v174 = 2047; /*0x72573d*/
+    v175 = 2047; /*0x725747*/
+    v176 = 2047; /*0x725751*/
+    v177 = 2047; /*0x72575b*/
+    v178 = 2047; /*0x725765*/
+    v179 = 2047; /*0x72576f*/
+    v180 = 2047; /*0x725779*/
+    v181 = 2047; /*0x725783*/
+    v182 = 2047; /*0x72578d*/
+    v183 = 2047; /*0x725797*/
+    v184 = 2047; /*0x7257a1*/
+    v185 = 2047; /*0x7257ab*/
+    v186 = 2047; /*0x7257b5*/
+    v187 = 2047; /*0x7257bf*/
+    v188 = 2047; /*0x7257c9*/
+    v189 = 2047; /*0x7257d3*/
+    v190 = 2047; /*0x7257dd*/
+    v191 = 2047; /*0x7257e7*/
+    v192 = 2047; /*0x7257f1*/
+    v193 = 2047; /*0x7257fb*/
+    v194 = 2047; /*0x725805*/
+    v195 = 2047; /*0x72580f*/
+    v196 = 2047; /*0x725819*/
+    v197 = 2047; /*0x725823*/
+    v198 = 2047; /*0x72582d*/
+    v199 = 2047; /*0x725837*/
+    v200 = 2047; /*0x725841*/
+    v201 = 2047; /*0x72584b*/
+    v202 = 2047; /*0x725855*/
+    v203 = 2047; /*0x72585f*/
+    v204 = 2047; /*0x725869*/
+    v165 = 0; /*0x725873*/
+    v166 = 0; /*0x72587e*/
+    v167 = 1065353216; /*0x725889*/
+    v164 = 1065353216; /*0x725894*/
+    v155 = 0; /*0x72589f*/
+    v156 = 0; /*0x7258aa*/
+    v160 = 0; /*0x7258b5*/
+    v168 = 1065353216; /*0x7258c0*/
+    v158 = 0; /*0x7258cb*/
+    v159 = 0; /*0x7258d6*/
+    v162 = 1065353216; /*0x7258e1*/
+    v154 = 800; /*0x7258ec*/
+    v163 = 1065353216; /*0x7258f6*/
+  }
+  v140 = a4; /*0x72590e*/
+  PLmemcpy(a5, a4, 18048); /*0x725916*/
+  v132 = 0; /*0x725922*/
+  if ( qword_337E2E0 )
+  {
+    v16 = *(_DWORD *)(qword_337E2E0 + 24LL); /*0x725932*/
+    if ( v16 > 1 || v16 == -2 )
+    {
+      Com_Printf(25, (unsigned int)"%3i: playerstate\n", *((_DWORD *)a2 + 9), v13, v14, v15);
+      v132 = 1; /*0x725956*/
+    }
+  }
+  Bit = MSG_ReadBit(a2); /*0x72596c*/
+  v125 = MSG_ReadBit(a2); /*0x725978*/
+  v144 = MSG_ReadBit(a2); /*0x725981*/
+  v137 = a3; /*0x72598c*/
+  if ( v144 ) /*0x72598a*/
+    v129 = 0; /*0x725994*/
+  else
+    v129 = (unsigned int)MSG_ReadBit(a2) != 0; /*0x7259b3*/
+  v18 = *((_DWORD *)g_netFieldList + 14); /*0x7259cc*/
+  v143 = g_netFieldList[6]; /*0x7259d8*/
+  v19 = 32 - __lzcnt(v18 + 1); /*0x7259e7*/
+  Bits = MSG_ReadBits(a2, v19); /*0x7259ee*/
+  if ( Bits >= v18 + 1 ) /*0x7259f4*/
+  {
+    v24 = va((unsigned int)"lastChanged was %i, totalFields is %i\n", Bits, v18 + 1, v20, v21, v22); /*0x725a05*/
+    v19 = 1001; /*0x725a22*/
+    MyAssertHandler( /*0x725a31*/
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+      1001,
+      0,
+      (unsigned int)"%s\n\t%s",
+      (unsigned int)"lastChanged < totalFields",
+      v24);
+  }
+  v138 = Bits - 1; /*0x725a3a*/
+  if ( Bits - 1 <= -2 ) /*0x725a44*/
+  {
+    v19 = 2869; /*0x725a5b*/
+    MyAssertHandler( /*0x725a64*/
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+      2869,
+      0,
+      (unsigned int)"%s",
+      (unsigned int)"lc >= -1",
+      (_BYTE)v22);
+  }
+  if ( Bits > v18 ) /*0x725a6c*/
+  {
+    MSG_Discard(a2); /*0x725a71*/
+    v25 = 25; /*0x725a84*/
+    Com_PrintError(25, (unsigned int)"Got lastChanged field of %i, but there are only %i fields\n", v138, v18, v26, v27); /*0x725a8e*/
+    goto LABEL_169; /*0x725a93*/
+  }
+  v126 = v18; /*0x725a98*/
+  _R15 = a5; /*0x725a9d*/
+  v29 = a2; /*0x725aa2*/
+  v30 = -1; /*0x725aa5*/
+  v135 = a2; /*0x725aad*/
+  if ( Bits > 0 ) /*0x725ab2*/
+  {
+    v31 = -1; /*0x725abd*/
+    while ( 1 ) /*0x725ad3*/
+    {
+      v32 = _R15; /*0x725ad3*/
+      if ( *(_DWORD *)v29 ) /*0x725ad0*/
+        MyAssertHandler( /*0x725af6*/
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          2882,
+          0,
+          (unsigned int)"%s",
+          (unsigned int)"!msg->overflowed",
+          (_BYTE)v22);
+      NumFieldsSkipped = MSG_ReadNumFieldsSkipped(v29, 4, (unsigned int)(v138 - v31)); /*0x725b12*/
+      v36 = v31 + 1; /*0x725b1b*/
+      v139 = NumFieldsSkipped + v31; /*0x725b1f*/
+      if ( v31 + 1 < NumFieldsSkipped + v31 ) /*0x725b2a*/
+      {
+        v37 = &v143[2 * v31 + 2]; /*0x725b42*/
+        v33 = NumFieldsSkipped; /*0x725b46*/
+        v38 = NumFieldsSkipped - 1; /*0x725b4b*/
+        do /*0x725bb8*/
+        {
+          v39 = *((_WORD *)v37 + 7); /*0x725b50*/
+          if ( v144 || (v33 = v39 & 0x1F0, !(_WORD)v33) ) /*0x725b6a*/
+          {
+            if ( (v39 & 2) == 0 ) /*0x725b92*/
+              MSG_CopyFieldOver(v143, v140, v32, v36); /*0x725baa*/
+          }
+          else
+          {
+            MSG_SetResetOnSpawnField((unsigned int)v141, v37, *((unsigned __int16 *)v37 + 4) + v32); /*0x725b80*/
+          }
+          ++v36; /*0x725baf*/
+          v37 += 2; /*0x725bb2*/
+          --v38; /*0x725bb6*/
+        }
+        while ( v38 ); /*0x725bb8*/
+      }
+      v40 = 2LL * v139; /*0x725bc5*/
+      if ( Bit ) /*0x725bce*/
+        break; /*0x725bce*/
+      v41 = HIWORD(v143[v40 + 1]); /*0x725bf8*/
+      v42 = (unsigned __int8)(v41 & 4) >> 2; /*0x725c05*/
+      LOBYTE(v33) = (v125 == 0) | ((unsigned __int8)(v41 & 4) >> 2); /*0x725c0c*/
+      if ( !(_BYTE)v33 ) /*0x725c10*/
+        goto LABEL_36; /*0x725c10*/
+LABEL_38:
+      if ( v139 > v138 ) /*0x725c32*/
+      {
+        v43 = va((unsigned int)"nextChanged == %i, lc == %i", v139, v138, v33, v34, v35); /*0x725c4c*/
+        MyAssertHandler( /*0x725c75*/
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          2907,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"nextChanged <= lc",
+          v43);
+      }
+      if ( NumFieldsSkipped <= 0 ) /*0x725c8d*/
+      {
+        v44 = va((unsigned int)"nextChanged == %i, lastChanged == %i", v139, v31, v33, v34, v35); /*0x725ca3*/
+        MyAssertHandler( /*0x725cd2*/
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          2908,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"nextChanged > lastChanged",
+          v44);
+      }
+      v19 = v137; /*0x725ce0*/
+      v45 = a6 & v42; /*0x725cfa*/
+      _R15 = v32; /*0x725cfe*/
+      v46 = &v143[v40]; /*0x725d01*/
+      MSG_ReadDeltaField((_DWORD)v135, v137, (_DWORD)v140, _R15, (_DWORD)v143 + v40 * 8, v132, v45); /*0x725d0a*/
+      v47 = v143; /*0x725d13*/
+      if ( v129 && (v143[v40 + 1] & 0x1F0000000000000LL) != 0 && (int)MSG_ReadBit(v135) > 0 ) /*0x725d3f*/
+      {
+        v19 = (__int64)&v143[v40]; /*0x725d55*/
+        MSG_SetResetOnSpawnField((unsigned int)v141, v46, &v146); /*0x725d5b*/
+        _RAX = LOWORD(v143[v40 + 1]); /*0x725d60*/
+        v49 = WORD1(v143[v40 + 1]); /*0x725d66*/
+        __asm { vmovdqu xmm0, xmmword ptr [r15+rax] } /*0x725d6e*/
+        v51 = -(unsigned __int16)v49; /*0x725d74*/
+        if ( v49 >= 0 ) /*0x725d79*/
+          LOBYTE(v51) = v49; /*0x725d79*/
+        __asm { vpcmpeqb xmm0, xmm0, [rsp+4C28h+var_4B78] } /*0x725d81*/
+        v52 = (1 << v51) - 1; /*0x725d8c*/
+        __asm { vpmovmskb ecx, xmm0 } /*0x725d8e*/
+        v20 = v52 & _ECX; /*0x725d92*/
+        if ( (_DWORD)v20 != v52 ) /*0x725d96*/
+        {
+          v19 = (__int64)&v146; /*0x725da6*/
+          v134 = _RAX + _R15; /*0x725da9*/
+          if ( !(unsigned __int8)MSG_ValuesAreEqualPost(_RAX + _R15, &v146, (unsigned int)SWORD2(v143[v40 + 1]), v20) ) /*0x725dae*/
+          {
+            v54 = (__int16 *)&v143[v40 + 1] + 3; /*0x725dc5*/
+            v124 = (__int16 *)&v143[v40 + 1] + 1; /*0x725ddd*/
+            ((void (__fastcall *)(__int64, __int64 *, _BYTE *, __int64))MSG_PrintNetFieldValue)(v134, v46, v148, 32); /*0x725de2*/
+            ((void (__fastcall *)(__int128 *, __int64 *, _BYTE *, __int64))MSG_PrintNetFieldValue)(&v146, v46, v147, 32); /*0x725e00*/
+            v120 = v147; /*0x725e29*/
+            Com_PrintError( /*0x725e2d*/
+              25,
+              (unsigned int)"field %s size %d changedhints %d received value %s != resetvalue %s\n",
+              *v46,
+              *v124,
+              *v54,
+              (unsigned int)v148);
+            v55 = *v54; /*0x725e3b*/
+            _R15 = a5; /*0x725e3f*/
+            v56 = va( /*0x725e52*/
+                    (unsigned int)"field %s size %d changedhints %d received value %s != resetvalue %s\n",
+                    *v46,
+                    *v124,
+                    v55,
+                    (unsigned int)v148,
+                    (unsigned int)v147);
+            v19 = 2936; /*0x725e5a*/
+            MyAssertHandler((unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp", 2936, 0, v56, v57, v58); /*0x725e6a*/
+            v47 = v143; /*0x725e6f*/
+          }
+        }
+      }
+      v143 = v47; /*0x725e80*/
+      v29 = v135; /*0x725e88*/
+      if ( *(_DWORD *)v135 ) /*0x725e8d*/
+      {
+        v19 = 2942; /*0x725e92*/
+        MyAssertHandler( /*0x725eb0*/
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          2942,
+          0,
+          (unsigned int)"%s",
+          (unsigned int)"!msg->overflowed",
+          (_BYTE)v22);
+      }
+      v30 = v139; /*0x725eb5*/
+      v31 = v139; /*0x725ec4*/
+      if ( v138 <= v139 ) /*0x725ec7*/
+        goto LABEL_53; /*0x725ec7*/
+    }
+    if ( !v125 ) /*0x725bd5*/
+    {
+      LOBYTE(v42) = 0; /*0x725c20*/
+      goto LABEL_38; /*0x725c20*/
+    }
+    v41 = HIWORD(v143[v40 + 1]); /*0x725bdf*/
+LABEL_36:
+    LOBYTE(v42) = (unsigned __int8)(v41 & 8) >> 3; /*0x725c12*/
+    goto LABEL_38; /*0x725c1b*/
+  }
+LABEL_53:
+  v136 = v29; /*0x725ecd*/
+  if ( v138 != v30 ) /*0x725ed9*/
+  {
+    v59 = v30; /*0x725edb*/
+    v19 = 2944; /*0x725ef3*/
+    MyAssertHandler( /*0x725efc*/
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+      2944,
+      0,
+      (unsigned int)"%s",
+      (unsigned int)"nextChanged == lc",
+      (_BYTE)v22);
+    v30 = v59; /*0x725f01*/
+  }
+  v60 = v30 + 1; /*0x725f04*/
+  v61 = v30; /*0x725f07*/
+  if ( v30 + 1 < v126 ) /*0x725f11*/
+  {
+    v62 = &v143[2 * v30 + 2]; /*0x725f33*/
+    do /*0x725f97*/
+    {
+      if ( v144 || (*((_WORD *)v62 + 7) & 0x1F0) == 0 ) /*0x725f53*/
+      {
+        v19 = (__int64)v140; /*0x725f78*/
+        MSG_CopyFieldOver(v143, v140, _R15, v60); /*0x725f85*/
+      }
+      else
+      {
+        v19 = (__int64)v62; /*0x725f5d*/
+        MSG_SetResetOnSpawnField((unsigned int)v141, v62, *((unsigned __int16 *)v62 + 4) + _R15); /*0x725f64*/
+      }
+      ++v60; /*0x725f8f*/
+      v62 += 2; /*0x725f91*/
+    }
+    while ( v126 != v60 ); /*0x725f97*/
+  }
+  v63 = v61; /*0x725f99*/
+  v64 = v136; /*0x725f9c*/
+  v65 = v143; /*0x725fa9*/
+  if ( v61 > 0 ) /*0x725fb4*/
+  {
+    do /*0x725ff1*/
+    {
+      if ( (*((_BYTE *)v65 + 14) & 2) != 0 ) /*0x725fc4*/
+      {
+        v19 = v137; /*0x725fc6*/
+        MSG_ReadDeltaField((_DWORD)v136, v137, (_DWORD)v140, _R15, (_DWORD)v65, v132, 0); /*0x725fe5*/
+      }
+      v65 += 2; /*0x725fea*/
+      --v63; /*0x725fee*/
+    }
+    while ( v63 ); /*0x725ff1*/
+  }
+  if ( Bit ) /*0x725ff8*/
+  {
+    if ( !unk_337EDB8 ) /*0x726009*/
+      MyAssertHandler( /*0x726029*/
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+        1184,
+        0,
+        (unsigned int)"%s",
+        (unsigned int)"clients",
+        (_BYTE)v22);
+    v66 = dword_337EDB0[0]; /*0x72603a*/
+    if ( dword_337EDB0[0] <= a1 ) /*0x726040*/
+      MyAssertHandler( /*0x72605c*/
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+        1186,
+        0,
+        (unsigned int)"localClientNum doesn't index MAX_LOCAL_CLIENTS\n\t%i not in [0, %i)",
+        a1,
+        LOBYTE(dword_337EDB0[0]));
+    v67 = unk_337EDB8; /*0x72606a*/
+    if ( *(_BYTE *)(unk_337EDB8 + 70528 * v122 + 18828) ) /*0x72606d*/
+    {
+      MyAssertHandler( /*0x726095*/
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+        1187,
+        0,
+        (unsigned int)"%s",
+        (unsigned int)"clients[localClientNum].alwaysFalse == false",
+        v66);
+      v67 = unk_337EDB8; /*0x72609a*/
+    }
+    v19 = *(unsigned int *)(_R15 + 76); /*0x72609d*/
+    if ( !(unsigned int)CL_GetPredictedPlayerInformationForServerTime(70528 * v122 + v67, v19, _R15) ) /*0x7260a7*/
+    {
+      v19 = (__int64)"Unable to find the origin we sent, delta is not going to work\n"; /*0x7260b4*/
+      Com_PrintError( /*0x7260c2*/
+        25,
+        (unsigned int)"Unable to find the origin we sent, delta is not going to work\n",
+        v68,
+        v20,
+        v69,
+        v22);
+      *(_DWORD *)(_R15 + 116) = *((_DWORD *)v140 + 29); /*0x7260cc*/
+      *(_DWORD *)(_R15 + 120) = *((_DWORD *)v140 + 30); /*0x7260d5*/
+      *(_DWORD *)(_R15 + 124) = *((_DWORD *)v140 + 31); /*0x7260de*/
+      *(_DWORD *)(_R15 + 128) = *((_DWORD *)v140 + 32); /*0x7260ea*/
+      *(_DWORD *)(_R15 + 132) = *((_DWORD *)v140 + 33); /*0x7260f9*/
+      *(_DWORD *)(_R15 + 136) = *((_DWORD *)v140 + 34); /*0x726108*/
+      *(_BYTE *)(_R15 + 14) = v140[14]; /*0x726114*/
+      *(_DWORD *)(_R15 + 196) = *((_DWORD *)v140 + 49); /*0x726120*/
+    }
+  }
+  else
+  {
+    __asm { vxorps xmm1, xmm1, xmm1 } /*0x726133*/
+    _RAX = unk_BA57FD0; /*0x726137*/
+    __asm /*0x72613a*/
+    {
+      vmovss xmm0, dword ptr [rax+18h]
+      vucomiss xmm0, xmm1
+    }
+  }
+  if ( !v125 && *(_WORD *)(_R15 + 216) != 2047 ) /*0x7262f5*/
+  {
+    if ( !unk_337EDB8 ) /*0x726306*/
+      MyAssertHandler( /*0x726326*/
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+        1184,
+        0,
+        (unsigned int)"%s",
+        (unsigned int)"clients",
+        (_BYTE)v22);
+    _R14 = v140; /*0x726337*/
+    v72 = dword_337EDB0[0]; /*0x72633a*/
+    if ( dword_337EDB0[0] <= a1 ) /*0x726340*/
+      MyAssertHandler( /*0x72635c*/
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+        1186,
+        0,
+        (unsigned int)"localClientNum doesn't index MAX_LOCAL_CLIENTS\n\t%i not in [0, %i)",
+        a1,
+        LOBYTE(dword_337EDB0[0]));
+    v73 = unk_337EDB8; /*0x726361*/
+    v74 = _R15; /*0x72636d*/
+    v75 = _R15 + 216; /*0x726370*/
+    v76 = v74; /*0x726377*/
+    if ( *(_BYTE *)(unk_337EDB8 + 70528 * v122 + 18828) ) /*0x72637a*/
+    {
+      MyAssertHandler( /*0x7263a2*/
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../client_mp/client_mp.h",
+        1187,
+        0,
+        (unsigned int)"%s",
+        (unsigned int)"clients[localClientNum].alwaysFalse == false",
+        v72);
+      v73 = unk_337EDB8; /*0x7263ae*/
+    }
+    v19 = *(unsigned int *)(v76 + 76); /*0x7263b1*/
+    v77 = v75; /*0x7263b6*/
+    _R15 = v76; /*0x7263bc*/
+    if ( !(unsigned int)CL_GetPredictedVehicleForServerTime(70528 * v122 + v73, v19, v77, v20) ) /*0x7263bf*/
+    {
+      *(_DWORD *)(v76 + 220) = *((_DWORD *)v140 + 55); /*0x7263d3*/
+      *(_DWORD *)(v76 + 228) = *((_DWORD *)v140 + 57); /*0x7263e1*/
+      *(_DWORD *)(v76 + 232) = *((_DWORD *)v140 + 58); /*0x7263ef*/
+      *(_DWORD *)(v76 + 236) = *((_DWORD *)v140 + 59); /*0x7263fd*/
+      *(_DWORD *)(v76 + 240) = *((_DWORD *)v140 + 60); /*0x72640b*/
+      *(_DWORD *)(v76 + 244) = *((_DWORD *)v140 + 61); /*0x726419*/
+      *(_DWORD *)(v76 + 248) = *((_DWORD *)v140 + 62); /*0x726427*/
+      *(_DWORD *)(v76 + 252) = *((_DWORD *)v140 + 63); /*0x726435*/
+      *(_DWORD *)(v76 + 256) = *((_DWORD *)v140 + 64); /*0x726443*/
+      *(_DWORD *)(v76 + 260) = *((_DWORD *)v140 + 65); /*0x726451*/
+      *(_DWORD *)(v76 + 264) = *((_DWORD *)v140 + 66); /*0x72645f*/
+      *(_DWORD *)(v76 + 268) = *((_DWORD *)v140 + 67); /*0x72646d*/
+      *(_DWORD *)(v76 + 272) = *((_DWORD *)v140 + 68); /*0x72647b*/
+      *(_DWORD *)(v76 + 276) = *((_DWORD *)v140 + 69); /*0x726489*/
+      *(_DWORD *)(v76 + 280) = *((_DWORD *)v140 + 70); /*0x726497*/
+      *(_DWORD *)(v76 + 284) = *((_DWORD *)v140 + 71); /*0x7264a5*/
+      *(_DWORD *)(v76 + 288) = *((_DWORD *)v140 + 72); /*0x7264b3*/
+      *(_DWORD *)(v76 + 292) = *((_DWORD *)v140 + 73); /*0x7264c1*/
+      *(_DWORD *)(v76 + 296) = *((_DWORD *)v140 + 74); /*0x7264cf*/
+      *(_DWORD *)(v76 + 300) = *((_DWORD *)v140 + 75); /*0x7264dd*/
+      *(_DWORD *)(v76 + 304) = *((_DWORD *)v140 + 76); /*0x7264eb*/
+      *(_DWORD *)(v76 + 308) = *((_DWORD *)v140 + 77); /*0x7264f9*/
+      *(_DWORD *)(v76 + 312) = *((_DWORD *)v140 + 78); /*0x726507*/
+      *(_DWORD *)(v76 + 316) = *((_DWORD *)v140 + 79); /*0x726515*/
+      *(_WORD *)(v76 + 320) = *((_WORD *)v140 + 160); /*0x726524*/
+      *(_WORD *)(v76 + 322) = *((_WORD *)v140 + 161); /*0x726534*/
+      *(_WORD *)(v76 + 324) = *((_WORD *)v140 + 162); /*0x726544*/
+      *(_WORD *)(v76 + 224) = *((_WORD *)v140 + 112); /*0x726554*/
+      __asm /*0x72655c*/
+      {
+        vmovups xmm0, xmmword ptr [r14+148h]
+        vmovups xmmword ptr [r15+148h], xmm0
+      }
+    }
+  }
+  if ( (unsigned int)MSG_ReadBit(v136) ) /*0x726571*/
+  {
+    if ( qword_337E2E0 && *(_DWORD *)(qword_337E2E0 + 24LL) == 5 ) /*0x726591*/
+      Com_Printf(25, (unsigned int)"%s ", (unsigned int)"PS_STATS", v78, v79, v80); /*0x7265a8*/
+    v19 = 4; /*0x7265ad*/
+    v81 = MSG_ReadBits(v136, 4); /*0x7265ba*/
+    if ( (v81 & 1) != 0 ) /*0x7265bf*/
+      *(_DWORD *)(_R15 + 472) = MSG_ReadShort(v136, 4, *(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64, a9); /*0x7265c9*/
+    if ( (v81 & 2) != 0 ) /*0x7265d3*/
+      *(_DWORD *)(_R15 + 476) = MSG_ReadShort(v136, 4, *(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64, a9); /*0x7265dd*/
+    if ( (v81 & 4) != 0 ) /*0x7265e7*/
+      *(_DWORD *)(_R15 + 480) = MSG_ReadShort(v136, 4, *(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64, a9); /*0x7265f1*/
+    if ( (v81 & 8) != 0 ) /*0x7265fb*/
+      *(_DWORD *)(_R15 + 484) = MSG_ReadByte(v136); /*0x726605*/
+  }
+  while ( (unsigned int)MSG_ReadBit(v136) ) /*0x72662f*/
+  {
+    v82 = (int)MSG_ReadBits(v136, 4); /*0x726646*/
+    v19 = 31; /*0x72664e*/
+    v83 = MSG_ReadBits(v136, 1); /*0x726656*/
+    v84 = MSG_ReadBits(v136, 31); /*0x726658*/
+    v85 = v83 == 0; /*0x72665d*/
+    v86 = 3 * v82; /*0x72665f*/
+    *(_DWORD *)(_R15 + 8 * v86 + 1448) = v84; /*0x726666*/
+    *(_BYTE *)(_R15 + 8 * v86 + 1452) = !v85; /*0x72666e*/
+    if ( (unsigned int)MSG_ReadBit(v136) ) /*0x726677*/
+    {
+      v19 = 8; /*0x726680*/
+      *(_DWORD *)(_R15 + 24 * v82 + 1456) = MSG_ReadBits(v136, 8); /*0x72668d*/
+    }
+    if ( (unsigned int)MSG_ReadBit(v136) ) /*0x726698*/
+    {
+      v19 = 8; /*0x726610*/
+      *(_DWORD *)(_R15 + 24 * v82 + 1460) = MSG_ReadBits(v136, 8); /*0x72661d*/
+    }
+  }
+  v128 = (_DWORD *)_R15; /*0x7266ad*/
+  if ( (unsigned int)MSG_ReadBit(v136) ) /*0x7266b2*/
+  {
+    v142 = v141 + 1; /*0x7266c4*/
+    _R15 = 0; /*0x7266cb*/
+    _RBX = v128 + 198; /*0x7266ce*/
+    v89 = v128 + 183; /*0x7266d5*/
+    do /*0x726a1f*/
+    {
+      if ( (unsigned int)MSG_ReadBit(v64) ) /*0x7266e3*/
+      {
+        if ( v144 || (unsigned int)MSG_ReadBit(v64) ) /*0x7266fd*/
+        {
+          if ( (unsigned int)MSG_ReadBit(v64) ) /*0x72670d*/
+          {
+            v90 = MSG_ReadBits(v64, 31); /*0x726722*/
+            *v89 = v90; /*0x72672e*/
+            if ( (!unk_8341190 || !*(_BYTE *)(unk_8341190 + 24LL)) /*0x726825*/
+              && v128[183] != v90
+              && v128[184] != v90
+              && v128[185] != v90
+              && v128[186] != v90
+              && v128[187] != v90
+              && v128[188] != v90
+              && v128[189] != v90
+              && v128[190] != v90
+              && v128[191] != v90
+              && v128[192] != v90
+              && v128[193] != v90
+              && v128[194] != v90
+              && v128[195] != v90
+              && v128[196] != v90
+              && v128[197] != v90 )
+            {
+              MyAssertHandler( /*0x726845*/
+                (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+                3126,
+                0,
+                (unsigned int)"%s",
+                (unsigned int)"equippedWeapon",
+                v91);
+            }
+          }
+          LOBYTE(_RBX[_R15]) = (int)MSG_ReadBit(v64) > 0; /*0x72685d*/
+          BYTE1(_RBX[_R15]) = (int)MSG_ReadBit(v64) > 0; /*0x72686c*/
+          BYTE2(_RBX[_R15]) = (int)MSG_ReadBit(v64) > 0; /*0x72687c*/
+          HIBYTE(_RBX[_R15]) = (int)MSG_ReadBit(v64) > 0; /*0x726889*/
+          if ( v144 ) /*0x726897*/
+          {
+            LOBYTE(_RBX[_R15 + 1]) = (int)MSG_ReadBit(v64) > 0; /*0x7268a6*/
+            v92 = (int)MSG_ReadBit(v64) > 0; /*0x7268b3*/
+          }
+          else
+          {
+            v92 = 0; /*0x7268c0*/
+            LOBYTE(_RBX[_R15 + 1]) = 0; /*0x7268c2*/
+          }
+          BYTE1(_RBX[_R15 + 1]) = v92; /*0x7268cb*/
+          v19 = 2; /*0x7268d7*/
+          BYTE2(_RBX[_R15 + 1]) = (int)MSG_ReadBit(v64) > 0; /*0x7268df*/
+          _RBX[_R15 + 2] = MSG_ReadBits(v64, 2); /*0x7268ed*/
+          LOBYTE(_RBX[_R15 + 3]) = (int)MSG_ReadBit(v64) > 0; /*0x7268fc*/
+          BYTE1(_RBX[_R15 + 3]) = (int)MSG_ReadBit(v64) > 0; /*0x726909*/
+          if ( v144 ) /*0x726917*/
+          {
+            MSG_ReadShort(v64, 2, *(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64, a9); /*0x72691c*/
+            __asm /*0x726921*/
+            {
+              vcvtsi2ss xmm0, xmm0, eax
+              vmulss xmm0, xmm0, cs:dword_F9B8B8
+            }
+            __asm { vmovss dword ptr [rbx+r15+10h], xmm0 }
+            Long = MSG_ReadLong(v64, 2, v94); /*0x726937*/
+          }
+          else
+          {
+            Long = 0; /*0x726940*/
+            _RBX[_R15 + 4] = 0; /*0x726942*/
+          }
+          _RBX[_R15 + 5] = Long; /*0x72694b*/
+          LOBYTE(_RBX[_R15 + 6]) = v142; /*0x72695a*/
+          v96 = MSG_ReadBit(v64); /*0x72695f*/
+          if ( v144 ) /*0x72696c*/
+          {
+            if ( !v96 ) /*0x726970*/
+            {
+              Byte = MSG_ReadByte(v64); /*0x72697e*/
+              LOBYTE(_RBX[_R15 + 6]) = Byte; /*0x7269a5*/
+              v64 = v136; /*0x7269aa*/
+              if ( Byte >= 19 ) /*0x7269b2*/
+              {
+                v19 = 3174; /*0x7269b8*/
+                MyAssertHandler( /*0x7269d9*/
+                  (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+                  3174,
+                  0,
+                  (unsigned int)"%s\n\t(to->weapEquippedData[equippedWeaponIndex].ownerOriginal) = %i",
+                  (unsigned int)"(to->weapEquippedData[equippedWeaponIndex].ownerOriginal <= 18)",
+                  Byte);
+              }
+            }
+          }
+          else if ( !v96 ) /*0x7269e2*/
+          {
+            LOBYTE(_RBX[_R15 + 6]) = 0; /*0x7269e4*/
+          }
+        }
+        else
+        {
+          __asm { vxorps xmm0, xmm0, xmm0 } /*0x7269ec*/
+          *v89 = 0; /*0x7269f0*/
+          __asm /*0x7269f8*/
+          {
+            vmovups xmmword ptr [rbx+r15+0Ch], xmm0
+            vmovups xmmword ptr [rbx+r15], xmm0
+          }
+        }
+      }
+      _R15 += 7; /*0x726a10*/
+      ++v89; /*0x726a14*/
+    }
+    while ( _R15 != 105 ); /*0x726a1f*/
+  }
+  v98 = (unsigned int)v128[307]; /*0x726a2a*/
+  if ( (_BYTE)v98 /*0x726b10*/
+    && (!unk_8341190 || !*(_BYTE *)(unk_8341190 + 24LL))
+    && v128[183] != (_DWORD)v98
+    && v128[184] != (_DWORD)v98
+    && v128[185] != (_DWORD)v98
+    && v128[186] != (_DWORD)v98
+    && v128[187] != (_DWORD)v98
+    && v128[188] != (_DWORD)v98
+    && v128[189] != (_DWORD)v98
+    && v128[190] != (_DWORD)v98
+    && v128[191] != (_DWORD)v98
+    && v128[192] != (_DWORD)v98
+    && v128[193] != (_DWORD)v98
+    && v128[194] != (_DWORD)v98
+    && v128[195] != (_DWORD)v98
+    && v128[196] != (_DWORD)v98
+    && v128[197] != (_DWORD)v98 )
+  {
+    WeaponName = BG_GetWeaponName(v98, v205, 1024); /*0x726b23*/
+    v103 = va( /*0x726b37*/
+             (unsigned int)"Player thinks their current weapon is %s but we don't have that weapon equipped",
+             WeaponName,
+             v100,
+             WeaponName,
+             v101,
+             v102);
+    v19 = 3193; /*0x726b54*/
+    MyAssertHandler( /*0x726b63*/
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+      3193,
+      0,
+      (unsigned int)"%s\n\t%s",
+      (unsigned int)"to->weapCommon.weapon.weaponIdx == WP_NONE || BG_GetEquippedWeaponState( to, to->weapCommon.weapon )",
+      v103);
+  }
+  while ( (unsigned int)MSG_ReadBit(v64) ) /*0x726bd5*/
+  {
+    v104 = MSG_ReadBits(v64, 4); /*0x726b85*/
+    v105 = MSG_ReadBits(v64, 1); /*0x726b95*/
+    v106 = MSG_ReadBits(v64, 31); /*0x726b97*/
+    v85 = v105 == 0; /*0x726b9f*/
+    v19 = 10; /*0x726ba1*/
+    v107 = 3LL * v104; /*0x726ba9*/
+    v128[v107 + 317] = v106; /*0x726bad*/
+    LOBYTE(v128[v107 + 318]) = !v85; /*0x726bb5*/
+    v128[3 * v104 + 319] = MSG_ReadBits(v64, 10); /*0x726bc3*/
+  }
+  v108 = v64; /*0x726bdf*/
+  if ( (unsigned int)MSG_ReadBit(v64) ) /*0x726bda*/
+  {
+    v109 = 0; /*0x726bf6*/
+    v110 = v128 + 2015; /*0x726bfb*/
+    v111 = g_netFieldList[8]; /*0x726c05*/
+    v145 = *((_DWORD *)g_netFieldList + 18); /*0x726c09*/
+    do /*0x726c6f*/
+    {
+      v19 = v137; /*0x726c2d*/
+      v110[v109] = MSG_ReadBits(v108, 3); /*0x726c4b*/
+      MSG_ReadDeltaFields( /*0x726c5f*/
+        (_DWORD)v108,
+        v137,
+        (_DWORD)v140 + 8060 + v109 * 4,
+        (_DWORD)v110 + v109 * 4,
+        v145,
+        (_DWORD)v111,
+        1,
+        0);
+      v109 += 9; /*0x726c64*/
+    }
+    while ( v109 != 288 ); /*0x726c6f*/
+  }
+  v112 = v108; /*0x726c71*/
+  v113 = (__int64)v108; /*0x726c86*/
+  if ( (unsigned int)MSG_ReadBit(v108) ) /*0x726c74*/
+  {
+    MSG_ReadDeltaHudElems(v108, v137, v140 + 14504, v128 + 3626, 15, 4, v120); /*0x726ccb*/
+    v112 = v108; /*0x726ce4*/
+    v19 = v137; /*0x726ce7*/
+    MSG_ReadDeltaHudElems(v108, v137, v140 + 9224, v128 + 2306, 30, 5, v121); /*0x726ced*/
+  }
+  v114 = Omnvar_PerPlayerstateCount(v112); /*0x726d05*/
+  v115 = Omnvar_PerPlayerstateMinBitsForIndex(); /*0x726d0d*/
+  v118 = Omnvar_PerSnapCount(v112, v19, v116, v117); /*0x726d10*/
+  v25 = v113; /*0x726d1c*/
+  MSG_ReadDeltaOmnvars_Internal(v113, v137, v114, v115, (_DWORD)v140 + 17144, (_DWORD)v128 + 17144, v118); /*0x726d2e*/
+LABEL_169:
+  result = *(_QWORD *)COMMON; /*0x726d33*/
+  if ( *(_QWORD *)COMMON != v206 ) /*0x726d45*/
+  {
+    PL__stack_chk_fail(*(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64, a9); /*0x726d56*/
+    return MSG_InitBaselinePlayerState(v25); /*0x726d5d*/
+  }
+  return result; /*0x726d47*/
+}

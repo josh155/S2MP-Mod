@@ -4,6 +4,7 @@
 ///////////////////////////////////////
 #include "pch.h"
 #include "Console.hpp"
+#include "DevMode.hpp"
 #include <string>
 #include <algorithm>
 #include <iostream>
@@ -176,17 +177,21 @@ void Console::registerCommandOverrides() {
 	GameUtil::overrideCommand("exec", &Exec::execCmd);
 }
 
-//not a dvar or a command
+// Lobby-parameter names. These are neither dvars nor real commands: the engine
+// routes EVERY console command through Party_SetLobbyParamFromCmd before
+// dispatch, so simply having a command by this name is what lets
+// `party_maxplayers 18` reach the lobby. They only matter to the hosting work,
+// so they live in developer mode with it.
 void setupSpecialLobbyVars() {
-	GameUtil::addCommand("ui_mapname", &CustomCommands::none);
-	GameUtil::addCommand("ui_gametype", &CustomCommands::none);
-	GameUtil::addCommand("party_minplayers", &CustomCommands::none);
-	GameUtil::addCommand("party_maxplayers", &CustomCommands::none);
-	GameUtil::addCommand("party_matchedplayercount", &CustomCommands::none);
-	GameUtil::addCommand("party_minlobbytime", &CustomCommands::none);
-	GameUtil::addCommand("requireOpenNat", &CustomCommands::none);
-	GameUtil::addCommand("matchmaking_allowJoiningListenServer", &CustomCommands::none);
-	GameUtil::addCommand("rankedMatch", &CustomCommands::none);
+	dev_mode::add_command("ui_mapname", &CustomCommands::none);
+	dev_mode::add_command("ui_gametype", &CustomCommands::none);
+	dev_mode::add_command("party_minplayers", &CustomCommands::none);
+	dev_mode::add_command("party_maxplayers", &CustomCommands::none);
+	dev_mode::add_command("party_matchedplayercount", &CustomCommands::none);
+	dev_mode::add_command("party_minlobbytime", &CustomCommands::none);
+	dev_mode::add_command("requireOpenNat", &CustomCommands::none);
+	dev_mode::add_command("matchmaking_allowJoiningListenServer", &CustomCommands::none);
+	dev_mode::add_command("rankedMatch", &CustomCommands::none);
 }
 
 void cgt() {
@@ -201,47 +206,53 @@ void cgt() {
 
 void Console::registerCustomCommands() {
 	setupSpecialLobbyVars();
-	//GameUtil::addCommand("setviewpos", &CustomCommands::setViewPos);
-	GameUtil::addCommand("noclip", &Noclip::toggle);
-	GameUtil::addCommand("ufo", &CustomCommands::toggleUfo);
-	GameUtil::addCommand("map_restart", &CustomCommands::mapRestart);
-	GameUtil::addCommand("fast_restart", &CustomCommands::fastRestart);
-	GameUtil::addCommand("god", &CustomCommands::god);
-	GameUtil::addCommand("notarget", &CustomCommands::notarget);
-	GameUtil::addCommand("demigod", &CustomCommands::demigod);
-	GameUtil::addCommand("trans", &CustomCommands::translateString);
-	GameUtil::addCommand("luidbg", &DevDraw::toggleLuaDebugGui);
-	GameUtil::addCommand("entdbg", &DevDraw::toggleEntityDebugGui);
-	GameUtil::addCommand("acdbg", &DevDraw::toggleAntiCheatDebugGui);
-	GameUtil::addCommand("posdbg", &DevDraw::togglePlayerOriginDebugGui);
-	GameUtil::addCommand("gscdbg", &DevDraw::toggleGscDebugGui);
-	GameUtil::addCommand("intcondbg", &DevDraw::toggleIntConDebugGui);
-	GameUtil::addCommand("listcmd", &CustomCommands::listAllCmds);
+	dev_mode::register_command();
+
+	// ---- the product -------------------------------------------------
+	// Short on purpose. Everything a normal session needs, and nothing that
+	// only makes sense mid-investigation.
 	GameUtil::addCommand("map", &CustomCommands::changeMap);
 	GameUtil::addCommand("clear", &InternalConsole::clearFullConsole);
-	GameUtil::addCommand("r_fullbright", &CustomCommands::tempToggleFullbright);
-	GameUtil::addCommand("r_wireframe", &CustomCommands::tempToggleWireframe);
-	GameUtil::addCommand("r_togglePortals", &CustomCommands::togglePortals); //TODO
 	GameUtil::addCommand("unlockall", &CustomCommands::unlockAll);
-	GameUtil::addCommand("listassetpool", &CustomCommands::listAssetPool);
-	GameUtil::addCommand("saveassetpool", &CustomCommands::saveAssetPool);
-	GameUtil::addCommand("dumpAllLuaFiles", &CustomCommands::dumpAllLuaFiles);
-	GameUtil::addCommand("dumpAllCSVFiles", &CustomCommands::dumpAllCSVFiles);
-	GameUtil::addCommand("dumpAllScriptFiles", &CustomCommands::dumpAllScriptFiles);
-	GameUtil::addCommand("give", &CustomCommands::give);
-	GameUtil::addCommand("dropweapon", &CustomCommands::dropWeapon); //not implemented yet
-	GameUtil::addCommand("execbuiltin", reinterpret_cast<void (*)()>(0x64A2A0_b));//in-engine exec command
-	GameUtil::addCommand("reloadImages", &ImageLoader::reloadImages);
+
+	// ---- developer mode ----------------------------------------------
+	// Cheats, engine debug overlays, asset dumpers and renderer switches.
+	// All still here; `s2_dev 1` brings them back.
+	dev_mode::add_command("noclip", &Noclip::toggle);
+	dev_mode::add_command("ufo", &CustomCommands::toggleUfo);
+	dev_mode::add_command("map_restart", &CustomCommands::mapRestart);
+	dev_mode::add_command("fast_restart", &CustomCommands::fastRestart);
+	dev_mode::add_command("god", &CustomCommands::god);
+	dev_mode::add_command("notarget", &CustomCommands::notarget);
+	dev_mode::add_command("demigod", &CustomCommands::demigod);
+	dev_mode::add_command("trans", &CustomCommands::translateString);
+	dev_mode::add_command("luidbg", &DevDraw::toggleLuaDebugGui);
+	dev_mode::add_command("entdbg", &DevDraw::toggleEntityDebugGui);
+	dev_mode::add_command("acdbg", &DevDraw::toggleAntiCheatDebugGui);
+	dev_mode::add_command("posdbg", &DevDraw::togglePlayerOriginDebugGui);
+	dev_mode::add_command("gscdbg", &DevDraw::toggleGscDebugGui);
+	dev_mode::add_command("intcondbg", &DevDraw::toggleIntConDebugGui);
+	dev_mode::add_command("listcmd", &CustomCommands::listAllCmds);
+	dev_mode::add_command("r_fullbright", &CustomCommands::tempToggleFullbright);
+	dev_mode::add_command("r_wireframe", &CustomCommands::tempToggleWireframe);
+	dev_mode::add_command("r_togglePortals", &CustomCommands::togglePortals);
+	dev_mode::add_command("listassetpool", &CustomCommands::listAssetPool);
+	dev_mode::add_command("saveassetpool", &CustomCommands::saveAssetPool);
+	dev_mode::add_command("dumpAllLuaFiles", &CustomCommands::dumpAllLuaFiles);
+	dev_mode::add_command("dumpAllCSVFiles", &CustomCommands::dumpAllCSVFiles);
+	dev_mode::add_command("dumpAllScriptFiles", &CustomCommands::dumpAllScriptFiles);
+	dev_mode::add_command("give", &CustomCommands::give);
+	dev_mode::add_command("dropweapon", &CustomCommands::dropWeapon);
+	dev_mode::add_command("execbuiltin", reinterpret_cast<void (*)()>(0x64A2A0_b));
+	dev_mode::add_command("reloadImages", &ImageLoader::reloadImages);
 #ifdef DEVELOPMENT_BUILD
-	GameUtil::addCommand("dumpgscfunctions", &CustomCommands::dumpGscFunctions);
-	GameUtil::addCommand("cgt", &cgt);
-	GameUtil::addCommand("enginemode", &setenginemode);
-	GameUtil::addCommand("cmdtest", &CustomCommands::cmdTest);
-	GameUtil::addCommand("getCmdFuncAddr", &CustomCommands::getCmdFuncAddr);
+	dev_mode::add_command("dumpgscfunctions", &CustomCommands::dumpGscFunctions);
+	dev_mode::add_command("cgt", &cgt);
+	dev_mode::add_command("enginemode", &setenginemode);
+	dev_mode::add_command("cmdtest", &CustomCommands::cmdTest);
+	dev_mode::add_command("getCmdFuncAddr", &CustomCommands::getCmdFuncAddr);
 #endif // DEVELOPMENT_BUILD
 
-
-	//maybe find better spot for this but its good for now
 	if (ConfigManager::readConfigValue("s2mp-mod.cfg", "unlockall", false)) {
 		CustomCommands::unlockAll();//might as well just call it directly
 		Console::infoPrint("Unlock All set");

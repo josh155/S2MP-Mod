@@ -1,0 +1,669 @@
+
+==== case 0xFF92 ====
+  IF MSG_ReadBit()
+      {
+  MSG_ReadBits(4)
+  MSG_ReadBits(2)
+      }
+      else
+      {
+      }
+  IF MSG_ReadBit()
+      {
+  MSG_ReadBits(4)
+      }
+      else
+      {
+      }
+      if ( a6 )
+      {
+      }
+      goto LABEL_234;
+
+==== case 0xFF93 ====
+      goto LABEL_10;
+
+==== case 0xFF94 ====
+      goto LABEL_47;
+
+==== case 0xFF95 ====
+  MSG_ReadBit()
+  MSG_ReadBit()
+      if ( Bit == 1 )
+      {
+        if ( v74 == 1 )
+        {
+  MSG_ReadBits(4)
+        }
+        else
+        {
+        }
+        if ( !ClassByIndex )
+        {
+        }
+        if ( v224 && *(_WORD *)(v224 + 4) )
+        {
+  IF MSG_ReadBit()
+          {
+  MSG_ReadBits(a2)
+          }
+          else
+          {
+          }
+          if ( v259 >> 1 >= v261 )
+          {
+          }
+  IF MSG_ReadBit()
+          {
+  MSG_ReadBits(a2)
+          }
+          else
+          {
+          }
+          if ( v266 >= v267 )
+          {
+          }
+        }
+        else
+        {
+        }
+        if ( a6 )
+        {
+          goto LABEL_232;
+        }
+      }
+      else
+      {
+        if ( v74 == 1 )
+        {
+  MSG_ReadBits(12)
+        }
+        else
+        {
+        }
+  IF MSG_ReadBit()
+        {
+  MSG_ReadBits(10)
+        }
+        else
+        {
+        }
+        if ( a6 )
+        {
+    LABEL_232:
+        }
+      }
+      goto LABEL_234;
+
+==== case 0xFF96 ====
+
+==== case 0xFF97 ====
+
+==== case 0xFF98 ====
+  IF MSG_ReadBit()
+      {
+        {
+        }
+  MSG_ReadFloatCase(&v293, a5, a6)
+    LABEL_43:
+    LABEL_44:
+        goto LABEL_234;
+      }
+      if ( (_DWORD)v20 != -104 )
+      {
+  MSG_ReadOriginFloat(a1, *(double *)_XMM0.m128_u64)
+        if ( a6 )
+        {
+        }
+        goto LABEL_43;
+      }
+      {
+      }
+  IF MSG_ReadBit()
+      {
+        {
+        }
+  MSG_ReadBits(16)
+        {
+        }
+        {
+        }
+      }
+      else
+      {
+  MSG_ReadBits(7)
+        {
+        }
+        {
+        }
+      }
+      if ( !a6 )
+        goto LABEL_44;
+      goto LABEL_234;
+
+==== case 0xFF99 ====
+  IF MSG_ReadBit()
+        goto LABEL_70;
+  MSG_ReadBits(4)
+      goto LABEL_158;
+
+==== case 0xFF9A ====
+  IF MSG_ReadBit()
+      {
+    LABEL_70:
+        goto LABEL_106;
+      }
+  MSG_ReadBits(4)
+      goto LABEL_158;
+
+==== case 0xFF9B ====
+  IF MSG_ReadBit()
+      {
+  MSG_ReadShort()
+        goto LABEL_158;
+      }
+      goto LABEL_234;
+
+==== case 0xFF9C ====
+      {
+      }
+  MSG_ReadBit()
+  MSG_ReadBit()
+      if ( v79 == 1 )
+      {
+  MSG_ReadBits(a2)
+        if ( v81 >= 7 )
+        {
+        }
+        if ( !g_commonAngleDeltas[v83] )
+        {
+        }
+        {
+        }
+        {
+        }
+      }
+      else
+      {
+        if ( v80 )
+        {
+  MSG_ReadBit()
+  MSG_ReadBits(12)
+          if ( !v180 )
+          {
+          }
+          {
+          }
+          {
+          }
+        }
+        else
+        {
+    LABEL_144:
+  MSG_ReadAngle16(_XMM0)
+        }
+    LABEL_145:
+      }
+      goto LABEL_234;
+
+==== case 0xFF9D ====
+  IF MSG_ReadBit()
+      {
+  IF MSG_ReadBit()
+        {
+  MSG_ReadLong(a2, v91)
+          if ( a6 )
+          {
+          }
+        }
+        else
+        {
+  MSG_ReadBits(4)
+  MSG_ReadByte()
+          {
+          }
+          if ( a6 )
+          {
+          }
+        }
+      }
+      else
+      {
+      }
+      {
+      }
+      if ( (unsigned int)_RAX >= 0x1000 )
+      {
+      }
+      goto LABEL_234;
+
+==== case 0xFF9E ====
+      if ( *(_DWORD *)a1 )
+  IF MSG_ReadBit()
+      {
+    LABEL_106:
+  MSG_ReadBits(a2)
+      }
+      else
+      {
+  MSG_ReadBits(5)
+        if ( v188 >= 0x1D )
+        {
+        }
+      }
+      goto LABEL_158;
+
+==== case 0xFF9F ====
+
+==== case 0xFFB6 ====
+
+==== case 0xFFB8 ====
+
+==== case 0xFFBA ====
+  IF MSG_ReadBit()
+        goto LABEL_25;
+  MSG_ReadBits(8)
+      goto LABEL_234;
+
+==== case 0xFFA0 ====
+  MSG_ReadBit()
+      if ( v99 != 1 )
+      {
+  MSG_ReadBit()
+        if ( v101 != 1 )
+        {
+  MSG_ReadBits(3)
+        }
+      }
+      goto LABEL_180;
+
+==== case 0xFFA1 ====
+  MSG_ReadBits(7)
+      goto LABEL_158;
+
+==== case 0xFFA2 ====
+  IF MSG_ReadBit()
+      {
+        if ( v200 >= 0xBA )
+        {
+        }
+        if ( (_DWORD)a2 )
+        {
+          goto LABEL_165;
+        }
+        goto LABEL_175;
+      }
+      if ( v105 >= 0xBA )
+      {
+      }
+      if ( !v107 )
+      {
+    LABEL_175:
+        goto LABEL_234;
+      }
+  IF MSG_ReadBit()
+      {
+    LABEL_165:
+  MSG_ReadBits(a2)
+        goto LABEL_234;
+      }
+      if ( v106 == 183 )
+    LABEL_234:
+      if ( *v33 != v294 )
+      {
+  MSG_ReadDeltaFields(a2, v269, v270, v271, v272, a10, a11)
+      }
+      return result;
+
+==== case 0xFFA3 ====
+  MSG_ReadBits(31)
+      goto LABEL_122;
+
+==== case 0xFFA4 ====
+
+==== case 0xFFA5 ====
+
+==== case 0xFFAD ====
+
+==== case 0xFFAE ====
+  MSG_ReadOriginFloat(a1, *(double *)_XMM0.m128_u64)
+      goto LABEL_131;
+
+==== case 0xFFA6 ====
+
+==== case 0xFFAF ====
+      {
+      }
+  IF MSG_ReadBit()
+      {
+        {
+        }
+  MSG_ReadBits(16)
+        {
+        }
+        {
+        }
+      }
+      else
+      {
+  MSG_ReadBits(7)
+        {
+        }
+        {
+        }
+      }
+    LABEL_131:
+      if ( a6 )
+        goto LABEL_132;
+      goto LABEL_234;
+
+==== case 0xFFA7 ====
+  IF MSG_ReadBit()
+        goto LABEL_100;
+  MSG_ReadBits(5)
+  MSG_ReadByte()
+      {
+      }
+      if ( !a6 )
+        goto LABEL_234;
+      goto LABEL_185;
+
+==== case 0xFFA8 ====
+    LABEL_100:
+  MSG_ReadLong(a2, a3)
+      if ( a6 )
+      {
+    LABEL_132:
+      }
+      goto LABEL_234;
+
+==== case 0xFFA9 ====
+      goto LABEL_144;
+
+==== case 0xFFAA ====
+  MSG_ReadBits(6)
+      {
+      }
+      goto LABEL_145;
+
+==== case 0xFFAB ====
+  IF MSG_ReadBit()
+      {
+      }
+      else
+      {
+  IF MSG_ReadBit()
+        {
+        }
+        else
+        {
+  MSG_ReadByte()
+  MSG_ReadByte()
+  MSG_ReadByte()
+        }
+  MSG_ReadBits(5)
+      }
+      goto LABEL_234;
+
+==== case 0xFFAC ====
+      goto LABEL_106;
+
+==== case 0xFFB0 ====
+
+==== case 0xFFB2 ====
+
+==== case 0xFFB7 ====
+
+==== case 0xFFB9 ====
+
+==== case 0xFFBB ====
+
+==== case 0xFFBC ====
+    LABEL_25:
+  MSG_ReadLong(a2, a3)
+      goto LABEL_158;
+
+==== case 0xFFB1 ====
+      {
+      }
+  IF MSG_ReadBit()
+      {
+        {
+        }
+        {
+        }
+  MSG_ReadBit()
+  MSG_ReadBits(12)
+        if ( !v129 )
+        {
+        }
+        {
+        }
+        if ( v131 | v132 )
+        {
+        }
+        else
+        {
+        }
+        {
+        }
+        if ( _R12D != (__int64)(__int16)_R12D )
+        {
+        }
+        if ( (unsigned __int16)_R12D >= 0x1000u )
+        {
+        }
+        if ( (v151 & 0x8000) != 0 )
+        {
+        }
+        else
+        {
+          if ( v153 <= (int)&unk_FFF0000 )
+        }
+        if ( v154 >= 0x1000u )
+        {
+        }
+        {
+        }
+        if ( v247 || v248 )
+        {
+          goto LABEL_213;
+        }
+      }
+      else
+      {
+  MSG_ReadBits(12)
+        if ( v207 >= 0x1000u )
+        {
+        }
+        {
+        }
+        if ( v212 || v213 )
+        {
+          goto LABEL_213;
+        }
+      }
+    LABEL_213:
+      goto LABEL_234;
+
+==== case 0xFFB3 ====
+    LABEL_122:
+      goto LABEL_180;
+
+==== case 0xFFB4 ====
+  IF MSG_ReadBit()
+      {
+  MSG_ReadBits(4)
+        switch ( *((_WORD *)a5 + 5) )
+        {
+          case 0xFFFC:
+          case 4:
+            break;
+          case 0xFFFE:
+            break;
+          case 0xFFFF:
+            break;
+          case 1:
+            break;
+          case 2:
+            break;
+          default:
+            break;
+        }
+      }
+      else
+      {
+        switch ( v158 )
+        {
+          case 0xFFFFFFFC:
+          case 4u:
+            break;
+          case 0xFFFFFFFE:
+            break;
+          case 0xFFFFFFFF:
+            break;
+          case 1u:
+            break;
+          case 2u:
+            break;
+          default:
+            break;
+        }
+      }
+      if ( !a6 )
+        goto LABEL_234;
+    LABEL_185:
+      goto LABEL_39;
+
+==== case 0xFFB5 ====
+  MSG_ReadBit()
+      if ( v161 == 1 )
+      {
+        switch ( *((_WORD *)a5 + 5) )
+        {
+          case 0xFFFC:
+          case 4:
+            break;
+          case 0xFFFE:
+            break;
+          case 0xFFFF:
+            break;
+          case 1:
+            break;
+          case 2:
+            break;
+          default:
+            break;
+        }
+  MSG_ReadBits(32 - __lzcnt(0x10u))
+    LABEL_180:
+      }
+      else
+      {
+        switch ( v164 )
+        {
+          case 0xFFFFFFFC:
+          case 4u:
+            break;
+          case 0xFFFFFFFE:
+            break;
+          case 0xFFFFFFFF:
+            break;
+          case 1u:
+            break;
+          case 2u:
+            break;
+          default:
+            break;
+        }
+      }
+      goto LABEL_234;
+
+==== case 0xFFBD ====
+  MSG_ReadBits(5)
+      goto LABEL_158;
+
+==== default ====
+      if ( *((_WORD *)a5 + 6) )
+      {
+    LABEL_10:
+  IF MSG_ReadBit()
+        {
+          if ( v24 < 0 )
+          if ( (v24 & 7) != 0 )
+          {
+          }
+          while ( v26 < v24 )
+          {
+          }
+          if ( v24 >= 33 )
+          if ( v24 != 32 )
+          switch ( (int)v284 )
+          {
+            case -4:
+            case 4:
+              break;
+            case -2:
+              break;
+            case -1:
+              break;
+            case 1:
+              break;
+            case 2:
+              break;
+            default:
+              break;
+          }
+          if ( v273 < 0 )
+          {
+            if ( _bittest((const int *)&v32, v24 - 1) )
+          }
+          else
+          {
+          }
+        }
+        else
+        {
+          switch ( *((_WORD *)a5 + 5) )
+          {
+            case 0xFFFC:
+            case 4:
+              break;
+            case 0xFFFE:
+            case 2:
+              break;
+            case 0xFFFF:
+            case 1:
+              break;
+            default:
+              break;
+          }
+        }
+        if ( a6 )
+        {
+          switch ( *((_WORD *)v19 + 5) )
+          {
+            case 0xFFFC:
+            case 4:
+              break;
+            case 0xFFFE:
+              break;
+            case 0xFFFF:
+              break;
+            case 1:
+              break;
+            case 2:
+              break;
+            default:
+              break;
+          }
+    LABEL_39:
+        }
+      }
+      else
+      {
+    LABEL_47:
+  MSG_ReadFloatCase(v280, a5, a6)
+    LABEL_158:
+      }
+      goto LABEL_234;

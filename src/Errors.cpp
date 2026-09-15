@@ -310,5 +310,23 @@ void hook_Com_Error(errorParm_t code, const char* fmt, ...) {
 
 void Errors::init() {
     DEV_INIT_PRINT();
-    Hook::create("Com_Error", 0x8F750_b, &hook_Com_Error, &_Com_Error);
+
+    // ⛔ THIS HOOK IS NOT INSTALLED, AND NEVER WORKED. Found by audit 2026-08-11.
+    //
+    // demo_native::init() hooks the SAME target (Com_Error, IDA 0x90750) and runs
+    // FIRST -- ExtConsole.cpp calls demo::init() at line 131 and Errors::init() at
+    // line 139. So MH_CreateHook here returned MH_ERROR_ALREADY_CREATED, Hook::create
+    // counted that as success, MinHook left `_Com_Error` NULL, and hook_Com_Error
+    // has never executed once. The "******** ERROR: ..." formatting below it has
+    // therefore never appeared.
+    //
+    // Re-enabling it would not restore that -- it would only re-create the silent
+    // duplicate. If the formatting is wanted, it belongs in demo_native's
+    // com_error_stub, which is the surviving owner of this target and already
+    // prints code, message and the ENGINE return address as an IDA address.
+    //
+    // Hook::create now REPORTS a duplicate loudly and returns false (RULE A3.1),
+    // so this class of failure announces itself at boot from here on.
+    //
+    // Hook::create("Com_Error", 0x8F750_b, &hook_Com_Error, &_Com_Error);
 }

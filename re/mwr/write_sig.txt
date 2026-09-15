@@ -1,0 +1,533 @@
+
+==== case 0xFF92 ====
+  MSG_WriteHudData(v271, _R8)
+      break;
+
+==== case 0xFF93 ====
+      goto LABEL_41;
+
+==== case 0xFF94 ====
+      goto LABEL_59;
+
+==== case 0xFF95 ====
+  MSG_WriteAnimData(v271, _R8)
+      break;
+
+==== case 0xFF96 ====
+
+==== case 0xFF97 ====
+
+==== case 0xFF98 ====
+  MSG_WriteMovingPlatformValidOrigin(v282, v62, v271, _R8)
+      break;
+
+==== case 0xFF99 ====
+      if ( v79 > 799 )
+        goto LABEL_158;
+      goto LABEL_67;
+
+==== case 0xFF9A ====
+      if ( v79 > 3999 )
+        goto LABEL_158;
+    LABEL_67:
+      if ( (_DWORD)v79 == v81 )
+      {
+  MSG_WriteBit0()
+  MSG_WriteBits(v80, 4, v82, v83)
+      }
+      else
+      {
+    LABEL_158:
+  MSG_WriteBit1()
+  MSG_WriteBits(a2, 16, v185, v186)
+      }
+      break;
+
+==== case 0xFF9B ====
+      if ( !*(_WORD *)_R8 )
+        goto LABEL_71;
+  MSG_WriteBit1()
+  MSG_WriteShort(a2)
+      break;
+
+==== case 0xFF9C ====
+      {
+      }
+      if ( v95 < 1 )
+      if ( g_commonAngleDeltas[0] == v95
+      {
+  MSG_WriteBit1()
+        if ( v94 < 0 )
+  MSG_WriteBit1()
+        else
+  MSG_WriteBit0()
+        goto LABEL_259;
+      }
+  MSG_WriteBit0()
+      if ( v246 == (_DWORD)a2 || v95 >= 4096 )
+      {
+        if ( !v59 && !*((_BYTE *)v63 + 28) )
+  MSG_WriteBit0()
+  MSG_WriteAngle16(_XMM0, a2, v249, v250, v251, v252)
+        break;
+      }
+      if ( !v59 && !*((_BYTE *)v63 + 28) )
+  MSG_WriteBit1()
+      if ( v94 < 0 )
+  MSG_WriteBit1()
+      else
+  MSG_WriteBit0()
+  MSG_WriteBits((unsigned int)v95, 12, v247, v248)
+      {
+      }
+      if ( v61 )
+      {
+        goto LABEL_228;
+      }
+      goto LABEL_73;
+
+==== case 0xFF9D ====
+      {
+      }
+      {
+      }
+      if ( !v60 || v61 || _EBX == 0x80000000 )
+      {
+  MSG_WriteBit1()
+        if ( _EBX == 0x80000000 )
+          goto LABEL_198;
+        {
+        }
+        if ( !v193 || v194 || (v197 = _EBX + 2048, v197 > 0xFFF) )
+        {
+    LABEL_198:
+  MSG_WriteBit1()
+  MSG_WriteLong(a2)
+        }
+        else
+        {
+  MSG_WriteBit0()
+  MSG_WriteBits((unsigned int)v198, 4, v199, v200)
+  MSG_WriteByte(a2)
+        }
+      }
+      else
+      {
+  MSG_WriteBit0()
+      }
+      {
+      }
+      if ( (unsigned int)_RAX >= 0x1000 )
+      {
+      }
+      goto LABEL_73;
+
+==== case 0xFF9E ====
+      if ( *(_DWORD *)(v282 + 4) )
+      if ( (v104 & 0x1FFFFFFF) != 0 && (v105 & (v104 + 0x1FFFFFFF)) == 0 )
+      {
+        if ( v102 >= 0x1D )
+        if ( v105 != 1 << v102 )
+  MSG_WriteBit0()
+      }
+      else
+      {
+  MSG_WriteBit1()
+      }
+  MSG_WriteBits(v102, v108, v106, v107)
+      break;
+
+==== case 0xFF9F ====
+
+==== case 0xFFB6 ====
+
+==== case 0xFFB8 ====
+
+==== case 0xFFBA ====
+  MSG_WriteDeltaTime(a3, (unsigned int)*_R8)
+      break;
+
+==== case 0xFFA0 ====
+      switch ( *((_WORD *)v21 + 5) )
+      {
+        case 0xFFFC:
+        case 4:
+          break;
+        case 0xFFFE:
+          break;
+        case 0xFFFF:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        default:
+          break;
+      }
+      if ( *(_DWORD *)(v282 + 4) )
+      {
+      }
+  IF MSG_WriteBit0()
+      {
+  MSG_WriteBit1()
+      }
+      else
+      {
+  MSG_WriteBit0()
+  MSG_WriteBits((unsigned int)v109, 3, v188, v189)
+  MSG_WriteByte(a2)
+      }
+      break;
+
+==== case 0xFFA1 ====
+      if ( !v59 )
+      goto LABEL_157;
+
+==== case 0xFFA2 ====
+      if ( !a20 )
+        goto LABEL_232;
+      if ( *(char *)(a5 + 14) >= 18 )
+      if ( (v114 & 0x80000000) != 0LL )
+      {
+      }
+      else
+      {
+        if ( (int)v114 < 4 )
+          goto LABEL_231;
+      }
+    LABEL_231:
+    LABEL_232:
+  MSG_WriteEvent(v282, v269, a5, v21, v112)
+      break;
+
+==== case 0xFFA3 ====
+      switch ( *((_WORD *)v21 + 5) )
+      {
+        case 0xFFFC:
+        case 4:
+          break;
+        case 0xFFFE:
+          break;
+        case 0xFFFF:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        default:
+          break;
+      }
+      if ( *(_DWORD *)(v282 + 4) )
+  MSG_WriteBits(v117, 31, v30, _R8)
+      break;
+
+==== case 0xFFA4 ====
+
+==== case 0xFFA5 ====
+
+==== case 0xFFAD ====
+
+==== case 0xFFAE ====
+  MSG_WriteOriginFloat(a2, a1 + 1, v282, v62, *(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64)
+      break;
+
+==== case 0xFFA6 ====
+
+==== case 0xFFAF ====
+  MSG_WriteOriginZFloat(a1 + 1, v282, *(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64)
+      break;
+
+==== case 0xFFA7 ====
+      {
+      }
+      if ( _EAX != 0x80000000 )
+      {
+        {
+        }
+      }
+  MSG_WriteBit1()
+  MSG_WriteLong(a2)
+      break;
+
+==== case 0xFFA8 ====
+      goto LABEL_47;
+
+==== case 0xFFA9 ====
+  MSG_WriteAngle16(_XMM0, a2, v31, (__int64)v30, (__int64)_R8, (int)a6)
+      break;
+
+==== case 0xFFAA ====
+      {
+      }
+      if ( 32 - (int)v123 > (unsigned int)((_EBX >> 31) + 6) )
+      {
+      }
+  MSG_WriteBits((unsigned int)_EBX, 6, v123, _R8)
+      break;
+
+==== case 0xFFAB ====
+      if ( v125 )
+      {
+        if ( v125 != 255 || *((_BYTE *)_R8 + 3) )
+          goto LABEL_186;
+      }
+      else
+      {
+        if ( *((unsigned __int8 *)_R8 + 3) != 255 )
+          goto LABEL_186;
+      }
+      if ( !v202 )
+      {
+  MSG_WriteBit1()
+        break;
+      }
+    LABEL_186:
+  MSG_WriteBit0()
+      if ( *v271 == *v203 && v271[1] == v203[1] && v271[2] == v203[2] )
+      {
+  MSG_WriteBit1()
+      }
+      else
+      {
+  MSG_WriteBit0()
+  MSG_WriteByte(*v203)
+  MSG_WriteByte(v203[1])
+  MSG_WriteByte(v203[2])
+      }
+  MSG_WriteBits(a2, 5, v204, v205)
+      break;
+
+==== case 0xFFAC ====
+      goto LABEL_157;
+
+==== case 0xFFB0 ====
+
+==== case 0xFFB2 ====
+
+==== case 0xFFB7 ====
+
+==== case 0xFFB9 ====
+
+==== case 0xFFBB ====
+
+==== case 0xFFBC ====
+    LABEL_47:
+  MSG_WriteLong(a2)
+      break;
+
+==== case 0xFFB1 ====
+      {
+      }
+      {
+      }
+      if ( !v145 )
+      {
+        {
+        }
+      }
+      if ( !(v143 | v144) )
+      {
+        {
+        }
+      }
+      if ( !v145 )
+      {
+      }
+      {
+      }
+      if ( _R12D != (__int64)(__int16)_R12D )
+      {
+      }
+      if ( (unsigned __int16)_R12D >= 0x1000u )
+      {
+      }
+      if ( (v270 & 1) == 0 )
+      {
+      }
+      {
+      }
+      if ( _EBX != (__int64)(__int16)_EBX )
+      {
+      }
+      if ( (unsigned __int16)_EBX >= 0x1000u )
+      {
+      }
+      if ( v171 < 1 )
+      if ( v171 <= 0 )
+      {
+        if ( !v59 && !*((_BYTE *)v149 + 28) )
+  MSG_WriteBit0()
+  MSG_WriteBits(v275, 12, v207, v208)
+        break;
+      }
+      if ( v171 >= 4096 )
+      {
+      }
+      if ( !v59 && !*((_BYTE *)v149 + 28) )
+  MSG_WriteBit1()
+      if ( v170 < 0 )
+  MSG_WriteBit1()
+      else
+  MSG_WriteBit0()
+  MSG_WriteBits((unsigned int)v171, 12, v173, v174)
+      if ( (unsigned __int16)v167 >= 0x1000u )
+      {
+      }
+      if ( (v270 & 1) == 0 )
+      {
+      }
+      {
+      }
+      if ( (const char *)v268 != v167 )
+      {
+      }
+      if ( (unsigned __int16)v167 >= 0x1000u )
+      {
+      }
+      if ( v224 )
+      {
+        if ( (unsigned __int16)v167 >= 0x1000u )
+        {
+        }
+        if ( (v270 & 1) == 0 )
+        {
+        }
+        if ( (const char *)v268 != v167 )
+        {
+        }
+        if ( (unsigned __int16)v167 >= 0x1000u )
+        {
+        }
+    LABEL_228:
+      }
+      goto LABEL_73;
+
+==== case 0xFFB3 ====
+      switch ( *((_WORD *)v21 + 5) )
+      {
+        case 0xFFFC:
+        case 4:
+          break;
+        case 0xFFFE:
+          break;
+        case 0xFFFF:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        default:
+          break;
+      }
+      if ( 32 - __lzcnt(v175 ^ (v175 >> 31)) > (v175 >> 31) + 8 )
+  MSG_WriteByte((unsigned int)v175)
+      break;
+
+==== case 0xFFB4 ====
+      if ( !v59 && !*((_BYTE *)a1 + 28) )
+      if ( (signed int)-v177 < 1 )
+      if ( v178 <= 7 )
+      {
+  MSG_WriteBit1()
+  MSG_WriteBits(a2, 4, v179, v180)
+        break;
+      }
+  MSG_WriteBit0()
+      goto LABEL_57;
+
+==== case 0xFFB5 ====
+      switch ( *((_WORD *)v21 + 5) )
+      {
+        case 0xFFFC:
+        case 4:
+          goto LABEL_176;
+        case 0xFFFE:
+    LABEL_247:
+          break;
+        case 0xFFFF:
+    LABEL_249:
+          break;
+        case 1:
+    LABEL_251:
+          break;
+        case 2:
+    LABEL_253:
+          break;
+        default:
+    LABEL_176:
+          switch ( v182 )
+          {
+            case 0:
+            case 8:
+              break;
+            case 2:
+              goto LABEL_247;
+            case 3:
+              goto LABEL_249;
+            case 5:
+              goto LABEL_251;
+            case 6:
+              goto LABEL_253;
+            default:
+              break;
+          }
+          break;
+      }
+      if ( v244 - 1 > 0xF )
+      {
+        if ( !v59 && !*((_BYTE *)v63 + 28) )
+  MSG_WriteBit0()
+        goto LABEL_57;
+      }
+      if ( !v59 && !*((_BYTE *)v63 + 28) )
+  MSG_WriteBit1()
+    LABEL_259:
+  MSG_WriteBits(v96, MinBitCountForNum, v213, v214)
+      break;
+
+==== case 0xFFBD ====
+    LABEL_157:
+  MSG_WriteBits(a2, v111, v30, _R8)
+      break;
+
+==== default ====
+      if ( *((_WORD *)v21 + 6) )
+      {
+    LABEL_41:
+        if ( (int)v62 <= -51 )
+        {
+        }
+        switch ( *((_WORD *)v21 + 5) )
+        {
+          case 0xFFFC:
+          case 4:
+            break;
+          case 0xFFFE:
+            break;
+          case 0xFFFF:
+            break;
+          case 1:
+            break;
+          case 2:
+            break;
+          default:
+            goto LABEL_71;
+        }
+        if ( v70 )
+        {
+  MSG_WriteBit1()
+    LABEL_57:
+  MSG_WriteValue(a2, v75, v76, v77, v74)
+        }
+        else
+        {
+    LABEL_71:
+  MSG_WriteBit0()
+        }
+      }
+      else
+      {
+    LABEL_59:
+  MSG_WriteFloatCase(v271, _R8)
+      }
+      break;

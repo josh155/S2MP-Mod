@@ -8,12 +8,33 @@
 #include "GameUtil.hpp"
 #include "Hook.hpp"
 #include "DevDef.h"
+#include "ModPaths.hpp"
 
 bool Logfile::enabled = false;
 
+// WHERE THE LOG GOES, per build.
+//
+// Steam: "main/s2mp_console.log", relative to the working directory, EXACTLY as
+// before. That path is baked into how probe output is retrieved from this project
+// (CLAUDE.md refers to main/s2mp_console.log throughout), so it must not move.
+//
+// Store: the game lives in C:\Program Files\WindowsApps, which is not writable,
+// and the working directory of a packaged app is not somewhere we should be
+// writing either. The log joins the rest of the mod's data in LocalState.
+static std::string log_path()
+{
+	if (build_map::current() == build_map::Build::Store)
+	{
+		// Forward slash on purpose: Windows accepts it, and it cannot be
+		// mangled by an escaping mistake the way a backslash can.
+		return mod_paths::mod_dir() + "/s2mp_console.log";
+	}
+	return "main/s2mp_console.log";
+}
+
 void Logfile::init() {
 	//delete logfile if it exists
-	std::string filePath = "main/s2mp_console.log";
+	const std::string filePath = log_path();
 	std::filesystem::path logFilePath(filePath);
 	try {
 		if (std::filesystem::exists(logFilePath)) {
@@ -34,7 +55,7 @@ void Logfile::setEnabled(bool b) {
 
 void Logfile::append(std::string& text) {
 	if (Logfile::enabled) {
-		std::string filePath = "main/s2mp_console.log";
+		const std::string filePath = log_path();
 		std::filesystem::path dirPath = std::filesystem::path(filePath).parent_path();
 		if (!std::filesystem::exists(dirPath)) {
 			std::filesystem::create_directories(dirPath);

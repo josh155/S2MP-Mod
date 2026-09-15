@@ -9,6 +9,10 @@
 #include "Binds.hpp"
 #include "Hook.hpp"
 #include "ImageLoader.hpp"
+#include "demo/dolly.hpp"
+#include "hud/dynamic_crosshair.hpp"
+#include "hud/wii_aim.hpp"
+#include "hud/nametags.hpp"
 
 typedef void (*R_EndFrame_t)(void);
 R_EndFrame_t _EndFrame = nullptr;
@@ -983,6 +987,24 @@ void R_EndFrame_hookfunc() {
 	if (intConReady) {
 		drawConsole();
 	}
+
+	// Dolly camera markers + path, drawn with the engine's own 2D primitives.
+	// It lives HERE rather than in its own hook because R_EndFrame is already
+	// hooked (RULE A3.1: a second Hook::create on the same target returns
+	// MH_ERROR_ALREADY_CREATED, which Hook::create reports as success while
+	// leaving `original` null — the detour is then silently discarded).
+	// It draws nothing unless a native demo is playing and points exist.
+	dolly::render();
+
+	// MWII-style crosshair centre dot, same reasoning as dolly above: a call-out
+	// from this existing stub, NOT a second Hook::create on R_EndFrame. Draws
+	// nothing unless the dot is enabled AND a crosshair was positioned this
+	// frame, so it disappears in menus and while dead just like the reticle.
+	dynamic_crosshair::render_dot();
+
+	// Wii pointer-aiming reticle (and optional bounding-box outline). Same
+	// call-out pattern; draws nothing unless a usercmd was built this frame.
+	wii_aim::render_reticle();
 
 	_EndFrame();
 }

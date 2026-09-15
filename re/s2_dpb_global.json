@@ -1,0 +1,1529 @@
+[
+ {
+  "offset": 4,
+  "hex": "0x4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 4
+  },
+  "funcs": [
+   "CL_Demo_AllocPlaybackState"
+  ]
+ },
+ {
+  "offset": 8,
+  "hex": "0x8",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 14,
+  "types": {
+   "_BYTE": 13,
+   "unsigned __int8": 1
+  },
+  "funcs": [
+   "CL_Demo_CanStartClipRecord",
+   "CL_Demo_IsCompleted",
+   "CL_Demo_ReadDemoMessage",
+   "sub_916F60",
+   "sub_917D40",
+   "sub_917ED0"
+  ]
+ },
+ {
+  "offset": 9,
+  "hex": "0x9",
+  "type": "unsigned __int8",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "unsigned __int8": 1
+  },
+  "funcs": [
+   "sub_916EB0"
+  ]
+ },
+ {
+  "offset": 10,
+  "hex": "0xa",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 15,
+  "types": {
+   "_BYTE": 15
+  },
+  "funcs": [
+   "CL_Demo_HandleAction",
+   "CL_Demo_IsPaused",
+   "CL_Demo_SeekToNextKeyFrame",
+   "CL_Demo_StartClipRecord",
+   "sub_915A10",
+   "sub_915C50"
+  ]
+ },
+ {
+  "offset": 11,
+  "hex": "0xb",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 2,
+  "types": {
+   "_BYTE": 2
+  },
+  "funcs": [
+   "CL_Demo_ReadDemoMessage"
+  ]
+ },
+ {
+  "offset": 12,
+  "hex": "0xc",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 6,
+  "types": {
+   "unsigned __int8": 1,
+   "_BYTE": 5
+  },
+  "funcs": [
+   "CL_Demo_GetJumpTimeFlag",
+   "sub_917570",
+   "sub_917ED0",
+   "sub_919700",
+   "sub_919CE0",
+   "sub_91A190"
+  ]
+ },
+ {
+  "offset": 16,
+  "hex": "0x10",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "_DWORD": 2,
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_914790",
+   "sub_919CE0",
+   "sub_91A3A0"
+  ]
+ },
+ {
+  "offset": 20,
+  "hex": "0x14",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_917190"
+  ]
+ },
+ {
+  "offset": 24,
+  "hex": "0x18",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "_DWORD": 6,
+   "int": 1
+  },
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "sub_914790",
+   "sub_917ED0",
+   "sub_919700",
+   "sub_919CE0",
+   "sub_91BD20"
+  ]
+ },
+ {
+  "offset": 28,
+  "hex": "0x1c",
+  "type": "float",
+  "width": 4,
+  "hits": 13,
+  "types": {
+   "float": 10,
+   "_DWORD": 3
+  },
+  "funcs": [
+   "CL_Demo_HandleAction",
+   "CL_Demo_ReadDemoMessage",
+   "sub_915A10",
+   "sub_915E20",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 32,
+  "hex": "0x20",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 6,
+  "types": {
+   "_BYTE": 5,
+   "unsigned __int8": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction",
+   "sub_916870",
+   "sub_916D40"
+  ]
+ },
+ {
+  "offset": 36,
+  "hex": "0x24",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 40,
+  "hex": "0x28",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 44,
+  "hex": "0x2c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 48,
+  "hex": "0x30",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 52,
+  "hex": "0x34",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 56,
+  "hex": "0x38",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 60,
+  "hex": "0x3c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 64,
+  "hex": "0x40",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 68,
+  "hex": "0x44",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 72,
+  "hex": "0x48",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_HandleAction"
+  ]
+ },
+ {
+  "offset": 2176588,
+  "hex": "0x21364c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 1,
+   "int": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176592,
+  "hex": "0x213650",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176596,
+  "hex": "0x213654",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176600,
+  "hex": "0x213658",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176604,
+  "hex": "0x21365c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176608,
+  "hex": "0x213660",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176612,
+  "hex": "0x213664",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176624,
+  "hex": "0x213670",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2176628,
+  "hex": "0x213674",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188584,
+  "hex": "0x216528",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 8,
+  "types": {
+   "_DWORD": 4,
+   "int": 4
+  },
+  "funcs": [
+   "CL_Demo_SeekToNextKeyFrame",
+   "sub_914790",
+   "sub_915A10",
+   "sub_915C50",
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188588,
+  "hex": "0x21652c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 14,
+  "types": {
+   "int": 3,
+   "_DWORD": 11
+  },
+  "funcs": [
+   "sub_914790",
+   "sub_919CE0",
+   "sub_91C350"
+  ]
+ },
+ {
+  "offset": 2188592,
+  "hex": "0x216530",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 17,
+  "types": {
+   "int": 4,
+   "_DWORD": 13
+  },
+  "funcs": [
+   "sub_917ED0",
+   "sub_9191D0"
+  ]
+ },
+ {
+  "offset": 2188596,
+  "hex": "0x216534",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188604,
+  "hex": "0x21653c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188612,
+  "hex": "0x216544",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188620,
+  "hex": "0x21654c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188628,
+  "hex": "0x216554",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188636,
+  "hex": "0x21655c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188644,
+  "hex": "0x216564",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188652,
+  "hex": "0x21656c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188660,
+  "hex": "0x216574",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188668,
+  "hex": "0x21657c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188676,
+  "hex": "0x216584",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188684,
+  "hex": "0x21658c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188692,
+  "hex": "0x216594",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188700,
+  "hex": "0x21659c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188708,
+  "hex": "0x2165a4",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188716,
+  "hex": "0x2165ac",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 2188724,
+  "hex": "0x2165b4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "_DWORD": 5,
+   "_BYTE": 1,
+   "int": 1
+  },
+  "funcs": [
+   "sub_914790",
+   "sub_9158C0",
+   "sub_91BD20"
+  ]
+ },
+ {
+  "offset": 3336304,
+  "hex": "0x32e870",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 30,
+  "types": {
+   "_DWORD": 30
+  },
+  "funcs": [
+   "CL_Demo_CanStartClipRecord",
+   "CL_Demo_FollowCameraMove",
+   "CL_Demo_FreeCameraMove",
+   "CL_Demo_GetClipPausedState",
+   "CL_Demo_HandleAction",
+   "CL_Demo_HiResScreenshot"
+  ]
+ },
+ {
+  "offset": 3336308,
+  "hex": "0x32e874",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 5,
+  "types": {
+   "_BYTE": 5
+  },
+  "funcs": [
+   "sub_913320",
+   "sub_917460",
+   "sub_91A160",
+   "sub_91ADC0"
+  ]
+ },
+ {
+  "offset": 3336312,
+  "hex": "0x32e878",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 8,
+  "types": {
+   "_DWORD": 7,
+   "int": 1
+  },
+  "funcs": [
+   "CL_Demo_ReadDemoMessage",
+   "CL_Demo_StartClipRecord",
+   "sub_912480",
+   "sub_913480",
+   "sub_917570",
+   "sub_917D40"
+  ]
+ },
+ {
+  "offset": 5433468,
+  "hex": "0x52e87c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 12,
+  "types": {
+   "int": 4,
+   "_DWORD": 8
+  },
+  "funcs": [
+   "CL_Demo_CanStartClipRecord",
+   "CL_Demo_ReadDemoMessage",
+   "CL_Demo_StartClipRecord",
+   "CL_Demo_WriteClipCommandsWhenPaused",
+   "sub_913320",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5434176,
+  "hex": "0x52eb40",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord"
+  ]
+ },
+ {
+  "offset": 5434180,
+  "hex": "0x52eb44",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 10,
+  "types": {
+   "unsigned int": 1,
+   "_DWORD": 9
+  },
+  "funcs": [
+   "CL_Demo_SeekToNextKeyFrame",
+   "CL_Demo_StartClipRecord",
+   "sub_9159D0",
+   "sub_915A10",
+   "sub_915C50",
+   "sub_917ED0"
+  ]
+ },
+ {
+  "offset": 5434184,
+  "hex": "0x52eb48",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 22,
+  "types": {
+   "_DWORD": 18,
+   "unsigned int": 4
+  },
+  "funcs": [
+   "sub_912530",
+   "sub_914790",
+   "sub_917570",
+   "sub_917ED0",
+   "sub_918590",
+   "sub_919AE0"
+  ]
+ },
+ {
+  "offset": 5434188,
+  "hex": "0x52eb4c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 5
+  },
+  "funcs": [
+   "sub_917ED0",
+   "sub_919CE0",
+   "sub_91A1C0"
+  ]
+ },
+ {
+  "offset": 5434192,
+  "hex": "0x52eb50",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "sub_912530",
+   "sub_91A1C0"
+  ]
+ },
+ {
+  "offset": 5434196,
+  "hex": "0x52eb54",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 23,
+  "types": {
+   "_DWORD": 21,
+   "unsigned int": 2
+  },
+  "funcs": [
+   "sub_9124B0",
+   "sub_9125F0",
+   "sub_9128B0",
+   "sub_912BD0",
+   "sub_914790",
+   "sub_915870"
+  ]
+ },
+ {
+  "offset": 5434200,
+  "hex": "0x52eb58",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 15,
+  "types": {
+   "_DWORD": 15
+  },
+  "funcs": [
+   "sub_9124B0",
+   "sub_9125F0",
+   "sub_9128B0",
+   "sub_912BD0",
+   "sub_914790",
+   "sub_915870"
+  ]
+ },
+ {
+  "offset": 5434208,
+  "hex": "0x52eb60",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 3,
+   "int": 1
+  },
+  "funcs": [
+   "sub_913060",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5434212,
+  "hex": "0x52eb64",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 1,
+  "types": {
+   "_OWORD": 1
+  },
+  "funcs": [
+   "sub_913060"
+  ]
+ },
+ {
+  "offset": 5434228,
+  "hex": "0x52eb74",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_913060"
+  ]
+ },
+ {
+  "offset": 5434236,
+  "hex": "0x52eb7c",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 1,
+  "types": {
+   "_OWORD": 1
+  },
+  "funcs": [
+   "sub_913060"
+  ]
+ },
+ {
+  "offset": 5434252,
+  "hex": "0x52eb8c",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_913060"
+  ]
+ },
+ {
+  "offset": 5439256,
+  "hex": "0x52ff18",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 4,
+  "types": {
+   "_BYTE": 4
+  },
+  "funcs": [
+   "sub_913060",
+   "sub_917570",
+   "sub_917ED0",
+   "sub_919A00"
+  ]
+ },
+ {
+  "offset": 5439257,
+  "hex": "0x52ff19",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 6,
+  "types": {
+   "_BYTE": 6
+  },
+  "funcs": [
+   "CL_Demo_ShouldReadMultipleNonDeltaSnapshots",
+   "sub_917570",
+   "sub_91A1C0"
+  ]
+ },
+ {
+  "offset": 5439260,
+  "hex": "0x52ff1c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord"
+  ]
+ },
+ {
+  "offset": 5439264,
+  "hex": "0x52ff20",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord"
+  ]
+ },
+ {
+  "offset": 5439268,
+  "hex": "0x52ff24",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 6,
+  "types": {
+   "_BYTE": 3,
+   "_WORD": 3
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord",
+   "sub_914790",
+   "sub_91B130",
+   "sub_91BD20",
+   "sub_91C480"
+  ]
+ },
+ {
+  "offset": 5439269,
+  "hex": "0x52ff25",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 2,
+  "types": {
+   "_BYTE": 2
+  },
+  "funcs": [
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439272,
+  "hex": "0x52ff28",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord",
+   "sub_91BD20"
+  ]
+ },
+ {
+  "offset": 5439276,
+  "hex": "0x52ff2c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord",
+   "sub_91BD20"
+  ]
+ },
+ {
+  "offset": 5439280,
+  "hex": "0x52ff30",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CL_Demo_StartClipRecord",
+   "sub_91BD20"
+  ]
+ },
+ {
+  "offset": 5439284,
+  "hex": "0x52ff34",
+  "type": "unsigned __int8",
+  "width": 1,
+  "hits": 2,
+  "types": {
+   "unsigned __int8": 1,
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439288,
+  "hex": "0x52ff38",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439292,
+  "hex": "0x52ff3c",
+  "type": "unsigned __int8",
+  "width": 1,
+  "hits": 6,
+  "types": {
+   "unsigned __int8": 3,
+   "_BYTE": 3
+  },
+  "funcs": [
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439296,
+  "hex": "0x52ff40",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 8,
+  "types": {
+   "_DWORD": 5,
+   "float": 3
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439300,
+  "hex": "0x52ff44",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 8,
+  "types": {
+   "_DWORD": 5,
+   "float": 3
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439304,
+  "hex": "0x52ff48",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 8,
+  "types": {
+   "_DWORD": 5,
+   "float": 3
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439308,
+  "hex": "0x52ff4c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "_DWORD": 4,
+   "float": 3
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439312,
+  "hex": "0x52ff50",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "_DWORD": 4,
+   "float": 3
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439316,
+  "hex": "0x52ff54",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "_DWORD": 4,
+   "float": 3
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439320,
+  "hex": "0x52ff58",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 7,
+  "types": {
+   "_BYTE": 7
+  },
+  "funcs": [
+   "CL_Demo_GetClipPausedState",
+   "CL_Demo_ReadDemoMessage",
+   "sub_916F60",
+   "sub_917D40",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 5439324,
+  "hex": "0x52ff5c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 3,
+   "float": 2
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439328,
+  "hex": "0x52ff60",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 3,
+   "float": 2
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439332,
+  "hex": "0x52ff64",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 3,
+   "float": 2
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439336,
+  "hex": "0x52ff68",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 3,
+   "float": 1
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439340,
+  "hex": "0x52ff6c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 3,
+   "float": 1
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439344,
+  "hex": "0x52ff70",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 3,
+   "float": 1
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439348,
+  "hex": "0x52ff74",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 4,
+  "types": {
+   "_BYTE": 4
+  },
+  "funcs": [
+   "CL_Demo_InterpolateCameraPose",
+   "sub_917570"
+  ]
+ },
+ {
+  "offset": 5439352,
+  "hex": "0x52ff78",
+  "type": "int",
+  "width": 4,
+  "hits": 6,
+  "types": {
+   "int": 4,
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CL_Demo_FollowCameraMove",
+   "CL_Demo_FreeCameraMove",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 6096396,
+  "hex": "0x5d060c",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 3,
+  "types": {
+   "_BYTE": 3
+  },
+  "funcs": [
+   "CL_Demo_ReadDemoMessage",
+   "CL_Demo_StartClipRecord",
+   "sub_91A0B0"
+  ]
+ },
+ {
+  "offset": 6096400,
+  "hex": "0x5d0610",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 16,
+  "types": {
+   "_DWORD": 11,
+   "int": 5
+  },
+  "funcs": [
+   "CL_Demo_CanStartClipRecord",
+   "CL_Demo_ReadDemoMessage",
+   "CL_Demo_StartClipRecord",
+   "sub_913320",
+   "sub_917460",
+   "sub_917D40"
+  ]
+ },
+ {
+  "offset": 6096404,
+  "hex": "0x5d0614",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 3,
+   "int": 1
+  },
+  "funcs": [
+   "CL_Demo_ReadDemoMessage",
+   "sub_917D40"
+  ]
+ },
+ {
+  "offset": 6096408,
+  "hex": "0x5d0618",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 3,
+   "unsigned int": 1,
+   "int": 1
+  },
+  "funcs": [
+   "CL_Demo_ReadDemoMessage",
+   "sub_917D40",
+   "sub_919190"
+  ]
+ },
+ {
+  "offset": 6096412,
+  "hex": "0x5d061c",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 4,
+  "types": {
+   "_BYTE": 4
+  },
+  "funcs": [
+   "CL_Demo_HandleAction",
+   "CL_Demo_ReadDemoMessage",
+   "sub_913010"
+  ]
+ },
+ {
+  "offset": 6096413,
+  "hex": "0x5d061d",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 7,
+  "types": {
+   "_BYTE": 7
+  },
+  "funcs": [
+   "CL_Demo_ReadDemoMessage",
+   "sub_917D40",
+   "sub_91A0B0"
+  ]
+ },
+ {
+  "offset": 6096416,
+  "hex": "0x5d0620",
+  "type": "int",
+  "width": 4,
+  "hits": 11,
+  "types": {
+   "int": 9,
+   "_DWORD": 2
+  },
+  "funcs": [
+   "sub_919280",
+   "sub_919700",
+   "sub_91BD20",
+   "sub_91C400"
+  ]
+ },
+ {
+  "offset": 6096420,
+  "hex": "0x5d0624",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 28,
+  "types": {
+   "int": 8,
+   "_DWORD": 20
+  },
+  "funcs": [
+   "sub_919280",
+   "sub_919700",
+   "sub_91BD20",
+   "sub_91C400"
+  ]
+ },
+ {
+  "offset": 6297228,
+  "hex": "0x60168c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 15,
+  "types": {
+   "_DWORD": 14,
+   "_BYTE": 1
+  },
+  "funcs": [
+   "CG_IsTheaterFreeCamera",
+   "CG_IsTheaterOrbitCamera",
+   "CL_Demo_HandleAction",
+   "CL_Demo_SetCameraMode",
+   "sub_916ED0",
+   "sub_91AC80"
+  ]
+ },
+ {
+  "offset": 6297232,
+  "hex": "0x601690",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 3,
+  "types": {
+   "unsigned __int8": 1,
+   "_BYTE": 2
+  },
+  "funcs": [
+   "CL_Demo_SetCameraMode",
+   "sub_912F50",
+   "sub_913040"
+  ]
+ }
+]

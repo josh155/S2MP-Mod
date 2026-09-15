@@ -1,0 +1,3464 @@
+{
+ "A_no_basis": [
+  {
+   "func": "0x4778d0",
+   "name": "__RTC_NumErrors",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x4da3f0",
+   "name": "__mkgmtime",
+   "size": 16,
+   "has_comment": false
+  },
+  {
+   "func": "0x4da410",
+   "name": "_iswlower",
+   "size": 16,
+   "has_comment": false
+  },
+  {
+   "func": "0x4da6a0",
+   "name": "__mkgmtime_0",
+   "size": 16,
+   "has_comment": true
+  },
+  {
+   "func": "0x4da6c0",
+   "name": "_iswlower_0",
+   "size": 16,
+   "has_comment": true
+  },
+  {
+   "func": "0x50b320",
+   "name": "StartAddress",
+   "size": 127,
+   "has_comment": false
+  },
+  {
+   "func": "0x55a0d0",
+   "name": "fn",
+   "size": 149,
+   "has_comment": false
+  },
+  {
+   "func": "0x577550",
+   "name": "_WinMain@16",
+   "size": 494,
+   "has_comment": false
+  },
+  {
+   "func": "0x5db230",
+   "name": "__mkgmtime_1",
+   "size": 16,
+   "has_comment": true
+  },
+  {
+   "func": "0x5f45b0",
+   "name": "fnEnum",
+   "size": 29,
+   "has_comment": false
+  },
+  {
+   "func": "0x64c8b0",
+   "name": "Callback",
+   "size": 34,
+   "has_comment": false
+  },
+  {
+   "func": "0x6700e0",
+   "name": "WSACleanup",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6700e6",
+   "name": "sendto",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6700ec",
+   "name": "setsockopt",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6700f2",
+   "name": "htons",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6700f8",
+   "name": "WSAGetLastError",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6700fe",
+   "name": "inet_addr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670104",
+   "name": "ntohl",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67010a",
+   "name": "recvfrom",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670110",
+   "name": "WSAStartup",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670116",
+   "name": "connect",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67011c",
+   "name": "gethostname",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670122",
+   "name": "ioctlsocket",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670128",
+   "name": "send",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67012e",
+   "name": "gethostbyname",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670134",
+   "name": "closesocket",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67013a",
+   "name": "socket",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670140",
+   "name": "bind",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670146",
+   "name": "recv",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67014c",
+   "name": "_AIL_sample_ms_position@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670152",
+   "name": "_AIL_set_sample_channel_levels@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670158",
+   "name": "_AIL_sample_stage_property@24",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67015e",
+   "name": "_AIL_sample_volume_pan@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670164",
+   "name": "_AIL_set_sample_3D_position@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67016a",
+   "name": "_AIL_sample_status@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670170",
+   "name": "_AIL_find_filter@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670176",
+   "name": "_AIL_set_sample_volume_levels@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67017c",
+   "name": "_AIL_set_digital_master_reverb_levels@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670182",
+   "name": "_AIL_set_sample_processor@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670188",
+   "name": "_AIL_set_speaker_configuration@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67018e",
+   "name": "_AIL_sample_playback_rate@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670194",
+   "name": "_AIL_stream_status@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67019a",
+   "name": "_AIL_open_digital_driver@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701a0",
+   "name": "_AIL_set_stream_ms_position@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701a6",
+   "name": "_AIL_startup@0",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701ac",
+   "name": "_AIL_sample_3D_position@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701b2",
+   "name": "_AIL_digital_CPU_percent@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701b8",
+   "name": "_AIL_open_stream@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701be",
+   "name": "_AIL_stream_sample_handle@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701c4",
+   "name": "_AIL_speaker_configuration@20",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701ca",
+   "name": "_AIL_set_sample_3D_distances@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701d0",
+   "name": "_AIL_end_sample@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701d6",
+   "name": "_AIL_set_sample_ms_position@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701dc",
+   "name": "_AIL_set_preference@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701e2",
+   "name": "_AIL_set_stream_loop_count@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701e8",
+   "name": "_AIL_set_sample_playback_rate@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701ee",
+   "name": "_AIL_set_sample_loop_count@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701f4",
+   "name": "_AIL_stream_ms_position@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6701fa",
+   "name": "_AIL_stop_sample@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670200",
+   "name": "_AIL_open_filter@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670206",
+   "name": "_AIL_init_sample@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67020c",
+   "name": "_AIL_stream_info@20",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670212",
+   "name": "_AIL_sample_volume_levels@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670218",
+   "name": "_AIL_sample_channel_levels@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67021e",
+   "name": "_AIL_pause_stream@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670224",
+   "name": "_AIL_set_3D_distance_factor@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67022a",
+   "name": "_AIL_allocate_sample_handle@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670230",
+   "name": "_AIL_last_error@0",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670236",
+   "name": "_AIL_set_sample_info@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67023c",
+   "name": "_AIL_set_file_callbacks@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670242",
+   "name": "_AIL_resume_sample@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670248",
+   "name": "_AIL_set_3D_rolloff_factor@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67024e",
+   "name": "_AIL_set_room_type@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670254",
+   "name": "_AIL_set_sample_reverb_levels@12",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67025a",
+   "name": "_AIL_shutdown@0",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670260",
+   "name": "_AIL_set_redist_directory@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670266",
+   "name": "_AIL_close_stream@4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67026c",
+   "name": "_AIL_set_DirectSound_HWND@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670272",
+   "name": "_AIL_size_processed_digital_audio@16",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670278",
+   "name": "_AIL_WAV_info@8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67027e",
+   "name": "_AIL_process_digital_audio@24",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670284",
+   "name": "Direct3DCreate9",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67028a",
+   "name": "D3DXCompileShader",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670290",
+   "name": "DirectSoundCreate8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670296",
+   "name": "DirectSoundCaptureCreate",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67029c",
+   "name": "CreateToolhelp32Snapshot",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6702a2",
+   "name": "Module32Next",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x6702a8",
+   "name": "Module32First",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x670644",
+   "name": "__vsnprintf_l",
+   "size": 177,
+   "has_comment": false
+  },
+  {
+   "func": "0x67082e",
+   "name": "__tolower_l",
+   "size": 279,
+   "has_comment": false
+  },
+  {
+   "func": "0x670bd2",
+   "name": "__time64",
+   "size": 60,
+   "has_comment": false
+  },
+  {
+   "func": "0x670e34",
+   "name": "_vscan_fn",
+   "size": 104,
+   "has_comment": false
+  },
+  {
+   "func": "0x670ebb",
+   "name": "__isalpha_l",
+   "size": 84,
+   "has_comment": false
+  },
+  {
+   "func": "0x670f3a",
+   "name": "__isupper_l",
+   "size": 79,
+   "has_comment": false
+  },
+  {
+   "func": "0x670fb2",
+   "name": "__isdigit_l",
+   "size": 79,
+   "has_comment": false
+  },
+  {
+   "func": "0x67102a",
+   "name": "__isxdigit_l",
+   "size": 84,
+   "has_comment": false
+  },
+  {
+   "func": "0x67107e",
+   "name": "_isxdigit",
+   "size": 43,
+   "has_comment": false
+  },
+  {
+   "func": "0x6710a9",
+   "name": "__isspace_l",
+   "size": 79,
+   "has_comment": false
+  },
+  {
+   "func": "0x671121",
+   "name": "__isalnum_l",
+   "size": 84,
+   "has_comment": false
+  },
+  {
+   "func": "0x6711a0",
+   "name": "__atof_l",
+   "size": 169,
+   "has_comment": false
+  },
+  {
+   "func": "0x671260",
+   "name": "_swap",
+   "size": 40,
+   "has_comment": false
+  },
+  {
+   "func": "0x671290",
+   "name": "_shortsort",
+   "size": 135,
+   "has_comment": false
+  },
+  {
+   "func": "0x6717be",
+   "name": "__toupper_l",
+   "size": 280,
+   "has_comment": false
+  },
+  {
+   "func": "0x6719ac",
+   "name": "__get_printf_count_output",
+   "size": 22,
+   "has_comment": false
+  },
+  {
+   "func": "0x6719c2",
+   "name": "_getenv",
+   "size": 129,
+   "has_comment": false
+  },
+  {
+   "func": "0x671b1e",
+   "name": "_V6_HeapAlloc",
+   "size": 70,
+   "has_comment": false
+  },
+  {
+   "func": "0x671cdd",
+   "name": "__fclose_nolock",
+   "size": 114,
+   "has_comment": false
+  },
+  {
+   "func": "0x671dcb",
+   "name": "__fsopen",
+   "size": 186,
+   "has_comment": false
+  },
+  {
+   "func": "0x671ea2",
+   "name": "__fread_nolock_s",
+   "size": 518,
+   "has_comment": false
+  },
+  {
+   "func": "0x6720a8",
+   "name": "_fread_s",
+   "size": 140,
+   "has_comment": false
+  },
+  {
+   "func": "0x672159",
+   "name": "__fwrite_nolock",
+   "size": 351,
+   "has_comment": false
+  },
+  {
+   "func": "0x67233a",
+   "name": "__ftell_nolock",
+   "size": 408,
+   "has_comment": false
+  },
+  {
+   "func": "0x672540",
+   "name": "__fseek_nolock",
+   "size": 135,
+   "has_comment": false
+  },
+  {
+   "func": "0x6726fd",
+   "name": "__localtime64_s",
+   "size": 709,
+   "has_comment": false
+  },
+  {
+   "func": "0x6729e6",
+   "name": "_asctime_s",
+   "size": 494,
+   "has_comment": false
+  },
+  {
+   "func": "0x672c21",
+   "name": "___initstdio",
+   "size": 177,
+   "has_comment": false
+  },
+  {
+   "func": "0x672cf2",
+   "name": "__lock_file",
+   "size": 60,
+   "has_comment": false
+  },
+  {
+   "func": "0x672d2e",
+   "name": "__lock_file2",
+   "size": 46,
+   "has_comment": false
+  },
+  {
+   "func": "0x672d5c",
+   "name": "__unlock_file",
+   "size": 54,
+   "has_comment": false
+  },
+  {
+   "func": "0x672d92",
+   "name": "__unlock_file2",
+   "size": 42,
+   "has_comment": false
+  },
+  {
+   "func": "0x673126",
+   "name": "__recalloc",
+   "size": 121,
+   "has_comment": false
+  },
+  {
+   "func": "0x673210",
+   "name": "__initterm",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x673228",
+   "name": "__initterm_e",
+   "size": 32,
+   "has_comment": false
+  },
+  {
+   "func": "0x6732bb",
+   "name": "__cinit",
+   "size": 146,
+   "has_comment": false
+  },
+  {
+   "func": "0x673451",
+   "name": "__cexit",
+   "size": 15,
+   "has_comment": false
+  },
+  {
+   "func": "0x673460",
+   "name": "__c_exit",
+   "size": 15,
+   "has_comment": false
+  },
+  {
+   "func": "0x67346f",
+   "name": "__init_pointers",
+   "size": 76,
+   "has_comment": false
+  },
+  {
+   "func": "0x6734c0",
+   "name": "??0bad_alloc@std@@QAE@XZ",
+   "size": 25,
+   "has_comment": false
+  },
+  {
+   "func": "0x6736e9",
+   "name": "??0exception@std@@QAE@ABQBD@Z",
+   "size": 78,
+   "has_comment": false
+  },
+  {
+   "func": "0x673737",
+   "name": "??0exception@std@@QAE@ABQBDH@Z",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x67374f",
+   "name": "??0exception@std@@QAE@ABV01@@Z",
+   "size": 88,
+   "has_comment": false
+  },
+  {
+   "func": "0x6737bd",
+   "name": "?what@exception@@UBEPBDXZ",
+   "size": 13,
+   "has_comment": false
+  },
+  {
+   "func": "0x67386b",
+   "name": "__invoke_watson",
+   "size": 252,
+   "has_comment": false
+  },
+  {
+   "func": "0x67398b",
+   "name": "__invalid_parameter_noinfo",
+   "size": 16,
+   "has_comment": false
+  },
+  {
+   "func": "0x67399b",
+   "name": "__flush",
+   "size": 98,
+   "has_comment": false
+  },
+  {
+   "func": "0x6739fd",
+   "name": "__fflush_nolock",
+   "size": 66,
+   "has_comment": false
+  },
+  {
+   "func": "0x673a3f",
+   "name": "_flsall",
+   "size": 157,
+   "has_comment": false
+  },
+  {
+   "func": "0x673b75",
+   "name": "___time64_t_from_ft",
+   "size": 102,
+   "has_comment": false
+  },
+  {
+   "func": "0x673eb0",
+   "name": "__validdrive",
+   "size": 55,
+   "has_comment": false
+  },
+  {
+   "func": "0x673ee7",
+   "name": "__getdcwd_nolock",
+   "size": 309,
+   "has_comment": false
+  },
+  {
+   "func": "0x674124",
+   "name": "__calloc_impl",
+   "size": 247,
+   "has_comment": false
+  },
+  {
+   "func": "0x6742ab",
+   "name": "_vfprintf_helper",
+   "size": 324,
+   "has_comment": false
+  },
+  {
+   "func": "0x674554",
+   "name": "__onexit_nolock",
+   "size": 185,
+   "has_comment": false
+  },
+  {
+   "func": "0x67460d",
+   "name": "___onexitinit",
+   "size": 47,
+   "has_comment": false
+  },
+  {
+   "func": "0x67463c",
+   "name": "__onexit",
+   "size": 54,
+   "has_comment": false
+  },
+  {
+   "func": "0x6746f7",
+   "name": "_fast_error_exit",
+   "size": 36,
+   "has_comment": false
+  },
+  {
+   "func": "0x67471b",
+   "name": "_check_managed_app",
+   "size": 65,
+   "has_comment": false
+  },
+  {
+   "func": "0x67475c",
+   "name": "___tmainCRTStartup",
+   "size": 480,
+   "has_comment": false
+  },
+  {
+   "func": "0x67493c",
+   "name": "start",
+   "size": 10,
+   "has_comment": false
+  },
+  {
+   "func": "0x674946",
+   "name": "@__security_check_cookie@4",
+   "size": 15,
+   "has_comment": false
+  },
+  {
+   "func": "0x674a48",
+   "name": "__set_abort_behavior",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x674a66",
+   "name": "__make__time64_t",
+   "size": 691,
+   "has_comment": false
+  },
+  {
+   "func": "0x674d26",
+   "name": "__gmtime64_s",
+   "size": 572,
+   "has_comment": false
+  },
+  {
+   "func": "0x674f86",
+   "name": "_init_namebuf",
+   "size": 197,
+   "has_comment": false
+  },
+  {
+   "func": "0x67504b",
+   "name": "_genfname",
+   "size": 144,
+   "has_comment": false
+  },
+  {
+   "func": "0x67523f",
+   "name": "?strtoxl@@YAKPAUlocaleinfo_struct@@PBDPAPBDHH@Z",
+   "size": 555,
+   "has_comment": false
+  },
+  {
+   "func": "0x675493",
+   "name": "_strtoul",
+   "size": 42,
+   "has_comment": false
+  },
+  {
+   "func": "0x6754bd",
+   "name": "__freea",
+   "size": 27,
+   "has_comment": false
+  },
+  {
+   "func": "0x6754d8",
+   "name": "__store_str",
+   "size": 32,
+   "has_comment": false
+  },
+  {
+   "func": "0x6754f8",
+   "name": "__store_num",
+   "size": 121,
+   "has_comment": false
+  },
+  {
+   "func": "0x675571",
+   "name": "?_expandtime@@YAHPAUlocaleinfo_struct@@DPBUtm@@PAPADPAIPAU__lc_time_data@@I@Z",
+   "size": 998,
+   "has_comment": false
+  },
+  {
+   "func": "0x675957",
+   "name": "?_store_winword@@YAHPAUlocaleinfo_struct@@HPBUtm@@PAPADPAIPAU__lc_time_data@@@Z",
+   "size": 1117,
+   "has_comment": false
+  },
+  {
+   "func": "0x675db4",
+   "name": "__Strftime_l",
+   "size": 431,
+   "has_comment": false
+  },
+  {
+   "func": "0x676107",
+   "name": "_IsRootUNCName",
+   "size": 120,
+   "has_comment": false
+  },
+  {
+   "func": "0x67617f",
+   "name": "__fullpath_helper",
+   "size": 94,
+   "has_comment": false
+  },
+  {
+   "func": "0x676680",
+   "name": "__get_errno_from_oserr",
+   "size": 59,
+   "has_comment": false
+  },
+  {
+   "func": "0x6766e1",
+   "name": "__dosmaperr",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x6766ff",
+   "name": "_fastcopy_I",
+   "size": 135,
+   "has_comment": false
+  },
+  {
+   "func": "0x676786",
+   "name": "__VEC_memcpy",
+   "size": 227,
+   "has_comment": false
+  },
+  {
+   "func": "0x676869",
+   "name": "__sse2_mathfcns_init",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x67687d",
+   "name": "__use_encode_pointer",
+   "size": 108,
+   "has_comment": false
+  },
+  {
+   "func": "0x6768e9",
+   "name": "__encode_pointer",
+   "size": 110,
+   "has_comment": false
+  },
+  {
+   "func": "0x676957",
+   "name": "__encoded_null",
+   "size": 9,
+   "has_comment": false
+  },
+  {
+   "func": "0x676960",
+   "name": "__decode_pointer",
+   "size": 110,
+   "has_comment": false
+  },
+  {
+   "func": "0x6769ce",
+   "name": "___crtTlsAlloc@4",
+   "size": 9,
+   "has_comment": false
+  },
+  {
+   "func": "0x6769d7",
+   "name": "___set_flsgetvalue",
+   "size": 50,
+   "has_comment": false
+  },
+  {
+   "func": "0x676a09",
+   "name": "__mtterm",
+   "size": 61,
+   "has_comment": false
+  },
+  {
+   "func": "0x676a46",
+   "name": "__initptd",
+   "size": 182,
+   "has_comment": false
+  },
+  {
+   "func": "0x676b7c",
+   "name": "__getptd",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x676b94",
+   "name": "__freefls@4",
+   "size": 265,
+   "has_comment": false
+  },
+  {
+   "func": "0x676cb5",
+   "name": "__mtinit",
+   "size": 388,
+   "has_comment": false
+  },
+  {
+   "func": "0x676e39",
+   "name": "__flsbuf",
+   "size": 352,
+   "has_comment": false
+  },
+  {
+   "func": "0x676f99",
+   "name": "_write_char",
+   "size": 51,
+   "has_comment": false
+  },
+  {
+   "func": "0x676fcc",
+   "name": "_write_multi_char",
+   "size": 36,
+   "has_comment": false
+  },
+  {
+   "func": "0x676ff0",
+   "name": "_write_string",
+   "size": 74,
+   "has_comment": false
+  },
+  {
+   "func": "0x67703a",
+   "name": "__output_l",
+   "size": 2420,
+   "has_comment": false
+  },
+  {
+   "func": "0x6779ce",
+   "name": "_CPtoLCID",
+   "size": 47,
+   "has_comment": false
+  },
+  {
+   "func": "0x6779fd",
+   "name": "?setSBCS@@YAXPAUthreadmbcinfostruct@@@Z",
+   "size": 85,
+   "has_comment": false
+  },
+  {
+   "func": "0x677a52",
+   "name": "?setSBUpLow@@YAXPAUthreadmbcinfostruct@@@Z",
+   "size": 394,
+   "has_comment": false
+  },
+  {
+   "func": "0x677bdc",
+   "name": "___updatetmbcinfo",
+   "size": 152,
+   "has_comment": false
+  },
+  {
+   "func": "0x677c80",
+   "name": "?getSystemCP@@YAHH@Z",
+   "size": 122,
+   "has_comment": false
+  },
+  {
+   "func": "0x677cfa",
+   "name": "__setmbcp_nolock",
+   "size": 473,
+   "has_comment": false
+  },
+  {
+   "func": "0x677ed3",
+   "name": "__setmbcp",
+   "size": 353,
+   "has_comment": false
+  },
+  {
+   "func": "0x67806d",
+   "name": "___initmbctable",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x67808b",
+   "name": "___freetlocinfo",
+   "size": 320,
+   "has_comment": false
+  },
+  {
+   "func": "0x6781cb",
+   "name": "___addlocaleref",
+   "size": 134,
+   "has_comment": false
+  },
+  {
+   "func": "0x678251",
+   "name": "___removelocaleref",
+   "size": 140,
+   "has_comment": false
+  },
+  {
+   "func": "0x6782dd",
+   "name": "__updatetlocinfoEx_nolock",
+   "size": 62,
+   "has_comment": false
+  },
+  {
+   "func": "0x67831b",
+   "name": "___updatetlocinfo",
+   "size": 106,
+   "has_comment": false
+  },
+  {
+   "func": "0x678391",
+   "name": "?__crtLCMapStringA_stat@@YAHPAUlocaleinfo_struct@@KKPBDHPADHHH@Z",
+   "size": 930,
+   "has_comment": false
+  },
+  {
+   "func": "0x678733",
+   "name": "___crtLCMapStringA",
+   "size": 67,
+   "has_comment": false
+  },
+  {
+   "func": "0x678776",
+   "name": "__isleadbyte_l",
+   "size": 54,
+   "has_comment": false
+  },
+  {
+   "func": "0x6787ac",
+   "name": "_isleadbyte",
+   "size": 14,
+   "has_comment": false
+  },
+  {
+   "func": "0x6787ba",
+   "name": "__isctype_l",
+   "size": 182,
+   "has_comment": false
+  },
+  {
+   "func": "0x678870",
+   "name": "__aulldiv",
+   "size": 104,
+   "has_comment": false
+  },
+  {
+   "func": "0x6788d8",
+   "name": "___heap_select",
+   "size": 91,
+   "has_comment": false
+  },
+  {
+   "func": "0x678933",
+   "name": "__heap_init",
+   "size": 90,
+   "has_comment": false
+  },
+  {
+   "func": "0x67898d",
+   "name": "__mtinitlocks",
+   "size": 73,
+   "has_comment": false
+  },
+  {
+   "func": "0x6789d6",
+   "name": "__mtdeletelocks",
+   "size": 85,
+   "has_comment": false
+  },
+  {
+   "func": "0x678b34",
+   "name": "___sbh_heap_init",
+   "size": 72,
+   "has_comment": false
+  },
+  {
+   "func": "0x678b7c",
+   "name": "___sbh_find_block",
+   "size": 43,
+   "has_comment": false
+  },
+  {
+   "func": "0x678ba7",
+   "name": "___sbh_free_block",
+   "size": 788,
+   "has_comment": false
+  },
+  {
+   "func": "0x678ebb",
+   "name": "___sbh_alloc_new_region",
+   "size": 176,
+   "has_comment": false
+  },
+  {
+   "func": "0x678f6b",
+   "name": "___sbh_alloc_new_group",
+   "size": 262,
+   "has_comment": false
+  },
+  {
+   "func": "0x679071",
+   "name": "___sbh_resize_block",
+   "size": 735,
+   "has_comment": false
+  },
+  {
+   "func": "0x679350",
+   "name": "___sbh_alloc_block",
+   "size": 739,
+   "has_comment": false
+  },
+  {
+   "func": "0x679690",
+   "name": "SEH_67E170",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x6798bb",
+   "name": "___check_float_string",
+   "size": 84,
+   "has_comment": false
+  },
+  {
+   "func": "0x67990f",
+   "name": "__inc",
+   "size": 22,
+   "has_comment": false
+  },
+  {
+   "func": "0x679925",
+   "name": "__whiteout",
+   "size": 37,
+   "has_comment": false
+  },
+  {
+   "func": "0x67994a",
+   "name": "__input_l",
+   "size": 3149,
+   "has_comment": false
+  },
+  {
+   "func": "0x67a597",
+   "name": "__fltin2",
+   "size": 165,
+   "has_comment": false
+  },
+  {
+   "func": "0x67a63d",
+   "name": "__cfltcvt_init_5",
+   "size": 96,
+   "has_comment": false
+  },
+  {
+   "func": "0x67a69d",
+   "name": "__fpmath",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x67a6bb",
+   "name": "___strgtold12_l",
+   "size": 1680,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ad7b",
+   "name": "___libm_error_support",
+   "size": 634,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b02b",
+   "name": "__ceil_default",
+   "size": 209,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b0fc",
+   "name": "__stbuf",
+   "size": 150,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b192",
+   "name": "__ftbuf",
+   "size": 47,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b1c1",
+   "name": "__mbsnbicoll_l",
+   "size": 236,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b2ad",
+   "name": "__mbsnbicoll",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b2c4",
+   "name": "___wtomb_environ",
+   "size": 149,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b3be",
+   "name": "_strnlen",
+   "size": 26,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b578",
+   "name": "__FF_MSGBANNER",
+   "size": 57,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b5bb",
+   "name": "__callnewh",
+   "size": 34,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b5dd",
+   "name": "__close_nolock",
+   "size": 148,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b76b",
+   "name": "__freebuf",
+   "size": 44,
+   "has_comment": false
+  },
+  {
+   "func": "0x67b797",
+   "name": "__openfile",
+   "size": 672,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ba37",
+   "name": "__getstream",
+   "size": 292,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bb68",
+   "name": "__local_unwind4",
+   "size": 144,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bbf8",
+   "name": "__unwind_handler4",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bc3e",
+   "name": "__seh_longjmp_unwind4@4",
+   "size": 28,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bc5a",
+   "name": "@_EH4_CallFilterFunc@8",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bc71",
+   "name": "@_EH4_TransferToHandler@8",
+   "size": 25,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bc8a",
+   "name": "@_EH4_GlobalUnwind@4",
+   "size": 26,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bca4",
+   "name": "@_EH4_LocalUnwind@16",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bcbb",
+   "name": "__filbuf",
+   "size": 288,
+   "has_comment": false
+  },
+  {
+   "func": "0x67bddb",
+   "name": "__read_nolock",
+   "size": 1473,
+   "has_comment": false
+  },
+  {
+   "func": "0x67c39c",
+   "name": "__read",
+   "size": 243,
+   "has_comment": false
+  },
+  {
+   "func": "0x67c4a0",
+   "name": "_memset",
+   "size": 122,
+   "has_comment": false
+  },
+  {
+   "func": "0x67c51a",
+   "name": "__write_nolock",
+   "size": 1478,
+   "has_comment": false
+  },
+  {
+   "func": "0x67cae0",
+   "name": "__write",
+   "size": 210,
+   "has_comment": false
+  },
+  {
+   "func": "0x67cf25",
+   "name": "__ioinit",
+   "size": 576,
+   "has_comment": false
+  },
+  {
+   "func": "0x67d165",
+   "name": "__lseek_nolock",
+   "size": 114,
+   "has_comment": false
+  },
+  {
+   "func": "0x67d1d7",
+   "name": "__lseek",
+   "size": 210,
+   "has_comment": false
+  },
+  {
+   "func": "0x67d3eb",
+   "name": "__rt_probe_read4@4",
+   "size": 75,
+   "has_comment": false
+  },
+  {
+   "func": "0x67d436",
+   "name": "__tzset_nolock",
+   "size": 682,
+   "has_comment": false
+  },
+  {
+   "func": "0x67d77f",
+   "name": "_cvtdate",
+   "size": 501,
+   "has_comment": false
+  },
+  {
+   "func": "0x67d974",
+   "name": "__isindst_nolock",
+   "size": 430,
+   "has_comment": false
+  },
+  {
+   "func": "0x67db22",
+   "name": "___tzset",
+   "size": 70,
+   "has_comment": false
+  },
+  {
+   "func": "0x67db71",
+   "name": "__isindst",
+   "size": 56,
+   "has_comment": false
+  },
+  {
+   "func": "0x67dc70",
+   "name": "__alldiv",
+   "size": 170,
+   "has_comment": false
+  },
+  {
+   "func": "0x67dd20",
+   "name": "__allrem",
+   "size": 178,
+   "has_comment": false
+  },
+  {
+   "func": "0x67de1a",
+   "name": "__malloc_crt",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x67dea2",
+   "name": "__realloc_crt",
+   "size": 75,
+   "has_comment": false
+  },
+  {
+   "func": "0x67deed",
+   "name": "__recalloc_crt",
+   "size": 80,
+   "has_comment": false
+  },
+  {
+   "func": "0x67dfdc",
+   "name": "__msize",
+   "size": 146,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e0c7",
+   "name": "__initp_misc_cfltcvt_tab",
+   "size": 31,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e0f0",
+   "name": "__ValidateImageBase",
+   "size": 41,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e120",
+   "name": "__FindPESection",
+   "size": 66,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e170",
+   "name": "__IsNonwritableInCurrentImage",
+   "size": 187,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e22b",
+   "name": "?terminate@@YAXXZ",
+   "size": 57,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e264",
+   "name": "?unexpected@@YAXXZ",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e277",
+   "name": "?_inconsistency@@YAXXZ",
+   "size": 55,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e2ae",
+   "name": "__initp_eh_hooks",
+   "size": 17,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e2bf",
+   "name": "__XcptFilter",
+   "size": 350,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e41d",
+   "name": "__initp_misc_winsig",
+   "size": 25,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e436",
+   "name": "_siglookup",
+   "size": 52,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e477",
+   "name": "_raise",
+   "size": 366,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e645",
+   "name": "___crtInitCritSecNoSpinCount@8",
+   "size": 16,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e655",
+   "name": "___crtInitCritSecAndSpinCount",
+   "size": 197,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e764",
+   "name": "?_Type_info_dtor@type_info@@CAXPAV1@@Z",
+   "size": 103,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e7e0",
+   "name": "_strcmp",
+   "size": 136,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e870",
+   "name": "__commit",
+   "size": 215,
+   "has_comment": false
+  },
+  {
+   "func": "0x67e951",
+   "name": "___loctotime64_t",
+   "size": 617,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ebba",
+   "name": "__getdrive",
+   "size": 198,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ec80",
+   "name": "?__CxxUnhandledExceptionFilter@@YGJPAU_EXCEPTION_POINTERS@@@Z",
+   "size": 61,
+   "has_comment": false
+  },
+  {
+   "func": "0x67eccb",
+   "name": "__wincmdln",
+   "size": 93,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ed28",
+   "name": "__setenvp",
+   "size": 219,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ee03",
+   "name": "_parse_cmdline",
+   "size": 408,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ef9b",
+   "name": "__setargv",
+   "size": 185,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f054",
+   "name": "___crtGetEnvironmentStringsA",
+   "size": 309,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f189",
+   "name": "___security_init_cookie",
+   "size": 148,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f21d",
+   "name": "___report_gsfailure",
+   "size": 260,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f330",
+   "name": "__allmul",
+   "size": 52,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f364",
+   "name": "_strcat_s",
+   "size": 113,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f3d5",
+   "name": "_xtoa_s@20",
+   "size": 219,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f4b0",
+   "name": "__ultoa_s",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f4c8",
+   "name": "GetCurrentProcessId",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f4ce",
+   "name": "__mbsrchr_l",
+   "size": 192,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f58e",
+   "name": "__mbsrchr",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f5a1",
+   "name": "__rmtmp",
+   "size": 117,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f6e5",
+   "name": "__strdup",
+   "size": 80,
+   "has_comment": false
+  },
+  {
+   "func": "0x67f735",
+   "name": "__tsopen_nolock",
+   "size": 1881,
+   "has_comment": false
+  },
+  {
+   "func": "0x67fe8e",
+   "name": "__sopen_helper",
+   "size": 153,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ff5a",
+   "name": "__sopen_s",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ff78",
+   "name": "___ascii_stricmp",
+   "size": 53,
+   "has_comment": false
+  },
+  {
+   "func": "0x67ffad",
+   "name": "__stricmp_l",
+   "size": 211,
+   "has_comment": false
+  },
+  {
+   "func": "0x6800d0",
+   "name": "__alloca_probe_16",
+   "size": 22,
+   "has_comment": true
+  },
+  {
+   "func": "0x6800e6",
+   "name": "__alloca_probe_8",
+   "size": 22,
+   "has_comment": true
+  },
+  {
+   "func": "0x6800fc",
+   "name": "__fullpath",
+   "size": 264,
+   "has_comment": false
+  },
+  {
+   "func": "0x680204",
+   "name": "___dtoxmode",
+   "size": 185,
+   "has_comment": false
+  },
+  {
+   "func": "0x6802bd",
+   "name": "__mbctolower_l",
+   "size": 164,
+   "has_comment": false
+  },
+  {
+   "func": "0x68036f",
+   "name": "__mbspbrk_l",
+   "size": 202,
+   "has_comment": false
+  },
+  {
+   "func": "0x68044c",
+   "name": "_has_osfxsr_set",
+   "size": 80,
+   "has_comment": false
+  },
+  {
+   "func": "0x68049c",
+   "name": "__get_sse2_info",
+   "size": 96,
+   "has_comment": false
+  },
+  {
+   "func": "0x680509",
+   "name": "__lseeki64_nolock",
+   "size": 131,
+   "has_comment": false
+  },
+  {
+   "func": "0x68058c",
+   "name": "__lseeki64",
+   "size": 271,
+   "has_comment": false
+  },
+  {
+   "func": "0x6806a5",
+   "name": "__getbuf",
+   "size": 68,
+   "has_comment": false
+  },
+  {
+   "func": "0x6806e9",
+   "name": "__isatty",
+   "size": 94,
+   "has_comment": false
+  },
+  {
+   "func": "0x680747",
+   "name": "__wctomb_s_l",
+   "size": 351,
+   "has_comment": false
+  },
+  {
+   "func": "0x6808a6",
+   "name": "_wctomb_s",
+   "size": 27,
+   "has_comment": false
+  },
+  {
+   "func": "0x6808d0",
+   "name": "__aulldvrm",
+   "size": 149,
+   "has_comment": false
+  },
+  {
+   "func": "0x680965",
+   "name": "?__crtGetStringTypeA_stat@@YAHPAUlocaleinfo_struct@@KPBDHPAGHHH@Z",
+   "size": 440,
+   "has_comment": false
+  },
+  {
+   "func": "0x680b1d",
+   "name": "___crtGetStringTypeA",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x680b5d",
+   "name": "__free_lc_time",
+   "size": 400,
+   "has_comment": false
+  },
+  {
+   "func": "0x680ced",
+   "name": "___free_lconv_num",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x680d2d",
+   "name": "___free_lconv_mon",
+   "size": 137,
+   "has_comment": false
+  },
+  {
+   "func": "0x680db6",
+   "name": "____lc_codepage_func",
+   "size": 38,
+   "has_comment": false
+  },
+  {
+   "func": "0x680de0",
+   "name": "_strcspn",
+   "size": 70,
+   "has_comment": false
+  },
+  {
+   "func": "0x680e26",
+   "name": "_strncpy_s",
+   "size": 179,
+   "has_comment": false
+  },
+  {
+   "func": "0x680ee0",
+   "name": "_strpbrk",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x680f20",
+   "name": "___ansicp",
+   "size": 71,
+   "has_comment": false
+  },
+  {
+   "func": "0x680f67",
+   "name": "___convertcp",
+   "size": 434,
+   "has_comment": false
+  },
+  {
+   "func": "0x681119",
+   "name": "__ungetc_nolock",
+   "size": 286,
+   "has_comment": false
+  },
+  {
+   "func": "0x681237",
+   "name": "__mbtowc_l",
+   "size": 275,
+   "has_comment": false
+  },
+  {
+   "func": "0x68134a",
+   "name": "_mbtowc",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x681de5",
+   "name": "__forcdecpt_l",
+   "size": 113,
+   "has_comment": false
+  },
+  {
+   "func": "0x681e56",
+   "name": "__cropzeros_l",
+   "size": 128,
+   "has_comment": false
+  },
+  {
+   "func": "0x681ed6",
+   "name": "__positive",
+   "size": 22,
+   "has_comment": false
+  },
+  {
+   "func": "0x681eec",
+   "name": "__fassign_l",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x681f2c",
+   "name": "__fassign",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x681f43",
+   "name": "__shift",
+   "size": 29,
+   "has_comment": false
+  },
+  {
+   "func": "0x681f60",
+   "name": "__forcdecpt",
+   "size": 14,
+   "has_comment": false
+  },
+  {
+   "func": "0x681f7c",
+   "name": "__cftoe2_l",
+   "size": 365,
+   "has_comment": false
+  },
+  {
+   "func": "0x6820e9",
+   "name": "__cftoe_l",
+   "size": 206,
+   "has_comment": false
+  },
+  {
+   "func": "0x6821b7",
+   "name": "__cftoe",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x6821d5",
+   "name": "__cftoa_l",
+   "size": 881,
+   "has_comment": false
+  },
+  {
+   "func": "0x682546",
+   "name": "__cftof2_l",
+   "size": 245,
+   "has_comment": false
+  },
+  {
+   "func": "0x68263b",
+   "name": "__cftof_l",
+   "size": 185,
+   "has_comment": false
+  },
+  {
+   "func": "0x6826f4",
+   "name": "__cftog_l",
+   "size": 248,
+   "has_comment": false
+  },
+  {
+   "func": "0x6827ec",
+   "name": "__cfltcvt_l",
+   "size": 134,
+   "has_comment": false
+  },
+  {
+   "func": "0x682872",
+   "name": "__cfltcvt",
+   "size": 33,
+   "has_comment": false
+  },
+  {
+   "func": "0x682893",
+   "name": "__setdefaultprecision",
+   "size": 41,
+   "has_comment": false
+  },
+  {
+   "func": "0x6828bc",
+   "name": "__ms_p5_test_fdiv",
+   "size": 60,
+   "has_comment": false
+  },
+  {
+   "func": "0x6828f8",
+   "name": "__ms_p5_mp_test_fdiv",
+   "size": 41,
+   "has_comment": false
+  },
+  {
+   "func": "0x682921",
+   "name": "___mtold12",
+   "size": 460,
+   "has_comment": false
+  },
+  {
+   "func": "0x682af0",
+   "name": "__raise_exc_ex",
+   "size": 730,
+   "has_comment": false
+  },
+  {
+   "func": "0x682dca",
+   "name": "__raise_exc",
+   "size": 33,
+   "has_comment": false
+  },
+  {
+   "func": "0x682deb",
+   "name": "__handle_exc",
+   "size": 481,
+   "has_comment": false
+  },
+  {
+   "func": "0x682fcc",
+   "name": "__set_errno",
+   "size": 40,
+   "has_comment": false
+  },
+  {
+   "func": "0x682ff4",
+   "name": "__errcode",
+   "size": 45,
+   "has_comment": false
+  },
+  {
+   "func": "0x683021",
+   "name": "__umatherr",
+   "size": 158,
+   "has_comment": false
+  },
+  {
+   "func": "0x6830bf",
+   "name": "__handle_qnan1",
+   "size": 83,
+   "has_comment": false
+  },
+  {
+   "func": "0x683112",
+   "name": "__except1",
+   "size": 186,
+   "has_comment": false
+  },
+  {
+   "func": "0x6831cc",
+   "name": "__frnd",
+   "size": 17,
+   "has_comment": false
+  },
+  {
+   "func": "0x6831dd",
+   "name": "__set_exp",
+   "size": 42,
+   "has_comment": false
+  },
+  {
+   "func": "0x683207",
+   "name": "__sptype",
+   "size": 91,
+   "has_comment": false
+  },
+  {
+   "func": "0x683262",
+   "name": "__decomp",
+   "size": 175,
+   "has_comment": false
+  },
+  {
+   "func": "0x683311",
+   "name": "__statfp",
+   "size": 11,
+   "has_comment": false
+  },
+  {
+   "func": "0x68331c",
+   "name": "__clrfp",
+   "size": 12,
+   "has_comment": false
+  },
+  {
+   "func": "0x683328",
+   "name": "__ctrlfp",
+   "size": 39,
+   "has_comment": false
+  },
+  {
+   "func": "0x68334f",
+   "name": "__set_statfp",
+   "size": 86,
+   "has_comment": false
+  },
+  {
+   "func": "0x6833a5",
+   "name": "___set_fpsr_sse2",
+   "size": 114,
+   "has_comment": false
+  },
+  {
+   "func": "0x683417",
+   "name": "?__crtCompareStringA_stat@@YAHPAUlocaleinfo_struct@@KKPBDH1HH@Z",
+   "size": 905,
+   "has_comment": false
+  },
+  {
+   "func": "0x6837a0",
+   "name": "___crtCompareStringA",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x6837e0",
+   "name": "__strnicoll_l",
+   "size": 248,
+   "has_comment": false
+  },
+  {
+   "func": "0x6838d8",
+   "name": "_findenv",
+   "size": 77,
+   "has_comment": false
+  },
+  {
+   "func": "0x683925",
+   "name": "_copy_environ",
+   "size": 93,
+   "has_comment": false
+  },
+  {
+   "func": "0x683982",
+   "name": "___crtsetenv",
+   "size": 588,
+   "has_comment": false
+  },
+  {
+   "func": "0x683d8b",
+   "name": "__set_error_mode",
+   "size": 70,
+   "has_comment": false
+  },
+  {
+   "func": "0x683dd1",
+   "name": "__set_osfhnd",
+   "size": 125,
+   "has_comment": false
+  },
+  {
+   "func": "0x683e4e",
+   "name": "__free_osfhnd",
+   "size": 129,
+   "has_comment": false
+  },
+  {
+   "func": "0x683ecf",
+   "name": "__get_osfhandle",
+   "size": 113,
+   "has_comment": false
+  },
+  {
+   "func": "0x683f40",
+   "name": "___lock_fhandle",
+   "size": 146,
+   "has_comment": false
+  },
+  {
+   "func": "0x683fe0",
+   "name": "__unlock_fhandle",
+   "size": 34,
+   "has_comment": false
+  },
+  {
+   "func": "0x684002",
+   "name": "__alloc_osfhnd",
+   "size": 205,
+   "has_comment": false
+  },
+  {
+   "func": "0x6841a1",
+   "name": "__mbsicmp_l",
+   "size": 538,
+   "has_comment": false
+  },
+  {
+   "func": "0x6843bb",
+   "name": "__mbsicmp",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x6843ce",
+   "name": "__mbsnbcmp_l",
+   "size": 361,
+   "has_comment": false
+  },
+  {
+   "func": "0x684537",
+   "name": "__mbsnbcmp",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x68454e",
+   "name": "_fastzero_I",
+   "size": 87,
+   "has_comment": false
+  },
+  {
+   "func": "0x6845a5",
+   "name": "__VEC_memzero",
+   "size": 143,
+   "has_comment": false
+  },
+  {
+   "func": "0x684634",
+   "name": "__putwch_nolock",
+   "size": 194,
+   "has_comment": false
+  },
+  {
+   "func": "0x6846ff",
+   "name": "?x_ismbbtype_l@@YAHPAUlocaleinfo_struct@@IHH@Z",
+   "size": 81,
+   "has_comment": false
+  },
+  {
+   "func": "0x684750",
+   "name": "__ismbblead",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x684763",
+   "name": "__chsize_nolock",
+   "size": 436,
+   "has_comment": false
+  },
+  {
+   "func": "0x684917",
+   "name": "__setmode_nolock",
+   "size": 188,
+   "has_comment": false
+  },
+  {
+   "func": "0x684a10",
+   "name": "__alloca_probe",
+   "size": 43,
+   "has_comment": false
+  },
+  {
+   "func": "0x684a3b",
+   "name": "__strnicmp_l",
+   "size": 240,
+   "has_comment": false
+  },
+  {
+   "func": "0x684cd3",
+   "name": "__fptostr",
+   "size": 189,
+   "has_comment": false
+  },
+  {
+   "func": "0x684d90",
+   "name": "___dtold",
+   "size": 187,
+   "has_comment": false
+  },
+  {
+   "func": "0x684e4b",
+   "name": "__fltout2",
+   "size": 142,
+   "has_comment": false
+  },
+  {
+   "func": "0x684ee0",
+   "name": "__alldvrm",
+   "size": 223,
+   "has_comment": false
+  },
+  {
+   "func": "0x684fc0",
+   "name": "__aullshr",
+   "size": 31,
+   "has_comment": false
+  },
+  {
+   "func": "0x684fdf",
+   "name": "__controlfp_s",
+   "size": 106,
+   "has_comment": false
+  },
+  {
+   "func": "0x685049",
+   "name": "__mbschr_l",
+   "size": 186,
+   "has_comment": false
+  },
+  {
+   "func": "0x685103",
+   "name": "__mbschr",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x685116",
+   "name": "___initconout",
+   "size": 31,
+   "has_comment": false
+  },
+  {
+   "func": "0x685162",
+   "name": "_wcslen",
+   "size": 22,
+   "has_comment": false
+  },
+  {
+   "func": "0x685180",
+   "name": "___ascii_strnicmp",
+   "size": 97,
+   "has_comment": false
+  },
+  {
+   "func": "0x6851e1",
+   "name": "_$I10_OUTPUT",
+   "size": 2246,
+   "has_comment": false
+  },
+  {
+   "func": "0x685aa7",
+   "name": "__hw_cw",
+   "size": 142,
+   "has_comment": false
+  },
+  {
+   "func": "0x685b35",
+   "name": "___hw_cw_sse2",
+   "size": 160,
+   "has_comment": false
+  },
+  {
+   "func": "0x685bd5",
+   "name": "__control87",
+   "size": 771,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f56",
+   "name": "getsockname",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f5c",
+   "name": "WSAAsyncSelect",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f62",
+   "name": "accept",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f68",
+   "name": "listen",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f6e",
+   "name": "getsockopt",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f74",
+   "name": "D3DXGetShaderOutputSemantics",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f7a",
+   "name": "D3DXCreateBuffer",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f80",
+   "name": "D3DXGetShaderInputSemantics",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f86",
+   "name": "D3DXGetShaderConstantTable",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f8c",
+   "name": "DirectDrawEnumerateExA",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x685f92",
+   "name": "DirectDrawCreateEx",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x688c82",
+   "name": "RtlUnwind",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x688c88",
+   "name": "?_strlwr_s_l_stat@@YAHPADIPAUlocaleinfo_struct@@@Z",
+   "size": 385,
+   "has_comment": false
+  },
+  {
+   "func": "0x688e09",
+   "name": "__strlwr_s_l",
+   "size": 50,
+   "has_comment": false
+  },
+  {
+   "func": "0x688e9d",
+   "name": "__putenv_helper",
+   "size": 527,
+   "has_comment": false
+  },
+  {
+   "func": "0x6890f1",
+   "name": "_xtoa@16",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x689159",
+   "name": "?_JumpToContinuation@@YGXPAXPAUEHRegistrationNode@@@Z",
+   "size": 43,
+   "has_comment": false
+  },
+  {
+   "func": "0x689190",
+   "name": "?_UnwindNestedFrames@@YGXPAUEHRegistrationNode@@PAUEHExceptionRecord@@@Z",
+   "size": 82,
+   "has_comment": false
+  },
+  {
+   "func": "0x6891e2",
+   "name": "___CxxFrameHandler3",
+   "size": 54,
+   "has_comment": false
+  },
+  {
+   "func": "0x6893ba",
+   "name": "?_GetRangeOfTrysToCheck@@YAPBU_s_TryBlockMapEntry@@PBU_s_FuncInfo@@HHPAI1@Z",
+   "size": 115,
+   "has_comment": false
+  },
+  {
+   "func": "0x68942d",
+   "name": "__CreateFrameInfo",
+   "size": 40,
+   "has_comment": false
+  },
+  {
+   "func": "0x689455",
+   "name": "__IsExceptionObjectToBeDestroyed",
+   "size": 33,
+   "has_comment": false
+  },
+  {
+   "func": "0x689476",
+   "name": "__FindAndUnlinkFrame",
+   "size": 76,
+   "has_comment": false
+  },
+  {
+   "func": "0x6894c2",
+   "name": "?_CallCatchBlock2@@YAPAXPAUEHRegistrationNode@@PBU_s_FuncInfo@@PAXHK@Z",
+   "size": 94,
+   "has_comment": false
+  },
+  {
+   "func": "0x689553",
+   "name": "__EH_prolog3_catch",
+   "size": 54,
+   "has_comment": false
+  },
+  {
+   "func": "0x689589",
+   "name": "_wfindenv",
+   "size": 81,
+   "has_comment": false
+  },
+  {
+   "func": "0x6895da",
+   "name": "_copy_environ_0",
+   "size": 93,
+   "has_comment": true
+  },
+  {
+   "func": "0x689637",
+   "name": "___crtwsetenv",
+   "size": 870,
+   "has_comment": false
+  },
+  {
+   "func": "0x6899ca",
+   "name": "___TypeMatch",
+   "size": 92,
+   "has_comment": false
+  },
+  {
+   "func": "0x689a26",
+   "name": "___FrameUnwindFilter",
+   "size": 68,
+   "has_comment": false
+  },
+  {
+   "func": "0x689a6a",
+   "name": "___FrameUnwindToState",
+   "size": 192,
+   "has_comment": false
+  },
+  {
+   "func": "0x689b4b",
+   "name": "?ExFilterRethrow@@YAHPAU_EXCEPTION_POINTERS@@@Z",
+   "size": 69,
+   "has_comment": false
+  },
+  {
+   "func": "0x689be4",
+   "name": "___AdjustPointer",
+   "size": 37,
+   "has_comment": false
+  },
+  {
+   "func": "0x689c09",
+   "name": "?IsInExceptionSpec@@YAEPAUEHExceptionRecord@@PBU_s_ESTypeList@@@Z",
+   "size": 121,
+   "has_comment": false
+  },
+  {
+   "func": "0x689c82",
+   "name": "?CallUnexpected@@YAXPBU_s_ESTypeList@@@Z",
+   "size": 40,
+   "has_comment": false
+  },
+  {
+   "func": "0x689ccb",
+   "name": "?CallCatchBlock@@YAPAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PBU_s_FuncInfo@@PAXHK@Z",
+   "size": 288,
+   "has_comment": false
+  },
+  {
+   "func": "0x689e67",
+   "name": "___BuildCatchObjectHelper",
+   "size": 383,
+   "has_comment": false
+  },
+  {
+   "func": "0x689fe6",
+   "name": "___BuildCatchObject",
+   "size": 133,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a077",
+   "name": "?CatchIt@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@PBU_s_HandlerType@@PBU_s_CatchableType@@PBU_s_TryBlockMapEntry@@H1E@Z",
+   "size": 108,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a0e3",
+   "name": "?FindHandlerForForeignException@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@HH1@Z",
+   "size": 242,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a1d5",
+   "name": "?FindHandler@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@EH1@Z",
+   "size": 854,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a543",
+   "name": "___InternalCxxFrameHandler",
+   "size": 228,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a630",
+   "name": "__CallSettingFrame@12",
+   "size": 76,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a67c",
+   "name": "__wcsnicoll_l",
+   "size": 321,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a7bd",
+   "name": "__wcsnicoll",
+   "size": 162,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a85f",
+   "name": "__wcsdup",
+   "size": 83,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a8b2",
+   "name": "_wcscpy_s",
+   "size": 108,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a91e",
+   "name": "___mbtow_environ",
+   "size": 133,
+   "has_comment": false
+  },
+  {
+   "func": "0x68a9a3",
+   "name": "__wsetenvp",
+   "size": 218,
+   "has_comment": false
+  },
+  {
+   "func": "0x68aa7d",
+   "name": "___crtGetEnvironmentStringsW",
+   "size": 353,
+   "has_comment": false
+  },
+  {
+   "func": "0x68abde",
+   "name": "_wcschr",
+   "size": 34,
+   "has_comment": false
+  },
+  {
+   "func": "0x68ac0d",
+   "name": "?wcsncnt@@YAHPB_WH@Z",
+   "size": 28,
+   "has_comment": false
+  },
+  {
+   "func": "0x68ac29",
+   "name": "?__crtCompareStringW_stat@@YAHPAUlocaleinfo_struct@@KKPB_WH1HH@Z",
+   "size": 592,
+   "has_comment": false
+  },
+  {
+   "func": "0x68ae79",
+   "name": "___crtCompareStringW",
+   "size": 64,
+   "has_comment": false
+  },
+  {
+   "func": "0x68af80",
+   "name": "_pow",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68afc0",
+   "name": "__CIpow",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68affb",
+   "name": "__CIpow_default",
+   "size": 25,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b01d",
+   "name": "start_0",
+   "size": 453,
+   "has_comment": true
+  },
+  {
+   "func": "0x68b1e2",
+   "name": "_test_whether_TOS_is_int",
+   "size": 36,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b206",
+   "name": "_odd",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b210",
+   "name": "_log",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b250",
+   "name": "__CIlog",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b28b",
+   "name": "__CIlog_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b2a8",
+   "name": "start_1",
+   "size": 184,
+   "has_comment": true
+  },
+  {
+   "func": "0x68b396",
+   "name": "__ftol2",
+   "size": 117,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b410",
+   "name": "_exp",
+   "size": 59,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b44c",
+   "name": "__CIexp",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b4a0",
+   "name": "__allshr",
+   "size": 33,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b5f0",
+   "name": "_asin",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b630",
+   "name": "__CIasin",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b66b",
+   "name": "__CIasin_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b688",
+   "name": "start_2",
+   "size": 174,
+   "has_comment": true
+  },
+  {
+   "func": "0x68b740",
+   "name": "_atan",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b780",
+   "name": "__CIatan",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b7bb",
+   "name": "__CIatan_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b7d8",
+   "name": "start_3",
+   "size": 130,
+   "has_comment": true
+  },
+  {
+   "func": "0x68b880",
+   "name": "_sin",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b8c0",
+   "name": "__CIsin",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b8fb",
+   "name": "__CIsin_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b918",
+   "name": "start_4",
+   "size": 145,
+   "has_comment": true
+  },
+  {
+   "func": "0x68b9b0",
+   "name": "_cos",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68b9f0",
+   "name": "__CIcos",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68ba2b",
+   "name": "__CIcos_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68ba48",
+   "name": "start_5",
+   "size": 145,
+   "has_comment": true
+  },
+  {
+   "func": "0x68bae0",
+   "name": "_acos",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bb20",
+   "name": "__CIacos",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bb5b",
+   "name": "__CIacos_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bb78",
+   "name": "start_6",
+   "size": 174,
+   "has_comment": true
+  },
+  {
+   "func": "0x68bc30",
+   "name": "_tan",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bc70",
+   "name": "__CItan",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bcab",
+   "name": "__CItan_default",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bcc8",
+   "name": "start_7",
+   "size": 149,
+   "has_comment": true
+  },
+  {
+   "func": "0x68bf00",
+   "name": "__allshl",
+   "size": 31,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bf20",
+   "name": "__trandisp1",
+   "size": 103,
+   "has_comment": false
+  },
+  {
+   "func": "0x68bf87",
+   "name": "__trandisp2",
+   "size": 140,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c0d9",
+   "name": "__rttosnpopde",
+   "size": 10,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c0e9",
+   "name": "chsifnegret",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c0f0",
+   "name": "__startTwoArgErrorHandling",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c107",
+   "name": "__startOneArgErrorHandling",
+   "size": 60,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c150",
+   "name": "__twoToTOS",
+   "size": 21,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c165",
+   "name": "__load_CW",
+   "size": 23,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c17c",
+   "name": "__convertTOStoQNaN",
+   "size": 25,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c195",
+   "name": "__fload_withFB",
+   "size": 67,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c1d8",
+   "name": "__checkTOS_withFB",
+   "size": 22,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c225",
+   "name": "__check_overflow_exit",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c239",
+   "name": "__check_range_exit",
+   "size": 163,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c2e0",
+   "name": "__CIpow_pentium4",
+   "size": 25,
+   "has_comment": false
+  },
+  {
+   "func": "0x68c2f9",
+   "name": "__pow_pentium4",
+   "size": 2872,
+   "has_comment": false
+  },
+  {
+   "func": "0x68cf27",
+   "name": "zerotoxdone",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68cf72",
+   "name": "_expbigret",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68cf9e",
+   "name": "__ffexpm1",
+   "size": 67,
+   "has_comment": false
+  },
+  {
+   "func": "0x68cfe1",
+   "name": "_isintTOS",
+   "size": 37,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d006",
+   "name": "_isintTOSret",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d007",
+   "name": "notanint",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d00e",
+   "name": "evenint",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d015",
+   "name": "_usepowhlp",
+   "size": 50,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d047",
+   "name": "__d_inttype",
+   "size": 100,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d0ab",
+   "name": "__powhlp",
+   "size": 318,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d1f0",
+   "name": "__CIlog_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d20e",
+   "name": "start_8",
+   "size": 590,
+   "has_comment": true
+  },
+  {
+   "func": "0x68d460",
+   "name": "__CIexp_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d47e",
+   "name": "start_9",
+   "size": 671,
+   "has_comment": true
+  },
+  {
+   "func": "0x68d720",
+   "name": "__cintrindisp2",
+   "size": 62,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d75e",
+   "name": "__cintrindisp1",
+   "size": 61,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d79b",
+   "name": "__ctrandisp2",
+   "size": 72,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d7e3",
+   "name": "ctranexit",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d7ea",
+   "name": "cintrinexit",
+   "size": 327,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d931",
+   "name": "__ctrandisp1",
+   "size": 51,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d964",
+   "name": "__fload",
+   "size": 60,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d9a0",
+   "name": "_CallDestructExceptionObject",
+   "size": 52,
+   "has_comment": false
+  },
+  {
+   "func": "0x68d9e0",
+   "name": "_ValidateScopeTableHandlers",
+   "size": 177,
+   "has_comment": false
+  },
+  {
+   "func": "0x68daa0",
+   "name": "__ValidateEH3RN",
+   "size": 930,
+   "has_comment": false
+  },
+  {
+   "func": "0x68de50",
+   "name": "__CIasin_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68de6e",
+   "name": "start_10",
+   "size": 1378,
+   "has_comment": true
+  },
+  {
+   "func": "0x68e3d0",
+   "name": "__CIatan_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e3ee",
+   "name": "start_11",
+   "size": 717,
+   "has_comment": true
+  },
+  {
+   "func": "0x68e6fb",
+   "name": "PatanDone",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e6fc",
+   "name": "AugmentSinCos",
+   "size": 48,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e72c",
+   "name": "__rtpiby2",
+   "size": 9,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e745",
+   "name": "postv",
+   "size": 1,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e770",
+   "name": "__CIsin_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e78e",
+   "name": "start_12",
+   "size": 425,
+   "has_comment": true
+  },
+  {
+   "func": "0x68e940",
+   "name": "__CIcos_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68e95e",
+   "name": "start_13",
+   "size": 395,
+   "has_comment": true
+  },
+  {
+   "func": "0x68eaf0",
+   "name": "__CIacos_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68eb0e",
+   "name": "start_14",
+   "size": 1334,
+   "has_comment": true
+  },
+  {
+   "func": "0x68f050",
+   "name": "__CItan_pentium4",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x68f06e",
+   "name": "start_15",
+   "size": 564,
+   "has_comment": true
+  },
+  {
+   "func": "0x68f2b0",
+   "name": "__floor_default",
+   "size": 209,
+   "has_comment": false
+  },
+  {
+   "func": "0x69020b",
+   "name": "__fpclass",
+   "size": 148,
+   "has_comment": false
+  },
+  {
+   "func": "0x6902e0",
+   "name": "SEH_575A00",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x6902f0",
+   "name": "SEH_575850",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x690300",
+   "name": "SEH_53B9B0",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x690310",
+   "name": "SEH_575A70",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x690320",
+   "name": "SEH_56EF50",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x690330",
+   "name": "SEH_53B360",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x690340",
+   "name": "SEH_53B4B0",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x690350",
+   "name": "SEH_53BA40",
+   "size": 5,
+   "has_comment": false
+  }
+ ],
+ "C_near_duplicate": [
+  {
+   "normalised": "std__exception__exception",
+   "functions": [
+    {
+     "func": "0x6736e9",
+     "name": "??0exception@std@@QAE@ABQBD@Z",
+     "size": 78
+    },
+    {
+     "func": "0x673737",
+     "name": "??0exception@std@@QAE@ABQBDH@Z",
+     "size": 24
+    },
+    {
+     "func": "0x67374f",
+     "name": "??0exception@std@@QAE@ABV01@@Z",
+     "size": 88
+    }
+   ]
+  }
+ ]
+}

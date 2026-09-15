@@ -11,6 +11,8 @@
 #include <array>
 #include <signal.h>
 #include "Console.hpp"
+#include "DevMode.hpp"
+#include "BuildMap.hpp"
 #include <thread>
 #include "FuncPointers.h"
 #include "PrintPatches.hpp"
@@ -22,8 +24,7 @@
 #include "Dvars.hpp"
 #include "Binds.hpp"
 #include "Exec.hpp"
-#include "DemoCustom.hpp"
-#include "DemoUI.hpp"
+#include "demo/demo.hpp"
 
 HANDLE hProcess;
 HINSTANCE hInst;
@@ -124,14 +125,34 @@ void ExtConsole::extConInit(int extConsoleMode) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 	DeleteFileA("ZM");//just in case
+	// Which game build are we in? Every hardcoded address depends on the answer,
+	// so say it out loud before anything uses one (RULE A15). Detection is by the
+	// EXE_ERR_PROCESS_DEMO_FILE_FAILED string, the same signature RULE A2 uses to
+	// verify a Cheat Engine attachment -- not a version number or a module size.
+	Console::printf("[build] detected: %s   (%zu addresses in the Store table)",
+		build_map::name(), build_map::mapped_count());
+	if (build_map::current() == build_map::Build::Unknown)
+	{
+		Console::printf("[build] WARNING: no build signature matched. Addresses are "
+			"being used UNTRANSLATED, i.e. as if this were the Steam build. If this "
+			"is not the Steam build, expect it to fault.");
+	}
+
+	// Developer mode decides which console commands and UI tabs exist, so it
+	// has to be settled before any module registers anything.
+	dev_mode::init();
+	Console::printf("[s2mp] developer mode: %s", dev_mode::enabled() ? "ON" : "off");
+
 	ArxanPatches::init();
 	DebugPatches::init();
 	PrintPatches::init();
+	// Dvar mappings must be ready before theater reads stock dvars (mapname→1673, etc.).
+	DvarInterface::init();
+	demo::init();
 	DevPatches::init();
 	Console::registerCustomCommands();
 	Console::registerCustomDvars();
 	Console::registerCommandOverrides();
-	DvarInterface::init();
 	Binds::init();
 	Exec::init();
 	Dvars::initPatches();
@@ -139,23 +160,10 @@ void ExtConsole::extConInit(int extConsoleMode) {
 	InternalConsole::init();
 	Loaders::initAssetLoaders();
 
-	// Custom demo system (MP only — parser hooks use MP addresses).
-	// Auto-records real matches; play with "demo_play <file>" or the ImGui menu.
-	if (!doZombiesMode) {
-		demo_custom::init();
-		DemoUI::init();      // in-game ImGui demo picker (INSERT / "demo_menu")
-	}
-
-	// Kill leftover native-demo test harness markers. An older WIP would run the first
-	// line of autotest.txt via Cbuf ~30s after boot (used to drive cl_demo_play headlessly).
-	if (DeleteFileA("autotest.txt")) {
-		Console::printf("[demo] deleted leftover autotest.txt (was used to auto-fire cl_demo_play)");
-	}
-
-	// Also strip any cl_demo_play / demo_play lines left in players2/autoexec.cfg from testing.
-	Exec::scrubDemoAutostartFromAutoexec();
-
 	GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "exec autoexec");
+
+	// Drop leftover NativeTrace harness marker so it cannot silently re-arm native demos.
+	DeleteFileA("autotest.txt");
 
 	DeleteFileA("ZM");//just in case
 	if (extConsoleMode == 0 || extConsoleMode == 2) {

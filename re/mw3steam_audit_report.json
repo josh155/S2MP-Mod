@@ -1,0 +1,345 @@
+{
+ "A_no_basis": [
+  {
+   "func": "0x14001e110",
+   "name": "_guard_check_icall_nop",
+   "size": 3,
+   "has_comment": false
+  },
+  {
+   "func": "0x1400fea90",
+   "name": "CompletionRoutine",
+   "size": 20,
+   "has_comment": false
+  },
+  {
+   "func": "0x1401e3260",
+   "name": "fnEnum",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x140218e30",
+   "name": "StartAddress",
+   "size": 372,
+   "has_comment": false
+  },
+  {
+   "func": "0x14028e110",
+   "name": "Sleep",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x140311180",
+   "name": "fn",
+   "size": 211,
+   "has_comment": false
+  },
+  {
+   "func": "0x140350eb0",
+   "name": "timeGetTime",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x140375692",
+   "name": "Direct3DCreate9",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x140375698",
+   "name": "DirectSoundCreate8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x14037569e",
+   "name": "DirectSoundCaptureCreate",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403756a4",
+   "name": "CallNtPowerInformation",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403756aa",
+   "name": "__WSAFDIsSet",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403756b0",
+   "name": "CreateToolhelp32Snapshot",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403756b6",
+   "name": "Module32First",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403756bc",
+   "name": "Module32Next",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x14037b4c0",
+   "name": "fnInternetCallback",
+   "size": 2644,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403a4446",
+   "name": "inet_ntop",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403a4636",
+   "name": "BCryptOpenAlgorithmProvider",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403a463c",
+   "name": "BCryptCloseAlgorithmProvider",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403a4642",
+   "name": "BCryptGenRandom",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403ca5f0",
+   "name": "__alloca_probe",
+   "size": 78,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403ca890",
+   "name": "TlsCallback_0",
+   "size": 102,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403caff0",
+   "name": "__GSHandlerCheck",
+   "size": 29,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb010",
+   "name": "__GSHandlerCheckCommon",
+   "size": 91,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb080",
+   "name": "__security_check_cookie",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb0a0",
+   "name": "__raise_securityfailure",
+   "size": 52,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb0d4",
+   "name": "__report_gsfailure",
+   "size": 210,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb1a8",
+   "name": "__report_rangecheckfailure",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb1bc",
+   "name": "__report_securityfailure",
+   "size": 156,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb258",
+   "name": "capture_current_context",
+   "size": 109,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb2c8",
+   "name": "capture_previous_context",
+   "size": 113,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403cb33c",
+   "name": "__GSHandlerCheck_EH4",
+   "size": 127,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403d364c",
+   "name": "DeleteCriticalSection",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403d3664",
+   "name": "EnterCriticalSection",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403d366c",
+   "name": "LeaveCriticalSection",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403f6b90",
+   "name": "__CxxFrameHandler3",
+   "size": 134,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403f6c18",
+   "name": "__CxxFrameHandler4",
+   "size": 191,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403f6d28",
+   "name": "__C_specific_handler",
+   "size": 523,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403f6fec",
+   "name": "_CxxThrowException",
+   "size": 160,
+   "has_comment": false
+  },
+  {
+   "func": "0x1403f70fc",
+   "name": "?_CallMemberFunction0@@YAXQEAX0@Z",
+   "size": 3,
+   "has_comment": false
+  },
+  {
+   "func": "0x14041cd38",
+   "name": "Callback",
+   "size": 32,
+   "has_comment": false
+  },
+  {
+   "func": "0x140421288",
+   "name": "LocaleEnumProc",
+   "size": 50,
+   "has_comment": false
+  },
+  {
+   "func": "0x140421720",
+   "name": "FlsAlloc",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x140421728",
+   "name": "FlsFree",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x140421730",
+   "name": "FlsGetValue",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x140421738",
+   "name": "FlsSetValue",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x14042a810",
+   "name": "GetStringTypeW",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x14042e870",
+   "name": "RtlUnwind",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x140440f10",
+   "name": "__GSHandlerCheck_SEH",
+   "size": 133,
+   "has_comment": false
+  },
+  {
+   "func": "0x140440f98",
+   "name": "__GSHandlerCheck_EH",
+   "size": 127,
+   "has_comment": false
+  },
+  {
+   "func": "0x140441018",
+   "name": "__C_specific_handler_noexcept",
+   "size": 75,
+   "has_comment": false
+  },
+  {
+   "func": "0x140441ad0",
+   "name": "_guard_dispatch_icall_nop",
+   "size": 2,
+   "has_comment": false
+  },
+  {
+   "func": "0x140441af0",
+   "name": "_guard_xfg_dispatch_icall_nop",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x148981310",
+   "name": "start",
+   "size": 96,
+   "has_comment": false
+  }
+ ],
+ "C_near_duplicate": [
+  {
+   "normalised": "sl_getstring",
+   "functions": [
+    {
+     "func": "0x140299fa0",
+     "name": "SL_GetString",
+     "size": 42
+    },
+    {
+     "func": "0x14029a960",
+     "name": "SL_GetString_",
+     "size": 36
+    }
+   ]
+  }
+ ]
+}

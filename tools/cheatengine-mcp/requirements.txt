@@ -1,0 +1,3 @@
+# Cheat Engine MCP Bridge - Python Dependencies
+mcp>=1.0.0
+pywin32>=306

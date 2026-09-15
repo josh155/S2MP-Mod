@@ -1,0 +1,487 @@
+{
+  "ea": "0x40c920",
+  "count": 60,
+  "stride": 16,
+  "fields": [
+    {
+      "i": 0,
+      "name": "eType",
+      "offset": 4,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 1,
+      "name": "lerp.eFlags",
+      "offset": 8,
+      "bits": -98,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 2,
+      "name": "lerp.pos.trBase[0]",
+      "offset": 24,
+      "bits": -92,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 3,
+      "name": "lerp.pos.trBase[1]",
+      "offset": 28,
+      "bits": -91,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 4,
+      "name": "lerp.pos.trBase[2]",
+      "offset": 32,
+      "bits": -90,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 5,
+      "name": "events[0]",
+      "offset": 164,
+      "bits": -94,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 6,
+      "name": "eventSequence",
+      "offset": 160,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 7,
+      "name": "weapon",
+      "offset": 196,
+      "bits": 7,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 8,
+      "name": "weaponModel",
+      "offset": 200,
+      "bits": 4,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 9,
+      "name": "eventParms[0]",
+      "offset": 180,
+      "bits": -93,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 10,
+      "name": "surfType",
+      "offset": 132,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 11,
+      "name": "lerp.u.anonymous.data[0]",
+      "offset": 84,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 12,
+      "name": "time2",
+      "offset": 112,
+      "bits": -97,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 13,
+      "name": "index",
+      "offset": 136,
+      "bits": 10,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 14,
+      "name": "solid",
+      "offset": 152,
+      "bits": 24,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 15,
+      "name": "un2",
+      "offset": 216,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 16,
+      "name": "groundEntityNum",
+      "offset": 124,
+      "bits": -96,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 17,
+      "name": "un1",
+      "offset": 212,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 18,
+      "name": "lerp.apos.trBase[1]",
+      "offset": 64,
+      "bits": -100,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 19,
+      "name": "lerp.apos.trBase[0]",
+      "offset": 60,
+      "bits": -100,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 20,
+      "name": "clientNum",
+      "offset": 140,
+      "bits": 7,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 21,
+      "name": "lerp.pos.trDelta[0]",
+      "offset": 36,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 22,
+      "name": "lerp.pos.trDelta[1]",
+      "offset": 40,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 23,
+      "name": "lerp.pos.trDelta[2]",
+      "offset": 44,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 24,
+      "name": "events[1]",
+      "offset": 168,
+      "bits": -94,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 25,
+      "name": "events[2]",
+      "offset": 172,
+      "bits": -94,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 26,
+      "name": "eventParms[1]",
+      "offset": 184,
+      "bits": -93,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 27,
+      "name": "eventParms[2]",
+      "offset": 188,
+      "bits": -93,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 28,
+      "name": "lerp.pos.trTime",
+      "offset": 16,
+      "bits": -97,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 29,
+      "name": "lerp.pos.trType",
+      "offset": 12,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 30,
+      "name": "eventParm",
+      "offset": 156,
+      "bits": -93,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 31,
+      "name": "lerp.apos.trType",
+      "offset": 48,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 32,
+      "name": "events[3]",
+      "offset": 176,
+      "bits": -94,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 33,
+      "name": "lerp.apos.trBase[2]",
+      "offset": 68,
+      "bits": -100,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 34,
+      "name": "lerp.apos.trTime",
+      "offset": 52,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 35,
+      "name": "lerp.apos.trDelta[0]",
+      "offset": 72,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 36,
+      "name": "lerp.apos.trDelta[2]",
+      "offset": 80,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 37,
+      "name": "eventParms[3]",
+      "offset": 192,
+      "bits": -93,
+      "type": 65535,
+      "flags": 0
+    },
+    {
+      "i": 38,
+      "name": "lerp.pos.trDuration",
+      "offset": 20,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 39,
+      "name": "lerp.apos.trDelta[1]",
+      "offset": 76,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 40,
+      "name": "attackerEntityNum",
+      "offset": 120,
+      "bits": 10,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 41,
+      "name": "fWaistPitch",
+      "offset": 224,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 42,
+      "name": "fTorsoPitch",
+      "offset": 220,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 43,
+      "name": "iHeadIcon",
+      "offset": 144,
+      "bits": 4,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 44,
+      "name": "iHeadIconTeam",
+      "offset": 148,
+      "bits": 2,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 45,
+      "name": "lerp.apos.trDuration",
+      "offset": 56,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 46,
+      "name": "torsoAnim",
+      "offset": 208,
+      "bits": 10,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 47,
+      "name": "legsAnim",
+      "offset": 204,
+      "bits": 10,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 48,
+      "name": "loopSound",
+      "offset": 128,
+      "bits": 8,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 49,
+      "name": "otherEntityNum",
+      "offset": 116,
+      "bits": 10,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 50,
+      "name": "lerp.u.anonymous.data[1]",
+      "offset": 88,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 51,
+      "name": "lerp.u.anonymous.data[2]",
+      "offset": 92,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 52,
+      "name": "lerp.u.anonymous.data[3]",
+      "offset": 96,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 53,
+      "name": "lerp.u.anonymous.data[4]",
+      "offset": 100,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 54,
+      "name": "lerp.u.anonymous.data[5]",
+      "offset": 104,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 55,
+      "name": "partBits[0]",
+      "offset": 228,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 56,
+      "name": "partBits[1]",
+      "offset": 232,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 57,
+      "name": "partBits[2]",
+      "offset": 236,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 58,
+      "name": "partBits[3]",
+      "offset": 240,
+      "bits": 32,
+      "type": 0,
+      "flags": 0
+    },
+    {
+      "i": 59,
+      "name": "field_59",
+      "offset": 0,
+      "bits": 0,
+      "type": 0,
+      "flags": 0
+    }
+  ]
+}

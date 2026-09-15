@@ -1,0 +1,1238 @@
+==== case 0xFF92 ====
+    if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+    {
+      MSG_ReadBits(a1, 4);
+      v70 = v69 & 0xF;
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 2);
+      v72 = v70 | (16 * v71) & 0x30;
+    }
+    else
+    {
+      v72 = *(_DWORD *)v280 & 0x3F;
+    }
+    if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+    {
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 4);
+      v176 = (v175 & 0xF) << 6;
+    }
+    else
+    {
+      v176 = *(_DWORD *)v280 & 0x3C0;
+    }
+    v198 = v176 | v72 & 0xFFFFFC3F;
+    if ( a6 )
+    {
+      a2 = (__int64)"%s:%d,%d,%d ";
+      Com_Printf(25, (unsigned int)"%s:%d,%d,%d ", *v68, v198 & 0xF, (v198 >> 4) & 3, (v198 >> 6) & 0xF);
+    }
+    *_R13 = v198;
+    goto LABEL_234;
+
+==== case 0xFF93 ====
+    goto LABEL_10;
+
+==== case 0xFF94 ====
+    goto LABEL_47;
+
+==== case 0xFF95 ====
+    Bit = MSG_ReadBit(a1);
+    v74 = MSG_ReadBit(a1);
+    if ( Bit == 1 )
+    {
+      if ( v74 == 1 )
+      {
+        *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 4);
+        v76 = v75 << 13;
+      }
+      else
+      {
+        v76 = *(_DWORD *)v280;
+      }
+      v221 = v76 & 0x1E000;
+      v20 = v221 >> 13;
+      ClassByIndex = BG_AnimationState_GetClassByIndex(v20);
+      if ( !ClassByIndex )
+      {
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          1320,
+          0,
+          (unsigned int)"%s",
+          (unsigned int)"animClass",
+          v222);
+      }
+      v224 = *(_QWORD *)(ClassByIndex + 8);
+      v225 = v221 | 1;
+      if ( v224 && *(_WORD *)(v224 + 4) )
+      {
+        if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+        {
+          a2 = 32 - __lzcnt(*(unsigned __int16 *)(*(_QWORD *)(ClassByIndex + 8) + 4LL));
+          *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, a2);
+          LOBYTE(v226) = 2 * v226;
+        }
+        else
+        {
+          v226 = *(_DWORD *)v280;
+        }
+        v259 = v226 & 0xFE;
+        v260 = v259 >> 1;
+        v261 = *(unsigned __int16 *)(*(_QWORD *)(ClassByIndex + 8) + 4LL);
+        if ( v259 >> 1 >= v261 )
+        {
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+            1334,
+            0,
+            (unsigned int)"toValue->animState doesn't index animClass->stateMachine->stateCount\n\t%i not in [0, %i)",
+            v260,
+            v261);
+        }
+        v262 = v225 | v259;
+        if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+        {
+          a2 = 32 - __lzcnt(*(unsigned __int8 *)(*(_QWORD *)(*(_QWORD *)(ClassByIndex + 8) + 8LL) + 40LL * v260 + 13));
+          *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, a2);
+          LOWORD(v264) = v263 << 8;
+        }
+        else
+        {
+          v264 = *(_DWORD *)v280;
+        }
+        v265 = v264 & 0x1F00;
+        v227 = v265 | v262;
+        v266 = v265 >> 8;
+        v267 = *(unsigned __int8 *)(*(_QWORD *)(*(_QWORD *)(ClassByIndex + 8) + 8LL) + 40LL * (v291 >> 1) + 13);
+        if ( v266 >= v267 )
+        {
+          v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+            1346,
+            0,
+            (unsigned int)"toValue->animEntry doesn't index animClass->stateMachine->states[toValue->animState].entryCo"
+                          "unt\n"
+                          "\t%i not in [0, %i)",
+            v266,
+            v267);
+        }
+      }
+      else
+      {
+      }
+      if ( a6 )
+      {
+        a2 = (__int64)"%s:%d,%d,%d,%d ";
+        v234 = (v227 >> 13) & 0xF;
+        v233 = v227 & 1;
+        v232 = (unsigned __int8)v227 >> 1;
+        goto LABEL_232;
+      }
+    }
+    else
+    {
+      if ( v74 == 1 )
+      {
+        *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 12);
+        v178 = v177 << 11;
+      }
+      else
+      {
+        v178 = *(_DWORD *)v280;
+      }
+      v228 = v178 & 0x7FF800;
+      if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+      {
+        *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 10);
+        LOWORD(v230) = 2 * v229;
+      }
+      else
+      {
+        v230 = *(_DWORD *)v280;
+      }
+      v231 = v230 & 0x7FE;
+      v227 = v228 | v231;
+      if ( a6 )
+      {
+        v232 = v231 >> 1;
+        a2 = (__int64)"%s:%d,%d,%d ";
+        v234 = v228 >> 11;
+  LABEL_232:
+        Com_Printf(25, a2, v235, v233, v234, v232);
+      }
+    }
+    *v279 = v227;
+    goto LABEL_234;
+
+==== case 0xFF96 ====
+
+==== case 0xFF97 ====
+
+==== case 0xFF98 ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      a2 = (__int64)&v293;
+      __asm
+      {
+        vmovss xmm0, dword ptr [rax]
+        vaddss xmm0, xmm0, cs:dword_F9B8D0
+        vroundss xmm0, xmm0, xmm0, 1
+        vcvttss2si eax, xmm0
+      }
+      _EBX = MSG_ReadFloatCase(a1, &v293, a5, a6);
+  LABEL_43:
+  LABEL_44:
+      *_R13 = _EBX;
+      goto LABEL_234;
+    }
+    v20 = (unsigned int)*((__int16 *)a5 + 6);
+    if ( (_DWORD)v20 != -104 )
+    {
+      __asm { vmovss xmm0, dword ptr [rax] }
+      *(double *)_XMM0.m128_u64 = MSG_ReadOriginFloat(v20, a1, *(double *)_XMM0.m128_u64);
+      __asm { vmovd ebx, xmm0 }
+      if ( a6 )
+      {
+        __asm { vcvtss2sd xmm0, xmm0, xmm0 }
+        a2 = (__int64)"%s:%f ";
+        Com_Printf(25, (unsigned int)"%s:%f ", *a5, v172, v173, v174);
+      }
+      goto LABEL_43;
+    }
+    __asm
+    {
+      vmovss xmm0, dword ptr [rax]
+      vmovss dword ptr [rbp+var_50], xmm0
+    }
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      __asm
+      {
+        vmovss xmm0, dword ptr [rax+158h]
+        vroundss xmm0, xmm0, xmm0, 1
+        vcvttss2si ebx, xmm0
+      }
+      *(double *)&_XMM0 = MSG_ReadBits(a1, 16);
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vroundss xmm0, xmm0, dword ptr [rbp+var_50], 1
+      }
+      __asm { vcvttss2si ecx, xmm0 }
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vcvtsi2ss xmm0, xmm0, eax
+      }
+    }
+    else
+    {
+      *(double *)&_XMM0 = MSG_ReadBits(a1, 7);
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vroundss xmm0, xmm0, dword ptr [rbp+var_50], 1
+      }
+      __asm
+      {
+        vcvttss2si ecx, xmm0
+        vxorps xmm0, xmm0, xmm0
+        vcvtsi2ss xmm0, xmm0, eax
+        vcvtsi2ss xmm1, xmm0, ecx
+        vaddss xmm0, xmm0, xmm1
+      }
+    }
+    __asm { vmovd ebx, xmm0 }
+    if ( !a6 )
+      goto LABEL_44;
+    __asm { vcvtss2sd xmm0, xmm0, xmm0 }
+    a2 = (__int64)"%s:%f ";
+    Com_Printf(25, (unsigned int)"%s:%f ", *a5, _ECX, v62, v63);
+    *_R13 = _EBX;
+    goto LABEL_234;
+
+==== case 0xFF99 ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+      goto LABEL_70;
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 4);
+    Short = 50 * v77;
+    goto LABEL_158;
+
+==== case 0xFF9A ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+  LABEL_70:
+      a2 = 16;
+      goto LABEL_106;
+    }
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 4);
+    Short = 250 * v199;
+    goto LABEL_158;
+
+==== case 0xFF9B ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      Short = MSG_ReadShort(
+                (char *)a1,
+                a2,
+                *(double *)_XMM0.m128_u64,
+                *(double *)_XMM1.m128_u64,
+                *(double *)_XMM2.m128_u64);
+      goto LABEL_158;
+    }
+    *_R13 = 0;
+    goto LABEL_234;
+
+==== case 0xFF9C ====
+    __asm
+    {
+      vmovss xmm0, dword ptr [rax]
+      vmovss dword ptr [rbp+var_50], xmm0
+    }
+    v79 = MSG_ReadBit(a1);
+    v80 = MSG_ReadBit(a1);
+    if ( v79 == 1 )
+    {
+      a2 = 32 - __lzcnt(7u);
+      MSG_ReadBits(a1, a2);
+      if ( v81 >= 7 )
+      {
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          1078,
+          0,
+          (unsigned int)"index doesn't index COMMON_ANGLE_DELTA_ARRAYCOUNT\n\t%i not in [0, %i)",
+          v81,
+          7);
+      }
+      if ( !g_commonAngleDeltas[v83] )
+      {
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          1080,
+          0,
+          (unsigned int)"%s",
+          (unsigned int)"delta",
+          v82);
+      }
+      __asm { vmovss xmm0, dword ptr [rbp+var_50] }
+      __asm
+      {
+        vmulss xmm0, xmm0, cs:dword_F9B8D8
+        vaddss xmm0, xmm0, cs:dword_F9B8D0
+        vroundss xmm0, xmm0, xmm0, 1
+        vcvttss2si eax, xmm0
+      }
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vcvtsi2ss xmm0, xmm0, eax
+        vmulss xmm0, xmm0, cs:dword_F9B8DC
+        vmovss dword ptr [r13+0], xmm0
+      }
+    }
+    else
+    {
+      if ( v80 )
+      {
+        MSG_ReadBit(a1);
+        MSG_ReadBits(a1, 12);
+        if ( !v180 )
+        {
+          v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+            1100,
+            0,
+            (unsigned int)"%s",
+            (unsigned int)"delta",
+            v179);
+        }
+        __asm { vmovss xmm0, dword ptr [rbp+var_50] }
+        __asm
+        {
+          vmulss xmm0, xmm0, cs:dword_F9B8D8
+          vaddss xmm0, xmm0, cs:dword_F9B8D0
+          vroundss xmm0, xmm0, xmm0, 1
+          vcvttss2si eax, xmm0
+        }
+        __asm
+        {
+          vxorps xmm0, xmm0, xmm0
+          vcvtsi2ss xmm0, xmm0, eax
+          vmulss xmm0, xmm0, cs:dword_F9B8DC
+        }
+      }
+      else
+      {
+  LABEL_144:
+        _XMM0 = (__m128)MSG_ReadAngle16(a1, _XMM0);
+      }
+  LABEL_145:
+      __asm { vmovss dword ptr [r13+0], xmm0 }
+    }
+    goto LABEL_234;
+
+==== case 0xFF9D ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      if ( (unsigned int)MSG_ReadBit(a1) )
+      {
+        _EAX = *(_DWORD *)v280 ^ MSG_ReadLong(a1, a2, v91);
+        *_R13 = _EAX;
+        if ( a6 )
+        {
+          __asm { vmovd xmm0, eax }
+          a2 = (__int64)"%s:%f\n";
+          __asm { vcvtss2sd xmm0, xmm0, xmm0 }
+          Com_Printf(25, (unsigned int)"%s:%f\n", *a5, (_DWORD)v280, v93, v94);
+        }
+      }
+      else
+      {
+        MSG_ReadBits(a1, 4);
+        *(double *)_XMM0.m128_u64 = MSG_ReadByte(a1);
+        __asm { vcvttss2si ecx, dword ptr [rcx] }
+        v242 = ((v237 + 16 * v241) ^ ((_DWORD)_RCX + 2048)) - 2048;
+        __asm
+        {
+          vcvtsi2ss xmm0, xmm0, ecx
+          vmovss dword ptr [r13+0], xmm0
+        }
+        if ( a6 )
+        {
+          a2 = (__int64)"%s:%i\n";
+          Com_Printf(25, (unsigned int)"%s:%i\n", *v19, v242, v238, v239);
+        }
+      }
+    }
+    else
+    {
+      *_R13 = 0;
+    }
+    __asm { vmovss xmm0, dword ptr [r13+0] }
+    __asm
+    {
+      vaddss xmm0, xmm0, cs:dword_F9B8E0
+      vcvttss2si rax, xmm0
+    }
+    if ( (unsigned int)_RAX >= 0x1000 )
+    {
+      __asm { vcvttss2si r8d, xmm0 }
+      v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+      MyAssertHandler(
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+        1664,
+        0,
+        (unsigned int)"*(float *)toF + HUDELEM_COORD_BIAS doesn't index 1 << HUDELEM_COORD_BITS\n\t%i not in [0, %i)",
+        _R8D,
+        4096);
+    }
+    goto LABEL_234;
+
+==== case 0xFF9E ====
+    v97 = *(_DWORD *)v280;
+    if ( *(_DWORD *)a1 )
+      MyAssertHandler(
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+        799,
+        0,
+        (unsigned int)"%s",
+        (unsigned int)"!msg->overflowed",
+        a6);
+    if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+    {
+      a2 = 29;
+  LABEL_106:
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, a2);
+    }
+    else
+    {
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 5);
+      if ( v188 >= 0x1D )
+      {
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          810,
+          0,
+          (unsigned int)"%s\n\t(bitChanged) = %i",
+          (unsigned int)"(bitChanged >= 0 && bitChanged < 29)",
+          v188);
+      }
+      Short = v97 ^ (1 << v189);
+    }
+    goto LABEL_158;
+
+==== case 0xFF9F ====
+
+==== case 0xFFB6 ====
+
+==== case 0xFFB8 ====
+
+==== case 0xFFBA ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+      goto LABEL_25;
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 8);
+    *_R13 = v277 - v55;
+    goto LABEL_234;
+
+==== case 0xFFA0 ====
+    v98 = *((__int16 *)a5 + 5);
+    v99 = MSG_ReadBit(a1);
+    if ( v99 != 1 )
+    {
+      v101 = MSG_ReadBit(a1);
+      if ( v101 != 1 )
+      {
+        *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 3);
+        v100 = v102 | (8 * (unsigned int)((__int64 (__fastcall *)(__int64))MSG_ReadByte)(a1));
+      }
+    }
+    a2 = v98;
+    goto LABEL_180;
+
+==== case 0xFFA1 ====
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 7);
+    Short = 100 * v103;
+    goto LABEL_158;
+
+==== case 0xFFA2 ====
+    v104 = *((unsigned __int16 *)a5 + 4);
+    if ( !(unsigned int)MSG_ReadBit(a1) )
+    {
+      v200 = *(int *)(a3 + v104);
+      *(_DWORD *)(a4 + v104) = v200;
+      if ( v200 >= 0xBA )
+      {
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          175,
+          0,
+          (unsigned int)"eventType doesn't index EV_MAX_EVENTS\n\t%i not in [0, %i)",
+          v200,
+          186);
+      }
+      a2 = *((unsigned int *)&qword_F9BA00 + v200);
+      if ( (_DWORD)a2 )
+      {
+        goto LABEL_165;
+      }
+      goto LABEL_175;
+    }
+    v105 = ((__int64 (__fastcall *)(__int64))MSG_ReadByte)(a1);
+    *(_DWORD *)(a4 + v104) = v105;
+    if ( v105 >= 0xBA )
+    {
+      v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+      MyAssertHandler(
+        (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+        175,
+        0,
+        (unsigned int)"eventType doesn't index EV_MAX_EVENTS\n\t%i not in [0, %i)",
+        v105,
+        186);
+    }
+    v107 = *((_DWORD *)&qword_F9BA00 + v106);
+    if ( !v107 )
+    {
+  LABEL_175:
+      *(_DWORD *)(a4 + v104 + 4) = 0;
+      goto LABEL_234;
+    }
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      a2 = v107;
+  LABEL_165:
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(v20, a2);
+      *(_DWORD *)(a4 + v104 + 4) = v201;
+      goto LABEL_234;
+    }
+    v255 = ~(-1 << v107);
+    if ( v106 == 183 )
+      v255 = -1;
+    *(_DWORD *)(a4 + v104 + 4) = *(_DWORD *)(a3 + v104 + 4) & v255;
+  LABEL_234:
+    result = *v33;
+    if ( *v33 != v294 )
+    {
+      PL__stack_chk_fail(*(double *)_XMM0.m128_u64, *(double *)_XMM1.m128_u64, *(double *)_XMM2.m128_u64);
+      return MSG_ReadDeltaFields(v20, a2, v269, v270, v271, v272, a10, a11);
+    }
+    return result;
+
+==== case 0xFFA3 ====
+    v108 = *((__int16 *)a5 + 5);
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 31);
+    goto LABEL_122;
+
+==== case 0xFFA4 ====
+
+==== case 0xFFA5 ====
+
+==== case 0xFFAD ====
+
+==== case 0xFFAE ====
+    __asm { vmovss xmm0, dword ptr [rax] }
+    *(double *)_XMM0.m128_u64 = MSG_ReadOriginFloat(v20, a1, *(double *)_XMM0.m128_u64);
+    goto LABEL_131;
+
+==== case 0xFFA6 ====
+
+==== case 0xFFAF ====
+    __asm
+    {
+      vmovss xmm0, dword ptr [rax]
+      vmovss dword ptr [rbp+var_50], xmm0
+    }
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      __asm
+      {
+        vmovss xmm0, dword ptr [rax+158h]
+        vroundss xmm0, xmm0, xmm0, 1
+        vcvttss2si ebx, xmm0
+      }
+      *(double *)&_XMM0 = MSG_ReadBits(a1, 16);
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vroundss xmm0, xmm0, dword ptr [rbp+var_50], 1
+      }
+      __asm { vcvttss2si ecx, xmm0 }
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vcvtsi2ss xmm0, xmm0, eax
+      }
+    }
+    else
+    {
+      *(double *)&_XMM0 = MSG_ReadBits(a1, 7);
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vroundss xmm0, xmm0, dword ptr [rbp+var_50], 1
+      }
+      __asm
+      {
+        vcvttss2si ecx, xmm0
+        vxorps xmm0, xmm0, xmm0
+        vcvtsi2ss xmm0, xmm0, eax
+        vcvtsi2ss xmm1, xmm0, ecx
+        vaddss xmm0, xmm0, xmm1
+      }
+    }
+  LABEL_131:
+    __asm { vmovss dword ptr [r13+0], xmm0 }
+    if ( a6 )
+      goto LABEL_132;
+    goto LABEL_234;
+
+==== case 0xFFA7 ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+      goto LABEL_100;
+    MSG_ReadBits(a1, 5);
+    *(double *)_XMM0.m128_u64 = MSG_ReadByte(a1);
+    __asm { vcvttss2si ecx, dword ptr [rcx] }
+    v37 = ((v203 + 32 * v205) ^ ((_DWORD)_RCX + 4096)) - 4096;
+    __asm
+    {
+      vcvtsi2ss xmm0, xmm0, ecx
+      vmovss dword ptr [r13+0], xmm0
+    }
+    if ( !a6 )
+      goto LABEL_234;
+    goto LABEL_185;
+
+==== case 0xFFA8 ====
+  LABEL_100:
+    Long = MSG_ReadLong(a1, a2, a3);
+    *_R13 = Long;
+    _EAX = *(_DWORD *)v280 ^ Long;
+    *_R13 = _EAX;
+    if ( a6 )
+    {
+      __asm { vmovd xmm0, eax }
+  LABEL_132:
+      __asm { vcvtss2sd xmm0, xmm0, xmm0 }
+      a2 = (__int64)"%s:%f\n";
+      Com_Printf(25, (unsigned int)"%s:%f\n", *v19, _ECX, v40, v41);
+    }
+    goto LABEL_234;
+
+==== case 0xFFA9 ====
+    goto LABEL_144;
+
+==== case 0xFFAA ====
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 6);
+    __asm
+    {
+      vcvtsi2ss xmm0, xmm0, eax
+      vdivss xmm0, xmm0, cs:dword_F9B8BC
+      vxorps xmm1, xmm1, xmm1
+      vaddss xmm0, xmm0, xmm1
+    }
+    goto LABEL_145;
+
+==== case 0xFFAB ====
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      *_R13 = *(_DWORD *)v280;
+      *((_BYTE *)_R13 + 3) = -(*((_BYTE *)v280 + 3) == 0);
+    }
+    else
+    {
+      if ( (unsigned int)MSG_ReadBit(a1) )
+      {
+        *(_BYTE *)_R13 = *(_BYTE *)v280;
+        *((_BYTE *)_R13 + 1) = *((_BYTE *)v280 + 1);
+        v206 = *((_BYTE *)v280 + 2);
+      }
+      else
+      {
+        MSG_ReadByte(a1);
+        *(_BYTE *)_R13 = v256;
+        MSG_ReadByte(a1);
+        *((_BYTE *)_R13 + 1) = v257;
+        MSG_ReadByte(a1);
+      }
+      *((_BYTE *)_R13 + 2) = v206;
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 5);
+      *((_BYTE *)_R13 + 3) = 8 * v258;
+    }
+    goto LABEL_234;
+
+==== case 0xFFAC ====
+    a2 = 13;
+    goto LABEL_106;
+
+==== case 0xFFB0 ====
+
+==== case 0xFFB2 ====
+
+==== case 0xFFB7 ====
+
+==== case 0xFFB9 ====
+
+==== case 0xFFBB ====
+
+==== case 0xFFBC ====
+  LABEL_25:
+    Short = MSG_ReadLong(a1, a2, a3);
+    goto LABEL_158;
+
+==== case 0xFFB1 ====
+    __asm
+    {
+      vmovss xmm0, dword ptr [rax]
+      vmovss dword ptr [rbp+var_50], xmm0
+    }
+    if ( (unsigned int)MSG_ReadBit(a1) )
+    {
+      __asm
+      {
+        vmovss xmm0, dword ptr [rbp+var_50]
+        vxorps xmm2, xmm2, xmm2
+      }
+      __asm
+      {
+        vmulss xmm0, xmm0, cs:dword_F9B8C0
+        vroundss xmm1, xmm0, xmm0, 1
+        vsubss xmm0, xmm0, xmm1
+        vmulss xmm0, xmm0, cs:dword_F9B8C4
+        vaddss xmm1, xmm0, cs:dword_F9B8C8
+        vcmpless xmm2, xmm2, xmm1
+        vblendvps xmm0, xmm0, xmm1, xmm2
+        vmovaps xmmword ptr [rbp+var_50], xmm0
+      }
+      v123 = -((unsigned int)MSG_ReadBit(a1) == 0);
+      *(double *)&_XMM0 = MSG_ReadBits(a1, 12);
+      v132 = v129 == 0;
+      if ( !v129 )
+      {
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          1149,
+          0,
+          (unsigned int)"%s",
+          (unsigned int)"delta",
+          v127);
+      }
+      __asm
+      {
+        vmovaps xmm1, xmmword ptr [rbp+var_50]
+        vxorps xmm0, xmm0, xmm0
+        vucomiss xmm0, xmm1
+        vmovaps xmm0, xmm1
+      }
+      if ( v131 | v132 )
+      {
+        __asm { vucomiss xmm0, cs:dword_F9B8C4 }
+      }
+      else
+      {
+        __asm { vcvtss2sd xmm0, xmm0, xmm0 }
+        __asm { vmovsd [rbp+var_58], xmm0 }
+        v137 = va((unsigned int)"oldFloat %f isn't normalized\n", a2, v124, v125, v126, v127);
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+          1151,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"IsAngleNormalized360(oldFloat)",
+          v137);
+        __asm { vmovsd xmm0, [rbp+var_58] }
+        v143 = va(
+                 (unsigned int)"AngleToCompressed called with a non normalized angle: x = %f\n",
+                 1151,
+                 v139,
+                 v140,
+                 v141,
+                 v142);
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h",
+          1360,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"IsAngleNormalized360(x)",
+          v143);
+        __asm { vmovaps xmm0, xmmword ptr [rbp+var_50] }
+      }
+      __asm { vmulss xmm0, xmm0, cs:dword_F9B8CC }
+      v145 = ~v123;
+      __asm
+      {
+        vaddss xmm0, xmm0, cs:dword_F9B8D0
+        vroundss xmm0, xmm0, xmm0, 1
+        vcvttss2si r12d, xmm0
+      }
+      if ( _R12D != (__int64)(__int16)_R12D )
+      {
+        a2 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h";
+        *(double *)&_XMM0 = truncate_cast_assert_with_info(
+                              _R12D,
+                              "D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h",
+                              1362);
+      }
+      v149 = v145 | 1;
+      if ( (unsigned __int16)_R12D >= 0x1000u )
+      {
+        v150 = va((unsigned int)"compressedAngle %d not within 0-%d range\n", (__int16)_R12D, 4095, v125, v126, v127);
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h",
+          1366,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"(compressedAngle >= 0.f) && (compressedAngle<=COMPRESSED_ANGLE_RANGE)",
+          v150);
+      }
+      v151 = (unsigned __int16)_R12D + v149 * v130;
+      v152 = _R12D + v149 * v130;
+      v153 = v151 << 16;
+      if ( (v151 & 0x8000) != 0 )
+      {
+        v154 = v152 + 4095;
+      }
+      else
+      {
+        v154 = v152 - 4095;
+        if ( v153 <= (int)&unk_FFF0000 )
+          v154 = _R12D + v149 * v130;
+      }
+      v247 = v154 < 0x1000u;
+      v248 = v154 == 4096;
+      if ( v154 >= 0x1000u )
+      {
+        v249 = va(
+                 (unsigned int)"CompressedToAngle called with out of band value: x = %d\n",
+                 (__int16)v154,
+                 v124,
+                 v153,
+                 v126,
+                 v127);
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h",
+          1373,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"(x >= 0) && (x <= COMPRESSED_ANGLE_RANGE)",
+          v249);
+      }
+      __asm
+      {
+        vcvtsi2ss xmm0, xmm0, eax
+        vmulss xmm1, xmm0, cs:dword_F9B8D4
+        vxorps xmm0, xmm0, xmm0
+        vucomiss xmm0, xmm1
+      }
+      if ( v247 || v248 )
+      {
+        __asm { vucomiss xmm1, cs:dword_F9B8C4 }
+        goto LABEL_213;
+      }
+      __asm { vcvtss2sd xmm0, xmm1, xmm1 }
+      __asm { vmovss dword ptr [rbp+var_50], xmm1 }
+      v217 = va((unsigned int)"newFloat %f isn't normalized ! (from CompressedToAngle)", a2, v124, v153, v126, v127);
+      v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+    }
+    else
+    {
+      *(double *)&_XMM0 = MSG_ReadBits(a1, 12);
+      v212 = v207 < 0x1000u;
+      v213 = v207 == 4096;
+      if ( v207 >= 0x1000u )
+      {
+        v214 = va(
+                 (unsigned int)"CompressedToAngle called with out of band value: x = %d\n",
+                 (__int16)v207,
+                 v208,
+                 v209,
+                 v210,
+                 v211);
+        v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h";
+        MyAssertHandler(
+          (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/com_math.h",
+          1373,
+          0,
+          (unsigned int)"%s\n\t%s",
+          (unsigned int)"(x >= 0) && (x <= COMPRESSED_ANGLE_RANGE)",
+          v214);
+      }
+      __asm
+      {
+        vxorps xmm0, xmm0, xmm0
+        vcvtsi2ss xmm0, xmm0, eax
+        vmulss xmm1, xmm0, cs:dword_F9B8D4
+        vxorps xmm0, xmm0, xmm0
+        vucomiss xmm0, xmm1
+      }
+      if ( v212 || v213 )
+      {
+        __asm { vucomiss xmm1, cs:dword_F9B8C4 }
+        goto LABEL_213;
+      }
+      __asm { vcvtss2sd xmm0, xmm1, xmm1 }
+      __asm { vmovss dword ptr [rbp+var_50], xmm1 }
+      v217 = va((unsigned int)"newFloat %f isn't normalized ! (from MSG_ReadAngle16)", a2, v208, v209, v210, v211);
+      v20 = (__int64)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp";
+    }
+    MyAssertHandler(
+      (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+      a2,
+      0,
+      (unsigned int)"%s\n\t%s",
+      (unsigned int)"IsAngleNormalized360(newFloat)",
+      v217);
+    __asm { vmovss xmm1, dword ptr [rbp+var_50] }
+  LABEL_213:
+    __asm { vmovss dword ptr [r13+0], xmm1 }
+    goto LABEL_234;
+
+==== case 0xFFB3 ====
+    v108 = *((__int16 *)a5 + 5);
+    v109 = ((__int64 (__fastcall *)(__int64))MSG_ReadByte)(a1);
+  LABEL_122:
+    a2 = v108;
+    goto LABEL_180;
+
+==== case 0xFFB4 ====
+    if ( (unsigned int)MSG_ReadBit(a1) == 1 )
+    {
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 4);
+      v158 = *((__int16 *)a5 + 5);
+      switch ( *((_WORD *)a5 + 5) )
+      {
+        case 0xFFFC:
+        case 4:
+          v160 = *(_DWORD *)v280;
+          break;
+        case 0xFFFE:
+          break;
+        case 0xFFFF:
+          v160 = *(char *)v280;
+          break;
+        case 1:
+          v160 = *(unsigned __int8 *)v280;
+          break;
+        case 2:
+          break;
+        default:
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/../qcommon/msg.h",
+            521,
+            0,
+            (unsigned int)"unknown field size",
+            v156,
+            v157);
+          break;
+      }
+      v219 = (unsigned int)(v159 + v160 - 8);
+    }
+    else
+    {
+      v158 = *((__int16 *)a5 + 5);
+      v192 = ((__int64 (__fastcall *)(__int64))MSG_ReadByte)(a1);
+      switch ( v158 )
+      {
+        case 0xFFFFFFFC:
+        case 4u:
+          v193 = *(_DWORD *)v280;
+          break;
+        case 0xFFFFFFFE:
+          LOWORD(v193) = *v280;
+          break;
+        case 0xFFFFFFFF:
+          LOBYTE(v193) = *(_BYTE *)v280;
+          break;
+        case 1u:
+          LOBYTE(v193) = *(_BYTE *)v280;
+          break;
+        case 2u:
+          LOWORD(v193) = *v280;
+          break;
+        default:
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/../qcommon/msg.h",
+            521,
+            0,
+            (unsigned int)"unknown field size",
+            v190,
+            v191);
+          break;
+      }
+      v219 = v192 ^ (unsigned int)(unsigned __int8)v193;
+    }
+    SetField(_R13, v158, v219);
+    if ( !a6 )
+      goto LABEL_234;
+  LABEL_185:
+    a2 = (__int64)"%s:%i\n";
+    goto LABEL_39;
+
+==== case 0xFFB5 ====
+    v161 = MSG_ReadBit(a1);
+    v164 = *((__int16 *)a5 + 5);
+    if ( v161 == 1 )
+    {
+      switch ( *((_WORD *)a5 + 5) )
+      {
+        case 0xFFFC:
+        case 4:
+          v165 = *(_DWORD *)v280;
+          break;
+        case 0xFFFE:
+          break;
+        case 0xFFFF:
+          v165 = *(char *)v280;
+          break;
+        case 1:
+          v165 = *(unsigned __int8 *)v280;
+          break;
+        case 2:
+          break;
+        default:
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/../qcommon/msg.h",
+            521,
+            0,
+            (unsigned int)"unknown field size",
+            v162,
+            v163);
+          break;
+      }
+      *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 32 - __lzcnt(0x10u));
+      v100 = (unsigned int)(v165 + v220 + 1);
+      a2 = v164;
+  LABEL_180:
+      SetField(v20, a2, v100);
+    }
+    else
+    {
+      v196 = ((__int64 (__fastcall *)(__int64))MSG_ReadByte)(a1);
+      switch ( v164 )
+      {
+        case 0xFFFFFFFC:
+        case 4u:
+          v197 = *(_DWORD *)v280;
+          break;
+        case 0xFFFFFFFE:
+          LOWORD(v197) = *v280;
+          break;
+        case 0xFFFFFFFF:
+          LOBYTE(v197) = *(_BYTE *)v280;
+          break;
+        case 1u:
+          LOBYTE(v197) = *(_BYTE *)v280;
+          break;
+        case 2u:
+          LOWORD(v197) = *v280;
+          break;
+        default:
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/../qcommon/msg.h",
+            521,
+            0,
+            (unsigned int)"unknown field size",
+            v194,
+            v195);
+          break;
+      }
+      SetField(_R13, v164, v196 ^ (unsigned int)(unsigned __int8)v197);
+    }
+    goto LABEL_234;
+
+==== case 0xFFBD ====
+    *(double *)_XMM0.m128_u64 = MSG_ReadBits(a1, 5);
+    Short = v166 - 10;
+    goto LABEL_158;
+
+==== default ====
+    if ( *((_WORD *)a5 + 6) )
+    {
+  LABEL_10:
+      if ( (unsigned int)MSG_ReadBit(a1) )
+      {
+        v284 = (unsigned int)*((__int16 *)a5 + 5);
+        v273 = *((_WORD *)a5 + 6);
+        v24 = (v273 >> 31) ^ (v273 + (v273 >> 31));
+        if ( v24 < 0 )
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+            1012,
+            0,
+            (unsigned int)"%s",
+            (unsigned int)"bits >= 0",
+            v23);
+        if ( (v24 & 7) != 0 )
+        {
+          v25 = ((__int64 (__fastcall *)(__int64, _QWORD))MSG_ReadBits)(a1, v24 & 7);
+          v26 = v24 & 7;
+        }
+        while ( v26 < v24 )
+        {
+          v27 = ((__int64 (__fastcall *)(__int64))MSG_ReadByte)(a1);
+          v26 += 8;
+          v25 |= v27 << v28;
+        }
+        if ( v24 >= 33 )
+          MyAssertHandler(
+            (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon\\msg_mp.cpp",
+            1046,
+            0,
+            (unsigned int)"%s\n\t(absbits) = %i",
+            (unsigned int)"(absbits <= 32)",
+            v24);
+        v29 = -1;
+        if ( v24 != 32 )
+          v29 = (1 << v24) - 1;
+        switch ( (int)v284 )
+        {
+          case -4:
+          case 4:
+            v30 = *(_DWORD *)v280;
+            break;
+          case -2:
+            break;
+          case -1:
+            v30 = *(char *)v280;
+            break;
+          case 1:
+            v30 = *(unsigned __int8 *)v280;
+            break;
+          case 2:
+            break;
+          default:
+            MyAssertHandler(
+              (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/../qcommon/msg.h",
+              521,
+              0,
+              (unsigned int)"unknown field size",
+              v22,
+              v23);
+            break;
+        }
+        v32 = v25 ^ v29 & v30;
+        if ( v273 < 0 )
+        {
+          a2 = v284;
+          if ( _bittest((const int *)&v32, v24 - 1) )
+            v32 |= ~v29;
+        }
+        else
+        {
+          a2 = v284;
+        }
+        SetField(v278, a2, v32);
+      }
+      else
+      {
+        switch ( *((_WORD *)a5 + 5) )
+        {
+          case 0xFFFC:
+          case 4:
+            *_R13 = 0;
+            break;
+          case 0xFFFE:
+          case 2:
+            *(_WORD *)_R13 = 0;
+            break;
+          case 0xFFFF:
+          case 1:
+            *(_BYTE *)_R13 = 0;
+            break;
+          default:
+            break;
+        }
+      }
+      if ( a6 )
+      {
+        switch ( *((_WORD *)v19 + 5) )
+        {
+          case 0xFFFC:
+          case 4:
+            break;
+          case 0xFFFE:
+            v35 = *(__int16 *)_R13;
+            break;
+          case 0xFFFF:
+            v35 = *(char *)_R13;
+            break;
+          case 1:
+            v35 = *(unsigned __int8 *)_R13;
+            break;
+          case 2:
+            v35 = *(unsigned __int16 *)_R13;
+            break;
+          default:
+            MyAssertHandler(
+              (unsigned int)"D:\\h1\\code_source\\Runtime\\qcommon/../universal/../qcommon/msg.h",
+              521,
+              0,
+              (unsigned int)"unknown field size",
+              v22,
+              v23);
+            break;
+        }
+        a2 = (__int64)"default field value: %s:%i\n";
+  LABEL_39:
+        Com_Printf(25, a2, v36, v37, v22, v23);
+      }
+    }
+    else
+    {
+  LABEL_47:
+      Short = MSG_ReadFloatCase(a1, v280, a5, a6);
+  LABEL_158:
+      *_R13 = Short;
+    }
+    goto LABEL_234;
+

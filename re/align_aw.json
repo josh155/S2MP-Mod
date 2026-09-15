@@ -1,0 +1,253 @@
+[
+ {
+  "s2_func": "0xc5f80",
+  "name": "RtlLeaveCriticalSection",
+  "votes": 5,
+  "via": [
+   "GScr_LoadLuiFile",
+   "LUI_COD_AnyActiveMenus",
+   "LUI_IsMenuInStack",
+   "LUI_IsMenuOpenAndVisible"
+  ]
+ },
+ {
+  "s2_func": "0x358de0",
+  "name": "LUIElement_AreAllChildrenCached",
+  "votes": 2,
+  "via": [
+   "LUIElement_UIHorizontalListLayout"
+  ]
+ },
+ {
+  "s2_func": "0x38b7a0",
+  "name": "MSG_WriteBits",
+  "votes": 1,
+  "via": [
+   "CL_WritePacket"
+  ]
+ },
+ {
+  "s2_func": "0x14db40",
+  "name": "BG_Customization_UpdateEnvironment",
+  "votes": 1,
+  "via": [
+   "DB_LoadLevelXAssets"
+  ]
+ },
+ {
+  "s2_func": "0xb30c0",
+  "name": "Dvar_SetVariant",
+  "votes": 1,
+  "via": [
+   "Dvar_SetFloatFromSource"
+  ]
+ },
+ {
+  "s2_func": "0xb1460",
+  "name": "Dvar_RegisterVariant",
+  "votes": 1,
+  "via": [
+   "Dvar_SetIntByName"
+  ]
+ },
+ {
+  "s2_func": "0x2cb9f0",
+  "name": "hks::coroutine_resume_helper",
+  "votes": 1,
+  "via": [
+   "hks__coroutine_resume"
+  ]
+ },
+ {
+  "s2_func": "0xaf9b70",
+  "name": "hksf_fclose",
+  "votes": 1,
+  "via": [
+   "hks__io_close_file"
+  ]
+ },
+ {
+  "s2_func": "0x2d8580",
+  "name": "luaL_getmetatable",
+  "votes": 1,
+  "via": [
+   "hks::io_type"
+  ]
+ },
+ {
+  "s2_func": "0x2e2d90",
+  "name": "luaL_checkinteger",
+  "votes": 1,
+  "via": [
+   "hks__io_seek_file"
+  ]
+ },
+ {
+  "s2_func": "0x308fd0",
+  "name": "hks_obj_setfenv",
+  "votes": 1,
+  "via": [
+   "hks__package_module_setfenv"
+  ]
+ },
+ {
+  "s2_func": "0x2f59f0",
+  "name": "hks::Serializer::persistReference",
+  "votes": 1,
+  "via": [
+   "hks__Serializer__persistTop"
+  ]
+ },
+ {
+  "s2_func": "0xcc620",
+  "name": "hksi_lua_setfield",
+  "votes": 1,
+  "via": [
+   "LUIElement_UIVerticalListLayout"
+  ]
+ },
+ {
+  "s2_func": "0x37a360",
+  "name": "I_strnicmp",
+  "votes": 1,
+  "via": [
+   "BG_ParseCommands"
+  ]
+ },
+ {
+  "s2_func": "0x76b1a0",
+  "name": "BG_IndexForString",
+  "votes": 1,
+  "via": [
+   "BG_ParseCommands"
+  ]
+ },
+ {
+  "s2_func": "0xa05000",
+  "name": "CG_MatchLineStartingWith_0",
+  "votes": 1,
+  "via": [
+   "CG_ParseClientEffects"
+  ]
+ },
+ {
+  "s2_func": "0x3d0000",
+  "name": "CG_SkipWhiteSpace",
+  "votes": 1,
+  "via": [
+   "CG_ParseClientEffects"
+  ]
+ },
+ {
+  "s2_func": "0xa05050",
+  "name": "CG_SkipText_0",
+  "votes": 1,
+  "via": [
+   "CG_ParseExploder"
+  ]
+ },
+ {
+  "s2_func": "0x66e080",
+  "name": "NET_OutOfBandData",
+  "votes": 1,
+  "via": [
+   "CL_SendPeerVoiceData"
+  ]
+ },
+ {
+  "s2_func": "0xdc870",
+  "name": "MSG_ReadBit",
+  "votes": 1,
+  "via": [
+   "PartyAtomicHost_HandleMemberJoin"
+  ]
+ },
+ {
+  "s2_func": "0x4904e0",
+  "name": "PartyHost_SendRMsgToPartyClients",
+  "votes": 1,
+  "via": [
+   "PartyHost_TellPartyMembersToStopQoS"
+  ]
+ },
+ {
+  "s2_func": "0x76e1e0",
+  "name": "RMsg_AddMessageInternal",
+  "votes": 1,
+  "via": [
+   "PartyAtomicHost_SendJoinHostResponse"
+  ]
+ },
+ {
+  "s2_func": "0x49b700",
+  "name": "PartyMigrate_GetArbitratorClientNum",
+  "votes": 1,
+  "via": [
+   "PartyMigrate_HandleMakeHostErrorMsg"
+  ]
+ },
+ {
+  "s2_func": "0x789870",
+  "name": "Live_GetXuid",
+  "votes": 1,
+  "via": [
+   "PartyMigrate_AskForPredeterminedHostNominee"
+  ]
+ },
+ {
+  "s2_func": "0x7896e0",
+  "name": "PartyMigrate_GenerateMigrationID",
+  "votes": 1,
+  "via": [
+   "PartyMigrate_RequestFindBestHost"
+  ]
+ },
+ {
+  "s2_func": "0x191e00",
+  "name": "CL_WritePeerToPeerOOBData",
+  "votes": 1,
+  "via": [
+   "PartyMigrate_SendNomineeMsg"
+  ]
+ },
+ {
+  "s2_func": "0x66e130",
+  "name": "NET_OutOfBandPrint",
+  "votes": 1,
+  "via": [
+   "SVC_Info"
+  ]
+ },
+ {
+  "s2_func": "0x8ac5f0",
+  "name": "DB_FindXAssetHeader",
+  "votes": 1,
+  "via": [
+   "UI_DrawSpawnLocationMap_DrawSpawnPoint"
+  ]
+ },
+ {
+  "s2_func": "0x9264c0",
+  "name": "MatchRulesChanged",
+  "votes": 1,
+  "via": [
+   "LoadMatchRulesDataDefaults"
+  ]
+ },
+ {
+  "s2_func": "0x46d280",
+  "name": "GamerProfile_SetClanName",
+  "votes": 1,
+  "via": [
+   "UI_ClanKeyboard_callback"
+  ]
+ },
+ {
+  "s2_func": "0x81eee0",
+  "name": "VehPath_ParseAllFields",
+  "votes": 1,
+  "via": [
+   "VehPath_SpawnNode"
+  ]
+ }
+]

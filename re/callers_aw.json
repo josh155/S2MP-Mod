@@ -1,0 +1,348 @@
+[
+ {
+  "s2_func": "0x3b73c0",
+  "name": "BG_GetWeaponNameComplete",
+  "callers": 3,
+  "size": 13,
+  "via": [
+   "CG_GetWeaponName",
+   "G_GetItemClassname",
+   "LUI_CoD_UpdateWeaponChangeSystem"
+  ]
+ },
+ {
+  "s2_func": "0x93c5c0",
+  "name": "cos",
+  "callers": 3,
+  "size": 6,
+  "via": [
+   "GScr_SetMiniMap",
+   "LUIElement_UIHorizontalListLayout",
+   "XAnimSetIKSettings"
+  ]
+ },
+ {
+  "s2_func": "0x7505e0",
+  "name": "_DrawWrappedText",
+  "callers": 1,
+  "size": 1856,
+  "via": [
+   "UI_DrawWrappedText"
+  ]
+ },
+ {
+  "s2_func": "0x49c410",
+  "name": "PartyMigrate_MigrateToNewSession",
+  "callers": 1,
+  "size": 895,
+  "via": [
+   "PartyMigrate_HandleSessionInfoMsg"
+  ]
+ },
+ {
+  "s2_func": "0x6dd8c0",
+  "name": "SVC_GetStatus",
+  "callers": 1,
+  "size": 563,
+  "via": [
+   "SVC_Status"
+  ]
+ },
+ {
+  "s2_func": "0x76cbb0",
+  "name": "Info_RemoveKey",
+  "callers": 1,
+  "size": 432,
+  "via": [
+   "Info_SetValueForKey"
+  ]
+ },
+ {
+  "s2_func": "0x5bd600",
+  "name": "trigger_use_shared",
+  "callers": 1,
+  "size": 336,
+  "via": [
+   "trigger_use_touch"
+  ]
+ },
+ {
+  "s2_func": "0x2de170",
+  "name": "hks_obj_tonumber",
+  "callers": 1,
+  "size": 319,
+  "via": [
+   "hks__base_setfenv"
+  ]
+ },
+ {
+  "s2_func": "0x14d920",
+  "name": "BG_Customization_SetDefaultNonTransientCustomization",
+  "callers": 1,
+  "size": 316,
+  "via": [
+   "BG_Customization_SetRandomCustomization"
+  ]
+ },
+ {
+  "s2_func": "0x651290",
+  "name": "ComGroups_GetGroupID",
+  "callers": 1,
+  "size": 306,
+  "via": [
+   "ComGroups_GetCount"
+  ]
+ },
+ {
+  "s2_func": "0x2d3720",
+  "name": "hkss_stringPrint",
+  "callers": 1,
+  "size": 293,
+  "via": [
+   "hks__createFunctionName"
+  ]
+ },
+ {
+  "s2_func": "0x76b420",
+  "name": "Com_ScriptErrorDrop",
+  "callers": 1,
+  "size": 280,
+  "via": [
+   "Com_UngetToken"
+  ]
+ },
+ {
+  "s2_func": "0x741810",
+  "name": "UI_UpdateDisplayServers",
+  "callers": 1,
+  "size": 273,
+  "via": [
+   "UI_DoServerRefresh"
+  ]
+ },
+ {
+  "s2_func": "0x364ed0",
+  "name": "LUI_CustomDrawRect",
+  "callers": 1,
+  "size": 224,
+  "via": [
+   "LUIElement_CustomButton_Background"
+  ]
+ },
+ {
+  "s2_func": "0x48070",
+  "name": "CG_GetSelectedWeapon",
+  "callers": 1,
+  "size": 199,
+  "via": [
+   "CG_IsSelectedWeaponEquipped"
+  ]
+ },
+ {
+  "s2_func": "0x6e3240",
+  "name": "SendHeader",
+  "callers": 1,
+  "size": 174,
+  "via": [
+   "PickNewHost"
+  ]
+ },
+ {
+  "s2_func": "0x3b6e40",
+  "name": "BG_GetWeaponFieldXModelIndex",
+  "callers": 1,
+  "size": 170,
+  "via": [
+   "BG_GetViewModel"
+  ]
+ },
+ {
+  "s2_func": "0x2df100",
+  "name": "hks::CodeGenerator::VLoopState::?$HksDynamicVector::increment",
+  "callers": 1,
+  "size": 154,
+  "via": [
+   "hks__CodeGenerator__onForNumericStart"
+  ]
+ },
+ {
+  "s2_func": "0x3b63b0",
+  "name": "BG_GetEquippedWeaponStateConst",
+  "callers": 1,
+  "size": 151,
+  "via": [
+   "CG_GetWeaponForHud"
+  ]
+ },
+ {
+  "s2_func": "0x4ebfd0",
+  "name": "hks::Visitor::firstVisitCallback_post",
+  "callers": 1,
+  "size": 146,
+  "via": [
+   "R_AddSparkSurf"
+  ]
+ },
+ {
+  "s2_func": "0x5dc4b0",
+  "name": "NetConstStrings_CL_GetConfigStringValue",
+  "callers": 1,
+  "size": 125,
+  "via": [
+   "CL_GetConfigString"
+  ]
+ },
+ {
+  "s2_func": "0x7b2720",
+  "name": "Voice_IsXuidTalking",
+  "callers": 1,
+  "size": 124,
+  "via": [
+   "CL_IsPlayerTalking"
+  ]
+ },
+ {
+  "s2_func": "0x3e36e0",
+  "name": "CG_ClientNumOwnedByLocalPlayer",
+  "callers": 1,
+  "size": 118,
+  "via": [
+   "CG_RelativePlayerName"
+  ]
+ },
+ {
+  "s2_func": "0x466750",
+  "name": "CL_GetClientState",
+  "callers": 1,
+  "size": 109,
+  "via": [
+   "CL_GetLocalClientMigrationString"
+  ]
+ },
+ {
+  "s2_func": "0x74a7b0",
+  "name": "Live_SendInvite",
+  "callers": 1,
+  "size": 109,
+  "via": [
+   "Friends_SendInviteMessage_Platform"
+  ]
+ },
+ {
+  "s2_func": "0x46adf0",
+  "name": "GetDataByName",
+  "callers": 1,
+  "size": 97,
+  "via": [
+   "GamerProfile_GetDataByName"
+  ]
+ },
+ {
+  "s2_func": "0x721420",
+  "name": "SND_PlayLocalSoundAliasByName",
+  "callers": 1,
+  "size": 93,
+  "via": [
+   "CL_PlayTextFXPulseSounds"
+  ]
+ },
+ {
+  "s2_func": "0x6e22d0",
+  "name": "CreateBlock",
+  "callers": 1,
+  "size": 92,
+  "via": [
+   "HandleSaveAckMsg"
+  ]
+ },
+ {
+  "s2_func": "0x5c23d0",
+  "name": "SV_BotPlayerNameTaken",
+  "callers": 1,
+  "size": 45,
+  "via": [
+   "SV_BotGetRandomName"
+  ]
+ },
+ {
+  "s2_func": "0x287890",
+  "name": "Hunk_UserDestroy",
+  "callers": 1,
+  "size": 34,
+  "via": [
+   "SV_FreeClientMemory"
+  ]
+ },
+ {
+  "s2_func": "0xd0470",
+  "name": "__savegprlr_24",
+  "callers": 1,
+  "size": 32,
+  "via": [
+   "LUIElement_UILongCountdownLayout"
+  ]
+ },
+ {
+  "s2_func": "0x76d880",
+  "name": "NetConstBaselines_IsSupported",
+  "callers": 1,
+  "size": 18,
+  "via": [
+   "NetConstBaselines_ReadBaselineDataFromFile"
+  ]
+ },
+ {
+  "s2_func": "0x74a180",
+  "name": "CL_Splitscreen_RegisterCommands",
+  "callers": 1,
+  "size": 14,
+  "via": [
+   "CL_Splitscreen_Init"
+  ]
+ },
+ {
+  "s2_func": "0xcaeb0",
+  "name": "hksi_lua_gc",
+  "callers": 1,
+  "size": 11,
+  "via": [
+   "LUI_CoD_CollectGarbage"
+  ]
+ },
+ {
+  "s2_func": "0x3c3a70",
+  "name": "BG_UsingSniperScope",
+  "callers": 1,
+  "size": 11,
+  "via": [
+   "BG_IsThirdPersonMode"
+  ]
+ },
+ {
+  "s2_func": "0x257010",
+  "name": "R_InitCodeImages",
+  "callers": 1,
+  "size": 8,
+  "via": [
+   "R_InitImages"
+  ]
+ },
+ {
+  "s2_func": "0x766a60",
+  "name": "SendSave",
+  "callers": 1,
+  "size": 5,
+  "via": [
+   "HandleHeaderAckMsg"
+  ]
+ },
+ {
+  "s2_func": "0x661760",
+  "name": "ProcessStringDirective",
+  "callers": 1,
+  "size": 3,
+  "via": [
+   "UI_ReplaceDirective"
+  ]
+ }
+]
