@@ -23,6 +23,8 @@
 
 #include "demo/demo_game.hpp"
 #include "demo/demo_native.hpp"
+#include "demo/demo_playback.hpp"
+#include "demo/theater_camera.hpp"
 #include "demo/bonecam.hpp"
 #include "demo/demo_camera.hpp"
 
@@ -121,6 +123,51 @@ namespace dolly
 
 		constexpr int LOCAL_CLIENT = 0;
 		constexpr int CAMERA_MODE_FREE = 2;
+
+		// ---- dual-system dispatch ---------------------------------------------
+		// Dolly used to be native-`.demo`-only. bonecam.cpp already proved the
+		// pattern for driving the SAME freecam block regardless of which demo
+		// engine is playing: check theater_camera's unified mode (it makes the
+		// engine take the free-camera code path for either system) rather than
+		// demo_native::native_playing() alone.
+		[[nodiscard]] bool camera_ready()
+		{
+			return theater_camera::get_mode() == theater_camera::THEATER_CAMERA_FREECAM
+				&& (demo_native::native_playing() || demo_playback::is_playing());
+		}
+
+		// The smooth, continuously-advancing clock for whichever system is
+		// playing -- never the stepped snapshot value. Native reads cl.serverTime
+		// (demo_time_smooth()); the custom theater integrates its own clock every
+		// frame in advance_clock() and exposes it as current_time(). -1 when
+		// neither system is playing.
+		[[nodiscard]] int active_time()
+		{
+			if (demo_native::native_playing())
+			{
+				return demo_native::demo_time_smooth();
+			}
+			if (demo_playback::is_playing())
+			{
+				return demo_playback::current_time().value_or(-1);
+			}
+			return -1;
+		}
+
+		// Seek whichever system is playing to an absolute demo time and make sure
+		// it is actually running, not paused. Used by the "Go" button and by the
+		// new J hotkey (play_from_start).
+		// ⛔ Never seek directly from here. J and the Go button run on the DXGI
+		// Present thread, and a custom seek rewinds the demo file stream and
+		// rewrites clock state that the client thread is feeding from in the same
+		// instant. Queued as demo_player's own command it runs on the client
+		// thread, through the same code path as every other seek, so native and
+		// custom behave identically.
+		void seek_and_play(const int time_ms)
+		{
+			GameUtil::Cbuf_AddText(LOCAL_CLIENT_0,
+				std::format("demo_seek_to {} play", time_ms));
+		}
 
 		using CL_Demo_FreeCameraMove_t = std::int64_t(__fastcall*)(std::int64_t, std::int64_t);
 		CL_Demo_FreeCameraMove_t g_freecam_move_orig = nullptr;
@@ -243,8 +290,12 @@ namespace dolly
 		// the camera stays free before the first point and after the last — that
 		// is what makes "fly, add a point, fly on" work as an editing workflow.
 		[[nodiscard]] bool evaluate(const std::vector<point_t>& pts, const int t,
-			float out_pos[3], float out_ang[3])
+			float out_pos[3], float out_ang[3], float* out_fov = nullptr)
 		{
+			if (out_fov)
+			{
+				*out_fov = 0.0f;
+			}
 			const int n = static_cast<int>(pts.size());
 			if (n < 2 || t < pts.front().time || t > pts.back().time)
 			{
@@ -289,6 +340,23 @@ namespace dolly
 				const float u2 = b + ang_norm180(p2.angles[a] - b);
 				const float u3 = b + ang_norm180(p3.angles[a] - b);
 				out_ang[a] = catmull_rom(u0, b, u2, u3, f);
+			}
+
+			// FOV: a spline when both ends are keyed (a neighbour that is not
+			// keyed stands in as its segment end, so the curve does not dip to 0),
+			// held when only one end is, and left alone when neither is.
+			if (out_fov)
+			{
+				if (p1.fov > 0.0f && p2.fov > 0.0f)
+				{
+					const float f0 = (p0.fov > 0.0f) ? p0.fov : p1.fov;
+					const float f3 = (p3.fov > 0.0f) ? p3.fov : p2.fov;
+					*out_fov = (std::max)(1.0f, catmull_rom(f0, p1.fov, p2.fov, f3, f));
+				}
+				else if (p1.fov > 0.0f || p2.fov > 0.0f)
+				{
+					*out_fov = (p1.fov > 0.0f) ? p1.fov : p2.fov;
+				}
 			}
 			return true;
 		}
@@ -468,8 +536,7 @@ namespace dolly
 	{
 		// Same gate as render(), for the same reason: a stale-but-mapped cg would
 		// be WRITTEN here, not just read.
-		if (!g_enabled || !demo_native::native_playing()
-			|| !demo_native::cgame_active())
+		if (!g_enabled || !camera_ready() || !demo_native::cgame_active())
 		{
 			return;
 		}
@@ -484,12 +551,8 @@ namespace dolly
 			pts = g_points;
 		}
 
-		// THE SMOOTH CLOCK, not demo_time(). cl.snap.serverTime only moves when a
-		// snapshot is consumed, so evaluating on it held the camera still for a
-		// whole snapshot interval and then teleported it — the reported "jittery,
-		// like updating a frame every 2 seconds". cl.serverTime is recomputed
-		// every frame by CL_SetCGameTime and interpolates between snapshots.
-		const int t = demo_native::demo_time_smooth();
+		// THE SMOOTH CLOCK, not a stepped snapshot value. See active_time().
+		const int t = active_time();
 		if (t < 0)
 		{
 			return;
@@ -497,9 +560,16 @@ namespace dolly
 
 		float pos[3]{};
 		float ang[3]{};
-		if (!evaluate(pts, t, pos, ang))
+		float key_fov = 0.0f;
+		if (!evaluate(pts, t, pos, ang, &key_fov))
 		{
 			return;
+		}
+		// Keyed FOV rides the same spline. demo_camera applies it at the engine's
+		// final fov, so it works identically in native and custom playback.
+		if (key_fov > 0.0f)
+		{
+			demo_camera::set_dolly_fov(key_fov);
 		}
 
 		float* blk = freecam_block();
@@ -534,9 +604,19 @@ namespace dolly
 			// Both of its branches — sub_917240 on the native-playback path and
 			// the usercmd freecam elsewhere — write the same three fields, so
 			// this placement covers both without caring which one ran.
+			//
+			// Sprint/slow is applied AROUND this call specifically because this
+			// is the one place per frame that reads *freecam_speed() to move the
+			// camera -- everything below runs AFTER movement and would be too
+			// late to affect it. Only for the local client: *freecam_speed() is
+			// one shared global, and scaling it for some other client's move
+			// would just be wasted key-state polling with no effect of our own.
+			const bool is_local = (a1 == LOCAL_CLIENT);
+			const float speed_base = is_local ? demo_native::begin_speed_modifier() : 0.0f;
 			const std::int64_t r = g_freecam_move_orig(a1, a2);
-			if (a1 == LOCAL_CLIENT)
+			if (is_local)
 			{
+				demo_native::end_speed_modifier(speed_base);
 				drive();
 				// BONE CAM shares this hook rather than installing a second one
 				// on the same address (RULE A3.1). It runs last so that when both
@@ -559,8 +639,7 @@ namespace dolly
 		// cgame_active() is not belt-and-braces here, it is THE gate: during a
 		// seek the engine's cg is NULL while the back-pointer we derive from is
 		// still set, and that disagreement is what crashed the game.
-		if (!g_show_markers || !demo_native::native_playing()
-			|| !demo_native::cgame_active())
+		if (!g_show_markers || !camera_ready() || !demo_native::cgame_active())
 		{
 			return;
 		}
@@ -679,7 +758,7 @@ namespace dolly
 		// camera is, so it has to be evaluated on the same timebase.
 		if (g_enabled && pts.size() >= 2)
 		{
-			const int t = demo_native::demo_time_smooth();
+			const int t = active_time();
 			float pos[3]{};
 			float ang[3]{};
 			if (t >= 0 && evaluate(pts, t, pos, ang))
@@ -699,12 +778,13 @@ namespace dolly
 	// =========================================================================
 	bool add_point()
 	{
-		if (!demo_native::native_playing())
+		if (!demo_native::native_playing() && !demo_playback::is_playing())
 		{
-			Console::printf("[dolly] add: no native demo playing (cl_demo_play first)");
+			Console::printf("[dolly] add: no demo playing (cl_demo_play, or Play a "
+				"custom recording, first)");
 			return false;
 		}
-		const int mode = demo_native::camera_mode();
+		const int mode = theater_camera::get_mode();
 		if (mode != CAMERA_MODE_FREE)
 		{
 			Console::printf("[dolly] add: camera is %s, not free. Press F2 (or the "
@@ -718,7 +798,7 @@ namespace dolly
 		// Stamp on the SAME clock drive() evaluates on, or a point captured
 		// mid-snapshot would sit slightly off where the camera actually was.
 		const float* blk = freecam_block();
-		const int t = demo_native::demo_time_smooth();
+		const int t = active_time();
 		if (!blk || t < 0)
 		{
 			Console::printf("[dolly] add: camera state not readable yet (cg=%s, demoTime=%d)",
@@ -734,6 +814,8 @@ namespace dolly
 		p.angles[0] = blk[3];
 		p.angles[1] = blk[4];
 		p.angles[2] = blk[5];
+		// Key what is on screen right now, so zoom can be animated along the path.
+		p.fov = demo_camera::fov_available() ? demo_camera::fov() : 0.0f;
 
 		std::size_t count = 0;
 		bool replaced = false;
@@ -796,6 +878,26 @@ namespace dolly
 		Console::printf("[dolly] cleared %zu point(s)", had);
 	}
 
+	// Classic dollycam J: jump to the first marker and let the demo run, so the
+	// path plays from its own start. Whichever demo system is active drives it
+	// from there (drive() evaluates the spline every frame regardless).
+	bool play_from_start()
+	{
+		std::int32_t first_time = 0;
+		{
+			std::lock_guard<std::mutex> lock(g_lock);
+			if (g_points.empty())
+			{
+				Console::printf("[dolly] play: no points yet (K to add one)");
+				return false;
+			}
+			first_time = g_points.front().time;
+		}
+		seek_and_play(first_time);
+		Console::printf("[dolly] playing from %d ms", first_time);
+		return true;
+	}
+
 	bool retime_point(const int index, const std::int32_t time)
 	{
 		{
@@ -810,6 +912,33 @@ namespace dolly
 		}
 		Console::printf("[dolly] point %d moved to %d ms", index + 1, time);
 		return true;
+	}
+
+	bool go_to_point(const int index)
+	{
+		std::int32_t t = 0;
+		{
+			std::lock_guard<std::mutex> lock(g_lock);
+			if (index < 0 || index >= static_cast<int>(g_points.size()))
+			{
+				return false;
+			}
+			t = g_points[index].time;
+		}
+		// Points are stamped on active_time(); demo_seek_to seeks whichever
+		// system is playing on that same clock, on the client thread.
+		if (!demo_native::native_playing() && !demo_playback::is_playing())
+		{
+			Console::printf("[dolly] go: no demo playing");
+			return false;
+		}
+		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("demo_seek_to {}", t));
+		return true;
+	}
+
+	int current_time()
+	{
+		return active_time();
 	}
 
 	std::vector<point_t> points()
@@ -898,6 +1027,7 @@ namespace dolly
 
 		GameUtil::addCommand("dolly_add", [] { add_point(); });
 		GameUtil::addCommand("dolly_clear", [] { clear_points(); });
+		GameUtil::addCommand("dolly_play", [] { play_from_start(); });
 
 		GameUtil::addCommand("dolly_del", []
 		{

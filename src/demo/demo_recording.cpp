@@ -13,8 +13,10 @@
 #include "Hook.hpp"
 
 #include <fstream>
+#include <mutex>
 #include <optional>
 #include <span>
+#include <string>
 #include <vector>
 
 namespace demo_recording
@@ -22,6 +24,30 @@ namespace demo_recording
 	namespace
 	{
 		dvar_t* demo_autorecord = nullptr;
+
+		// ---- on-screen notice ---------------------------------------------
+		// Written on the CLIENT thread (the CL_ParseServerMessage hook or a
+		// console command), drawn on the RENDER thread from R_EndFrame, hence
+		// the mutex. The engine's own recorder shows a notice of its own; this
+		// is the equivalent for our capture.
+		struct notice_t
+		{
+			std::mutex lock;
+			std::string text;
+			std::uint64_t shown_at{};
+			bool recording{};     // red dot while recording, green once saved
+		};
+		notice_t g_notice;
+		constexpr std::uint64_t NOTICE_MS = 6000;
+		constexpr std::uint64_t NOTICE_FADE_MS = 1000;
+
+		void notify(std::string text, const bool recording)
+		{
+			std::lock_guard<std::mutex> guard(g_notice.lock);
+			g_notice.text = std::move(text);
+			g_notice.shown_at = GetTickCount64();
+			g_notice.recording = recording;
+		}
 
 		// H1-style: buffer from first gamestate (match connect) so mid-match demo_start
 		// still includes headers + update_gamestate_data + prior network TLVs.
@@ -52,6 +78,7 @@ namespace demo_recording
 					demo_utils::write_end_of_file(file);
 					file.close();
 					Console::printf("[demo] wrote %s", path.string().c_str());
+					notify("Saved demo: " + path.filename().string(), false);
 				}
 				path.clear();
 				buffer.clear();
@@ -160,6 +187,7 @@ namespace demo_recording
 			g_rec.buffer.clear();
 			Console::printf("[demo] recording %s (flushed %s buffer)",
 				path->string().c_str(), reason);
+			notify("Recording demo: " + path->filename().string(), true);
 			return true;
 		}
 
@@ -350,6 +378,26 @@ namespace demo_recording
 				return;
 			}
 
+			// ONE RECORDER AT A TIME. Turn the engine's auto-record off so the next
+			// connect does not start a second recording, and if the engine is
+			// already writing THIS match, finalise that file now (it is saved, with
+			// its footer) rather than recording the same match twice.
+			if (demo_native::auto_record())
+			{
+				demo_native::set_auto_record(false);
+				Console::printf("[demo] native auto-record turned off -- only one recorder "
+					"at a time");
+			}
+			if (demo_native::native_recording())
+			{
+				const bool stopped = demo_native::stop_native_recording();
+				Console::printf(stopped
+					? "[demo] stopped the native recording of this match (saved) so only "
+					  "our capture records it"
+					: "[demo] could not stop the native recording of this match -- both "
+					  "recorders may capture it");
+			}
+
 			const int cs = demo_game::connstate();
 			if (cs < demo_game::CA_PRIMED)
 			{
@@ -395,10 +443,12 @@ namespace demo_recording
 			demo_autorecord = static_cast<dvar_t*>(
 				Functions::_Dvar_RegisterBool("demoautorecord", false, 0));
 		}
-		dev_mode::add_command("demo_start", cmd_demostart);
-		dev_mode::add_command("demostart", cmd_demostart);
-		dev_mode::add_command("demo_stop_record", cmd_demostop);
-		dev_mode::add_command("demostop", cmd_demostop);
+		// Product-level, not developer-only: this is our own recorder, and
+		// it is the one that keeps working when native playback doesn't.
+		GameUtil::addCommand("demo_start", cmd_demostart);
+		GameUtil::addCommand("demostart", cmd_demostart);
+		GameUtil::addCommand("demo_stop_record", cmd_demostop);
+		GameUtil::addCommand("demostop", cmd_demostop);
 
 		Hook::create("CL_ParseServerMessage", reinterpret_cast<void*>(0x4639D0_b),
 			reinterpret_cast<void*>(cl_parse_server_message_stub),
@@ -414,8 +464,98 @@ namespace demo_recording
 		return g_rec.file_active();
 	}
 
+	bool is_armed()
+	{
+		return demo_autorecord && demo_autorecord->current.enabled;
+	}
+
 	void stop()
 	{
 		g_rec.clear_session();
+	}
+
+	void cancel()
+	{
+		cmd_demostop();
+	}
+
+	void render_notice()
+	{
+		if (!Functions::_R_AddCmdDrawText || !Functions::_R_AddCmdDrawStretchPic)
+		{
+			return;
+		}
+		// The console's font and white material are registered ONCE at init, so
+		// nothing here reaches into the asset system from the render thread.
+		font_t* font = InternalConsole::consoleFont;
+		Material* white = InternalConsole::getMaterialWhite();
+		if (!font || !white || font->pixelHeight <= 0)
+		{
+			return;
+		}
+
+		std::string text;
+		std::uint64_t shown_at = 0;
+		bool recording = false;
+		{
+			std::lock_guard<std::mutex> guard(g_notice.lock);
+			if (g_notice.text.empty())
+			{
+				return;
+			}
+			text = g_notice.text;
+			shown_at = g_notice.shown_at;
+			recording = g_notice.recording;
+		}
+		const std::uint64_t age = GetTickCount64() - shown_at;
+		if (age >= NOTICE_MS)
+		{
+			return;
+		}
+		const std::uint64_t left = NOTICE_MS - age;
+		const float alpha = left < NOTICE_FADE_MS
+			? static_cast<float>(left) / static_cast<float>(NOTICE_FADE_MS) : 1.0f;
+
+		// Render-target size: the same globals drawConsole and dolly use
+		// (IDA 0x1C86268 / 0x1C8626C).
+		const int sw = *reinterpret_cast<int*>(0x1C85268_b);
+		const int sh = *reinterpret_cast<int*>(0x1C8526C_b);
+		if (sw <= 0 || sh <= 0)
+		{
+			return;
+		}
+
+		// No text-width function is mapped, so size the panel from the glyph
+		// count. The console font is monospace-ish; 0.55 of the pixel height per
+		// character is close enough that the panel only ever runs a little wide.
+		const float ph = static_cast<float>(font->pixelHeight);
+		const float pad = ph * 0.6f;
+		const float dot = ph * 0.55f;
+		const float text_w = static_cast<float>(text.size()) * ph * 0.55f;
+		const float box_w = pad + dot + pad * 0.8f + text_w + pad;
+		const float box_h = ph + pad * 2.0f;
+		const float x = (static_cast<float>(sw) - box_w) * 0.5f;
+		const float y = static_cast<float>(sh) * 0.08f;
+
+		float bg[4] = { 0.0f, 0.0f, 0.0f, 0.65f * alpha };
+		Functions::_R_AddCmdDrawStretchPic(x, y, box_w, box_h, 0.0f, 0.0f, 1.0f, 1.0f, bg, white);
+
+		// Red while recording, green once saved.
+		float dot_col[4] = {};
+		if (recording)
+		{
+			dot_col[0] = 0.95f; dot_col[1] = 0.18f; dot_col[2] = 0.18f;
+		}
+		else
+		{
+			dot_col[0] = 0.35f; dot_col[1] = 0.90f; dot_col[2] = 0.40f;
+		}
+		dot_col[3] = alpha;
+		Functions::_R_AddCmdDrawStretchPic(x + pad, y + (box_h - dot) * 0.5f, dot, dot,
+			0.0f, 0.0f, 1.0f, 1.0f, dot_col, white);
+
+		float text_col[4] = { 1.0f, 1.0f, 1.0f, alpha };
+		Functions::_R_AddCmdDrawText(text.c_str(), 0x7FFFFFFF, font, 0, 0, font->pixelHeight,
+			x + pad + dot + pad * 0.8f, y + pad + ph, 1.0f, 1.0f, 0.0f, text_col, 0);
 	}
 }

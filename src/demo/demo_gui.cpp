@@ -61,6 +61,15 @@ namespace demo_gui
 		bool g_space_edge = false;
 		bool g_left_edge = false;
 		bool g_right_edge = false;
+		bool g_j_edge = false;
+		bool g_k_edge = false;
+		bool g_l_edge = false;
+
+		// Wheel deltas tapped from wnd_proc_hook (WM_MOUSEWHEEL fires on whatever
+		// thread pumps the game's window messages; demo_camera::on_wheel() is
+		// called from there directly since it only ever touches its own small,
+		// self-contained state -- no cross-thread hand-off needed, same as every
+		// other direct-call editing function already used from this file.
 		bool g_present_hooked = false;
 
 		ID3D11Device* g_device = nullptr;
@@ -129,6 +138,22 @@ namespace demo_gui
 					return 1;
 				}
 			}
+
+			// Plain wheel = roll, Alt+wheel = FOV, but only while our own window
+			// does not want the mouse (scrolling a list in the GUI must not also
+			// roll the camera). demo_camera::on_wheel() self-gates on free-camera
+			// mode and is safe to call from this thread -- see the note at the top
+			// of this file. NEVER swallow the message: it always falls through to
+			// CallWindowProcW so the game keeps seeing wheel input as normal.
+			if (msg == WM_MOUSEWHEEL
+				&& !(g_imgui_ready && g_open && ImGui::GetIO().WantCaptureMouse))
+			{
+				const float notches = static_cast<float>(static_cast<short>(HIWORD(wparam)))
+					/ static_cast<float>(WHEEL_DELTA);
+				const bool alt_held = (GetAsyncKeyState(VK_MENU) & 0x8000) != 0;
+				demo_camera::on_wheel(notches, alt_held);
+			}
+
 			return CallWindowProcW(g_wndproc_orig, hwnd, msg, wparam, lparam);
 		}
 
@@ -343,7 +368,7 @@ namespace demo_gui
 			ImGui::SeparatorText("Recording");
 			{
 				bool on = demo_player::auto_record();
-				if (ImGui::Checkbox("Record every match automatically", &on))
+				if (ImGui::Checkbox("Record every match automatically (native)", &on))
 				{
 					GameUtil::Cbuf_AddText(LOCAL_CLIENT_0,
 						on ? "demo_record 1" : "demo_record 0");
@@ -351,17 +376,44 @@ namespace demo_gui
 				if (ImGui::IsItemHovered())
 				{
 					ImGui::SetTooltip(
+						"Only one recorder can be on at a time: ticking this turns our\n"
+						"own capture off (saving it first if it is recording).\n\n"
 						"The game writes the demo itself, from the moment you connect.\n"
 						"Changing this takes effect on the NEXT match, because the\n"
 						"engine only asks once, at cgame init.\n\n"
 						"Public-match demos are repaired automatically when recording\n"
-						"stops, so they play back like any other.");
+						"stops, so they play back like any other.\n\n"
+						"Native PLAYBACK can get stuck loading a map on some demos --\n"
+						"if that happens, this recording is still fine, it is only\n"
+						"watching it back that is affected. Use the capture below\n"
+						"instead if you need reliable playback right now.");
 				}
 
+				bool custom_on = demo_recording::is_armed() || demo_player::capturing();
+				if (ImGui::Checkbox("Record with our own capture (.dm_s2)", &custom_on))
+				{
+					GameUtil::Cbuf_AddText(LOCAL_CLIENT_0,
+						custom_on ? "demo_start" : "demo_stop_record");
+				}
+				if (ImGui::IsItemHovered())
+				{
+					ImGui::SetTooltip(
+						"Only one recorder can be on at a time: ticking this turns the\n"
+						"native one off, and if it is already recording this match its\n"
+						"file is saved and closed first.\n\n"
+						"Our own recorder, entirely separate from the engine's. It\n"
+						"captures live from the moment you connect, can be started\n"
+						"or stopped mid-match, and plays back through Play without\n"
+						"ever calling the engine's own cl_demo_play -- so it is not\n"
+						"affected by native playback getting stuck.\n\n"
+						"Ticking this before you connect arms it for the next match;\n"
+						"the box will not show as actively recording until a match\n"
+						"is actually feeding it data.");
+				}
 				if (demo_player::capturing())
 				{
-					ImGui::TextColored(ImVec4(1.0f, 0.55f, 0.55f, 1.0f),
-						"Extra .dm_s2 capture running");
+					ImGui::SameLine();
+					ImGui::TextColored(ImVec4(0.55f, 1.0f, 0.55f, 1.0f), "writing now");
 				}
 			}
 
@@ -392,10 +444,32 @@ namespace demo_gui
 					"Never overwrites: a clash gets a _2 suffix. Demos that are\n"
 					"already named are left alone.");
 			}
-			ImGui::SameLine();
-			ImGui::TextDisabled("%d demo(s)", static_cast<int>(demo_player::list().size()));
-
 			const auto& demos = demo_player::list();
+
+			// Which engine a demo belongs to matters (different playback, different
+			// seeking, native can get stuck loading), so every row carries a
+			// coloured tag and the list can be narrowed to one kind.
+			const ImVec4 native_col(0.45f, 0.72f, 1.0f, 1.0f);
+			const ImVec4 custom_col(1.0f, 0.72f, 0.30f, 1.0f);
+			int n_native = 0;
+			int n_custom = 0;
+			for (const auto& d : demos)
+			{
+				(d.kind == demo_player::Kind::Engine ? n_native : n_custom) += 1;
+			}
+			ImGui::SameLine();
+			ImGui::TextDisabled("%d demo(s):", static_cast<int>(demos.size()));
+			ImGui::SameLine();
+			ImGui::TextColored(native_col, "%d native", n_native);
+			ImGui::SameLine();
+			ImGui::TextColored(custom_col, "%d custom", n_custom);
+
+			static int s_kind_filter = 0;   // 0 all, 1 native, 2 custom
+			ImGui::RadioButton("All", &s_kind_filter, 0);
+			ImGui::SameLine();
+			ImGui::RadioButton("Native (.demo)", &s_kind_filter, 1);
+			ImGui::SameLine();
+			ImGui::RadioButton("Custom (.dm_s2)", &s_kind_filter, 2);
 			if (demos.empty())
 			{
 				ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.35f, 1.0f), "No demos yet.");
@@ -408,6 +482,11 @@ namespace demo_gui
 				for (int i = 0; i < static_cast<int>(demos.size()); ++i)
 				{
 					const auto& d = demos[i];
+					const bool is_native = d.kind == demo_player::Kind::Engine;
+					if ((s_kind_filter == 1 && !is_native) || (s_kind_filter == 2 && is_native))
+					{
+						continue;
+					}
 					const bool sel = demo_player::selected() == i;
 
 					ImGui::PushID(i);
@@ -417,6 +496,22 @@ namespace demo_gui
 						demo_player::set_selected(i);
 					}
 					ImGui::SameLine(0.0f, 0.0f);
+
+					// Fixed-width tag column so names line up whichever kind it is.
+					const float tag_w = ImGui::CalcTextSize("CUSTOM").x
+						+ ImGui::GetStyle().ItemSpacing.x * 2.0f;
+					const float tag_x = ImGui::GetCursorPosX();
+					ImGui::TextColored(is_native ? native_col : custom_col, "%s",
+						is_native ? "NATIVE" : "CUSTOM");
+					if (ImGui::IsItemHovered())
+					{
+						ImGui::SetTooltip(is_native
+							? "The game's own demo (.demo, in main\\demo).\n"
+							  "Played by the engine's cl_demo_play."
+							: "Our own capture (.dm_s2, in demos).\n"
+							  "Played by the mod's theater.");
+					}
+					ImGui::SameLine(tag_x + tag_w);
 
 					// A demo whose footer is missing will NOT play, and that is
 					// worth saying in the list rather than at the moment the user
@@ -441,9 +536,7 @@ namespace demo_gui
 					else
 					{
 						ImGui::TextDisabled("%-16s %-16s %s",
-							d.info.map.empty()
-								? (d.kind == demo_player::Kind::Engine ? "" : "custom")
-								: d.info.map.c_str(),
+							d.info.map.empty() ? "?" : d.info.map.c_str(),
 							d.info.date.c_str(),
 							demo_library::human_size(d.size).c_str());
 					}
@@ -460,11 +553,27 @@ namespace demo_gui
 				const auto& det = demo_player::selected_details();
 				if (det.ok)
 				{
-					ImGui::TextDisabled("%s   %s   %s   client %u",
-						det.map.empty() ? "?" : det.map.c_str(),
-						demo_library::human_duration(det.duration_ms).c_str(),
-						demo_library::human_size(det.size).c_str(),
-						det.client);
+					const bool sel_native = e->kind == demo_player::Kind::Engine;
+					ImGui::TextColored(sel_native ? native_col : custom_col, "%s",
+						sel_native ? "NATIVE" : "CUSTOM");
+					ImGui::SameLine();
+					if (sel_native)
+					{
+						ImGui::TextDisabled("%s   %s   %s   client %u",
+							det.map.empty() ? "?" : det.map.c_str(),
+							demo_library::human_duration(det.duration_ms).c_str(),
+							demo_library::human_size(det.size).c_str(),
+							det.client);
+					}
+					else
+					{
+						// The .dm_s2 container has no recording-slot or duration
+						// field in its header, so show only what is really known.
+						ImGui::TextDisabled("%s   %s   %s",
+							det.map.empty() ? "?" : det.map.c_str(),
+							det.date.c_str(),
+							demo_library::human_size(det.size).c_str());
+					}
 				}
 				else if (e->kind == demo_player::Kind::Engine)
 				{
@@ -713,30 +822,32 @@ namespace demo_gui
 			ImGui::Spacing();
 			ImGui::SeparatorText("Framing");
 			{
-				// FOV is a plain dvar in S2 (cg_fov), so this needs no patch at
-				// all -- sub_45760 reads it every frame.
-				const float f = demo_camera::fov();
-				if (f > 0.0f)
+				// Applied at the engine's final fov, so it works in first, third
+				// and free camera, in native and custom demos alike -- and is not
+				// limited to cg_fov's 50..100.
+				if (demo_camera::fov_available())
 				{
-					float v = f;
+					float v = demo_camera::fov();
 					ImGui::SetNextItemWidth(200.0f);
-					if (ImGui::SliderFloat("FOV", &v, 45.0f, 160.0f, "%.0f"))
+					if (ImGui::SliderFloat("FOV", &v, 5.0f, 160.0f, "%.0f"))
 					{
 						demo_camera::set_fov(v);
 					}
 					ImGui::SameLine();
-					if (ImGui::Button("65##fov"))
+					if (ImGui::Button(demo_camera::fov_overridden() ? "Reset##fov" : "Game##fov"))
 					{
-						demo_camera::set_fov(65.0f);
+						demo_camera::clear_fov();
 					}
 					if (ImGui::IsItemHovered())
 					{
-						ImGui::SetTooltip("Back to the game default.");
+						ImGui::SetTooltip("Back to the game's own field of view.\n"
+							"Alt + mouse wheel zooms while flying the free camera.\n"
+							"Dolly points record the FOV too, so a zoom can be animated.");
 					}
 				}
 				else
 				{
-					ImGui::TextDisabled("FOV: cg_fov not readable in this build");
+					ImGui::TextDisabled("FOV: the field-of-view hook did not install");
 				}
 
 				// Third person distance/height. Two single instructions
@@ -1795,18 +1906,26 @@ namespace demo_gui
 
 		void draw_dolly_tab()
 		{
-			const bool playing = demo_native::native_playing();
-			const int mode = demo_native::camera_mode();
+			// Dual-system, matching what dolly.cpp itself already drives on
+			// (camera_ready()/active_time() — see dolly.hpp). Previously this read
+			// demo_native directly, so the tab reported "no demo playing" and the
+			// Free-camera button did nothing while a .dm_s2 custom-theater demo was
+			// running, even though the dolly engine underneath already worked there.
+			const bool playing = theater_camera::available();
+			const bool native = demo_native::native_playing();
+			const theater_camera::camera_mode mode = theater_camera::get_mode();
 			// Smooth clock — the same one drive() evaluates on, so "inside the
 			// shot" agrees with whether the camera is actually being driven.
-			const int now = demo_native::demo_time_smooth();
+			const int now = native
+				? demo_native::demo_time_smooth()
+				: demo_playback::current_time().value_or(0);
 
 			if (!playing)
 			{
 				ImGui::TextColored(ImVec4(1.0f, 0.6f, 0.3f, 1.0f),
-					"No native demo playing.");
+					"No demo playing.");
 				ImGui::TextDisabled(
-					"Play one from the Demos tab (or cl_demo_play <name>). The dolly "
+					"Play one from the Demos tab (native or custom). The dolly "
 					"stamps its points with the demo's own clock, so it has nothing "
 					"to attach to until a demo is running.");
 				return;
@@ -1815,21 +1934,49 @@ namespace demo_gui
 			// The camera mode is not a detail: free camera is the only mode the
 			// engine routes through CL_Demo_FreeCameraMove, which is where the
 			// dolly writes. Say so plainly instead of silently doing nothing.
-			if (mode == 2)
+			if (mode == theater_camera::THEATER_CAMERA_FREECAM)
 			{
 				ImGui::TextColored(ImVec4(0.4f, 1.0f, 0.5f, 1.0f),
-					"Free camera  |  demo time %d.%02ds", now / 1000, (now % 1000) / 10);
+					"Free camera (%s)  |  demo time %d.%02ds",
+					native ? "native" : "custom theater",
+					now / 1000, (now % 1000) / 10);
 			}
 			else
 			{
 				ImGui::TextColored(ImVec4(1.0f, 0.6f, 0.3f, 1.0f),
-					"Camera is %s — the dolly needs FREE camera.",
-					mode == 0 ? "first person" : (mode == 1 ? "third person" : "unknown"));
+					"Camera is %s (%s) — the dolly needs FREE camera.",
+					mode == theater_camera::THEATER_CAMERA_FIRST_PERSON ? "first person"
+						: (mode == theater_camera::THEATER_CAMERA_THIRD_PERSON ? "third person" : "unknown"),
+					native ? "native" : "custom theater");
 				ImGui::SameLine();
 				if (ImGui::Button("Free camera"))
 				{
-					demo_native::set_camera_mode(2);
+					theater_camera::set_mode(theater_camera::THEATER_CAMERA_FREECAM);
 				}
+				if (!native && !theater_camera::hooks_installed())
+				{
+					ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f),
+						"Custom-theater camera hooks failed to install — see "
+						"demo_camdiag.");
+				}
+			}
+
+			// Hotkey legend + a live roll/FOV readout, so a value nudged with the
+			// wheel while flying is visible without switching tabs. Roll/FOV
+			// themselves live on the Camera tab (demo_camera.hpp) — this is a
+			// read-only mirror, not a second copy of the controls.
+			ImGui::TextDisabled(
+				"K place marker   L clear markers   J play from start   "
+				"Shift sprint   Alt slow   Wheel roll   Alt+Wheel FOV");
+			if (demo_camera::fov_available())
+			{
+				ImGui::TextDisabled("FOV %.0f deg   Roll %.1f deg",
+					demo_camera::fov(), demo_camera::roll());
+			}
+			else
+			{
+				ImGui::TextDisabled("Roll %.1f deg   (FOV hook not installed)",
+					demo_camera::roll());
 			}
 
 			ImGui::Separator();
@@ -1895,23 +2042,29 @@ namespace demo_gui
 				for (std::size_t i = 0; i < pts.size(); ++i)
 				{
 					ImGui::PushID(static_cast<int>(i));
-					ImGui::Text("%2zu  %6.2fs  (%7.0f %7.0f %7.0f)  %5.1f/%5.1f",
+					ImGui::Text("%2zu  %6.2fs  (%7.0f %7.0f %7.0f)  %5.1f/%5.1f  fov %s",
 						i + 1, static_cast<float>(pts[i].time) / 1000.0f,
 						pts[i].pos[0], pts[i].pos[1], pts[i].pos[2],
-						pts[i].angles[0], pts[i].angles[1]);
+						pts[i].angles[0], pts[i].angles[1],
+						pts[i].fov > 0.0f ? std::format("{:.0f}", pts[i].fov).c_str() : "-");
 					ImGui::SameLine();
 					if (ImGui::SmallButton("Go"))
 					{
-						// Seek the DEMO to this point. Backward uses the engine's
-						// keyframe jump, forward the realtime skip — both already
-						// live in demo_native::seek_to_time.
-						demo_native::seek_to_time(pts[i].time);
+						// Seek whichever demo system is playing to this point.
+						// dolly routes it: native keyframe jump / realtime skip, or
+						// the custom theater's absolute seek.
+						dolly::go_to_point(static_cast<int>(i));
 					}
 					ImGui::SameLine();
 					if (ImGui::SmallButton("Retime"))
 					{
-						dolly::retime_point(static_cast<int>(i),
-							demo_native::demo_time_smooth());
+						// Same clock the point was stamped on -- demo_time_smooth()
+						// is native-only and reads nothing useful in the theater.
+						const int t = dolly::current_time();
+						if (t >= 0)
+						{
+							dolly::retime_point(static_cast<int>(i), t);
+						}
 					}
 					ImGui::SameLine();
 					if (ImGui::SmallButton("X"))
@@ -1949,25 +2102,29 @@ namespace demo_gui
 			// ---- FOV ----------------------------------------------------
 			ImGui::SeparatorText("Field of View");
 			{
-				const float f = demo_camera::fov();
+				// LIVE-PLAY fov: the game's own cg_fov, which the engine only
+				// accepts between 50 and 100. Demo/cinematic FOV has no such limit
+				// and lives in the Demos tab (Framing) and on dolly points.
+				const float f = demo_camera::game_fov();
 				if (f > 0.0f)
 				{
 					float v = f;
 					ImGui::SetNextItemWidth(260.0f);
-					if (ImGui::SliderFloat("Degrees##fov2", &v, 45.0f, 160.0f, "%.0f"))
+					if (ImGui::SliderFloat("Degrees##fov2", &v, 50.0f, 100.0f, "%.0f"))
 					{
-						demo_camera::set_fov(v);
+						demo_camera::set_game_fov(v);
 					}
 					ImGui::SameLine();
-					if (ImGui::Button("65"))  { demo_camera::set_fov(65.0f); }
+					if (ImGui::Button("65"))  { demo_camera::set_game_fov(65.0f); }
 					ImGui::SameLine();
-					if (ImGui::Button("90"))  { demo_camera::set_fov(90.0f); }
+					if (ImGui::Button("80"))  { demo_camera::set_game_fov(80.0f); }
 					ImGui::SameLine();
-					if (ImGui::Button("120")) { demo_camera::set_fov(120.0f); }
+					if (ImGui::Button("90"))  { demo_camera::set_game_fov(90.0f); }
 					if (ImGui::IsItemHovered())
 					{
-						ImGui::SetTooltip("65 is the game default. 90-120 suits filming\n"
-							"wide shots without the picture folding at the edges.");
+						ImGui::SetTooltip("65 is the game default. The game refuses values\n"
+							"outside 50-100 here; for cinematic FOV in demos use\n"
+							"Demos > Framing, which has no limit.");
 					}
 				}
 				else
@@ -2334,6 +2491,13 @@ namespace demo_gui
 			const bool space = edge(VK_SPACE, g_space_edge);
 			const bool left = edge(VK_LEFT, g_left_edge);
 			const bool right = edge(VK_RIGHT, g_right_edge);
+			// Dollycam marker keys: K = drop a point, L = clear the list,
+			// J = play from the first point. Same edge/gate pattern as the
+			// transport keys above -- polled every frame regardless of focus so a
+			// key held across a focus change is never seen as a fresh press.
+			const bool key_k = edge('K', g_k_edge);
+			const bool key_l = edge('L', g_l_edge);
+			const bool key_j = edge('J', g_j_edge);
 
 			if (ui_hotkeys_allowed())
 			{
@@ -2361,24 +2525,27 @@ namespace demo_gui
 			//
 			// The engine cannot see the key while our overlay owns game input
 			// (key-catcher bit 0), so that is the only case we handle ourselves.
-			if (space && ui_hotkeys_allowed())
+			// The ONLY thing that takes space away from pause/play is the s2mp
+			// console (you are typing in it). Our own window being open does not.
+			if (space && ui_hotkeys_allowed() && !InternalConsole::DEVONLY_consoleOpen())
 			{
 				const bool we_own_input = g_open || demo_game::key_catchers() != 0;
-				const bool native = demo_native::native_playing()
-					&& !demo_playback::is_active_replay();
 
-				if (native)
+				if (demo_playback::is_playing())
 				{
-					// Engine owns space unless we have taken the keyboard.
-					if (we_own_input)
-					{
-						demo_native::toggle_pause();
-					}
+					// The custom theater has no engine-side binding, so space is
+					// always ours. ⛔ 2026-09-15: this queued `demopause`, which the
+					// productisation pass renamed to `demo_pause` -- the command no
+					// longer existed, so space did nothing in custom demos. It was
+					// also skipped whenever our window or any key catcher was up.
+					GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_pause");
 				}
-				else if (demo_playback::is_active_replay() && !we_own_input)
+				else if (demo_native::native_playing() && we_own_input)
 				{
-					// The custom theater has no engine-side binding, so it is ours.
-					GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demopause");
+					// Native: the engine toggles pause itself (action 1/32) whenever
+					// it can see the key; only when we hold the keyboard must we do
+					// it, or the two toggles cancel out.
+					demo_native::toggle_pause();
 				}
 			}
 
@@ -2401,6 +2568,14 @@ namespace demo_gui
 				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0,
 					right ? "demo_seek 5" : "demo_seek -5");
 			}
+
+			// Dollycam: these touch the point list directly rather than going
+			// through Cbuf, exactly like the existing GUI buttons on the Dolly
+			// tab -- there is no console command wrapping add/clear/play, so
+			// there is nothing to queue.
+			if (key_k) { dolly::add_point(); }
+			if (key_l) { dolly::clear_points(); }
+			if (key_j) { dolly::play_from_start(); }
 		}
 
 		// ---- freeing the mouse while the UI is open ---------------------------
@@ -2461,6 +2636,10 @@ namespace demo_gui
 			// PROBE ONLY, native playback only: watches the viewmodel `hide` byte
 			// so the ~20s gun pop-in can be timed. No-op otherwise.
 			demo_native::watch_viewmodel();
+			// Ends the native session when the engine does, then starts a demo
+			// that was waiting for the previous one to close. Both no-ops normally.
+			demo_native::poll_session();
+			demo_player::poll_pending();
 			// Advances the playlist sweep if one is running. No-op otherwise, and
 			// it aborts itself (restoring the playlist) if you enter a match.
 			server_browser::tick();

@@ -1,7 +1,12 @@
 #pragma once
 // =============================================================================
-//  demo/dolly.hpp — dolly camera for NATIVE demo playback
+//  demo/dolly.hpp — dolly camera, driven by whichever demo system is playing
 // =============================================================================
+//
+//  Originally native-`.demo`-only; extended to also drive the custom `.dm_s2`
+//  theater by checking theater_camera::get_mode() (the unified mode) rather
+//  than demo_native::native_playing() alone -- the same pattern bonecam.cpp
+//  already used. See camera_ready()/active_time()/seek_and_play() in the .cpp.
 //
 //  A dolly is a list of camera POINTS, each stamped with a demo time. While the
 //  demo plays, the camera is interpolated between them, so the shot is tied to
@@ -67,6 +72,7 @@ namespace dolly
 		std::int32_t time{};        // demo time (cl.snap.serverTime), ms
 		float pos[3]{};
 		float angles[3]{};          // pitch, yaw, roll
+		float fov{};                // degrees; 0 = not keyed (fov left alone)
 	};
 
 	void init();
@@ -78,8 +84,16 @@ namespace dolly
 	bool add_point();
 	bool delete_point(int index);
 	void clear_points();
+	// Classic dollycam J: seek to the first point and play from there.
+	bool play_from_start();
 	// Re-stamps a point with the current demo time, then re-sorts.
 	bool retime_point(int index, std::int32_t time);
+	// Seeks whichever demo system is playing to point `index`'s time. Does not
+	// change pause state. The GUI's "Go" button.
+	bool go_to_point(int index);
+	// The clock points are stamped on, for whichever system is playing: native
+	// cl.serverTime, or the custom theater's own clock. -1 when nothing plays.
+	int current_time();
 
 	std::vector<point_t> points();       // a copy; the list is touched by 3 threads
 	int point_count();

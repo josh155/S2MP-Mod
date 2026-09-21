@@ -4291,6 +4291,36 @@ namespace demo_native
 		g_force_record = on;
 	}
 
+	// sub_910440 (IDA 0x910440 - 0x1000 = 0x90F440):
+	//     return clc && &clc[client] && clc[client].demoState == 1;
+	// the exact gate sub_99960's per-message append chain checks, so "true" means
+	// packets are being written to a .demo right now. RULE A17: returns bool.
+	bool native_recording()
+	{
+		using fn = bool(__fastcall*)(int);
+		return reinterpret_cast<fn>(_b(0x90F440))(0);
+	}
+
+	// CL_Demo_StopRecord (IDA 0x90FCA0 - 0x1000 = 0x90ECA0), decompiled 2026-09-15:
+	// gated on connstate >= 5; reads demoState, ZEROES it, writes the type-0
+	// terminator + footer + NetConstStrings table, closes the file and sets
+	// demoFileHandle = 0. Once demoState is 0 the append gate above is false, so
+	// no further packets are written. It is the teardown a disconnect runs.
+	//
+	// Called through the ENGINE address, not our trampoline, so the existing
+	// cl_demo_stop_record_stub still runs the public-match repair and rename.
+	// No return-address check in its body. RULE A17: returns char.
+	bool stop_native_recording()
+	{
+		if (!native_recording())
+		{
+			return false;
+		}
+		using fn = char(__fastcall*)(int);
+		reinterpret_cast<fn>(_b(0x90ECA0))(0);
+		return !native_recording();
+	}
+
 	std::optional<std::filesystem::path> native_demos_directory()
 	{
 		// Our own demos live in <base>/demos; the ENGINE's live in <base>/main/demo.
@@ -4448,6 +4478,38 @@ namespace demo_native
 
 	float* freecam_speed() { return g_freecam_speed; }
 	bool freecam_speed_patched() { return g_freecam_patched; }
+
+	// Called from dolly's shared CL_Demo_FreeCameraMove stub, wrapped tightly
+	// around the ORIGINAL call -- that is the only place that actually reads
+	// *g_freecam_speed each frame. Shift = sprint, Alt = slow/precise, matching
+	// the same modifier keys already used for other flying controls in this
+	// project's history. Returns the base value unmodified so the caller can
+	// restore it exactly, whether or not the patch is even live.
+	float begin_speed_modifier()
+	{
+		const float base = *g_freecam_speed;
+		if (!g_freecam_patched)
+		{
+			return base; // instruction was never repointed -- nothing to scale
+		}
+		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		{
+			*g_freecam_speed = base * 4.0f;
+		}
+		else if (GetAsyncKeyState(VK_MENU) & 0x8000)
+		{
+			*g_freecam_speed = base * 0.25f;
+		}
+		return base;
+	}
+
+	void end_speed_modifier(const float base)
+	{
+		if (g_freecam_patched)
+		{
+			*g_freecam_speed = base;
+		}
+	}
 
 	bool native_playing() { return g_native_playing; }
 
@@ -4797,7 +4859,10 @@ namespace demo_native
 	// We pick the keyframe by TIME ourselves and drive the engine's own
 	// ProcessKeyFrameJump, which is a complete seek (file reposition, gamestate
 	// reparse, state block, message replay, clock resync).
-	void seek_back()    { GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_seek prev"); }
+	// ⛔ 2026-09-15: this used to queue `demo_seek prev`. `demo_seek` now belongs to
+	// demo_player and means "relative SECONDS", so the native keyframe jump lives
+	// under `demo_seek_kf`. Never queue a bare `demo_seek` from here again.
+	void seek_back()    { GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_seek_kf prev"); }
 
 	// =====================================================================
 	//  FAST FORWARD — ported from IWXMVM (reallyluckyy/IWXMVM), 2026-08-11
@@ -4847,6 +4912,18 @@ namespace demo_native
 		{
 			return;
 		}
+		// Backstop against a unit error upstream. A skip this large reads every
+		// packet in one frame and leaves the clock hours ahead, and the FX system
+		// then steps through that much time and never returns -- measured
+		// 2026-09-15, a 287-million-ms skip spun a worker in the FX update
+		// (IDA 0x51B502) for minutes. No genuine demo seek is this big.
+		constexpr int MAX_SKIP_MS = 60 * 60 * 1000;
+		if (ms > MAX_SKIP_MS)
+		{
+			Console::printf("[demo] skip: refusing a %d ms jump (over an hour) -- "
+				"almost certainly a units bug in whatever asked for it", ms);
+			return;
+		}
 		auto* rt = reinterpret_cast<std::int32_t*>(_b(0x1C7D1F0));
 		if (!readable(rt, sizeof(std::int32_t)))
 		{
@@ -4874,21 +4951,161 @@ namespace demo_native
 	// commands are queued on the SAME Cbuf and drain in order on the client
 	// thread: the jump completes (it calls CL_SetCGameTime itself) before the
 	// skip runs, which is exactly the ordering the skip needs.
+	// Queues the absolute seek so it runs on the CLIENT thread. Safe to call
+	// from the GUI. `demo_seek_kf`, never `demo_seek` (that is demo_player's
+	// relative-seconds command -- see seek_back above).
 	void seek_to_time(const int ms)
 	{
-		const int now = current_demo_time();
-		if (now >= 0 && ms > now)
+		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("demo_seek_kf {}", ms));
+	}
+
+	namespace
+	{
+		// Run CL_SetCGameTime once, NOW, even if the demo is paused -- the
+		// engine's own way. sub_919CE0 (the engine's reset-and-replay) does
+		// exactly this:
+		//     *(BYTE*)(PlaybackData + 10) = 1;
+		//     CL_SetCGameTime(client);
+		//     *(BYTE*)(PlaybackData + 10) = 0;
+		// because CL_Demo_IsPaused @0x916E30 is
+		//     PlaybackData && cl_demo_pause && !PlaybackData[10]
+		// so the flag makes the one call behave as unpaused.
+		//
+		// WHY IT IS NEEDED (PROVEN from the CL_SetCGameTime decompile @0x86D30):
+		// while paused OR completed it does
+		//     cls_realtime = cl.serverTime - cl.serverTimeDelta - 5; return;
+		// before its feed loop. So a forward skip (cls_realtime += gap) made while
+		// paused was thrown away on the next frame and no packet was read: a
+		// paused native seek either did nothing (forward) or stopped on the
+		// keyframe instead of the target (backward). Calling it here, once, reads
+		// the packets up to the target and leaves the pause exactly as it was.
+		//
+		//   CL_SetCGameTime  IDA 0x86D30 - 0x1000 = 0x85D30  (demo_game::
+		//   addr_CL_SetCGameTime, hooked by demo_playback -- its stub passes
+		//   straight through when the custom theater is not playing). The engine
+		//   itself calls it from command context in ProcessKeyFrameJump.
+		bool pump_cgame_time_now()
 		{
-			GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("demo_skip {}", ms - now));
+			const auto g = demo_playback_data();
+			auto* force = g ? reinterpret_cast<std::uint8_t*>(g + 10) : nullptr;
+			if (!force || !readable(force, 1))
+			{
+				return false;
+			}
+			const std::uint8_t was = *force;
+			*force = 1;
+			reinterpret_cast<void(__fastcall*)(unsigned int)>(
+				demo_game::addr_CL_SetCGameTime())(static_cast<unsigned int>(LOCAL_CLIENT_0));
+			*force = was;
+			return true;
+		}
+
+		bool g_saw_demo_state = false;
+	}
+
+	// ONE absolute seek, the same contract as the custom theater's seek_to:
+	// land on `target` and keep the current pause state.
+	//   backward: jump to the nearest usable keyframe at or before the target
+	//             (the earliest one if the target is before all of them), then
+	//   forward:  skip the remainder through the engine's own feed, now.
+	// CLIENT THREAD ONLY (it drives ProcessKeyFrameJump and CL_SetCGameTime).
+	bool seek_absolute_now(int target)
+	{
+		if (!g_native_playing)
+		{
+			Console::printf("[demo] seek: no native demo playing");
+			return false;
+		}
+		target = (std::max)(0, target);
+		int now = demo_time_smooth();
+		if (now < 0)
+		{
+			now = current_demo_time();
+		}
+		if (now < 0)
+		{
+			Console::printf("[demo] seek: demo clock not readable yet");
+			return false;
+		}
+		const int from = now;
+
+		// Snapshots are 50 ms apart, so anything closer than that is "here".
+		if (target < now - 50)
+		{
+			const auto slots = usable_slots();
+			if (slots.empty())
+			{
+				Console::printf("[demo] seek -> %d ms: nothing to rewind to yet -- let the "
+					"demo play a few more seconds so the engine writes keyframes.", target);
+				return false;
+			}
+			int pick = -1, pick_time = -1;
+			for (const auto& s : slots)
+			{
+				if (s.time <= target && s.time > pick_time) { pick = s.index; pick_time = s.time; }
+			}
+			if (pick < 0)
+			{
+				for (const auto& s : slots)
+				{
+					if (pick_time < 0 || s.time < pick_time) { pick = s.index; pick_time = s.time; }
+				}
+				Console::printf("[demo] seek -> %d ms is before the earliest keyframe; "
+					"landing on %d ms", target, pick_time);
+				target = pick_time;
+			}
+			jump_to_slot(pick);
+			// ProcessKeyFrameJump repositioned the file and cleared the engine's
+			// completed flag (PlaybackData[8] = 0), so reading is legitimate again.
+			g_eof_seen = false;
+			now = demo_time_smooth();
+			if (now < 0)
+			{
+				now = pick_time;
+			}
+		}
+
+		const int gap = target - now;
+		if (gap > 0)
+		{
+			skip_forward_ms(gap);
+			pump_cgame_time_now();
+		}
+		Console::printf("[demo] seek %d -> %d ms (landed %d%s)", from, target,
+			demo_time_smooth(), engine_paused() ? ", still paused" : "");
+		return true;
+	}
+
+	// The native session ends when the ENGINE says so: clc.demoState leaves 2
+	// (a disconnect zeroes it through CL_Demo_StopRecord). Polled once a frame
+	// from the Present hook. It only ever ends a session it has seen running,
+	// because demoState is still 0 for the frames between play() and
+	// CL_Demo_Play_f actually executing.
+	void poll_session()
+	{
+		if (!g_native_playing)
+		{
+			g_saw_demo_state = false;
 			return;
 		}
-		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("demo_seek {}", ms));
-
-		// Close the gap the jump leaves. `demo_seek` reports the keyframe time it
-		// picked, so the two lines read together tell you how far it had to land
-		// back — which is also the diagnostic for whether the ring is dense
-		// enough. Skipping 0 is a no-op, so an exact landing costs nothing.
-		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("demo_skip_to {}", ms));
+		const char* c = clc_native(LOCAL_CLIENT_0);
+		const auto* st = c ? reinterpret_cast<const std::int32_t*>(c + 262752) : nullptr;
+		if (!st || !readable(st, 4))
+		{
+			return;
+		}
+		if (*st == 2)
+		{
+			g_saw_demo_state = true;
+			return;
+		}
+		if (g_saw_demo_state)
+		{
+			g_saw_demo_state = false;
+			g_native_playing = false;
+			g_eof_seen = false;
+			Console::printf("[native] demo session ended");
+		}
 	}
 
 	SeekRange seek_range()
@@ -5418,7 +5635,13 @@ namespace demo_native
 			// so without this the NEXT call reads one byte past the terminator,
 			// lands on the footer's version dword (0x1D) and Com_Errors.
 			g_eof_seen = true;
-			g_native_playing = false;   // stop touching messages once the demo ends
+			// ⛔ 2026-09-15: this used to also clear g_native_playing. That ended
+			// the SESSION at end-of-stream while the demo was still loaded and
+			// frozen -- so from then on demo_skip / demo_seek_kf refused ("no
+			// native demo playing"), demo_player lost the transport, and Stop
+			// could not even disconnect. Rewinding from the end was impossible.
+			// The session now lives until the engine's demoState leaves 2
+			// (poll_session), and a seek clears g_eof_seen after the jump.
 			remove_absent_client_object();
 
 			if (cs && state >= 5 && state < 9 && !g_runaway_reported)
@@ -5909,14 +6132,18 @@ namespace demo_native
 		//     [7] length = writeCursor - [0]    <- scan requires > 0
 		// A slot with a time but length 0 means the keyframe wrote NO PAYLOAD,
 		// and every seek will skip it.
-		// demo_seek <ms>   absolute demo time
-		// demo_seek prev | next
+		// demo_seek_kf <ms>   absolute demo time   (was `demo_seek`; renamed, see seek_back)
+		// demo_seek_kf prev | next
 		// Runs on the CLIENT thread, which matters: ProcessKeyFrameJump reparses
 		// the gamestate and calls CL_SetCGameTime.
 		// demo_skip <ms> — IWXMVM's fast-forward. Runs on the CLIENT thread, which
 		// matters: it feeds CL_SetCGameTime's packet loop, and a large skip makes
 		// that loop consume many packets in one frame.
-		dev_mode::add_command("demo_skip", []
+		// ⛔ ALWAYS registered, not dev-only: seek_forward() and seek_to_time()
+		// queue this, and they are reached from the product transport and the
+		// dolly Go button. As a dev_mode command it simply did not exist outside
+		// developer mode, so those seeks silently did nothing.
+		GameUtil::addCommand("demo_skip", []
 		{
 			if (!g_native_playing)
 			{
@@ -5928,13 +6155,13 @@ namespace demo_native
 			{
 				Console::printf("[demo] usage: demo_skip <ms>   (forward only — the engine "
 					"clamps cl.serverTime against oldFrameServerTime, so a negative skip "
-					"does nothing. Use demo_seek for backward.)");
+					"does nothing. Use demo_seek_kf for backward.)");
 				return;
 			}
 			const int ms = GameUtil::safeStringToInt(args->argv[args->nesting][1]);
 			if (ms <= 0)
 			{
-				Console::printf("[demo] skip: forward only. Use `demo_seek <ms>` to go back.");
+				Console::printf("[demo] skip: forward only. Use `demo_seek_kf <ms>` to go back.");
 				return;
 			}
 			// A very large skip is legal but reads every packet in between within
@@ -5944,9 +6171,10 @@ namespace demo_native
 				Console::printf("[demo] skipping %d ms — this reads every packet in "
 					"between, so expect a pause.", ms);
 			}
-			const int before = current_demo_time();
-			skip_forward_ms(ms);
-			Console::printf("[demo] skip +%d ms (demo time was %d)", ms, before);
+			// Through the one absolute seek, so a skip lands the same way whether
+			// the demo is playing or paused.
+			const int now = demo_time_smooth();
+			seek_absolute_now((now >= 0 ? now : current_demo_time()) + ms);
 		});
 
 		// demo_skip_to <absolute ms> — the second half of seek_to_time's
@@ -5954,7 +6182,7 @@ namespace demo_native
 		// time it runs the jump has completed and current_demo_time() reports
 		// where the keyframe actually landed. Forward-only by nature: if the jump
 		// overshot (or landed exactly) there is nothing to do.
-		dev_mode::add_command("demo_skip_to", []
+		GameUtil::addCommand("demo_skip_to", []   // always: seek_to_time queues it
 		{
 			if (!g_native_playing)
 			{
@@ -5976,7 +6204,7 @@ namespace demo_native
 			}
 			Console::printf("[demo] skip_to %d: closing the %d ms the keyframe jump "
 				"left short", target, target - now);
-			skip_forward_ms(target - now);
+			seek_absolute_now(target);
 		});
 
 		dev_mode::add_command("demo_seek_forceclock", []
@@ -5993,7 +6221,7 @@ namespace demo_native
 				"keyframe time: %s", g_force_seek_clock ? "ON" : "OFF");
 		});
 
-		dev_mode::add_command("demo_seek_kf", []
+		GameUtil::addCommand("demo_seek_kf", []   // always: seek_to_time / seek_back queue it
 		{
 			if (!g_native_playing)
 			{
@@ -6007,6 +6235,13 @@ namespace demo_native
 				return;
 			}
 			const std::string a = args->argv[args->nesting][1];
+			// An absolute time is the ONE seek (keyframe jump + exact landing,
+			// pause-safe). Only prev/next remain raw keyframe steps below.
+			if (a != "prev" && a != "next")
+			{
+				seek_absolute_now(GameUtil::safeStringToInt(a.c_str()));
+				return;
+			}
 			auto slots = usable_slots();
 			if (slots.empty())
 			{
@@ -6071,6 +6306,7 @@ namespace demo_native
 			Console::printf("[demo] seek -> %d ms: keyframe slot %d (t=%d), from %d ms",
 				target, pick, pick_time, now);
 			jump_to_slot(pick);
+			g_eof_seen = false;   // the jump cleared the engine's completed flag
 		});
 
 		dev_mode::add_command("demo_keyframe_dump", []

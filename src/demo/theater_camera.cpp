@@ -91,6 +91,40 @@ namespace theater_camera
 		// dwords out of it), so it is MEASURED and reported, never written.
 		constexpr std::size_t CG_MOVER_GATE = 0x598C;   // 22924
 
+		// ---- THIRD PERSON FOLLOW TARGET ------------------------------------------
+		// CL_Demo_FollowCameraMove (IDA 0x9135D0) does
+		//     CG_GetEntity(client, *(u16*)(dvar_cl_demo_client + 16));
+		//     sub_AF9B70();                      // vec-copy the entity origin
+		// CL_Demo_RegisterDvars registers cl_demo_client ("2669") with DEFAULT -1
+		// (domain -1..48), and ONLY CL_Demo_Play_f ever sets it, from the .demo
+		// header's recording slot. The custom theater never runs that, so the
+		// mover asked for entity 0xFFFF, got an out-of-range pointer, and the copy
+		// thunk read 0xFFFFFFFFFFFFFFFF. PROVEN from the 2026-09-15 10:05 minidump:
+		// the faulting thread's top return address is IDA 0x9137B4, the instruction
+		// immediately after that copy.
+		//
+		// Fix: give the dvar the same value native playback gives it -- the demo's
+		// own client slot (cg + 22904, the value bonecam already rides) -- through
+		// the engine's own Dvar_SetInt, which also enforces the -1..48 domain.
+		//
+		// RULE A1:  dvar_cl_demo_client  IDA 0x10F1AFF0 - 0x1000 = 0x10F19FF0 (a POINTER)
+		//           Dvar_SetInt          IDA 0xB29C0    - 0x1000 = 0xB19C0
+		// RULE A17: Dvar_SetInt decompiles as `double` only because it tail-calls the
+		//           void Dvar_SetVariant; there is no meaningful return value.
+		// RULE A22: Dvar_SetInt / Dvar_SetVariant were read in full -- no retaddr check.
+		constexpr std::size_t ADDR_DVAR_CL_DEMO_CLIENT = 0x10F19FF0;
+		constexpr std::size_t ADDR_DVAR_SET_INT = 0xB19C0;
+		constexpr std::size_t CG_CLIENT_SLOT = 22904;   // sub_411BE0
+		constexpr std::size_t DVAR_VALUE = 16;          // S2 dvar: +12 type, +16 value
+		constexpr int MAX_DEMO_CLIENT = 48;             // the dvar's own domain max
+		using Dvar_SetInt_fn = void(__fastcall*)(void*, int);
+
+		// Validation caches. The predicate stubs run ~80x/frame and readable() is
+		// a VirtualQuery, so each pointer is probed once, not every call.
+		std::atomic<void*> g_slot_cg_ok{nullptr};
+		std::atomic<void*> g_dvar_ok{nullptr};
+		std::atomic<bool> g_follow_warned{false};
+
 		std::atomic<int> g_mode{THEATER_CAMERA_FIRST_PERSON};
 		std::atomic<bool> g_enabled{true};       // demo_camera 0|1
 		std::atomic<bool> g_seed_pending{false};
@@ -241,11 +275,86 @@ namespace theater_camera
 			return true;
 		}
 
+		// Third person is only safe once cl_demo_client names a real entity (see the
+		// FOLLOW TARGET block). On any failure we answer "not third person", so the
+		// engine stays in first person -- a message instead of a crash to desktop.
+		[[nodiscard]] bool fail_follow(const char* why)
+		{
+			if (!g_follow_warned.exchange(true, std::memory_order_relaxed))
+			{
+				Console::printf("[cam] third person unavailable: %s -- staying in first "
+					"person rather than following a bad entity", why);
+			}
+			return false;
+		}
+
+		[[nodiscard]] bool ensure_follow_target()
+		{
+			void* cg = demo_game::cg_globals_for(LOCAL_CLIENT);
+			if (!cg)
+			{
+				return fail_follow("cgame not up yet");
+			}
+			const auto* slot_p = reinterpret_cast<const std::uint8_t*>(
+				static_cast<char*>(cg) + CG_CLIENT_SLOT);
+			if (g_slot_cg_ok.load(std::memory_order_relaxed) != cg)
+			{
+				if (!readable(slot_p, 1))
+				{
+					return fail_follow("the demo's client slot is not readable");
+				}
+				g_slot_cg_ok.store(cg, std::memory_order_relaxed);
+			}
+			const int slot = *slot_p;
+			if (slot >= MAX_DEMO_CLIENT)
+			{
+				return fail_follow("the demo's client slot is out of range");
+			}
+
+			auto* dvar = *reinterpret_cast<void**>(_b(ADDR_DVAR_CL_DEMO_CLIENT));
+			if (!dvar)
+			{
+				return fail_follow("cl_demo_client is not registered");
+			}
+			if (g_dvar_ok.load(std::memory_order_relaxed) != dvar)
+			{
+				if (!readable(dvar, DVAR_VALUE + sizeof(std::int32_t)))
+				{
+					return fail_follow("cl_demo_client is not readable");
+				}
+				g_dvar_ok.store(dvar, std::memory_order_relaxed);
+			}
+
+			const auto* value = reinterpret_cast<const std::int32_t*>(
+				static_cast<char*>(dvar) + DVAR_VALUE);
+			if (*value == slot)
+			{
+				return true;   // the common case: already correct, no write
+			}
+			reinterpret_cast<Dvar_SetInt_fn>(_b(ADDR_DVAR_SET_INT))(dvar, slot);
+			if (*value != slot)
+			{
+				// Verify the thing we needed (the value the mover reads), not merely
+				// that we called the setter.
+				return fail_follow("the engine refused to set cl_demo_client");
+			}
+			g_follow_warned.store(false, std::memory_order_relaxed);
+			Console::printf("[cam] third person following client %d "
+				"(cl_demo_client was never set in the custom theater)", slot);
+			return true;
+		}
+
 		bool __fastcall CG_IsTheaterFreeCamera_stub(const int local_client_num)
 		{
 			if (override_active())
 			{
-				return g_mode.load(std::memory_order_relaxed) == THEATER_CAMERA_THIRD_PERSON;
+				if (g_mode.load(std::memory_order_relaxed) != THEATER_CAMERA_THIRD_PERSON)
+				{
+					return false;
+				}
+				// Runs before CG_PredictPlayerState reaches CL_Demo_FollowCameraMove:
+				// it asks THIS predicate first, so the dvar is correct in the same call.
+				return ensure_follow_target();
 			}
 			return CG_IsTheaterFreeCamera_orig
 				? CG_IsTheaterFreeCamera_orig(local_client_num) : false;
@@ -433,6 +542,12 @@ namespace theater_camera
 	bool hooks_installed()
 	{
 		return g_hooks_ok;
+	}
+
+	bool custom_theater_freecam_active()
+	{
+		return custom_theater_owns_camera()
+			&& g_mode.load(std::memory_order_relaxed) == THEATER_CAMERA_FREECAM;
 	}
 
 

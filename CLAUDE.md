@@ -27945,3 +27945,379 @@ call exceeds the MCP tool's default timeout but the save itself succeeds).
      mapped neighbour and so cannot be reached by graph propagation at all
      (the same "density is the ceiling, not method cleverness" finding from
      the CoD4X pass 2 applies here too, unverified but likely).
+
+---
+---
+
+# ⛔ FAILED ATTEMPT — demo_release_frontend WAS NOT THE cl_demo_play HANG CAUSE
+# (2026-09-15). The 2026-08-13 test finally ran; it disproves candidate (b).
+
+Attempt: per the 2026-08-13 entry's own prescribed test -- `demo_release_frontend 0`
+then `cl_demo_play` a light map (mp_shipment_s2) -- to distinguish "our own frontend
+release" from "a genuine engine race in CL_Demo_Play_f's teardown" as the cause of
+the recurring cl_demo_play hang.
+
+Result: the hang reproduced IDENTICALLY with the release disabled. A full game
+restart followed by `cl_demo_play` on a DIFFERENT map ALSO hung, in the same shape.
+Confirmed via `tools/dump_stacks.py` against the live process before killing it --
+same IDA addresses as the 2026-08-13 occurrence:
+
+    main thread     R_SyncRenderThread+0x34 (0x8BD224) <- CL_ShutdownAll+0xD (0x8815D)
+                    <- CL_Demo_Play_f+0x4BD (0x910B0D)
+    renderer worker 0x8E865E -> 0x8E6CC9 -> 0x8E6FFF -> 0x675DC0 (thread proc)
+
+Reason the release was never the cause: candidate (a) -- a genuine race inside the
+engine's own CL_Demo_Play_f teardown -- is what remains. The mod's asset-release
+code (`demo_release_frontend`/`demo_release_level`) is EXONERATED for this hang; do
+not re-test it for this again.
+
+Consequence: native `.demo` PLAYBACK (cl_demo_play / CL_Demo_Play_f specifically) is
+currently unreliable across at least two maps and survives a full restart, so it is
+not a one-off state issue. Native RECORDING is a different code path
+(CL_Demo_StartRecord/StopRecord, not CL_Demo_Play_f) and is NOT implicated by this
+evidence either way.
+
+## What changed as a result -- the custom (.dm_s2) recorder promoted to product-level
+
+demo_playback::play (the .dm_s2 replay path) never calls CL_Demo_Play_f at all -- it
+replays by feeding recorded messages back through CL_ParseServerMessage, a
+structurally separate path unaffected by this hang. Its recorder
+(demo_recording.cpp) was already fully hooked and running in the background
+(CL_ParseServerMessage + CL_SavePredicted hooks install unconditionally at init),
+but its start/stop commands (demo_start/demostart/demo_stop_record/demostop) were
+registered via `dev_mode::add_command`, i.e. hidden unless developer mode is on --
+so there was no product-facing way to trigger it, even though everything underneath
+already worked.
+
+Fixed by promoting those four commands to `GameUtil::addCommand` (dev_mode::
+add_command is documented as "same contract... so a module can gate a command by
+changing one call" -- this is that one call). Added `demo_recording::is_armed()`
+(reads the demo_autorecord dvar) so the GUI can show "recording" the moment it is
+requested rather than flickering unchecked until a file actually opens. Added a
+second checkbox in the Demos tab, "Record with our own capture (.dm_s2)", next to
+the existing native toggle, wired to demo_start/demo_stop_record.
+
+NOT YET CONFIRMED IN GAME per the Fix Declaration Rules -- built, deployed
+(hash-verified against the injection staging path C:\Users\joshu\OneDrive\Documents\
+WWII\s2mp-mod.dll), and the game relaunched with it loaded via Launch-S2.ps1, but
+the checkbox itself has not been exercised yet.
+
+## Where this leaves native cl_demo_play PLAYBACK
+
+Root cause still unknown -- only narrowed to "not the mod's frontend release,
+something inside the engine's own CL_Demo_Play_f teardown." The renderer-worker
+spin (0x8E6CF0 -> 0x8E6B20 -> 0x8E84D0 -> sub_89E4A0 -> CL_GetLocalClientActive's
+Arxan dispatcher) is the next thing that would need real disassembly work to
+resolve, not a console toggle. Until then: prefer the custom (.dm_s2) recorder for
+anything that needs to be reliably PLAYED BACK.
+
+
+---
+
+# CUSTOM-THEATER CAMERA: THIRD-PERSON CRASH + FREECAM WON'T MOVE (2026-09-15)
+
+User report: in CUSTOM (.dm_s2) playback the free camera turns but cannot move, and
+third person crashes to desktop. Both root-caused statically plus one minidump.
+Built + deployed. NOT yet tested in game -- CANDIDATE per the Fix Declaration Rules.
+
+## THIRD PERSON CRASH -- PROVEN
+
+Minidump s2_mp64_ship.exe.CL0.1789463143.dmp (10:05, built with the current DLL):
+AV reading 0xFFFFFFFFFFFFFFFF inside sub_AF9B70. The dump tool's printed thread is
+the dump writer; walking the EXCEPTION context's RSP gives the real top frame:
+**IDA 0x9137B4** = the instruction after `sub_AF9B70()` @0x9137AE in
+CL_Demo_FollowCameraMove (0x9135D0):
+
+    CG_GetEntity(client, *((u16*)dvar_cl_demo_client + 8));   // value at +16
+    ... sub_AF9B70();          // vec-copy entity origin -> freecam origin
+
+CL_Demo_RegisterDvars: `dvar_cl_demo_client = sub_B0C70("2669", -1, -1, 48, 0)` --
+DEFAULT -1. Only CL_Demo_Play_f sets it (from header +0x08). Custom theater never
+does -> entity 0xFFFF -> garbage pointer -> crash.
+
+FIX (theater_camera.cpp, ensure_follow_target): in the CG_IsTheaterFreeCamera stub,
+before answering "third person", set cl_demo_client to the demo's own slot
+(cg+22904, same value bonecam rides) via the engine's Dvar_SetInt (IDA 0xB29C0,
+_b 0xB19C0; dvar ptr IDA 0x10F1AFF0, _b 0x10F19FF0). Verifies the value stuck;
+on any failure answers false (stays first person) and prints once instead of
+crashing. Dvar_SetInt/Dvar_SetVariant read in full: no retaddr check; SetVariant
+enforces the -1..48 domain.
+
+NOTE: tools/s2_crash_dump.py's "thread registers" block is the dump-writing thread
+(rip in ntdll). For the faulting frame, read the exception stream's CONTEXT
+(RSP @ +0x98, RIP @ +0xF8) and scan from there -- that is what named 0x9137B4.
+The earlier 09:14 dump faulted inside s2mp-mod.dll but its PDB was overwritten by
+the 09:58 rebuild, so it cannot be resolved now.
+
+## FREECAM WON'T MOVE -- PROVEN, AND IT WAS OUR OWN STUB
+
+CL_Demo_FreeCameraMove (0x913AE0) builds velocity from the usercmd CG_PredictPlayerState
+takes out of the clientActive cmd ring (+25928, stride 128, & 0x7F):
+    forwardmove (char) cmd+52   rightmove (char) cmd+53
+    buttons cmd+8: bit0 -> up (+127), 0x800000 -> down (-127)
+    angles cmd+16/+20/+24
+
+demo_playback.cpp cl_create_cmd_stub zeroed cmd+0x8, +0x1C..+0x33, +0x34, +0x35,
++0x38 whenever the theater is armed. Angles (+0x10..+0x1B) were never stripped, so
+look worked and movement did not -- exactly the report.
+
+FIX: when theater_camera::custom_theater_freecam_active(), restore forwardmove,
+rightmove and only buttons & (1 | 0x800000). Fire/ADS/weapon still stripped.
+Residual risk: the loopback server also receives that movement; with CG_PredictPlayerState's
+theater branch returning early there is no client-side pmove, so no visible effect
+expected, but not measured.
+
+## Also established
+    CL_Demo_FreeCameraMove / FollowCameraMove extra gates: sub_91D920 / sub_91DA40
+      (key-catcher 16 + a menu-name list open), sub_91D910 ("demo_error" menu open),
+      and cg+22924 != 0. None implicated here.
+    CL_CreateCmd (0x9DC60): pitch clamp -30..60 in third person, -88..88 in free cam.
+
+
+# SEEK HANG + FOV "NOT FOUND" -- BOTH PROVEN, BOTH FIXED IN CODE (2026-09-15, later)
+
+User report after the camera fix: freecam markers place correctly in the custom
+theater, but a seek hung the game and FOV "can't find cg_fov". Built + deployed
+(hash c06869c0...). NOT yet tested in game -- CANDIDATE.
+
+## THE SEEK HANG -- a command NAME COLLISION left by the productisation pass
+
+Log line: `[demo] seek -> 287634276 ms (forward from 288350)` after a dolly point
+at 287346 ms.  288276 + 287346 x 1000 = 287,634,276 exactly.
+
+Chain:
+  dolly "Go" (demo_gui.cpp)  -> demo_native::seek_to_time(ms)
+  seek_to_time               -> Cbuf "demo_seek <ms>"   (old native keyframe cmd)
+  BUT demo_seek now belongs to demo_player = RELATIVE SECONDS
+  -> seek_relative(287346 * 1000) -> custom seek_to(now + 287,346,000)
+
+The productisation pass renamed the native command to `demo_seek_kf` and moved
+`demo_skip` / `demo_skip_to` / `demo_seek_kf` under dev_mode::add_command, but
+seek_to_time and seek_back still queued the OLD names. Two consequences:
+  * backward native seeks (and Go) queued the relative-seconds command -> runaway
+  * forward native seeks queued dev-only commands -> silently nothing outside dev mode
+The CUSTOM theater has no footer bounds on an unfinalised .dm_s2 (battleship_2.0000
+has 10,111 chunks, zero gen_footer, no eof), so nothing clamped the target.
+
+Live evidence before killing the hung process (tools/dump_stacks.py --process):
+the only in-module running thread sat at IDA 0x51B502 (FX update region), i.e.
+the clock had jumped ~80 h via serverTimeDelta and the FX system was stepping it.
+
+FIXES:
+  * seek_back / seek_to_time queue `demo_seek_kf` (never bare `demo_seek`)
+  * demo_skip, demo_skip_to, demo_seek_kf registered with GameUtil::addCommand
+    (always) -- they are part of the product transport
+  * dolly::go_to_point(i) + dolly::current_time(): Go/Retime now use the active
+    system's absolute seek and clock (Retime used native-only demo_time_smooth)
+  * backstops: demo_playback::seek_to_ms refuses a forward gap > 1 h;
+    demo_native::skip_forward_ms refuses a skip > 1 h. Both print why.
+
+LESSON (third time this file records it): after renaming or re-registering a
+console command, grep the whole tree for its name. A Cbuf_AddText of a command
+whose meaning changed compiles fine and fails at runtime -- here, as a hang.
+
+## FOV -- cg_fov IS registered; it is an OBFUSCATED FLOAT
+
+Live read (ReadProcessMemory, base verified per RULE A2):
+    IDA 0x11111B8 -> dvar 'cg_fov'           type byte 0x0B
+    IDA 0x11111C0 -> 'cg_fov1'               0x0B
+    IDA 0x11111C8 -> 'cg_fov_intermission'   0x0B
+    IDA 0x11111D0 -> '3078' (fovScale)       0x0B
+    IDA 0x11111E0 -> 'cg_fov_override'       0x0B
+
+0x0B = DVAR_TYPE_FLOAT_SECURE. Dvar_SetVariant (IDA 0xB30C0) case 0xB XOR-encodes
+the value across +16..+31 with keys IDA 0xD90164..0xD90170 and a per-session slot
+offset (dword_14DB5E8). demo_camera::fov() read +16 as a plain float -> junk ->
+failed its 1..200 check -> "unavailable". The FOV feature never worked in EITHER
+demo system.
+
+GameUtil.cpp already had a file-local decodeDvarSecureFloat, verified here as the
+exact inverse of that case-0xB chain. Exported as GameUtil::getDvarSecureFloat;
+fov() now decodes by type byte. Setting still goes through `cg_fov N` on Cbuf.
+
+⚠ sub_AF220 (the engine's obfuscated float getter) decompiles as `memset; return 0`
+-- an Arxan stub. Do not call it; decode in-mod.
+⚠ Remaining FOV caveat (unchanged): per-client scale at clientObf+4431600 beats
+cg_fov_override when > 0, so FOV may appear stuck while scoped.
+
+
+# CUSTOM-THEATER REWIND "GLITCHY" -- THREE DEFECTS, ALL READ OFF THE [rw] TRACE (2026-09-15)
+
+User: rewind works but it is hard to land where you want; "press rewind twice then
+forward once, and it doesn't always do it". The existing bounded [rw] trace in
+main/s2mp_console.log named all three causes without a new probe.
+Demo: battleship_2.0000.dm_s2 -- first snapshot 263950, NO footer (never finalised),
+so g_play.bounds is empty and nothing clamps a seek. CANDIDATE, not yet tested.
+
+## 1. Rewinding before the recording starts
+Targets 258950 / 254003 / 249065 / 244106 while the file starts at 263950. Repeated
+presses stack (rewind() subtracts from demo_clock_ms(), which is the PARKED target
+while a seek is outstanding). No data exists there, so the seek never completes.
+FIX: playback_t::earliest_snap -- min first-snapshot time, survives restarts; seek_to_ms
+clamps targets below it to it.
+
+## 2. The rewind freshness test fails at the start
+service_seek treated a rewind as landed only when a snapshot arrived BELOW
+rewind_from. Rewinding from the start makes the replay's first snapshot EQUAL
+rewind_from (log 4482: 263950 vs 263950; 4568: 264150 vs 264150) -> never fresh ->
+clock parked on the target forever (trace: serverTime frozen at 259004 while delta
+keeps falling). This is the "press twice" glitch.
+FIX: reset_snap_clock_for_rewind (demo_game.hpp:748) forces CA_SNAP_VALID = 0 at
+restart, and only CL_ParseSnapshot on a replayed message sets it back. Fresh now =
+snap < rewind_from OR snap.valid != 0. Works for finalised demos too, where
+restart_time == bounds.first == the first replayed snapshot.
+
+## 3. Forward seeks inherited a stalled rewind
+seek_to_ms's forward path cleared rewind_ff_target but not rewind_from/rewind_fresh.
+Log 4515-4544: forward to 268950, snap reached 269100, but 269100 is not below the
+stale rewind_from 263950 -> never "done" -> clock parked at 269000. "Forward doesn't
+always work". FIX: forward path clears rewind_from and rewind_fresh.
+
+## Reading the [rw] trace, for next time
+    service ... target=N  repeating with no `fresh` / `done`   -> the seek is stuck
+    serverTime constant while delta keeps drifting            -> clock parked by service_seek
+    [demo] first_snap seeded from snap.serverTime=T           -> T is the file's start
+
+
+# ONE RECORDER AT A TIME + ON-SCREEN NOTICE FOR OUR CAPTURE (2026-09-15)
+
+User request: only one demo recorder active at a time; show an on-screen notice of
+which .dm_s2 is being recorded, as native does. Built + deployed. CANDIDATE.
+
+## PROVEN -- the two engine functions that make exclusivity safe mid-match
+
+    sub_910440 (IDA 0x910440, _b 0x90F440)
+        return clc && &clc[client] && clc[client].demoState == 1;
+      -> the per-message append gate (demo_utils already uses it as record_ready).
+         Exposed as demo_native::native_recording().
+
+    CL_Demo_StopRecord (IDA 0x90FCA0, _b 0x90ECA0), decompiled:
+        gate connstate >= 5; reads demoState, ZEROES it; state 1 -> writes type-0
+        terminator, footer body, NetConstStrings (sub_5DC650), closes via
+        sub_9112F0, demoFileHandle = 0.
+      -> after it, the append gate is false, so no further writes. It is the
+         disconnect teardown. Exposed as demo_native::stop_native_recording(),
+         called through the ENGINE address so cl_demo_stop_record_stub still runs
+         the public-match type-21 repair and the auto-rename. CLIENT THREAD ONLY.
+
+CL_Demo_StartRecord contains NO on-screen notice call, so native's notice comes
+from elsewhere (not traced). Ours is drawn by the mod.
+
+## Behaviour
+  demo_start (custom on):  native auto-record off; if native is writing THIS
+                           match, StopRecord it now (file saved) -> no double capture
+  demo_record 1 (native):  cancel our capture (demo_recording::cancel = disarm +
+                           close/save); native starts at the next connect
+  GUI checkboxes already route through those commands, so the rule holds for
+  console use too. Tooltips say so.
+
+## Notice
+demo_recording::render_notice(), called from the existing R_EndFrame stub (no new
+hook). "Recording demo: <file>" (red dot) on flush_buffer_to_file success,
+"Saved demo: <file>" (green dot) in clear_session. 6 s, 1 s fade, top-centre at
+8% height. Uses InternalConsole::consoleFont + getMaterialWhite (registered once,
+never per frame). Written on the client thread, drawn on the render thread ->
+mutex. No text-width function is mapped, so the panel is sized from the glyph count.
+
+# DEMO LIST: NATIVE vs CUSTOM MADE DISTINGUISHABLE (2026-09-15)
+
+User: "very hard to distinguish what is a custom demo and native demo in the list".
+Built + deployed (hash d9b5538a). User accepted the result ("perfect").
+
+  * demo_library::describe_custom(path) -- reads only the first 4 KB of a .dm_s2,
+    walks up to 16 TLV chunks (id byte; 0x80 = one-byte size else u32; id & ~0xE0)
+    and takes the map from map_header (id 1, "map\0gametype\0"). Size/date from
+    the file. No engine access, any thread.
+  * demo_player::scan() fills Entry::info for custom demos with it (native keeps
+    describe()).
+  * demo_gui.cpp list: fixed-width coloured tag per row (NATIVE blue 0.45,0.72,1 /
+    CUSTOM amber 1,0.72,0.30), All / Native (.demo) / Custom (.dm_s2) filter
+    (filter hides rows only -- selection index is unchanged, so Play/Rename/Delete
+    still target the same file), split count line, custom rows show map+date,
+    selected-details line tagged and no longer shows "client 0" for custom.
+
+Note: a selection hidden by the filter stays selected.
+
+
+# DEMO FOV + SEEK PARITY (NATIVE == CUSTOM) + REPLAY CRASH (2026-09-15, later)
+
+User: FOV "doesn't work for cinematics", seek/rewind "still buggy", third-person
+crash fix confirmed working. "Must be identical for both native and custom."
+Built + deployed. CANDIDATE -- not yet tested in game.
+
+## FOV -- PROVEN why the dvar route could never work
+
+    CG_RegisterFovDvars @0x507E0: cg_fov = sub_B0B60("cg_fov", default 65.0,
+        min 50.0, max 100.0)  (dword_B37914 / B37904 / B37930, read from the IDB)
+    then v15[10] = sub_3E750 -- the domain callback -- which accepts only
+        sub_45830's range: floor 50, ceiling clamped into 70..100.
+So `cg_fov 120` / `cg_fov 30` is REJECTED silently. The slider offered 45..160.
+
+sub_48460 = the FINAL fov (callers CG_ApplyFov @0x4A850, sub_33CF0, sub_3F050 x2,
+sub_2C4E0, sub_4EAD60). In theater third/free camera it does
+`if (CG_IsTheaterFreeCamera || CG_IsTheaterOrbitCamera) v = sub_45760(client)`
+(the cg_fov chooser) and returns clamp(max(dvar off_8B0DB00, v), 170).
+
+FIX: hook sub_48460 (IDA 0x48460 - 0x1000 = 0x47460), `float __fastcall(unsigned
+int)` (`mov edi, ecx` @0x4847B; not a forwarder; no retaddr check). While a demo
+plays (native or custom), client 0: dolly key (fresh <250 ms) > override > engine.
+Live play untouched. Display tab keeps cg_fov, clamped 50..100 honestly.
+Dolly points now carry `fov` (captured from what is on screen), Catmull-Rom'd.
+
+## NATIVE SEEK -- three PROVEN defects
+
+1. SEEK WHILE PAUSED. CL_SetCGameTime @0x86D30, ACTIVE branch:
+       if (CL_Demo_IsPaused() || CL_Demo_IsCompleted()) { ...;
+           cls_realtime = serverTime - serverTimeDelta - 5; return; }
+   BEFORE the feed loop. So `cls_realtime += gap` was undone next frame, no packets
+   read: paused forward seek = nothing; paused rewind = stops on the keyframe.
+   Engine's own answer, sub_919CE0 (reset/replay):
+       *(BYTE*)(PlaybackData + 10) = 1; CL_SetCGameTime(c); *(BYTE*)(PlaybackData+10) = 0;
+   CL_Demo_IsPaused = PlaybackData && cl_demo_pause && !PlaybackData[10].
+   pump_cgame_time_now() transcribes that.
+2. END OF DEMO KILLED THE SESSION. note_read_result on the 0 return set
+   g_eof_seen AND g_native_playing = false, never reset. Afterwards every read was
+   refused, demo_skip / demo_seek_kf said "no native demo playing", demo_player
+   lost the transport, Stop could not disconnect. Rewind from the end: impossible.
+   Now: session lives until clc.demoState (clc+262752) leaves 2 (poll_session, from
+   Present, only after having SEEN 2); g_eof_seen cleared after every jump
+   (ProcessKeyFrameJump sets PlaybackData[8] = 0).
+3. seek_to_time was a Cbuf chain (demo_seek_kf; demo_skip_to). Now ONE synchronous
+   seek_absolute_now(target) on the client thread: keyframe jump if backward
+   (nearest <= target, else earliest), then skip + pump. Lands on the target, pause
+   untouched. demo_skip / demo_skip_to / demo_seek_kf <ms> all route through it.
+
+CL_Demo_JumpToStart_f @0x910480 read: scans slots, index != 0 -> sub_919CE0, else
+ProcessKeyFrameJump(0). sub_919CE0 memsets the slot ring first, so its later reads
+of slot 0 look like zeros in the decompile -- NOT trusted, not used.
+
+## PARITY -- one contract in demo_player
+
+    demo_player::current_time()   native cl.serverTime | custom clock (pending
+                                   target while a seek is outstanding)
+    demo_player::seek_absolute()  native seek_absolute_now | custom seek_to
+    demo_player::seek_relative()  current_time() + ms  -> presses ACCUMULATE
+    `demo_seek_to <ms> [play]`    the only way the GUI thread seeks
+
+⛔ THREADING DEFECT FIXED: dolly Go and J called demo_playback::seek_to (custom)
+directly from the DXGI Present thread -- it rewinds the ifstream and rewrites clock
+state the client thread is feeding from. Now queued as demo_seek_to.
+
+Custom: finish_playback's pause is tracked (paused_by_finish) and lifted by a rewind,
+matching native resuming after a rewind from the end.
+
+## THE 13:47 CRASH -- demo_player::play() called stop() then play()
+
+Dump s2_mp64_ship.exe.CL0.1789476438.dmp: AV @ IDA_0x6DA8C5 SV_ChangeMaxClients,
+SV_SpawnServer on the stack; log `[demo] playback stopped` -> `playback started`
+-> `bootstrap StartServer` -> dead. The 12:51 dump (1789473081) is the same shape on
+the asset limit (DB_RaiseAssetLimitError 0x78AC90 + SV_SpawnServer 0x6DC350).
+Custom stop left the map + loopback server up, and Play started a second server.
+FIX: same custom file -> `demo_seek_to 0 play`; anything else while a demo is loaded
+-> stop (BOTH kinds now disconnect) + deferred `demo_play` from poll_pending()
+once playing() is false for 1.5 s (30 s give-up).
+
+## LOG EVIDENCE WAS BEING DELETED
+
+Logfile::init removed main/s2mp_console.log on every launch, so the seek test the
+user ran had left nothing. It now rotates to s2mp_console.prev.log.

@@ -67,6 +67,11 @@ namespace demo_library
 
 	[[nodiscard]] bool remove(const std::filesystem::path& path, std::string& why);
 
+	// Our own .dm_s2 container. Reads only the first few KB: the map name comes
+	// from its map_header chunk (id 1, right after the 51-byte gen_header), the
+	// date from the file time. ok == true once the map header was found.
+	[[nodiscard]] Info describe_custom(const std::filesystem::path& path);
+
 	[[nodiscard]] std::string human_size(std::uintmax_t bytes);
 	[[nodiscard]] std::string human_duration(std::int32_t ms);
 }

@@ -39,6 +39,15 @@ namespace demo_native
 	bool auto_record();
 	void set_auto_record(bool on);
 
+	// Is the ENGINE writing a .demo for this match right now? The engine's own
+	// append gate (sub_910440: clc[client].demoState == 1).
+	bool native_recording();
+	// Finalise and close the current native recording NOW, through the engine's
+	// own CL_Demo_StopRecord -- the same teardown a disconnect runs, so the file
+	// gets its footer (and our public-match repair + rename). CLIENT THREAD ONLY:
+	// call it from a console command, never from the GUI thread.
+	bool stop_native_recording();
+
 	// Issues the engine's own cl_demo_play. Returns false (and explains) when
 	// the engine would silently refuse.
 	// Repair a PUBLIC-match recording whose footer lacks netconststring type 21
@@ -166,6 +175,14 @@ namespace demo_native
 	float* freecam_speed();
 	bool freecam_speed_patched();
 
+	// Call immediately before/after the ORIGINAL CL_Demo_FreeCameraMove call in
+	// dolly's shared hook stub -- that is the one place per frame that reads
+	// *freecam_speed(). Shift = sprint (x4), Alt = slow/precise (x0.25). A no-op
+	// pair when the speed patch never took (returns/restores the base value
+	// unchanged either way, so it is always safe to call).
+	float begin_speed_modifier();
+	void end_speed_modifier(float base);
+
 	// PROBE ONLY. Polls the viewmodel `hide` byte (cg+0x256C2B) every rendered
 	// frame during NATIVE playback and logs its transitions, to answer "when
 	// does the gun pop in". Polled rather than hooked because demo_playback.cpp
@@ -229,7 +246,14 @@ namespace demo_native
 	// 79,356-byte state block, replays buffered messages and resyncs the clock.
 	void seek_back();
 	void seek_forward();
+	// Queues an absolute seek (safe from any thread).
 	void seek_to_time(int ms);
+	// The absolute seek itself: keyframe jump if backward, then the exact
+	// remainder through the engine's feed, pause state untouched. CLIENT THREAD
+	// ONLY -- call it from a console command.
+	bool seek_absolute_now(int ms);
+	// Ends the native session once the engine's demoState leaves 2. Once a frame.
+	void poll_session();
 
 	// ⭐ FAST FORWARD, ported from IWXMVM (reallyluckyy/IWXMVM) 2026-08-11.
 	//

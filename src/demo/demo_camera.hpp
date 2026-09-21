@@ -11,16 +11,16 @@
 // repoints two single instructions using the same technique already
 // proven for the free-camera speed.
 //
-//   FOV          `cg_fov` is a REAL dvar (off_11111B8, flags 0x400001 =
-//                user-settable + archived), and the engine additionally
-//                ships `cg_fov_override` (off_11111E0, default -1).
-//                sub_45760 is the chooser:
-//                    intermission?           -> cg_fov_intermission
-//                    splitscreen client 1?   -> cg_fov1
-//                    per-client scale > 0    -> cg_fov * scale
-//                    cg_fov_override > 0     -> the override
-//                    else                    -> cg_fov
-//                So a slider is just the dvar. No hook, no patch.
+//   FOV          ⛔ CORRECTED 2026-09-15. `cg_fov` is a real dvar, but it is
+//                registered 50..100 and its domain callback (sub_3E750 ->
+//                sub_45830) narrows the top further, so `cg_fov 120` or
+//                `cg_fov 30` is silently REJECTED. A dvar slider could never
+//                do cinematic framing.
+//                The demo FOV is instead applied at sub_48460, the engine's
+//                FINAL fov (in third/free camera it takes the cg_fov chooser
+//                sub_45760 outright). One hook covers first, third and free
+//                camera in BOTH demo systems. Live play is left alone.
+//                Priority while a demo plays: dolly key > override > engine.
 //
 //   3rd person   CL_Demo_UpdatePlaybackView @0x9135D0 raises the camera by
 //                +35.0 (instruction 0x9137C1) and CL_Demo_TraceViewForward
@@ -47,10 +47,20 @@ namespace demo_camera
 	void init();
 
 	// ---- field of view ----------------------------------------------
-	// Reads the live dvar; -1 when it cannot be read.
+	// DEMO fov: what is on screen while a demo plays (dolly key, else the
+	// override, else the engine's own value). Same in native and custom.
 	[[nodiscard]] float fov();
-	void set_fov(float degrees);          // clamped 45..160
-	[[nodiscard]] bool fov_available();
+	void set_fov(float degrees);          // override, clamped 5..170
+	void clear_fov();                     // back to the engine's own fov
+	[[nodiscard]] bool fov_overridden();
+	[[nodiscard]] bool fov_available();   // the CG_CalcFov hook is live
+	// Called by the dolly every frame it drives. Expires by itself.
+	void set_dolly_fov(float degrees);
+
+	// LIVE-PLAY fov: the cg_fov dvar, which the engine limits to 50..100.
+	// -1 when it cannot be read.
+	[[nodiscard]] float game_fov();
+	void set_game_fov(float degrees);
 
 	// ---- third person framing ---------------------------------------
 	[[nodiscard]] bool framing_patched();
@@ -60,6 +70,12 @@ namespace demo_camera
 	// ---- camera roll -------------------------------------------------
 	[[nodiscard]] float roll();
 	void set_roll(float degrees);         // clamped -180..180
+
+	// Called from the game window's WM_MOUSEWHEEL handler (demo_gui.cpp).
+	// notches is the raw delta / WHEEL_DELTA (so 1.0 = one detent). Plain
+	// wheel adjusts roll, Alt+wheel adjusts FOV -- matching the MWR reference
+	// this was modelled on. No-op outside free camera.
+	void on_wheel(float notches, bool alt_held);
 
 	// Called from dolly's EXISTING CL_Demo_FreeCameraMove hook, after the
 	// engine's own mover and after bonecam. Never installs a hook of its own

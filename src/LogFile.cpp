@@ -33,12 +33,21 @@ static std::string log_path()
 }
 
 void Logfile::init() {
-	//delete logfile if it exists
+	// Keep the PREVIOUS session as s2mp_console.prev.log instead of deleting it.
+	// A test run followed by a relaunch used to erase exactly the evidence it
+	// produced -- 2026-09-15 a seek test left no trace for that reason.
 	const std::string filePath = log_path();
 	std::filesystem::path logFilePath(filePath);
 	try {
 		if (std::filesystem::exists(logFilePath)) {
-			std::filesystem::remove(logFilePath);
+			std::filesystem::path prev = logFilePath;
+			prev.replace_extension(".prev.log");
+			std::error_code ec;
+			std::filesystem::remove(prev, ec);
+			std::filesystem::rename(logFilePath, prev, ec);
+			if (ec) {
+				std::filesystem::remove(logFilePath);
+			}
 		}
 	}
 	catch (const std::filesystem::filesystem_error& e) {

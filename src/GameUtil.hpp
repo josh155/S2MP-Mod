@@ -25,6 +25,11 @@ public:
 	static bool decodeDvarSecureBool(const dvar_t* dvar);
 	static void setDvarSecureBool(dvar_t* dvar, bool newValue);
 	static void setDvarSecureFloat(dvar_t* dvar, float newValue);
+	// Reads a DVAR_TYPE_FLOAT_SECURE (0x0B) value. Such dvars store the float
+	// XOR-encoded at +16..+31 (Dvar_SetVariant case 0xB), so reading +16 as a
+	// float gives garbage. The caller must have checked the type and that
+	// dvar+0x10..+0x1F is readable.
+	static float getDvarSecureFloat(const dvar_t* dvar);
 	static std::string dvarValueToString(const dvar_t* dvar, bool showQuotesAroundStrings, bool truncateFloats);
 	static std::string getDvarDomainAsString(const dvar_t* dvar);
 	static std::string toLower(const std::string& str);

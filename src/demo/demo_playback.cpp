@@ -5,6 +5,7 @@
 #include "demo/demo_game.hpp"
 #include "demo/demo_timescale.hpp"
 #include "demo/demo_utils.hpp"
+#include "demo/theater_camera.hpp"
 
 #include "hud/broadcaster.hpp"
 #include "hud/wii_aim.hpp"
@@ -84,6 +85,17 @@ namespace demo_playback
 			int rewind_from{-1};
 			bool rewind_fresh{};
 			int first_snap{-1};
+			// The first snapshot time the FILE ever delivered -- i.e. where the
+			// recording really starts. Unlike first_snap it SURVIVES a rewind restart
+			// (restart clears first_snap and re-seeds it), so it is what a rewind
+			// target is clamped to. Measured 2026-09-15: with no footer there were no
+			// bounds, rewinds asked for 258950 / 254003 / 249065 when the file starts
+			// at 263950, and a seek for data that does not exist never completes.
+			int earliest_snap{-1};
+			// The pause finish_playback() puts on at end-of-file, as opposed to
+			// one the user asked for. A rewind from the end lifts only this one --
+			// the same as native, where rewinding a completed demo resumes it.
+			bool paused_by_finish{};
 			std::size_t network_cursor{};
 			int pre_gs_burst{};
 			bool gamestate_seen{};
@@ -178,6 +190,8 @@ namespace demo_playback
 				bounds.reset();
 				armed = paused = seeking = finished = false;
 				seek_ttl = first_snap = 0;
+				earliest_snap = -1;
+				paused_by_finish = false;
 				clock_ms = 0.0;
 				last_wall = -1;
 				seek_target = rewind_ff_target = rewind_from = -1;
@@ -258,6 +272,7 @@ namespace demo_playback
 			g_play.bounds = std::nullopt;
 			g_play.reset_clock(0);
 			g_play.first_snap = -1;
+			g_play.earliest_snap = -1;
 			return true;
 		}
 
@@ -393,6 +408,7 @@ namespace demo_playback
 				return;
 			}
 			g_play.finished = true;
+			g_play.paused_by_finish = !g_play.paused;
 			g_play.paused = true;
 			// Pin clock to the last applied snap and KEEP armed/open so loopback stays muted.
 			const int snap_t = demo_game::snap_server_time();
@@ -583,6 +599,10 @@ namespace demo_playback
 						if (snap_t > 0)
 						{
 							g_play.first_snap = snap_t;
+							if (g_play.earliest_snap < 0 || snap_t < g_play.earliest_snap)
+							{
+								g_play.earliest_snap = snap_t;
+							}
 							g_play.reset_clock(snap_t);
 							Console::printf("[demo] first_snap seeded from snap.serverTime=%d", snap_t);
 						}
@@ -1229,6 +1249,15 @@ namespace demo_playback
 			{
 				target_ms = std::clamp(target_ms, b->first, b->second);
 			}
+			// A recording has no data before its first snapshot. Ask for earlier and
+			// the rewind restarts, replays from the start, and then waits forever for
+			// a snapshot at the target that is never coming (the clock stays parked on
+			// it). Land on the start instead -- which is also what a user pressing
+			// rewind near the beginning means.
+			if (g_play.earliest_snap > 0 && target_ms < g_play.earliest_snap)
+			{
+				target_ms = g_play.earliest_snap;
+			}
 
 			const int snap_now = demo_game::snap_server_time();
 			const bool backward = snap_now > 0 && target_ms < snap_now;
@@ -1237,6 +1266,11 @@ namespace demo_playback
 				if (!restart_stream_for_rewind())
 				{
 					return false;
+				}
+				if (g_play.paused_by_finish)
+				{
+					g_play.paused = false;
+					g_play.paused_by_finish = false;
 				}
 				// H1: do NOT fast-forward before FirstSnapshot. Defer delta bump until
 				// PRIMED→ACTIVE so FirstSnapshot can re-own serverTimeDelta first.
@@ -1255,12 +1289,35 @@ namespace demo_playback
 				return true;
 			}
 
+			const int gap = (snap_now > 0) ? (target_ms - snap_now) : 0;
+
+			// Backstop. Without a footer (a recording that was never finalised has
+			// none) there are no bounds to clamp to, so a units bug upstream went
+			// straight through: 2026-09-15 a dolly Go asked for 287,634,276 ms from
+			// 288,350, the fast-forward bumped serverTimeDelta by ~80 hours, and the
+			// FX update spun forever on the resulting time step. No real seek is
+			// over an hour in one frame; refuse it and say why.
+			constexpr int MAX_FORWARD_SEEK_MS = 60 * 60 * 1000;
+			if (gap > MAX_FORWARD_SEEK_MS)
+			{
+				Console::printf("[demo] seek -> %d ms refused: %d ms ahead of %d is over an "
+					"hour -- almost certainly a units bug in the caller", target_ms, gap,
+					snap_now);
+				return false;
+			}
+
 			g_play.seek_target = target_ms;
 			g_play.seeking = true;
 			g_play.seek_ttl = 8;
 			g_play.rewind_ff_target = -1;
+			// A forward seek must not inherit an unfinished rewind's freshness wait.
+			// Measured 2026-09-15: a stalled rewind left rewind_from=263950, the next
+			// forward seek to 268950 reached snap 269100 -- which is not below
+			// 263950, so it never counted as fresh -- and the clock stayed parked on
+			// 268950 forever. That was the "press forward and it doesn't always work".
+			g_play.rewind_from = -1;
+			g_play.rewind_fresh = false;
 
-			const int gap = (snap_now > 0) ? (target_ms - snap_now) : 0;
 			if (gap > 0)
 			{
 				demo_utils::fast_forward_demo(static_cast<std::uint32_t>(gap));
@@ -1311,8 +1368,21 @@ namespace demo_playback
 
 			// Has replayed data arrived yet? Only a snapshot BELOW where the stale
 			// one sat can have come from the restarted stream.
-			if (g_play.rewind_from >= 0 && !g_play.rewind_fresh
-				&& snap_now > 0 && snap_now < g_play.rewind_from)
+			//
+			// ⭐ Second signal, and the one that matters at the START of a demo:
+			// restart_stream_for_rewind -> reset_snap_clock_for_rewind forces
+			// CA_SNAP_VALID to 0 (the [rw] restart line reads `valid=0`), and only
+			// CL_ParseSnapshot on a REPLAYED message sets it back to 1. The time test
+			// alone fails when you rewind from the start: the replay's first snapshot
+			// EQUALS rewind_from (263950 == 263950), is never "below" it, and the seek
+			// waited forever. That was the "press rewind twice" glitch.
+			int snap_valid = 0;
+			if (void* cl = demo_game::client_active_for(0))
+			{
+				snap_valid = demo_game::read_i(cl, demo_game::CA_SNAP_VALID);
+			}
+			if (g_play.rewind_from >= 0 && !g_play.rewind_fresh && snap_now > 0
+				&& (snap_now < g_play.rewind_from || snap_valid != 0))
 			{
 				g_play.rewind_fresh = true;
 				trace_rewind("fresh");
@@ -1757,11 +1827,34 @@ namespace demo_playback
 			}
 
 			auto* bytes = static_cast<std::uint8_t*>(cmd);
+
+			// FREE CAMERA needs its movement input. CL_Demo_FreeCameraMove (IDA
+			// 0x913AE0) builds its wish velocity from THIS command, via the
+			// clientActive cmd ring CG_PredictPlayerState hands it:
+			//     forwardmove = (char)cmd[+0x34]   rightmove = (char)cmd[+0x35]
+			//     buttons     = cmd[+0x8]: bit 0 -> up (+127), 0x800000 -> down
+			// Zeroing them below is exactly "the free camera turns but will not
+			// move": look survives because the angle shorts at +0x10..+0x1B were
+			// never part of the strip. So in free camera keep ONLY those fields;
+			// every other button (fire, ADS, weapon switch) is still removed.
+			constexpr std::uint64_t FREECAM_BUTTONS = 0x1 | 0x800000;
+			const bool freecam = theater_camera::custom_theater_freecam_active();
+			const std::uint64_t buttons = *reinterpret_cast<std::uint64_t*>(bytes + 0x8);
+			const std::uint8_t forward = bytes[0x34];
+			const std::uint8_t right = bytes[0x35];
+
 			*reinterpret_cast<std::uint64_t*>(bytes + 0x8) = 0;
 			std::memset(bytes + 0x1C, 0, 0x18);
 			bytes[0x34] = 0;
 			bytes[0x35] = 0;
 			bytes[0x38] = 0;
+
+			if (freecam)
+			{
+				*reinterpret_cast<std::uint64_t*>(bytes + 0x8) = buttons & FREECAM_BUTTONS;
+				bytes[0x34] = forward;
+				bytes[0x35] = right;
+			}
 			return result;
 		}
 
@@ -2124,6 +2217,7 @@ namespace demo_playback
 		if (g_play.open())
 		{
 			g_play.paused = !g_play.paused;
+			g_play.paused_by_finish = false;
 		}
 	}
 
@@ -2132,6 +2226,15 @@ namespace demo_playback
 		if (!g_play.open() || !g_play.armed)
 		{
 			return std::nullopt;
+		}
+		// While a seek is outstanding the clock is frozen at where it STARTED
+		// (advance_clock skips while seeking). Report where it is GOING, so the
+		// progress bar, the dolly, and a second rewind/forward press all work
+		// from the pending target -- exactly as they do on native, whose seek
+		// lands in the same frame.
+		if (g_play.seek_target >= 0)
+		{
+			return g_play.seek_target;
 		}
 		return g_play.demo_clock_ms();
 	}

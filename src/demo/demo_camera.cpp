@@ -3,10 +3,15 @@
 
 #include "Console.hpp"
 #include "GameUtil.hpp"
+#include "Hook.hpp"
 #include "demo/demo_game.hpp"
 #include "demo/demo_native.hpp"
+#include "demo/demo_playback.hpp"
+#include "demo/theater_camera.hpp"
 
 #include <algorithm>
+#include <atomic>
+#include <cmath>
 #include <cstring>
 
 namespace demo_camera
@@ -40,6 +45,90 @@ namespace demo_camera
 		bool g_framing_patched = false;
 
 		float g_roll = 0.0f;
+
+		// -----------------------------------------------------------------
+		//  FIELD OF VIEW — overridden at the engine's FINAL fov function
+		// -----------------------------------------------------------------
+		// PROVEN 2026-09-15 from the S2 IDB:
+		//
+		//   CG_RegisterFovDvars @0x507E0 registers cg_fov with default 65.0,
+		//   min 50.0, max 100.0 (dword_B37914 / B37904 / B37930), then REPLACES
+		//   its domain callback with sub_3E750, which accepts a value only
+		//   inside sub_45830's range: floor 50, ceiling somewhere in 70..100.
+		//   Anything outside is rejected by Dvar_SetVariant, silently. The old
+		//   slider offered 45..160 through `cg_fov N`, so a wide shot (120) or a
+		//   zoomed one (20-40) simply never applied -- "FOV doesn't work".
+		//
+		//   sub_48460 is the final fov (callers: CG_ApplyFov, sub_33CF0,
+		//   sub_3F050, sub_2C4E0, sub_4EAD60). In theater third/free camera it
+		//   takes sub_45760 (the cg_fov chooser) outright, then clamps to
+		//   [min dvar, 170]. So overriding ITS return value is the one place
+		//   that covers first, third and free camera in BOTH demo systems, with
+		//   no dvar range in the way.
+		//
+		//   `float __fastcall(unsigned int localClientNum)` -- one arg in ecx
+		//   (`mov edi, ecx` at 0x4847B), a real function rather than a forwarder
+		//   (RULE A23), return in xmm0 (RULE A17). No retaddr check in its body
+		//   (RULE A22), and we never call it ourselves anyway.
+		//
+		//   sub_48460  IDA 0x48460 - 0x1000 = 0x47460
+		constexpr std::uintptr_t CG_CALC_FOV_LITERAL = 0x47460;
+		using CG_CalcFov_t = float(__fastcall*)(unsigned int);
+		CG_CalcFov_t g_calc_fov_orig = nullptr;
+		bool g_fov_hook_ok = false;
+
+		// The engine clamps its own result to 170; 5 is a long lens.
+		constexpr float FOV_MIN = 5.0f;
+		constexpr float FOV_MAX = 170.0f;
+
+		// 0 = off. Only applied while a demo is playing; live play keeps the
+		// engine's own fov.
+		std::atomic<float> g_fov_override{ 0.0f };
+		// Written every frame by the dolly while it drives. Expires on its own
+		// once the dolly stops, so a stale key can never stick.
+		std::atomic<float> g_dolly_fov{ 0.0f };
+		std::atomic<std::uint64_t> g_dolly_fov_stamp{ 0 };
+		constexpr std::uint64_t DOLLY_FOV_TTL_MS = 250;
+		// What the engine itself computed last, before any override.
+		std::atomic<float> g_engine_fov{ -1.0f };
+
+		[[nodiscard]] bool demo_is_playing()
+		{
+			return demo_native::native_playing() || demo_playback::is_playing();
+		}
+
+		[[nodiscard]] float fresh_dolly_fov()
+		{
+			const auto stamp = g_dolly_fov_stamp.load(std::memory_order_relaxed);
+			if (stamp == 0 || GetTickCount64() - stamp > DOLLY_FOV_TTL_MS)
+			{
+				return 0.0f;
+			}
+			return g_dolly_fov.load(std::memory_order_relaxed);
+		}
+
+		float __fastcall cg_calc_fov_stub(const unsigned int client)
+		{
+			const float engine = g_calc_fov_orig(client);
+			if (client != 0)
+			{
+				return engine;
+			}
+			if (std::isfinite(engine) && engine > 1.0f && engine < 180.0f)
+			{
+				g_engine_fov.store(engine, std::memory_order_relaxed);
+			}
+			if (!demo_is_playing())
+			{
+				return engine;
+			}
+			if (const float d = fresh_dolly_fov(); d > 0.0f)
+			{
+				return d;
+			}
+			const float o = g_fov_override.load(std::memory_order_relaxed);
+			return (o > 0.0f) ? o : engine;
+		}
 
 		// Resolved inside a function, never at namespace scope (RULE A14).
 		// On the Store build this address is not in BuildMap.Store.inc, so _b
@@ -184,18 +273,24 @@ namespace demo_camera
 			const auto* args = GameUtil::getCmdArgs();
 			if (!args || args->argc[args->nesting] < 2)
 			{
-				const float f = fov();
-				if (f < 0.0f)
-				{
-					Console::printf("fov: unavailable (cg_fov not registered yet)");
-				}
-				else
-				{
-					Console::printf("fov: %.0f   (demo_fov <45..160>)", f);
-				}
+				const float o = g_fov_override.load(std::memory_order_relaxed);
+				Console::printf("demo fov: %s  | engine fov %.0f | hook %s   "
+					"(demo_fov <%.0f..%.0f> | demo_fov off)",
+					o > 0.0f ? std::format("{:.0f}", o).c_str() : "off",
+					g_engine_fov.load(std::memory_order_relaxed),
+					g_fov_hook_ok ? "live" : "NOT INSTALLED",
+					FOV_MIN, FOV_MAX);
 				return;
 			}
-			set_fov(static_cast<float>(std::atof(args->argv[args->nesting][1])));
+			const char* a = args->argv[args->nesting][1];
+			if (_stricmp(a, "off") == 0 || std::atof(a) <= 0.0)
+			{
+				clear_fov();
+				Console::printf("demo fov: off (the engine's own fov)");
+				return;
+			}
+			set_fov(static_cast<float>(std::atof(a)));
+			Console::printf("demo fov: %.0f", g_fov_override.load(std::memory_order_relaxed));
 		}
 
 		void cmd_third()
@@ -242,10 +337,55 @@ namespace demo_camera
 
 	bool fov_available()
 	{
-		return fov() >= 0.0f;
+		return g_fov_hook_ok;
 	}
 
 	float fov()
+	{
+		if (const float d = fresh_dolly_fov(); d > 0.0f)
+		{
+			return d;
+		}
+		if (const float o = g_fov_override.load(std::memory_order_relaxed); o > 0.0f)
+		{
+			return o;
+		}
+		if (const float e = g_engine_fov.load(std::memory_order_relaxed); e > 1.0f)
+		{
+			return e;
+		}
+		return game_fov();
+	}
+
+	bool fov_overridden()
+	{
+		return g_fov_override.load(std::memory_order_relaxed) > 0.0f;
+	}
+
+	void set_fov(const float degrees)
+	{
+		// No dvar, so no engine range check: the value goes straight into the
+		// engine's final fov while a demo plays.
+		g_fov_override.store(std::clamp(degrees, FOV_MIN, FOV_MAX),
+			std::memory_order_relaxed);
+	}
+
+	void clear_fov()
+	{
+		g_fov_override.store(0.0f, std::memory_order_relaxed);
+	}
+
+	void set_dolly_fov(const float degrees)
+	{
+		if (!(degrees > 0.0f))
+		{
+			return;
+		}
+		g_dolly_fov.store(std::clamp(degrees, FOV_MIN, FOV_MAX), std::memory_order_relaxed);
+		g_dolly_fov_stamp.store(GetTickCount64(), std::memory_order_relaxed);
+	}
+
+	float game_fov()
 	{
 		// off_11111B8 is a POINTER to the dvar; the value sits at dvar+16.
 		auto* slot = reinterpret_cast<std::uintptr_t*>(CG_FOV_DVAR_LITERAL_b());
@@ -254,22 +394,33 @@ namespace demo_camera
 			return -1.0f;
 		}
 		const auto dvar = *slot;
-		if (!readable(reinterpret_cast<void*>(dvar), 20))
+		// 32 bytes: the secure decode reads the whole +0x10..+0x1F block.
+		if (!readable(reinterpret_cast<void*>(dvar), 32))
 		{
 			return -1.0f;
 		}
-		const float v = *reinterpret_cast<float*>(dvar + 16);
+		// ⛔ cg_fov is NOT a plain float. Measured live 2026-09-15: its type byte
+		// (dvar+12) is 0x0B = DVAR_TYPE_FLOAT_SECURE, and so are cg_fov1,
+		// cg_fov_intermission, "3078" and cg_fov_override. Dvar_SetVariant's
+		// case 0xB XOR-encodes the value across +16..+31, so reading +16 as a
+		// float gave junk, failed the range check below, and FOV reported
+		// "unavailable" for as long as this feature has existed.
+		const auto type = *reinterpret_cast<const std::uint8_t*>(dvar + 12);
+		const float v = (type == DVAR_TYPE_FLOAT_SECURE)
+			? GameUtil::getDvarSecureFloat(reinterpret_cast<const dvar_t*>(dvar))
+			: *reinterpret_cast<float*>(dvar + 16);
 		// A dvar that has not been registered yet reads as junk, so sanity-check
 		// rather than handing the GUI a slider position of 1e38.
 		return (v > 1.0f && v < 200.0f) ? v : -1.0f;
 	}
 
-	void set_fov(const float degrees)
+	void set_game_fov(const float degrees)
 	{
-		const float v = std::clamp(degrees, 45.0f, 160.0f);
-		// Through the console, so the engine's own setter runs on the client
-		// thread and any change callback fires. Writing dvar+16 directly would
-		// skip both.
+		// The live-play dvar, through the console so the engine's own setter and
+		// change callback run on the client thread. Clamped to the range the
+		// engine registers (50..100); its domain callback may narrow the top
+		// further, in which case the engine keeps the old value.
+		const float v = std::clamp(degrees, 50.0f, 100.0f);
 		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("cg_fov {:.0f}", v));
 	}
 
@@ -282,6 +433,30 @@ namespace demo_camera
 	void set_roll(const float degrees)
 	{
 		g_roll = std::clamp(degrees, -180.0f, 180.0f);
+	}
+
+	void on_wheel(const float notches, const bool alt_held)
+	{
+		// Only while actually flying. Third/first person don't have a use for
+		// this, and the wheel is free for whatever the game itself does there.
+		if (theater_camera::get_mode() != theater_camera::THEATER_CAMERA_FREECAM)
+		{
+			return;
+		}
+		if (alt_held)
+		{
+			if (!fov_available() || !demo_is_playing())
+			{
+				return; // don't jump from "unavailable" straight to a clamp edge
+			}
+			// wheel up (positive notches) = zoom in = smaller FOV, matching the
+			// MWR reference's convention.
+			set_fov(fov() - notches * 2.0f);
+		}
+		else
+		{
+			set_roll(g_roll + notches * 2.0f);
+		}
 	}
 
 	void apply_after_camera_move()
@@ -324,6 +499,15 @@ namespace demo_camera
 	void init()
 	{
 		patch_framing();
+
+		// RULE A3: a hook is only live when it says so, and a duplicate reports
+		// success with a null trampoline -- so the trampoline is the proof.
+		g_fov_hook_ok = Hook::create("CG_CalcFov", _b(CG_CALC_FOV_LITERAL),
+			&cg_calc_fov_stub, &g_calc_fov_orig) && g_calc_fov_orig != nullptr;
+		Console::printf("[cam] demo field of view: %s (target=%p orig=%p)",
+			g_fov_hook_ok ? "adjustable in both demo systems" : "HOOK FAILED -- stock fov only",
+			reinterpret_cast<void*>(_b(CG_CALC_FOV_LITERAL)),
+			reinterpret_cast<void*>(g_calc_fov_orig));
 
 		GameUtil::addCommand("demo_fov", cmd_fov);
 		GameUtil::addCommand("demo_thirdperson", cmd_third);

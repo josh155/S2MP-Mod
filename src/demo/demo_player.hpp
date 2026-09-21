@@ -70,8 +70,19 @@ namespace demo_player
 	[[nodiscard]] float timescale();
 	void set_timescale(float value);
 
-	// Positive skips forward, negative rewinds. Both engines honour it.
+	// The active demo's own clock in ms (mid-seek: the pending target). -1 when
+	// nothing is playing.
+	[[nodiscard]] std::int32_t current_time();
+	// Absolute seek; lands on `ms` and keeps the pause state. CLIENT THREAD:
+	// from the GUI, queue `demo_seek_to <ms>` instead.
+	void seek_absolute(std::int32_t ms);
+	// Positive skips forward, negative rewinds. Both engines honour it the same
+	// way. CLIENT THREAD, like seek_absolute.
 	void seek_relative(std::int32_t ms);
+
+	// Starts a demo that was asked for while another was still loaded, once
+	// that one has closed. Call once a frame.
+	void poll_pending();
 
 	// ---- recording --------------------------------------------------
 	// Automatic engine recording -- the normal way demos are made.

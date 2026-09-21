@@ -10,6 +10,7 @@
 #include "Hook.hpp"
 #include "ImageLoader.hpp"
 #include "demo/dolly.hpp"
+#include "demo/demo_recording.hpp"
 #include "hud/dynamic_crosshair.hpp"
 #include "hud/wii_aim.hpp"
 #include "hud/nametags.hpp"
@@ -1005,6 +1006,12 @@ void R_EndFrame_hookfunc() {
 	// Wii pointer-aiming reticle (and optional bounding-box outline). Same
 	// call-out pattern; draws nothing unless a usercmd was built this frame.
 	wii_aim::render_reticle();
+
+	// "Recording demo: <file>" / "Saved demo: <file>" for our own .dm_s2
+	// capture -- the engine shows its own notice for native recordings. Same
+	// call-out pattern; draws nothing unless a notice was raised in the last
+	// few seconds.
+	demo_recording::render_notice();
 
 	_EndFrame();
 }

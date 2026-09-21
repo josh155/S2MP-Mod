@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
+#include <format>
+#include <mutex>
 
 namespace demo_player
 {
@@ -19,6 +21,15 @@ namespace demo_player
 	{
 		std::vector<Entry> g_list;
 		int g_selected = 0;
+
+		// A demo asked for while another is still loaded. It is started once the
+		// old one has fully closed -- see play() for why it cannot start at once.
+		std::mutex g_pending_lock;
+		std::string g_pending_name;
+		std::uint64_t g_pending_queued = 0;
+		std::uint64_t g_pending_clear_since = 0;
+		constexpr std::uint64_t PENDING_SETTLE_MS = 1500;
+		constexpr std::uint64_t PENDING_GIVE_UP_MS = 30000;
 
 		Kind kind_of(const std::filesystem::path& p)
 		{
@@ -67,6 +78,12 @@ namespace demo_player
 				if (kind == Kind::Engine)
 				{
 					entry.info = demo_library::describe(entry.path);
+				}
+				else
+				{
+					// One small read: map name from the .dm_s2 map header, so a
+					// custom row shows the same map/date columns as a native one.
+					entry.info = demo_library::describe_custom(entry.path);
 				}
 				g_list.push_back(std::move(entry));
 			}
@@ -141,6 +158,27 @@ namespace demo_player
 			seek_relative(static_cast<std::int32_t>(sec * 1000.0));
 		}
 
+		// demo_seek_to <ms> [play] -- an ABSOLUTE seek on the active demo's own
+		// clock. Everything that seeks from the GUI thread (dolly Go, J, the
+		// timeline) queues this, so the seek itself always runs here, on the
+		// client thread, through one code path for both engines.
+		void cmd_seek_to()
+		{
+			const auto* args = GameUtil::getCmdArgs();
+			if (!args || args->argc[args->nesting] < 2)
+			{
+				Console::printf("usage: demo_seek_to <demo time ms> [play]   (now: %d)",
+					current_time());
+				return;
+			}
+			seek_absolute(std::atoi(args->argv[args->nesting][1]));
+			if (args->argc[args->nesting] >= 3
+				&& _stricmp(args->argv[args->nesting][2], "play") == 0 && paused())
+			{
+				toggle_pause();
+			}
+		}
+
 		void cmd_speed()
 		{
 			const auto* args = GameUtil::getCmdArgs();
@@ -186,6 +224,14 @@ namespace demo_player
 			if (args && args->argc[args->nesting] >= 2)
 			{
 				on = args->argv[args->nesting][1][0] != '0';
+			}
+			// ONE RECORDER AT A TIME: switching native on switches our capture off,
+			// and if it is writing this match right now, saves and closes that file.
+			if (on && (demo_recording::is_armed() || demo_recording::is_recording()))
+			{
+				demo_recording::cancel();
+				Console::printf("[demo] our capture turned off -- only one recorder at a "
+					"time (native starts with the next match)");
 			}
 			set_auto_record(on);
 			Console::printf("[demo] auto-record every match: %s%s",
@@ -270,9 +316,45 @@ namespace demo_player
 
 	bool play(const std::filesystem::path& path)
 	{
-		stop();
+		const Kind kind = kind_of(path);
 
-		switch (kind_of(path))
+		// The same custom demo again: restart it in place (a seek to its start)
+		// rather than reloading the map underneath itself.
+		if (kind == Kind::Custom && demo_playback::is_playing())
+		{
+			std::error_code ec;
+			if (std::filesystem::equivalent(path, demo_playback::current_path(), ec))
+			{
+				GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "demo_seek_to 0 play");
+				Console::printf("[demo] restarting %s from the beginning",
+					path.filename().string().c_str());
+				return true;
+			}
+		}
+
+		// ⛔ NEVER start one demo while another is still loaded. MEASURED
+		// 2026-09-15 (minidump s2_mp64_ship.exe.CL0.1789476438.dmp): Play on a
+		// custom demo while one was loaded ran stop() then StartServer again on
+		// the still-running loopback server, and the second SV_SpawnServer
+		// faulted in SV_ChangeMaxClients (IDA 0x6DA8C5). The 12:51 dump died the
+		// same way on the image-asset limit. So close the old demo, go back to
+		// the menu, and start the new one once that has happened -- the same
+		// order native playback already requires.
+		if (playing())
+		{
+			stop();
+			{
+				std::lock_guard<std::mutex> lock(g_pending_lock);
+				g_pending_name = path.filename().string();
+				g_pending_queued = GetTickCount64();
+				g_pending_clear_since = 0;
+			}
+			Console::printf("[demo] closing the current demo first -- %s starts as soon "
+				"as it has.", path.filename().string().c_str());
+			return true;
+		}
+
+		switch (kind)
 		{
 		case Kind::Engine:
 			if (demo_native::server_running())
@@ -305,17 +387,59 @@ namespace demo_player
 
 	void stop()
 	{
-		if (demo_playback::is_playing())
+		const bool custom = demo_playback::is_playing();
+		const bool native = demo_native::native_playing();
+		if (custom)
 		{
 			demo_playback::stop();
 		}
 		// The engine has no "stop demo" command; disconnecting is how playback
-		// ends, and doing that unconditionally would kick the user out of a live
-		// match. So only disconnect when a native demo is actually running.
-		if (demo_native::native_playing())
+		// ends. Doing it unconditionally would kick the user out of a live match,
+		// so only when a demo is actually loaded -- and for BOTH kinds now. A
+		// stopped custom demo used to leave its map and loopback server up, and
+		// the next Play started a second server on top of it (the crash above).
+		if (custom || native)
 		{
 			GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, "disconnect");
 		}
+	}
+
+	void poll_pending()
+	{
+		std::string name;
+		{
+			std::lock_guard<std::mutex> lock(g_pending_lock);
+			if (g_pending_name.empty())
+			{
+				return;
+			}
+			const auto now = GetTickCount64();
+			if (now - g_pending_queued > PENDING_GIVE_UP_MS)
+			{
+				Console::printf("[demo] gave up waiting for the previous demo to close; "
+					"press Play again for %s", g_pending_name.c_str());
+				g_pending_name.clear();
+				return;
+			}
+			if (playing())
+			{
+				g_pending_clear_since = 0;
+				return;
+			}
+			// Gone. Let the frontend finish coming back before loading again.
+			if (g_pending_clear_since == 0)
+			{
+				g_pending_clear_since = now;
+				return;
+			}
+			if (now - g_pending_clear_since < PENDING_SETTLE_MS)
+			{
+				return;
+			}
+			name = std::move(g_pending_name);
+			g_pending_name.clear();
+		}
+		GameUtil::Cbuf_AddText(LOCAL_CLIENT_0, std::format("demo_play \"{}\"", name));
 	}
 
 	bool paused()
@@ -386,46 +510,56 @@ namespace demo_player
 		}
 	}
 
+	std::int32_t current_time()
+	{
+		switch (active())
+		{
+		case Kind::Engine:
+		{
+			// The smooth clock (cl.serverTime), same kind of clock the custom
+			// theater reports. The snapshot clock would lag by up to 50 ms.
+			const int t = demo_native::demo_time_smooth();
+			return (t >= 0) ? t : demo_native::demo_time();
+		}
+		case Kind::Custom:
+			// Reports the pending target while a seek is outstanding.
+			return demo_playback::current_time().value_or(-1);
+		default:
+			return -1;
+		}
+	}
+
+	// ONE seek contract for both engines: land on the absolute demo time and
+	// keep the current pause state. Native lands in the same frame; the custom
+	// theater lands over the next few frames and reports the target meanwhile.
+	void seek_absolute(std::int32_t ms)
+	{
+		ms = (std::max)(0, ms);
+		switch (active())
+		{
+		case Kind::Engine: demo_native::seek_absolute_now(ms); break;
+		case Kind::Custom: demo_playback::seek_to(ms); break;
+		default:
+			Console::printf("[demo] nothing is playing.");
+			break;
+		}
+	}
+
 	void seek_relative(std::int32_t ms)
 	{
 		if (ms == 0)
 		{
 			return;
 		}
-		switch (active())
+		// From the current time -- or, mid-seek, from where that seek is going,
+		// so pressing rewind twice goes back twice as far instead of repeating.
+		const int now = current_time();
+		if (now < 0)
 		{
-		case Kind::Engine:
-		{
-			// Forward is a cheap realtime skip; backward has to land on a
-			// keyframe, so route it through seek_to_time, which picks one and
-			// then trims the remainder.
-			const int now = demo_native::demo_time();
-			if (ms > 0)
-			{
-				demo_native::skip_forward_ms(ms);
-			}
-			else
-			{
-				demo_native::seek_to_time((std::max)(0, now + ms));
-			}
-			break;
-		}
-
-		case Kind::Custom:
-		{
-			const auto now = demo_playback::current_time();
-			if (!now)
-			{
-				return;
-			}
-			demo_playback::seek_to((std::max)(0, *now + ms));
-			break;
-		}
-
-		default:
 			Console::printf("[demo] nothing is playing.");
-			break;
+			return;
 		}
+		seek_absolute(now + ms);
 	}
 
 	const demo_library::Info& selected_details()
@@ -494,6 +628,7 @@ namespace demo_player
 		GameUtil::addCommand("demo_stop", cmd_stop);
 		GameUtil::addCommand("demo_pause", cmd_pause);
 		GameUtil::addCommand("demo_seek", cmd_seek);
+		GameUtil::addCommand("demo_seek_to", cmd_seek_to);
 		GameUtil::addCommand("demo_speed", cmd_speed);
 		GameUtil::addCommand("demo_list", cmd_list);
 		GameUtil::addCommand("demo_record", cmd_record);

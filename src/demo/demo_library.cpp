@@ -212,6 +212,76 @@ namespace demo_library
 		}
 	}
 
+	Info describe_custom(const std::filesystem::path& path)
+	{
+		Info info;
+		std::error_code ec;
+		info.size = std::filesystem::file_size(path, ec);
+		if (ec)
+		{
+			info.size = 0;
+		}
+		info.date = file_date(path);
+
+		std::ifstream f(path, std::ios::binary);
+		if (!f)
+		{
+			info.reason = "cannot open";
+			return info;
+		}
+		// The header chunks all sit at the very start, so one small read covers
+		// them. Chunk framing is demo_utils' write_id_and_size: an id byte whose
+		// 0x80 bit means "one-byte size", otherwise a u32 size; id = byte & ~0xE0;
+		// 31 = eof. map_header (id 1) payload = "<map>\0<gametype>\0".
+		char buf[4096]{};
+		f.read(buf, sizeof(buf));
+		const std::size_t n = static_cast<std::size_t>(f.gcount());
+
+		std::size_t off = 0;
+		for (int chunk = 0; chunk < 16 && off < n; ++chunk)
+		{
+			const auto id_byte = static_cast<std::uint8_t>(buf[off++]);
+			const int id = id_byte & ~0xE0 & 0xFF;
+			if (id == 31)
+			{
+				break;
+			}
+			std::uint32_t size = 0;
+			if (id_byte & 0x80)
+			{
+				if (off + 1 > n) break;
+				size = static_cast<std::uint8_t>(buf[off++]);
+			}
+			else
+			{
+				if (off + 4 > n) break;
+				std::memcpy(&size, buf + off, 4);
+				off += 4;
+			}
+			if (id == 1)
+			{
+				const std::size_t end = (std::min)(n, off + static_cast<std::size_t>(size));
+				std::string map;
+				for (std::size_t i = off; i < end && buf[i] != '\0'; ++i)
+				{
+					map += buf[i];
+				}
+				if (!map.empty())
+				{
+					info.map = std::move(map);
+					info.ok = true;
+				}
+				break;
+			}
+			off += size;
+		}
+		if (!info.ok)
+		{
+			info.reason = "no map header in the first 4 KB";
+		}
+		return info;
+	}
+
 	Info describe(const std::filesystem::path& path)
 	{
 		std::ifstream f(path, std::ios::binary);

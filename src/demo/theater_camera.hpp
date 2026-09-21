@@ -28,4 +28,9 @@ namespace theater_camera
 	// cannot leave first person. Surfaced in the UI rather than failing silently.
 	bool hooks_installed();
 
+	// True while the CUSTOM theater owns the camera AND it is in free-fly mode.
+	// demo_playback's CL_CreateCmd stub strips live input during replay; this is
+	// what tells it to keep the movement fields the free-camera mover needs.
+	bool custom_theater_freecam_active();
+
 }
