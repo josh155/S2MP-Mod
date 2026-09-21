@@ -64,3 +64,8 @@ public:
 
 	static Material* previewMaterial;
 };
+
+
+// Time scale globals / API: see time_scale_hook.hpp + time_scale_impl.cpp
+#include "time_scale_hook.hpp"
+

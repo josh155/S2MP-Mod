@@ -581,7 +581,7 @@ __kernel_entry NTSTATUS NtQuerySystemInformation_hookfunc(
         return status;
     }
 
-    // Block list (same as before)
+    // Tools the game must not see when it enumerates running processes.
     const wchar_t* blockedProcesses[] = {
         L"OLLYDBG.exe", L"x32dbg.exe", L"x64dbg.exe", L"x96dbg.exe",
         L"windbg.exe", L"dnSpy.exe", L"HxD.exe", L"ida.exe", L"ida64.exe",
@@ -589,107 +589,54 @@ __kernel_entry NTSTATUS NtQuerySystemInformation_hookfunc(
         L"OllyDumpEx_SA32.exe", L"OllyDumpEx_SA64.exe", L"apimonitor-x64.exe",
         L"apimonitor-x86.exe", L"cheatengine-x86_64.exe", L"Cheat Engine.exe",
         L"cheatengine-x86_64-SSE4-AVX2.exe", L"cheatengine-i386.exe",
-        L"DbgX.Shell.exe", L"EngHost.exe",
+        L"cheatengine-x86_64-AVX512.exe", L"DbgX.Shell.exe", L"EngHost.exe",
     };
     const size_t numBlocked = sizeof(blockedProcesses) / sizeof(blockedProcesses[0]);
 
-    // The maximum buffer size we are allowed to touch
-    ULONG bufferSize = SystemInformationLength;
-    // The actual used size (if ReturnLength is NULL, fallback to bufferSize)
-    ULONG usedSize = (ReturnLength && *ReturnLength <= bufferSize) ? *ReturnLength : bufferSize;
+    // SAFE in-place approach (replaces the old entry-removal surgery that crashed on
+    // some machines -- it moved list memory around and mis-computed sizes). Here we
+    // NEVER move memory or touch NextEntryOffset/ReturnLength: we only blank the
+    // ImageName of a blocked entry in-place, so the game's name comparison can't match
+    // it. Worst case it fails to hide (no crash), never corrupts the returned buffer.
+    BYTE* const bufStart = (BYTE*)SystemInformation;
+    BYTE* const bufEnd = bufStart + SystemInformationLength;
 
     PSYSTEM_PROCESS_INFORMATION spi = (PSYSTEM_PROCESS_INFORMATION)SystemInformation;
-    PSYSTEM_PROCESS_INFORMATION prevSpi = NULL;
 
-    // Helper to check if a pointer + offset stays within buffer
-    auto IsOffsetValid = [&](const BYTE* base, ULONG offset) -> bool {
-        return (offset <= (bufferSize - (ULONG)((BYTE*)base - (BYTE*)SystemInformation)));
-        };
-
-    while (true) {
-        // Safety: ensure spi is inside buffer and has at least the fixed header size
-        if ((BYTE*)spi - (BYTE*)SystemInformation + sizeof(SYSTEM_PROCESS_INFORMATION) > bufferSize)
+    for (unsigned guard = 0; guard < 100000; ++guard) {
+        // Entry header must fit entirely inside the buffer before we read any field.
+        if ((BYTE*)spi < bufStart || (BYTE*)spi + sizeof(SYSTEM_PROCESS_INFORMATION) > bufEnd)
             break;
 
-        bool blockedName = false;
+        if (spi->ImageName.Buffer && spi->ImageName.Length >= sizeof(wchar_t)) {
+            BYTE* nameStart = (BYTE*)spi->ImageName.Buffer;
+            BYTE* nameEnd = nameStart + spi->ImageName.Length;
 
-        if (spi->ImageName.Buffer && spi->ImageName.Length > 0) {
-            UNICODE_STRING name = spi->ImageName;
-            for (size_t i = 0; i < numBlocked; i++) {
-                UNICODE_STRING blocked;
-                myRtlInitUnicodeString(&blocked, blockedProcesses[i]);
+            // Only touch the name if it lives inside the buffer we own.
+            if (nameStart >= bufStart && nameEnd <= bufEnd) {
+                UNICODE_STRING name = spi->ImageName;
+                for (size_t i = 0; i < numBlocked; i++) {
+                    UNICODE_STRING blocked;
+                    myRtlInitUnicodeString(&blocked, blockedProcesses[i]);
 
-                if (fpRtlEqualUnicodeString && fpRtlEqualUnicodeString(&name, &blocked, TRUE)) {
-                    blockedName = true;
-                    break;
+                    if (fpRtlEqualUnicodeString && fpRtlEqualUnicodeString(&name, &blocked, TRUE)) {
+                        // Blank the name in place -- no structural change to the list.
+                        RtlZeroMemory(spi->ImageName.Buffer, spi->ImageName.Length);
+                        spi->ImageName.Length = 0;
+                        break;
+                    }
                 }
             }
         }
 
-        if (blockedName) {
-            // Remove this entry
-            if (prevSpi == NULL) {
-                // First entry in list is blocked
-                if (spi->NextEntryOffset == 0) {
-                    // Only this entry exists – clear entire buffer
-                    RtlZeroMemory(SystemInformation, bufferSize);
-                    if (ReturnLength) *ReturnLength = 0;
-                    return status;
-                }
-                else {
-                    // Remove first entry by moving subsequent data forward
-                    ULONG nextOffset = spi->NextEntryOffset;
-                    if (!IsOffsetValid((BYTE*)spi, nextOffset)) break; // corrupted offset
+        if (spi->NextEntryOffset == 0)
+            break;
 
-                    PSYSTEM_PROCESS_INFORMATION nextSpi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + nextOffset);
-                    ULONG bytesToMove = usedSize - nextOffset;
-                    if (bytesToMove <= bufferSize) {
-                        RtlMoveMemory(SystemInformation, nextSpi, bytesToMove);
-                    }
-                    usedSize -= nextOffset;
-                    if (ReturnLength) {
-                        *ReturnLength = usedSize;
-                        // Zero out the remainder to avoid stale data
-                        if (usedSize < bufferSize)
-                            RtlZeroMemory((BYTE*)SystemInformation + usedSize, bufferSize - usedSize);
-                    }
-                    // Restart from the new first entry
-                    spi = (PSYSTEM_PROCESS_INFORMATION)SystemInformation;
-                    prevSpi = NULL;
-                    continue;
-                }
-            }
-            else {
-                // Middle or last entry is blocked
-                if (spi->NextEntryOffset == 0) {
-                    // Last entry – just cut the list
-                    prevSpi->NextEntryOffset = 0;
-                    ULONG removedSize = (ULONG)((BYTE*)spi - (BYTE*)prevSpi);
-                    usedSize -= removedSize;
-                    if (ReturnLength) *ReturnLength = usedSize;
-                    break; // end of list
-                }
-                else {
-                    // Link around the blocked entry
-                    ULONG skipSize = spi->NextEntryOffset;
-                    if (!IsOffsetValid((BYTE*)spi, skipSize)) break;
-                    PSYSTEM_PROCESS_INFORMATION nextSpi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + skipSize);
-                    prevSpi->NextEntryOffset += skipSize;
-                    usedSize -= skipSize;
-                    if (ReturnLength) *ReturnLength = usedSize;
-                    // Zero the removed entry (optional)
-                    RtlZeroMemory(spi, skipSize);
-                    spi = nextSpi;
-                    continue;
-                }
-            }
-        }
+        BYTE* next = (BYTE*)spi + spi->NextEntryOffset;
+        if (next <= (BYTE*)spi || next + sizeof(SYSTEM_PROCESS_INFORMATION) > bufEnd)
+            break; // corrupt/last -- stop safely
 
-        // Not blocked – advance to next entry
-        prevSpi = spi;
-        if (spi->NextEntryOffset == 0) break;
-        if (!IsOffsetValid((BYTE*)spi, spi->NextEntryOffset)) break;
-        spi = (PSYSTEM_PROCESS_INFORMATION)((BYTE*)spi + spi->NextEntryOffset);
+        spi = (PSYSTEM_PROCESS_INFORMATION)next;
     }
 
     return status;
@@ -1176,6 +1123,12 @@ void DebugPatches::earlyInit() {
 
 void DebugPatches::init() {
     DEV_INIT_PRINT();
+    // Hide CheatEngine (and debuggers) from the game's process-list scans. Re-enabled here
+    // in the LATE init -- once the game window exists and Arxan's early unpacking is done --
+    // rather than in earlyInit, where the OLD entry-removal version crashed on some machines.
+    // The rewritten hook only blanks names in place (no buffer surgery), so it's launch-safe.
+    // Runs first so fpNtQuerySystemInformation is set for freeIdaMutants below.
+    patchProcessNameChecks();
     freeIdaMutants(); //works, but how can we prevent it from ever happening
     hookNtClose();
     repairNtUserStubs();//lovely

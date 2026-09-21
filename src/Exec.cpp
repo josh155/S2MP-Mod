@@ -257,6 +257,61 @@ void Exec::init() {
 	autoexecFile << "// put dvars and commands here to execute each time the game starts\n";
 }
 
+void Exec::scrubDemoAutostartFromAutoexec() {
+	const std::lock_guard<std::mutex> lock(g_autoexecMutex);
+
+	const std::filesystem::path autoexecPath = getPlayers2Path() / "autoexec.cfg";
+	if (!std::filesystem::exists(autoexecPath)) {
+		return;
+	}
+
+	std::vector<std::string> kept;
+	std::vector<std::string> removed;
+	{
+		std::ifstream in(autoexecPath);
+		std::string line;
+		while (std::getline(in, line)) {
+			if (!line.empty() && line.back() == '\r') {
+				line.pop_back();
+			}
+
+			const std::string trimmed = trimLine(line);
+			const std::string lower = GameUtil::toLower(trimmed);
+
+			// Drop anything that would auto-start a demo / theater session on boot.
+			const bool isDemoAutostart =
+				lower.starts_with("cl_demo_play") ||
+				lower.starts_with("demo_play") ||
+				lower.starts_with("demoplay") ||
+				lower == "connect demo" ||
+				lower.starts_with("connect demo ");
+
+			if (isDemoAutostart) {
+				removed.push_back(trimmed);
+				continue;
+			}
+			kept.push_back(line);
+		}
+	}
+
+	if (removed.empty()) {
+		return;
+	}
+
+	std::ofstream out(autoexecPath, std::ios::out | std::ios::trunc);
+	if (!out.is_open()) {
+		Console::printf("[demo] failed to rewrite autoexec.cfg while scrubbing demo autostart");
+		return;
+	}
+	for (const std::string& line : kept) {
+		out << line << '\n';
+	}
+
+	for (const std::string& line : removed) {
+		Console::printf("[demo] removed boot autostart from autoexec.cfg: %s", line.c_str());
+	}
+}
+
 bool Exec::updateAutoexecDvar(const std::string& dvarName, const std::string& value) {
 	const std::lock_guard<std::mutex> lock(g_autoexecMutex);
 

@@ -1,0 +1,34 @@
+{
+  "_README": [
+    "HAND-VERIFIED Steam -> Store address pairs. Applied LAST by",
+    "s2_emit_buildmap.py, so they beat the automated matcher.",
+    "",
+    "This file exists because the matcher CAN be wrong. It forces a pair only",
+    "when a size is unambiguous on both sides, which is what buys 99.36%",
+    "precision -- but a function that genuinely CHANGED SIZE between builds",
+    "cannot be matched that way, and call-graph propagation may then hand its",
+    "Store twin to some unrelated same-sized function.",
+    "",
+    "Every entry needs evidence written down. An override with no stated basis",
+    "is worse than a gap, because a gap faults loudly and a wrong entry does not."
+  ],
+
+  "0x90750": {
+    "name": "Com_Error",
+    "xbox": "0x8CA40",
+    "evidence": [
+      "The automated matcher could NOT pair this: Steam Com_Error is 607 bytes and",
+      "the Store twin is 552, so it is one of the 37 functions that genuinely",
+      "diverge (Steam vs GDK error reporting). Worse, propagation then gave Store",
+      "0x8CA40 to Steam sub_82D5F0, an unrelated 552-byte function -- a real false",
+      "positive, caught 2026-08-15.",
+      "",
+      "Proven instead from two call sites inside CL_Demo_Play_f, which IS matched",
+      "(steam 0x910650 -> store 0x9062F0), at the same positions with the same",
+      "string literals:",
+      "    STEAM  Com_Error(1, \"428 %s %s\", ...)      Com_Error(1, \"EXE_ERR_INVALID_DEMO_FILE\")",
+      "    STORE  sub_8CA40(1, \"428 %s %s\", ...)      sub_8CA40(1, \"EXE_ERR_INVALID_DEMO_FILE\")",
+      "Two independent sites, identical arguments, identical unique strings."
+    ]
+  }
+}

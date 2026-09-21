@@ -1,0 +1,5979 @@
+[
+ {
+  "s2_func": "0xa79d00",
+  "cur": "bdBitBuffer__typeToString",
+  "aw_name": "bdBitBuffer::typeToString",
+  "anchors": 18,
+  "size": 422,
+  "sample": [
+   "MultiByteString",
+   "Unknown Type",
+   "RangeFloat32"
+  ]
+ },
+ {
+  "s2_func": "0xacb290",
+  "cur": "bdXHTTP__prepareEndPoint",
+  "aw_name": "bdXHTTP::prepareEndPoint",
+  "anchors": 1,
+  "size": 5576,
+  "sample": [
+   "Transfer-Encoding: chunked\r\n"
+  ]
+ },
+ {
+  "s2_func": "0x27c480",
+  "cur": "bdMarketplaceCurrency__deserializeJSON",
+  "aw_name": "bdMarketplaceCurrency::deserializeJSON",
+  "anchors": 1,
+  "size": 446,
+  "sample": [
+   "currency_id"
+  ]
+ },
+ {
+  "s2_func": "0xa593e0",
+  "cur": "bdAuth__handleAuthReply",
+  "aw_name": "bdAuth::handleAuthReply",
+  "anchors": 2,
+  "size": 977,
+  "sample": [
+   "server_ticket",
+   "client_ticket"
+  ]
+ },
+ {
+  "s2_func": "0xad36e0",
+  "cur": "sub_AD36E0",
+  "aw_name": "bdLSPEnumerator::pump",
+  "anchors": 1,
+  "size": 204,
+  "sample": [
+   "%d.%d.%d.%d"
+  ]
+ },
+ {
+  "s2_func": "0xa97440",
+  "cur": "sub_A97440",
+  "aw_name": "bdNetStartParams::bdNetStartParams",
+  "anchors": 4,
+  "size": 360,
+  "sample": [
+   "stun.au.demonware.net",
+   "stun.jp.demonware.net",
+   "stun.eu.demonware.net"
+  ]
+ },
+ {
+  "s2_func": "0xa28980",
+  "cur": "sub_A28980",
+  "aw_name": "bdJSONDeserializer::getUInt32",
+  "anchors": 1,
+  "size": 8,
+  "sample": [
+   "bdUInt32"
+  ]
+ },
+ {
+  "s2_func": "0xa28990",
+  "cur": "sub_A28990",
+  "aw_name": "bdJSONDeserializer::getUInt64",
+  "anchors": 1,
+  "size": 8,
+  "sample": [
+   "bdUInt64"
+  ]
+ },
+ {
+  "s2_func": "0xa2a4a0",
+  "cur": "sub_A2A4A0",
+  "aw_name": "bdJSONUtility::escapeString",
+  "anchors": 1,
+  "size": 642,
+  "sample": [
+   "\\u%04x"
+  ]
+ },
+ {
+  "s2_func": "0x2cdf0",
+  "cur": "AimAssist_Init",
+  "aw_name": "AimAssist_Init",
+  "anchors": 1,
+  "size": 192,
+  "sample": [
+   "aim_assist/view_input_%d.graph"
+  ]
+ },
+ {
+  "s2_func": "0x14f6f0",
+  "cur": "BG_ParseEmblemCategoriesOrLayers",
+  "aw_name": "BG_ParseEmblemCategoriesOrLayers",
+  "anchors": 6,
+  "size": 806,
+  "sample": [
+   "mp/emblemCategoriesOrLayers.csv",
+   "EM_TYPE_CATEGORY_LOCKED",
+   "EM_CATEGORY_PURCHASED"
+  ]
+ },
+ {
+  "s2_func": "0x15a2f0",
+  "cur": "CG_ColorGradingInitDefault",
+  "aw_name": "CG_ColorGradingInitDefault",
+  "anchors": 1,
+  "size": 145,
+  "sample": [
+   "clut_%s"
+  ]
+ },
+ {
+  "s2_func": "0x15c790",
+  "cur": "CG_HudLighting_RegisterDvars",
+  "aw_name": "CG_HudLighting_RegisterDvars",
+  "anchors": 35,
+  "size": 1545,
+  "sample": [
+   "cg_hudLighting_basic_additiveLumOffset",
+   "cg_hudLighting_blood_additiveLumOffset",
+   "cg_hudLighting_basic_ambientLumOffset"
+  ]
+ },
+ {
+  "s2_func": "0x161d90",
+  "cur": "sub_161D90",
+  "aw_name": "CG_TargetingEntity_SerializeData",
+  "anchors": 1,
+  "size": 200,
+  "sample": [
+   " %f %f %f"
+  ]
+ },
+ {
+  "s2_func": "0x1762b0",
+  "cur": "CG_ParseFixedCameraToken",
+  "aw_name": "CG_ParseFixedCameraToken",
+  "anchors": 2,
+  "size": 639,
+  "sample": [
+   "CG_ParseFixedCameraToken: unknown camera orientation index %d\n",
+   "<fixed_use_supporting_actor>"
+  ]
+ },
+ {
+  "s2_func": "0x176530",
+  "cur": "CG_ParsePanCameraToken",
+  "aw_name": "CG_ParsePanCameraToken",
+  "anchors": 9,
+  "size": 1740,
+  "sample": [
+   "CG_ParsePanCameraToken: unknown camera orientation index %d\n",
+   "<pan_focus_supporting_actor>",
+   "<pan_to_supporting_actor>"
+  ]
+ },
+ {
+  "s2_func": "0x176cf0",
+  "cur": "CG_ParseRotateCameraToken",
+  "aw_name": "CG_ParseRotateCameraToken",
+  "anchors": 7,
+  "size": 1024,
+  "sample": [
+   "CG_ParseRotateCameraToken: unknown camera orientation index %d\n",
+   "<rotate_focus_supporting_actor>",
+   "<rotate_yaw_both_actors>"
+  ]
+ },
+ {
+  "s2_func": "0x1770f0",
+  "cur": "CG_ParseZoomCameraToken",
+  "aw_name": "CG_ParseZoomCameraToken",
+  "anchors": 4,
+  "size": 1328,
+  "sample": [
+   "CG_ParseZoomCameraToken: unknown camera orientation index %d\n",
+   "<zoom_reverse_actor_roles>",
+   "<zoom_end_radius_angles>"
+  ]
+ },
+ {
+  "s2_func": "0x176070",
+  "cur": "CG_ParseDofSettings",
+  "aw_name": "CG_ParseDofSettings",
+  "anchors": 8,
+  "size": 575,
+  "sample": [
+   "Scene %s: Exceeded max <dof> settings (%d)\n",
+   "Scene %s: invalid <dof> token '%s'",
+   "_near_start>"
+  ]
+ },
+ {
+  "s2_func": "0x733270",
+  "cur": "ComScore_Test_f",
+  "aw_name": "ComScore_Test_f",
+  "anchors": 1,
+  "size": 420,
+  "sample": [
+   "game_mode"
+  ]
+ },
+ {
+  "s2_func": "0x1f1380",
+  "cur": "ComScore_Init",
+  "aw_name": "ComScore_Init",
+  "anchors": 1,
+  "size": 151,
+  "sample": [
+   "comscore_test"
+  ]
+ },
+ {
+  "s2_func": "0x1f0460",
+  "cur": "ComScoreEvent_SetCommonFields",
+  "aw_name": "ComScoreEvent_SetCommonFields",
+  "anchors": 5,
+  "size": 419,
+  "sample": [
+   "split_screen_flag",
+   "session_id",
+   "visitorid"
+  ]
+ },
+ {
+  "s2_func": "0x1faac0",
+  "cur": "sub_1FAAC0",
+  "aw_name": "LoadBar_EstimateFastfiles",
+  "anchors": 1,
+  "size": 807,
+  "sample": [
+   "transient"
+  ]
+ },
+ {
+  "s2_func": "0x2a4290",
+  "cur": "sub_2A4290",
+  "aw_name": "DS_PingClient_InitDvars",
+  "anchors": 2,
+  "size": 2449,
+  "sample": [
+   "ds_dcid_override",
+   "ds_dcid"
+  ]
+ },
+ {
+  "s2_func": "0x200940",
+  "cur": "sub_200940",
+  "aw_name": "DS_PingClient_InitDvars",
+  "anchors": 1,
+  "size": 577,
+  "sample": [
+   "dsping_dc_%d"
+  ]
+ },
+ {
+  "s2_func": "0x207500",
+  "cur": "dwSingleIdentity_Init",
+  "aw_name": "dwSingleIdentity_Init",
+  "anchors": 1,
+  "size": 165,
+  "sample": [
+   "dwSingleIdentity_Init"
+  ]
+ },
+ {
+  "s2_func": "0x208ed0",
+  "cur": "ParseUserAccountReply",
+  "aw_name": "ParseUserAccountReply",
+  "anchors": 1,
+  "size": 370,
+  "sample": [
+   "secondaryAccountID"
+  ]
+ },
+ {
+  "s2_func": "0x2017c0",
+  "cur": "getUmbrellaURL",
+  "aw_name": "getUmbrellaURL",
+  "anchors": 1,
+  "size": 358,
+  "sample": [
+   "https://prod.umbrella.demonware.net/v1.0/"
+  ]
+ },
+ {
+  "s2_func": "0x209050",
+  "cur": "dwUmbrella_AcquireAccessTokenFromLSGTicket",
+  "aw_name": "dwUmbrella_AcquireAccessTokenFromLSGTicket",
+  "anchors": 1,
+  "size": 777,
+  "sample": [
+   "%s%s%s/?client=%s"
+  ]
+ },
+ {
+  "s2_func": "0x209470",
+  "cur": "dwUmbrella_GetUserByAccessToken",
+  "aw_name": "dwUmbrella_GetUserByAccessToken",
+  "anchors": 1,
+  "size": 513,
+  "sample": [
+   "%s%s%llu/?client=%s"
+  ]
+ },
+ {
+  "s2_func": "0x209720",
+  "cur": "dwUmbrella_LinkAccount",
+  "aw_name": "dwUmbrella_LinkAccount",
+  "anchors": 1,
+  "size": 717,
+  "sample": [
+   "%s%s%llu/%s/%llu/tokens/?client=%s"
+  ]
+ },
+ {
+  "s2_func": "0x20a050",
+  "cur": "dwUno_CreateAccount",
+  "aw_name": "dwUno_CreateAccount",
+  "anchors": 3,
+  "size": 584,
+  "sample": [
+   "dateOfBirth",
+   "accountType",
+   "isChild"
+  ]
+ },
+ {
+  "s2_func": "0x209a30",
+  "cur": "sub_209A30",
+  "aw_name": "GetAccountReplyHandler",
+  "anchors": 1,
+  "size": 296,
+  "sample": [
+   "tokens"
+  ]
+ },
+ {
+  "s2_func": "0x20a360",
+  "cur": "sub_20A360",
+  "aw_name": "dwUno_RetrieveAccount",
+  "anchors": 1,
+  "size": 408,
+  "sample": [
+   "auth/"
+  ]
+ },
+ {
+  "s2_func": "0x2389e0",
+  "cur": "AnimStateCmd_EnableAnimState",
+  "aw_name": "AnimStateCmd_EnableAnimState",
+  "anchors": 1,
+  "size": 337,
+  "sample": [
+   "default_anim"
+  ]
+ },
+ {
+  "s2_func": "0x23b7e0",
+  "cur": "sub_23B7E0",
+  "aw_name": "R_InitDaltonize",
+  "anchors": 1,
+  "size": 148,
+  "sample": [
+   "<daltonize>"
+  ]
+ },
+ {
+  "s2_func": "0x2705f0",
+  "cur": "Html_GetStyle",
+  "aw_name": "Html_GetStyle",
+  "anchors": 5,
+  "size": 864,
+  "sample": [
+   "ui/htmlStyle.csv",
+   "font-family",
+   "font-weight"
+  ]
+ },
+ {
+  "s2_func": "0x273990",
+  "cur": "CheckOngoingSessionTask",
+  "aw_name": "InGameStore_RefreshStoreUI",
+  "anchors": 1,
+  "size": 551,
+  "sample": [
+   "purchase_complete"
+  ]
+ },
+ {
+  "s2_func": "0x2736c0",
+  "cur": "InGameStore_CmdInit",
+  "aw_name": "InGameStore_CmdInit",
+  "anchors": 1,
+  "size": 86,
+  "sample": [
+   "showTokenRedemptionUI"
+  ]
+ },
+ {
+  "s2_func": "0x275e80",
+  "cur": "CL_GameInventory_OnMarketplaceItemsExpired",
+  "aw_name": "CL_GameInventory_OnMarketplaceItemsExpired",
+  "anchors": 2,
+  "size": 691,
+  "sample": [
+   "inventoryWrapperID",
+   "inventoryNumItems"
+  ]
+ },
+ {
+  "s2_func": "0x280a90",
+  "cur": "sub_280A90",
+  "aw_name": "Json_PrimitiveString",
+  "anchors": 2,
+  "size": 1205,
+  "sample": [
+   "0123456789abcdef",
+   "\\u0000"
+  ]
+ },
+ {
+  "s2_func": "0x2b9220",
+  "cur": "sub_2B9220",
+  "aw_name": "luaopen_string",
+  "anchors": 2,
+  "size": 820,
+  "sample": [
+   "string.format",
+   "format"
+  ]
+ },
+ {
+  "s2_func": "0x6dee70",
+  "cur": "SV_ConnectionlessPacket",
+  "aw_name": "SV_ConnectionlessPacket",
+  "anchors": 2,
+  "size": 1181,
+  "sample": [
+   "getchallenge",
+   "getinfo"
+  ]
+ },
+ {
+  "s2_func": "0x319bf0",
+  "cur": "LUI_CoD_KeyEvent",
+  "aw_name": "LUI_CoD_KeyEvent",
+  "anchors": 7,
+  "size": 1895,
+  "sample": [
+   "right_stick_pressed",
+   "left_stick_pressed",
+   "right_trigger"
+  ]
+ },
+ {
+  "s2_func": "0x2bae30",
+  "cur": "sub_2BAE30",
+  "aw_name": "hks::base_collectgarbage",
+  "anchors": 1,
+  "size": 469,
+  "sample": [
+   "collect"
+  ]
+ },
+ {
+  "s2_func": "0x2ddfd0",
+  "cur": "sub_2DDFD0",
+  "aw_name": "luaopen_io",
+  "anchors": 1,
+  "size": 401,
+  "sample": [
+   "no calling environment"
+  ]
+ },
+ {
+  "s2_func": "0xc790",
+  "cur": "hks__StaticStringCache__s_strings",
+  "aw_name": "'hks::StaticStringCache::s_strings''",
+  "anchors": 15,
+  "size": 2427,
+  "sample": [
+   "KoreInternal_GCFinalizerState",
+   "Error: Out of memory.",
+   "__isUsedForReffing"
+  ]
+ },
+ {
+  "s2_func": "0x2ba0b0",
+  "cur": "LuaPlus__hks_default_luaplus_errorFunc",
+  "aw_name": "LuaPlus::hks_default_luaplus_errorFunc",
+  "anchors": 1,
+  "size": 45,
+  "sample": [
+   "LuaFunction Error: %s\n"
+  ]
+ },
+ {
+  "s2_func": "0x2c88a0",
+  "cur": "sub_2C88A0",
+  "aw_name": "LuaPlus::ReportStackTrace",
+  "anchors": 1,
+  "size": 132,
+  "sample": [
+   "%s\n%s\n"
+  ]
+ },
+ {
+  "s2_func": "0x2fc660",
+  "cur": "sub_2FC660",
+  "aw_name": "hks::BytecodeReader::Reader::readVars",
+  "anchors": 1,
+  "size": 368,
+  "sample": [
+   "bad size"
+  ]
+ },
+ {
+  "s2_func": "0x2fa9a0",
+  "cur": "hks__BytecodeReader__readConstants",
+  "aw_name": "hks::BytecodeReader::readConstants",
+  "anchors": 2,
+  "size": 1160,
+  "sample": [
+   "lightuserdata constant without lightuserdata int literals enabled",
+   "bad constant"
+  ]
+ },
+ {
+  "s2_func": "0x2fb570",
+  "cur": "sub_2FB570",
+  "aw_name": "hks::BytecodeReader::readFunction",
+  "anchors": 1,
+  "size": 2023,
+  "sample": [
+   "code too deep"
+  ]
+ },
+ {
+  "s2_func": "0x2da170",
+  "cur": "hks__BytecodeWriter__dumpFunction",
+  "aw_name": "hks::BytecodeWriter::dumpFunction",
+  "anchors": 1,
+  "size": 1324,
+  "sample": [
+   "Attempt to dump a function that uses structures, and references upvalues outside its scope is not supported."
+  ]
+ },
+ {
+  "s2_func": "0x2d0b30",
+  "cur": "hks__StructInst__ensureBackTableForArrayInsert",
+  "aw_name": "hks::StructInst::ensureBackTableForArrayInsert",
+  "anchors": 1,
+  "size": 163,
+  "sample": [
+   "Cannot set value for a numeric key %d on instances of '%s' as it doesn't allow a backing table."
+  ]
+ },
+ {
+  "s2_func": "0x2d0be0",
+  "cur": "hks__StructInst__ensureBackTableForStringInsert",
+  "aw_name": "hks::StructInst::ensureBackTableForStringInsert",
+  "anchors": 1,
+  "size": 167,
+  "sample": [
+   "Key '%s' is not defined on instances of structure '%s'."
+  ]
+ },
+ {
+  "s2_func": "0x2e0880",
+  "cur": "hks__StructInst__insert",
+  "aw_name": "hks::StructInst::insert",
+  "anchors": 1,
+  "size": 443,
+  "sample": [
+   "Cannot set key of type %s on instances of structure '%s' as it does not allow a backing table."
+  ]
+ },
+ {
+  "s2_func": "0x2e0ef0",
+  "cur": "hks__StructInst__insertNumber",
+  "aw_name": "hks::StructInst::insertNumber",
+  "anchors": 1,
+  "size": 193,
+  "sample": [
+   "Cannot set value for a numeric key %0.8g on instances of '%s' as it doesn't allow a backing table."
+  ]
+ },
+ {
+  "s2_func": "0x2c7ee0",
+  "cur": "hks__CompilerFunc",
+  "aw_name": "hks::CompilerFunc",
+  "anchors": 3,
+  "size": 1051,
+  "sample": [
+   "Only inplace/referenced bytecode may be loaded into non-shared lua_State.",
+   "Attempting to load bytecode in shared mode into non-shared lua_State.",
+   "Attempt to load source code into a secure state."
+  ]
+ },
+ {
+  "s2_func": "0x2fbe00",
+  "cur": "hks__CompilerLexer__readLongString",
+  "aw_name": "hks::CompilerLexer::readLongString",
+  "anchors": 3,
+  "size": 686,
+  "sample": [
+   "nesting of [[...]] is deprecated",
+   "unfinished long comment",
+   "unfinished long string"
+  ]
+ },
+ {
+  "s2_func": "0x2fc0b0",
+  "cur": "hks__CompilerLexer__readNumeral",
+  "aw_name": "hks::CompilerLexer::readNumeral",
+  "anchors": 2,
+  "size": 1102,
+  "sample": [
+   "malformed int literal",
+   "malformed number"
+  ]
+ },
+ {
+  "s2_func": "0x2ca140",
+  "cur": "hks__Parser__checkExectedClosing",
+  "aw_name": "hks::Parser::checkExectedClosing",
+  "anchors": 1,
+  "size": 299,
+  "sample": [
+   "%s expected (to close %s at line %i)"
+  ]
+ },
+ {
+  "s2_func": "0x2f2350",
+  "cur": "hks__Parser__parseFor",
+  "aw_name": "hks::Parser::parseFor",
+  "anchors": 1,
+  "size": 730,
+  "sample": [
+   "\"=\" or \",\" expected"
+  ]
+ },
+ {
+  "s2_func": "0x2f2d40",
+  "cur": "hks__Parser__parseFunctionBody",
+  "aw_name": "hks::Parser::parseFunctionBody",
+  "anchors": 1,
+  "size": 977,
+  "sample": [
+   "<name> or \"...\" expected"
+  ]
+ },
+ {
+  "s2_func": "0x2f1d10",
+  "cur": "hks__Parser__parseDefstruct",
+  "aw_name": "hks::Parser::parseDefstruct",
+  "anchors": 1,
+  "size": 1344,
+  "sample": [
+   "proxytable/meta definition must be at the start of the struct."
+  ]
+ },
+ {
+  "s2_func": "0x2f3930",
+  "cur": "hks__Parser__parsePrefixExpression",
+  "aw_name": "hks::Parser::parsePrefixExpression",
+  "anchors": 1,
+  "size": 1070,
+  "sample": [
+   "unexpected symbol"
+  ]
+ },
+ {
+  "s2_func": "0x2f2bb0",
+  "cur": "hks__Parser__parseFunctionArguments",
+  "aw_name": "hks::Parser::parseFunctionArguments",
+  "anchors": 2,
+  "size": 392,
+  "sample": [
+   "ambiguous syntax (function call x new statement)",
+   "function arguments expected"
+  ]
+ },
+ {
+  "s2_func": "0x2f1860",
+  "cur": "hks__Parser__parseAssignment",
+  "aw_name": "hks::Parser::parseAssignment",
+  "anchors": 1,
+  "size": 332,
+  "sample": [
+   "too many variables in an assignment"
+  ]
+ },
+ {
+  "s2_func": "0x2c8300",
+  "cur": "hks__Parser__parse",
+  "aw_name": "hks::Parser::parse",
+  "anchors": 1,
+  "size": 394,
+  "sample": [
+   "Invalid or unsupported file encoding. Only ASCII and UTF-8 are supported"
+  ]
+ },
+ {
+  "s2_func": "0x2eed50",
+  "cur": "sub_2EED50",
+  "aw_name": "hks::CodeGenerator::onParseStart",
+  "anchors": 1,
+  "size": 155,
+  "sample": [
+   "(main chunk)"
+  ]
+ },
+ {
+  "s2_func": "0x2e8c00",
+  "cur": "hks__CodeGenerator__onExpressionIntLiteral",
+  "aw_name": "hks::CodeGenerator::onExpressionIntLiteral",
+  "anchors": 1,
+  "size": 221,
+  "sample": [
+   "int literals not enabled in compiler options"
+  ]
+ },
+ {
+  "s2_func": "0x2e86c0",
+  "cur": "hks__CodeGenerator__onExpressionDots",
+  "aw_name": "hks::CodeGenerator::onExpressionDots",
+  "anchors": 1,
+  "size": 173,
+  "sample": [
+   "cannot use '...' outside a vararg function"
+  ]
+ },
+ {
+  "s2_func": "0x2e7190",
+  "cur": "hks__CodeGenerator__onConstructorListFieldEnd",
+  "aw_name": "hks::CodeGenerator::onConstructorListFieldEnd",
+  "anchors": 1,
+  "size": 102,
+  "sample": [
+   "array items in a table constructor."
+  ]
+ },
+ {
+  "s2_func": "0x2ef740",
+  "cur": "hks__CodeGenerator__onRecordFieldIdent",
+  "aw_name": "hks::CodeGenerator::onRecordFieldIdent",
+  "anchors": 1,
+  "size": 238,
+  "sample": [
+   "hash items in a table constructor."
+  ]
+ },
+ {
+  "s2_func": "0x2e6a80",
+  "cur": "hks__CodeGenerator__onBreak",
+  "aw_name": "hks::CodeGenerator::onBreak",
+  "anchors": 1,
+  "size": 213,
+  "sample": [
+   "Break instruction not allowed: no enclosing loop to break."
+  ]
+ },
+ {
+  "s2_func": "0x2ea380",
+  "cur": "hks__CodeGenerator__onForListIteratorsStart",
+  "aw_name": "hks::CodeGenerator::onForListIteratorsStart",
+  "anchors": 3,
+  "size": 263,
+  "sample": [
+   "(for generator)",
+   "(for control)",
+   "(for state)"
+  ]
+ },
+ {
+  "s2_func": "0x2eae00",
+  "cur": "hks__CodeGenerator__onForNumericStart",
+  "aw_name": "hks::CodeGenerator::onForNumericStart",
+  "anchors": 3,
+  "size": 260,
+  "sample": [
+   "(for index)",
+   "(for limit)",
+   "(for step)"
+  ]
+ },
+ {
+  "s2_func": "0x3010d0",
+  "cur": "hks__CodeGenerator__storeVariable",
+  "aw_name": "hks::CodeGenerator::storeVariable",
+  "anchors": 1,
+  "size": 1593,
+  "sample": [
+   "Cannot resolve slot '%s' in instance of '%s' for assignment."
+  ]
+ },
+ {
+  "s2_func": "0x2fecd0",
+  "cur": "hks__CodeGenerator__setJumpTarget",
+  "aw_name": "hks::CodeGenerator::setJumpTarget",
+  "anchors": 1,
+  "size": 195,
+  "sample": [
+   "Control structure contains too many instructions."
+  ]
+ },
+ {
+  "s2_func": "0x2d1e60",
+  "cur": "hks__CodeGenerator__flushList",
+  "aw_name": "hks::CodeGenerator::flushList",
+  "anchors": 1,
+  "size": 230,
+  "sample": [
+   "Attempt to initialize a table with too many array literals. Please split into multiple statements."
+  ]
+ },
+ {
+  "s2_func": "0x2cbfc0",
+  "cur": "hks__CodeGenerator__createLocalVariable",
+  "aw_name": "hks::CodeGenerator::createLocalVariable",
+  "anchors": 1,
+  "size": 826,
+  "sample": [
+   "local variables"
+  ]
+ },
+ {
+  "s2_func": "0x2ca2f0",
+  "cur": "hks__CodeGenerator__signalLimitExceeded",
+  "aw_name": "hks::CodeGenerator::signalLimitExceeded",
+  "anchors": 2,
+  "size": 161,
+  "sample": [
+   "Function at line %i has more than %i %s",
+   "Main function has more than %i %s"
+  ]
+ },
+ {
+  "s2_func": "0x2e77d0",
+  "cur": "hks__CodeGenerator__onDefstruct",
+  "aw_name": "hks::CodeGenerator::onDefstruct",
+  "anchors": 1,
+  "size": 587,
+  "sample": [
+   "Cannot use '%s' as a structure name."
+  ]
+ },
+ {
+  "s2_func": "0x2e7ae0",
+  "cur": "hks__CodeGenerator__onDefstructBacktable",
+  "aw_name": "hks::CodeGenerator::onDefstructBacktable",
+  "anchors": 1,
+  "size": 52,
+  "sample": [
+   "Duplicate 'proxytable' slot definition."
+  ]
+ },
+ {
+  "s2_func": "0x2e80b0",
+  "cur": "hks__CodeGenerator__onDefstructMetaslot",
+  "aw_name": "hks::CodeGenerator::onDefstructMetaslot",
+  "anchors": 2,
+  "size": 300,
+  "sample": [
+   "Invalid type name '%s' for meta slot. Must be a object/table/structure name.",
+   "Duplicate 'meta' slot definition."
+  ]
+ },
+ {
+  "s2_func": "0x2e7bd0",
+  "cur": "hks__CodeGenerator__onDefstructDefSlot",
+  "aw_name": "hks::CodeGenerator::onDefstructDefSlot",
+  "anchors": 4,
+  "size": 467,
+  "sample": [
+   "Cannot use 'struct' as a type name. Must be a structure name.",
+   "Too many slots in the structure. Cannot add any more.",
+   "Unable to store UI64 values in a structure."
+  ]
+ },
+ {
+  "s2_func": "0x2e7e80",
+  "cur": "hks__CodeGenerator__onDefstructEnd",
+  "aw_name": "hks::CodeGenerator::onDefstructEnd",
+  "anchors": 3,
+  "size": 376,
+  "sample": [
+   "Cannot define another structure in this VM: too many structure prototypes.",
+   "Structure '%s' already has a different definition.",
+   "Empty structure definitions are not allowed."
+  ]
+ },
+ {
+  "s2_func": "0x2eeae0",
+  "cur": "hks__CodeGenerator__onMkStructStart",
+  "aw_name": "hks::CodeGenerator::onMkStructStart",
+  "anchors": 1,
+  "size": 164,
+  "sample": [
+   "Attempt to reference an undefined structure '%s'."
+  ]
+ },
+ {
+  "s2_func": "0x300580",
+  "cur": "hks__CodeGenerator__signalSlotUnreadable",
+  "aw_name": "hks::CodeGenerator::signalSlotUnreadable",
+  "anchors": 1,
+  "size": 116,
+  "sample": [
+   "Cannot index instances of '%s' with '%s'"
+  ]
+ },
+ {
+  "s2_func": "0x2ca8c0",
+  "cur": "hks__CodeGenerator__checkTypedAssign",
+  "aw_name": "hks::CodeGenerator::checkTypedAssign",
+  "anchors": 2,
+  "size": 270,
+  "sample": [
+   "Attempting to set local variable of type '%s%s' to type '%s%s'",
+   "struct "
+  ]
+ },
+ {
+  "s2_func": "0x2ca480",
+  "cur": "sub_2CA480",
+  "aw_name": "hks::CodeGenerator::signalError",
+  "anchors": 2,
+  "size": 381,
+  "sample": [
+   "Attempt to assign a value of invalid type to slot '%s' (expected '%s').",
+   "Attempt to assign an instance of '%s' to slot '%s' (expected '%s')."
+  ]
+ },
+ {
+  "s2_func": "0x2ca690",
+  "cur": "hks__CodeGenerator__checkStructSlotConstruct",
+  "aw_name": "hks::CodeGenerator::checkStructSlotConstruct",
+  "anchors": 2,
+  "size": 560,
+  "sample": [
+   "Attempt to assign to non-string indexes on instances of structure '%s' is not allowed.",
+   "Table index is nil."
+  ]
+ },
+ {
+  "s2_func": "0x2fe080",
+  "cur": "hks__CodeGenerator__resolveTypeDecoration",
+  "aw_name": "hks::CodeGenerator::resolveTypeDecoration",
+  "anchors": 2,
+  "size": 250,
+  "sample": [
+   "Type declaration '%s' does not match any built-in type or structure.",
+   "Type declaration 'struct' is not allowed."
+  ]
+ },
+ {
+  "s2_func": "0x2eaad0",
+  "cur": "sub_2EAAD0",
+  "aw_name": "hks::CodeGenerator::signalError",
+  "anchors": 1,
+  "size": 216,
+  "sample": [
+   "Only 'number' is allowed as a type for numeric FOR iterator. Got '%s'"
+  ]
+ },
+ {
+  "s2_func": "0x300400",
+  "cur": "sub_300400",
+  "aw_name": "hks::SimpleCompilerState::signalError",
+  "anchors": 2,
+  "size": 369,
+  "sample": [
+   "%s:%d: %s",
+   " near '"
+  ]
+ },
+ {
+  "s2_func": "0x2d0d90",
+  "cur": "sub_2D0D90",
+  "aw_name": "hks::fillInShortSource",
+  "anchors": 1,
+  "size": 566,
+  "sample": [
+   "%s?%s"
+  ]
+ },
+ {
+  "s2_func": "0x2dc230",
+  "cur": "sub_2DC230",
+  "aw_name": "hksi_lua_getinfo",
+  "anchors": 2,
+  "size": 2120,
+  "sample": [
+   "=(tail call)",
+   "(tail call)"
+  ]
+ },
+ {
+  "s2_func": "0x2fedc0",
+  "cur": "hks__StructInst__setMetaSlot",
+  "aw_name": "hks::StructInst::setMetaSlot",
+  "anchors": 2,
+  "size": 417,
+  "sample": [
+   "Type check failed when setting meta slot on instance of '%s':",
+   "Cannot set meta slot as it is not defined in structure '%s'."
+  ]
+ },
+ {
+  "s2_func": "0x303f10",
+  "cur": "hks__StructProto__undumpPrototypes",
+  "aw_name": "hks::StructProto::undumpPrototypes",
+  "anchors": 1,
+  "size": 4914,
+  "sample": [
+   "Header mismatch when loading prototype declarations"
+  ]
+ },
+ {
+  "s2_func": "0x2e5a80",
+  "cur": "hks__StructUtil__newInstance",
+  "aw_name": "hks::StructUtil::newInstance",
+  "anchors": 1,
+  "size": 228,
+  "sample": [
+   "Attempt to create a struct instance with a backing table, which isn't enabled in the prototype."
+  ]
+ },
+ {
+  "s2_func": "0x302d90",
+  "cur": "hks__StructUtil__throwTypeError",
+  "aw_name": "hks::StructUtil::throwTypeError",
+  "anchors": 4,
+  "size": 315,
+  "sample": [
+   " (expected instance of '%s'",
+   ", but got instance of '%s')",
+   " (expected '%s'"
+  ]
+ },
+ {
+  "s2_func": "0x2ba680",
+  "cur": "hks__base_setfenv",
+  "aw_name": "hks::base_setfenv",
+  "anchors": 1,
+  "size": 530,
+  "sample": [
+   "Invalid level %d"
+  ]
+ },
+ {
+  "s2_func": "0x2ba8a0",
+  "cur": "hks__base_getfenv",
+  "aw_name": "hks::base_getfenv",
+  "anchors": 3,
+  "size": 829,
+  "sample": [
+   "no function environment for tail call at level %d",
+   "invalid level %d",
+   "Invalid level"
+  ]
+ },
+ {
+  "s2_func": "0x2bacf0",
+  "cur": "hks__base_setmetatable",
+  "aw_name": "hks::base_setmetatable",
+  "anchors": 2,
+  "size": 317,
+  "sample": [
+   "nil or table/struct expected",
+   "cannot change the metatable"
+  ]
+ },
+ {
+  "s2_func": "0x2ba230",
+  "cur": "hks__base_loadfile",
+  "aw_name": "hks::base_loadfile",
+  "anchors": 1,
+  "size": 136,
+  "sample": [
+   "Filename not provided to loadfile(). The Havok Script VM does not support getting the name from STDIN."
+  ]
+ },
+ {
+  "s2_func": "0x2c9c00",
+  "cur": "hks__base_load_reader",
+  "aw_name": "hks::base_load_reader",
+  "anchors": 1,
+  "size": 315,
+  "sample": [
+   "reader function must return a string"
+  ]
+ },
+ {
+  "s2_func": "0x2bb350",
+  "cur": "sub_2BB350",
+  "aw_name": "hks::base_load",
+  "anchors": 1,
+  "size": 307,
+  "sample": [
+   "=(load)"
+  ]
+ },
+ {
+  "s2_func": "0x2ba3f0",
+  "cur": "hks__base_print",
+  "aw_name": "hks::base_print",
+  "anchors": 2,
+  "size": 284,
+  "sample": [
+   "tostring did not return a string to print",
+   "tostring"
+  ]
+ },
+ {
+  "s2_func": "0x2bb570",
+  "cur": "hks__base_unpack",
+  "aw_name": "hks::base_unpack",
+  "anchors": 1,
+  "size": 286,
+  "sample": [
+   "too many results to unpack"
+  ]
+ },
+ {
+  "s2_func": "0x2bb690",
+  "cur": "hks__base_assert",
+  "aw_name": "hks::base_assert",
+  "anchors": 1,
+  "size": 176,
+  "sample": [
+   "assertion failed"
+  ]
+ },
+ {
+  "s2_func": "0x2bb740",
+  "cur": "hks__base_tonumber",
+  "aw_name": "hks::base_tonumber",
+  "anchors": 1,
+  "size": 702,
+  "sample": [
+   "base out of range"
+  ]
+ },
+ {
+  "s2_func": "0x2bbd80",
+  "cur": "hks__base_select",
+  "aw_name": "hks::base_select",
+  "anchors": 1,
+  "size": 341,
+  "sample": [
+   "index out of bound"
+  ]
+ },
+ {
+  "s2_func": "0x2b8390",
+  "cur": "luaopen_base",
+  "aw_name": "luaopen_base",
+  "anchors": 7,
+  "size": 1899,
+  "sample": [
+   "ipairs helper",
+   "pairs helper",
+   "next helper"
+  ]
+ },
+ {
+  "s2_func": "0x2bbf60",
+  "cur": "hks__coroutine_resume",
+  "aw_name": "hks::coroutine_resume",
+  "anchors": 1,
+  "size": 208,
+  "sample": [
+   "a thread expected"
+  ]
+ },
+ {
+  "s2_func": "0x2bc150",
+  "cur": "hks__coroutine_wrap",
+  "aw_name": "hks::coroutine_wrap",
+  "anchors": 1,
+  "size": 425,
+  "sample": [
+   "wrap_resume"
+  ]
+ },
+ {
+  "s2_func": "0x2bc4e0",
+  "cur": "hks__coroutine_getname",
+  "aw_name": "hks::coroutine_getname",
+  "anchors": 1,
+  "size": 256,
+  "sample": [
+   "coroutine expected"
+  ]
+ },
+ {
+  "s2_func": "0x2bc900",
+  "cur": "hks__debug_getinfo",
+  "aw_name": "hks::debug_getinfo",
+  "anchors": 11,
+  "size": 2910,
+  "sample": [
+   "function or level expected",
+   "couldn't get debug info",
+   "lastlinedefined"
+  ]
+ },
+ {
+  "s2_func": "0x2bd460",
+  "cur": "hks__debug_getlocal",
+  "aw_name": "hks::debug_getlocal",
+  "anchors": 1,
+  "size": 443,
+  "sample": [
+   "level out of range"
+  ]
+ },
+ {
+  "s2_func": "0x2bd7e0",
+  "cur": "hks__debug_setlocal",
+  "aw_name": "hks::debug_setlocal",
+  "anchors": 1,
+  "size": 349,
+  "sample": [
+   "(level out of range)"
+  ]
+ },
+ {
+  "s2_func": "0x2bd940",
+  "cur": "hks__debug_setmetatable",
+  "aw_name": "hks::debug_setmetatable",
+  "anchors": 1,
+  "size": 207,
+  "sample": [
+   "nil, table or struct expected"
+  ]
+ },
+ {
+  "s2_func": "0x2e1210",
+  "cur": "hks__inspectPrintConstant",
+  "aw_name": "hks::inspectPrintConstant",
+  "anchors": 1,
+  "size": 418,
+  "sample": [
+   "LightUserData: %x"
+  ]
+ },
+ {
+  "s2_func": "0x2b98a0",
+  "cur": "sub_2B98A0",
+  "aw_name": "luaopen_debug",
+  "anchors": 1,
+  "size": 44,
+  "sample": [
+   "debug"
+  ]
+ },
+ {
+  "s2_func": "0x2bea70",
+  "cur": "hks__compiler_settings",
+  "aw_name": "hks::compiler_settings",
+  "anchors": 1,
+  "size": 246,
+  "sample": [
+   "Attempt to change bytecode sharing settings but bytecode sharing is not enabled in this build"
+  ]
+ },
+ {
+  "s2_func": "0x2beb70",
+  "cur": "hks__set_garbage_collector_weights",
+  "aw_name": "hks::set_garbage_collector_weights",
+  "anchors": 2,
+  "size": 1201,
+  "sample": [
+   "The provided weight for %s is not a positive number",
+   "Empty table provided to setgcweights"
+  ]
+ },
+ {
+  "s2_func": "0x2ba050",
+  "cur": "sub_2BA050",
+  "aw_name": "luaopen_hks",
+  "anchors": 1,
+  "size": 44,
+  "sample": [
+   "havokscript"
+  ]
+ },
+ {
+  "s2_func": "0x309150",
+  "cur": "hks__write_file",
+  "aw_name": "hks::write_file",
+  "anchors": 1,
+  "size": 416,
+  "sample": [
+   "can't write to a closed file"
+  ]
+ },
+ {
+  "s2_func": "0x2bf340",
+  "cur": "hks__io_close_file",
+  "aw_name": "hks::io_close_file",
+  "anchors": 2,
+  "size": 281,
+  "sample": [
+   "try to close a closed file",
+   "Cannot close std file."
+  ]
+ },
+ {
+  "s2_func": "0x2bf500",
+  "cur": "hks__io_read_file",
+  "aw_name": "hks::io_read_file",
+  "anchors": 2,
+  "size": 871,
+  "sample": [
+   "wrong argument (\"*l\", \"*a\", \"*n\", number",
+   "can't read a closed file"
+  ]
+ },
+ {
+  "s2_func": "0x2bf870",
+  "cur": "hks__io_read",
+  "aw_name": "hks::io_read",
+  "anchors": 1,
+  "size": 176,
+  "sample": [
+   "wrong #1 argument (\"*l\", \"*a\", \"*n\", number"
+  ]
+ },
+ {
+  "s2_func": "0x2e1d20",
+  "cur": "hks__io_lines_iterator",
+  "aw_name": "hks::io_lines_iterator",
+  "anchors": 1,
+  "size": 360,
+  "sample": [
+   "already at the end of the iterator"
+  ]
+ },
+ {
+  "s2_func": "0x2e1ab0",
+  "cur": "hks__io_input_or_output",
+  "aw_name": "hks::io_input_or_output",
+  "anchors": 1,
+  "size": 620,
+  "sample": [
+   "wrong # 1 argument (file handle or filename"
+  ]
+ },
+ {
+  "s2_func": "0x2bfe20",
+  "cur": "sub_2BFE20",
+  "aw_name": "hks::io_type",
+  "anchors": 1,
+  "size": 547,
+  "sample": [
+   "closed file"
+  ]
+ },
+ {
+  "s2_func": "0x2c02b0",
+  "cur": "hks__io_seek_file",
+  "aw_name": "hks::io_seek_file",
+  "anchors": 1,
+  "size": 311,
+  "sample": [
+   "try to seek a closed file"
+  ]
+ },
+ {
+  "s2_func": "0x2c0510",
+  "cur": "sub_2C0510",
+  "aw_name": "hks::io_tostring",
+  "anchors": 2,
+  "size": 185,
+  "sample": [
+   "file (closed)",
+   "file (%p)"
+  ]
+ },
+ {
+  "s2_func": "0x2b8b60",
+  "cur": "sub_2B8B60",
+  "aw_name": "luaopen_io",
+  "anchors": 3,
+  "size": 1671,
+  "sample": [
+   "stdout",
+   "stderr",
+   "stdin"
+  ]
+ },
+ {
+  "s2_func": "0x2c0af0",
+  "cur": "hks__math_random",
+  "aw_name": "hks::math_random",
+  "anchors": 1,
+  "size": 369,
+  "sample": [
+   "interval is empty"
+  ]
+ },
+ {
+  "s2_func": "0x2c1350",
+  "cur": "hks__os_tmpname",
+  "aw_name": "hks::os_tmpname",
+  "anchors": 1,
+  "size": 133,
+  "sample": [
+   "unable to generate a unique filename"
+  ]
+ },
+ {
+  "s2_func": "0x2d6610",
+  "cur": "hks__gettimetablefield",
+  "aw_name": "hks::gettimetablefield",
+  "anchors": 1,
+  "size": 432,
+  "sample": [
+   "%s must be in the table"
+  ]
+ },
+ {
+  "s2_func": "0x2c20c0",
+  "cur": "hks__os_time",
+  "aw_name": "hks::os_time",
+  "anchors": 1,
+  "size": 1199,
+  "sample": [
+   "error in getting time for year(%d), month(%d), day(%d), hours(%d), minute(%d), and second(%d)"
+  ]
+ },
+ {
+  "s2_func": "0x2c2600",
+  "cur": "sub_2C2600",
+  "aw_name": "hks::os_setlocale",
+  "anchors": 1,
+  "size": 396,
+  "sample": [
+   "string or nil"
+  ]
+ },
+ {
+  "s2_func": "0x2c2790",
+  "cur": "hks__preloader",
+  "aw_name": "hks::preloader",
+  "anchors": 2,
+  "size": 661,
+  "sample": [
+   "'package.preload' must be a table",
+   "preloader expects a function"
+  ]
+ },
+ {
+  "s2_func": "0x2d2100",
+  "cur": "hks__createFunctionName",
+  "aw_name": "hks::createFunctionName",
+  "anchors": 1,
+  "size": 589,
+  "sample": [
+   "luaopen_"
+  ]
+ },
+ {
+  "s2_func": "0x2f16a0",
+  "cur": "hks__package_module_setfenv",
+  "aw_name": "hks::package_module_setfenv",
+  "anchors": 1,
+  "size": 446,
+  "sample": [
+   "'module' not called from a Lua function"
+  ]
+ },
+ {
+  "s2_func": "0x2c34d0",
+  "cur": "hks__package_module",
+  "aw_name": "hks::package_module",
+  "anchors": 3,
+  "size": 1411,
+  "sample": [
+   "name conflict in global table for module \"%s\"",
+   "_PACKAGE",
+   "_NAME"
+  ]
+ },
+ {
+  "s2_func": "0x2b9900",
+  "cur": "sub_2B9900",
+  "aw_name": "luaopen_package",
+  "anchors": 1,
+  "size": 1859,
+  "sample": [
+   "loaded"
+  ]
+ },
+ {
+  "s2_func": "0x2c3d90",
+  "cur": "hks__profile_tick",
+  "aw_name": "hks::profile_tick",
+  "anchors": 1,
+  "size": 12,
+  "sample": [
+   "profile.tick() has been deprecated. Please call hks_tick() from C instead."
+  ]
+ },
+ {
+  "s2_func": "0x2b98d0",
+  "cur": "sub_2B98D0",
+  "aw_name": "luaopen_profile",
+  "anchors": 1,
+  "size": 44,
+  "sample": [
+   "profile"
+  ]
+ },
+ {
+  "s2_func": "0x2b3960",
+  "cur": "hks__serialize_persist",
+  "aw_name": "hks::serialize_persist",
+  "anchors": 1,
+  "size": 619,
+  "sample": [
+   "persist_wrapper"
+  ]
+ },
+ {
+  "s2_func": "0x2b3bd0",
+  "cur": "hks__serialize_unpersist",
+  "aw_name": "hks::serialize_unpersist",
+  "anchors": 1,
+  "size": 596,
+  "sample": [
+   "unpersist_wrapper"
+  ]
+ },
+ {
+  "s2_func": "0x2ba080",
+  "cur": "sub_2BA080",
+  "aw_name": "luaopen_serialize",
+  "anchors": 1,
+  "size": 44,
+  "sample": [
+   "serialize"
+  ]
+ },
+ {
+  "s2_func": "0x2b3e30",
+  "cur": "hks__string_format",
+  "aw_name": "hks::string_format",
+  "anchors": 3,
+  "size": 2360,
+  "sample": [
+   "more arguments expected in string.format",
+   "Illegal %%%c at the end of the format",
+   "string format: unknown format\n"
+  ]
+ },
+ {
+  "s2_func": "0x2b4770",
+  "cur": "hks__string_gmatch",
+  "aw_name": "hks::string_gmatch",
+  "anchors": 1,
+  "size": 804,
+  "sample": [
+   "gmatch_iterator"
+  ]
+ },
+ {
+  "s2_func": "0x301c00",
+  "cur": "hks__string_find_match",
+  "aw_name": "hks::string_find_match",
+  "anchors": 1,
+  "size": 880,
+  "sample": [
+   "pattern parsing error"
+  ]
+ },
+ {
+  "s2_func": "0x2b4ac0",
+  "cur": "hks__string_gsub",
+  "aw_name": "hks::string_gsub",
+  "anchors": 3,
+  "size": 2406,
+  "sample": [
+   "table, struct, string, or function expected",
+   "Pattern parsing error: %s",
+   "invalid Capture index"
+  ]
+ },
+ {
+  "s2_func": "0x2b6550",
+  "cur": "hks__string_dump",
+  "aw_name": "hks::string_dump",
+  "anchors": 1,
+  "size": 1251,
+  "sample": [
+   "unable to dump the function given"
+  ]
+ },
+ {
+  "s2_func": "0x2b6d10",
+  "cur": "hks__struct_describe",
+  "aw_name": "hks::struct_describe",
+  "anchors": 5,
+  "size": 1959,
+  "sample": [
+   "__proxytable",
+   "structure ",
+   "__name"
+  ]
+ },
+ {
+  "s2_func": "0x2b7ca0",
+  "cur": "hks__table_insert",
+  "aw_name": "hks::table_insert",
+  "anchors": 1,
+  "size": 632,
+  "sample": [
+   "inserted value must be specified"
+  ]
+ },
+ {
+  "s2_func": "0x2b82b0",
+  "cur": "Lua_string_sort",
+  "aw_name": "hks::table_sort",
+  "anchors": 1,
+  "size": 215,
+  "sample": [
+   "function expected"
+  ]
+ },
+ {
+  "s2_func": "0x2cbdc0",
+  "cur": "hks__GarbageCollector__createFinalizerState",
+  "aw_name": "hks::GarbageCollector::createFinalizerState",
+  "anchors": 1,
+  "size": 347,
+  "sample": [
+   "&GarbageCollector::luaWrapper_finalizeUserdata"
+  ]
+ },
+ {
+  "s2_func": "0x2c9fe0",
+  "cur": "hks__callBinaryHandler",
+  "aw_name": "hks::callBinaryHandler",
+  "anchors": 1,
+  "size": 285,
+  "sample": [
+   "operator %s is not supported for %s %s"
+  ]
+ },
+ {
+  "s2_func": "0x305520",
+  "cur": "hks__Serializer__unpersistNext",
+  "aw_name": "hks::Serializer::unpersistNext",
+  "anchors": 1,
+  "size": 824,
+  "sample": [
+   "Error parsing file"
+  ]
+ },
+ {
+  "s2_func": "0x2d9be0",
+  "cur": "hks__Serializer__unpersist",
+  "aw_name": "hks::Serializer::unpersist",
+  "anchors": 2,
+  "size": 528,
+  "sample": [
+   "File header is not valid. Tag is %c%c%c%c when it should be \"KORE\"",
+   "File was saved with version %d, but the runtime version is %d"
+  ]
+ },
+ {
+  "s2_func": "0x305250",
+  "cur": "hks__Serializer__unpersistMethod",
+  "aw_name": "hks::Serializer::unpersistMethod",
+  "anchors": 2,
+  "size": 717,
+  "sample": [
+   "Error reloading function",
+   "HksReload"
+  ]
+ },
+ {
+  "s2_func": "0x306390",
+  "cur": "hks__Serializer__unpersistUpValue",
+  "aw_name": "hks::Serializer::unpersistUpValue",
+  "anchors": 1,
+  "size": 596,
+  "sample": [
+   "Error parsing file - unexpected tag - %d"
+  ]
+ },
+ {
+  "s2_func": "0x2cc300",
+  "cur": "hks__Serializer__createPersistReference",
+  "aw_name": "hks::Serializer::createPersistReference",
+  "anchors": 1,
+  "size": 192,
+  "sample": [
+   "A reference to %s already exists"
+  ]
+ },
+ {
+  "s2_func": "0x2f5c30",
+  "cur": "hks__Serializer__persistThread",
+  "aw_name": "hks::Serializer::persistThread",
+  "anchors": 2,
+  "size": 1470,
+  "sample": [
+   "Cannot save the current state",
+   "Cannot save a running state"
+  ]
+ },
+ {
+  "s2_func": "0x2f61f0",
+  "cur": "hks__Serializer__persistTop",
+  "aw_name": "hks::Serializer::persistTop",
+  "anchors": 3,
+  "size": 1716,
+  "sample": [
+   "Error saving %s, it has a 'false' __persist value.",
+   "Unexpected type (%s) for __persist value.",
+   "__persist"
+  ]
+ },
+ {
+  "s2_func": "0x2c5fe0",
+  "cur": "hks__HeapVisualizer__HeapVisualizer",
+  "aw_name": "hks::HeapVisualizer::HeapVisualizer",
+  "anchors": 2,
+  "size": 576,
+  "sample": [
+   "Error opening %s in HeapVisualizer",
+   "<havokscriptheap>\n"
+  ]
+ },
+ {
+  "s2_func": "0x2f7a40",
+  "cur": "sub_2F7A40",
+  "aw_name": "hks::HeapVisualizer::firstVisitCallback_pre",
+  "anchors": 3,
+  "size": 257,
+  "sample": [
+   "Global Table",
+   "lua_State",
+   "Registry"
+  ]
+ },
+ {
+  "s2_func": "0x2f7240",
+  "cur": "sub_2F7240",
+  "aw_name": "hks::HeapVisualizer::firstVisitCallback_pre",
+  "anchors": 2,
+  "size": 909,
+  "sample": [
+   "(metatable)",
+   "HashTable"
+  ]
+ },
+ {
+  "s2_func": "0x2f78d0",
+  "cur": "sub_2F78D0",
+  "aw_name": "hks::HeapVisualizer::firstVisitCallback_pre",
+  "anchors": 2,
+  "size": 125,
+  "sample": [
+   "\t\t<size>%lld</size>\n",
+   "UserData"
+  ]
+ },
+ {
+  "s2_func": "0x2f7950",
+  "cur": "sub_2F7950",
+  "aw_name": "hks::HeapVisualizer::firstVisitCallback_pre",
+  "anchors": 2,
+  "size": 237,
+  "sample": [
+   "\t\t<upvalues>%d</upvalues>\n",
+   "c_function"
+  ]
+ },
+ {
+  "s2_func": "0x2f75d0",
+  "cur": "sub_2F75D0",
+  "aw_name": "hks::HeapVisualizer::firstVisitCallback_pre",
+  "anchors": 2,
+  "size": 269,
+  "sample": [
+   "\t\t<upvalues count=\"%d\" />\n",
+   "HksClosure"
+  ]
+ },
+ {
+  "s2_func": "0x2f76e0",
+  "cur": "sub_2F76E0",
+  "aw_name": "hks::HeapVisualizer::firstVisitCallback_pre",
+  "anchors": 3,
+  "size": 489,
+  "sample": [
+   "\t\t<source>",
+   "</source>\n",
+   "unnamed"
+  ]
+ },
+ {
+  "s2_func": "0x2c6330",
+  "cur": "hks__MemoryAllocationsByType__print",
+  "aw_name": "hks::MemoryAllocationsByType::print",
+  "anchors": 3,
+  "size": 1162,
+  "sample": [
+   "[   count | total bytes | percent ]\n",
+   "[ %7lu | %11lu |   %5.2f ] %s\n",
+   "%5.2fkb live data in heap\n"
+  ]
+ },
+ {
+  "s2_func": "0x2db600",
+  "cur": "hksi_luaL_argerror",
+  "aw_name": "hksi_luaL_argerror",
+  "anchors": 2,
+  "size": 386,
+  "sample": [
+   "bad argument #%d to '%s' (%s)",
+   "bad argument #%d (%s)"
+  ]
+ },
+ {
+  "s2_func": "0x2d7320",
+  "cur": "hksI_openlib",
+  "aw_name": "hksI_openlib",
+  "anchors": 1,
+  "size": 613,
+  "sample": [
+   "name conflict for module '%s'"
+  ]
+ },
+ {
+  "s2_func": "0x2dbc90",
+  "cur": "sub_2DBC90",
+  "aw_name": "hksi_luaL_where",
+  "anchors": 1,
+  "size": 139,
+  "sample": [
+   "%s:%d: "
+  ]
+ },
+ {
+  "s2_func": "0x2db010",
+  "cur": "hksi_hks_traceback",
+  "aw_name": "hksi_hks_traceback",
+  "anchors": 5,
+  "size": 711,
+  "sample": [
+   " in function <%s:%d>",
+   " in function '%s'",
+   "stack traceback:"
+  ]
+ },
+ {
+  "s2_func": "0x2d7590",
+  "cur": "sub_2D7590",
+  "aw_name": "hksL_tostring",
+  "anchors": 2,
+  "size": 792,
+  "sample": [
+   "0x%8.8x%8.8x",
+   "%s: %p"
+  ]
+ },
+ {
+  "s2_func": "0x2d6fd0",
+  "cur": "hksDefaultPanic",
+  "aw_name": "hksDefaultPanic",
+  "anchors": 5,
+  "size": 835,
+  "sample": [
+   "Havok Script Panic - Main State: %s - State name: %s\n\n",
+   "Function %s() %s Line %d\n",
+   "Unprotected error (%s)\n\n"
+  ]
+ },
+ {
+  "s2_func": "0x2da6a0",
+  "cur": "hksi_hks_dumpstats",
+  "aw_name": "hksi_hks_dumpstats",
+  "anchors": 5,
+  "size": 262,
+  "sample": [
+   "Intern String Table:  %d allocated, %d used\n",
+   "Max memory allocated: %d kilobytes\n",
+   "HavokScriptVM:               %s\n"
+  ]
+ },
+ {
+  "s2_func": "0x2bc2f9",
+  "cur": "hksi_lua_yield",
+  "aw_name": "hksi_lua_yield",
+  "anchors": 4,
+  "size": 199,
+  "sample": [
+   "attempt to yield across metamethod/C-call boundary",
+   "attempt to yield a yielded coroutine",
+   "attempt to yield a paused coroutine"
+  ]
+ },
+ {
+  "s2_func": "0xb12890",
+  "cur": "hks__execute2",
+  "aw_name": "hks::execute<2>",
+  "anchors": 1,
+  "size": 15360,
+  "sample": [
+   "VM Kernel error: invalid instruction pointer."
+  ]
+ },
+ {
+  "s2_func": "0x3095e0",
+  "cur": "LuaCoD_SetLuaLoader",
+  "aw_name": "LuaCoD_SetLuaLoader",
+  "anchors": 4,
+  "size": 739,
+  "sample": [
+   "package module not previously loaded!",
+   "loaders isn't a table...",
+   "path isn't a string..."
+  ]
+ },
+ {
+  "s2_func": "0xbb110",
+  "cur": "LUIElement_FireCompletionEvent",
+  "aw_name": "LUIElement_FireCompletionEvent",
+  "anchors": 3,
+  "size": 980,
+  "sample": [
+   "transition_complete_%s",
+   "interrupted",
+   "lateness"
+  ]
+ },
+ {
+  "s2_func": "0xc66d0",
+  "cur": "LUI_LuaCall_GetTextDimensions",
+  "aw_name": "LUI_LuaCall_GetTextDimensions",
+  "anchors": 1,
+  "size": 924,
+  "sample": [
+   "GetTextDimensions called with a nil font!"
+  ]
+ },
+ {
+  "s2_func": "0xc4460",
+  "cur": "LUI_Init",
+  "aw_name": "LUI_Init",
+  "anchors": 23,
+  "size": 3753,
+  "sample": [
+   "(LUI_LuaCall_UndoLastTransformation)",
+   "(LUI_LuaCall_ProjectRootCoordinate)",
+   "(LUI_LuaCall_GetMaterialDimensions)"
+  ]
+ },
+ {
+  "s2_func": "0xc1bd0",
+  "cur": "sub_C1BD0",
+  "aw_name": "LUI_GetAnimationStateFromSource",
+  "anchors": 1,
+  "size": 6690,
+  "sample": [
+   "alignment"
+  ]
+ },
+ {
+  "s2_func": "0xc3600",
+  "cur": "LUI_GetAnimationStateFromStack",
+  "aw_name": "LUI_GetAnimationStateFromStack",
+  "anchors": 1,
+  "size": 460,
+  "sample": [
+   "fromProperties"
+  ]
+ },
+ {
+  "s2_func": "0xc5dd0",
+  "cur": "LUI_Layout",
+  "aw_name": "LUI_Layout",
+  "anchors": 1,
+  "size": 418,
+  "sample": [
+   "deltaTime"
+  ]
+ },
+ {
+  "s2_func": "0xbdf80",
+  "cur": "sub_BDF80",
+  "aw_name": "LUI_CreateRoot",
+  "anchors": 1,
+  "size": 587,
+  "sample": [
+   "UIRoot"
+  ]
+ },
+ {
+  "s2_func": "0xcbc50",
+  "cur": "LUI_RestoreOldMenu",
+  "aw_name": "LUI_RestoreOldMenu",
+  "anchors": 2,
+  "size": 666,
+  "sample": [
+   "ignorePriority",
+   "openOldMenu"
+  ]
+ },
+ {
+  "s2_func": "0xca0f0",
+  "cur": "LUI_ObituaryHandler",
+  "aw_name": "LUI_Obituary",
+  "anchors": 2,
+  "size": 824,
+  "sample": [
+   "obituary",
+   "victim"
+  ]
+ },
+ {
+  "s2_func": "0xbed10",
+  "cur": "LUI_GameMessage",
+  "aw_name": "LUI_GameMessage",
+  "anchors": 1,
+  "size": 414,
+  "sample": [
+   "game_message"
+  ]
+ },
+ {
+  "s2_func": "0xbcad0",
+  "cur": "LUI_ActionSlotPressed",
+  "aw_name": "LUI_ActionSlotPressed",
+  "anchors": 1,
+  "size": 377,
+  "sample": [
+   "action_slot_pressed"
+  ]
+ },
+ {
+  "s2_func": "0xbd960",
+  "cur": "LUI_CoD_NotifySplitscreenControllerUnplugged",
+  "aw_name": "LUI_CoD_NotifySplitscreenControllerUnplugged",
+  "anchors": 2,
+  "size": 377,
+  "sample": [
+   "ss_controller_unplugged",
+   "controller_index"
+  ]
+ },
+ {
+  "s2_func": "0xc7b00",
+  "cur": "LUI_NotifyDvarChanged",
+  "aw_name": "LUI_NotifyDvarChanged",
+  "anchors": 1,
+  "size": 960,
+  "sample": [
+   "dvar_update"
+  ]
+ },
+ {
+  "s2_func": "0xc9c10",
+  "cur": "LUI_NotifyOmnvarChanged",
+  "aw_name": "LUI_NotifyOmnvarChanged",
+  "anchors": 3,
+  "size": 1143,
+  "sample": [
+   "omnvar_update",
+   "timeModified",
+   "omnvar"
+  ]
+ },
+ {
+  "s2_func": "0xcb0f0",
+  "cur": "sub_CB0F0",
+  "aw_name": "LUI_PutCachedEventOnTopOfStack",
+  "anchors": 1,
+  "size": 389,
+  "sample": [
+   "CachedEvents"
+  ]
+ },
+ {
+  "s2_func": "0x315500",
+  "cur": "LUI_LuaCall_Clan_GetRemoteClanCardData",
+  "aw_name": "LUI_LuaCall_Clan_GetRemoteClanCardData",
+  "anchors": 4,
+  "size": 434,
+  "sample": [
+   "nextLevelProgress",
+   "rewardCount",
+   "xpToNext"
+  ]
+ },
+ {
+  "s2_func": "0x3159f0",
+  "cur": "LUI_COD_AnyActiveMenus",
+  "aw_name": "LUI_COD_AnyActiveMenus",
+  "anchors": 2,
+  "size": 750,
+  "sample": [
+   "Expecting a boolean on top of the stack after calling 'AnyActiveMenusInStack'\n",
+   "AnyActiveMenusInStack"
+  ]
+ },
+ {
+  "s2_func": "0x3208f0",
+  "cur": "LUI_IsMenuOpenAndVisible",
+  "aw_name": "LUI_IsMenuOpenAndVisible",
+  "anchors": 1,
+  "size": 840,
+  "sample": [
+   "IsMenuOpenAndVisible"
+  ]
+ },
+ {
+  "s2_func": "0x321300",
+  "cur": "LUI_WantsInputDuringGameplay",
+  "aw_name": "LUI_WantsInputDuringGameplay",
+  "anchors": 2,
+  "size": 771,
+  "sample": [
+   "Expecting a boolean on top of the stack after calling 'WantsInputDuringGameplay'\n",
+   "WantsInputDuringGameplay"
+  ]
+ },
+ {
+  "s2_func": "0x3205b0",
+  "cur": "LUI_IsMenuInStack",
+  "aw_name": "LUI_IsMenuInStack",
+  "anchors": 2,
+  "size": 824,
+  "sample": [
+   "Expecting a boolean on top of the stack after calling 'IsMenuInStack'\n",
+   "IsMenuInStack"
+  ]
+ },
+ {
+  "s2_func": "0x320ea0",
+  "cur": "LUI_IsTopSignInMenu",
+  "aw_name": "LUI_IsTopSignInMenu",
+  "anchors": 2,
+  "size": 824,
+  "sample": [
+   "Expecting a boolean on top of the stack after calling 'IsTopSignInMenu'\n",
+   "IsTopSignInMenu"
+  ]
+ },
+ {
+  "s2_func": "0x316ea0",
+  "cur": "sub_316EA0",
+  "aw_name": "LUI_CoD_CloseAll",
+  "anchors": 1,
+  "size": 135,
+  "sample": [
+   "closeallmenus"
+  ]
+ },
+ {
+  "s2_func": "0x31b3f0",
+  "cur": "LUI_CoD_CheckForFFOTD",
+  "aw_name": "LUI_CoD_CheckForFFOTD",
+  "anchors": 2,
+  "size": 504,
+  "sample": [
+   "ui/LUI/ffotd.lua",
+   "LUI.ffotd"
+  ]
+ },
+ {
+  "s2_func": "0x181de0",
+  "cur": "sub_181DE0",
+  "aw_name": "LUI_CoD_Init",
+  "anchors": 1,
+  "size": 237,
+  "sample": [
+   "Main lua file %s not found!"
+  ]
+ },
+ {
+  "s2_func": "0x318a4b",
+  "cur": "sub_318A4B",
+  "aw_name": "LUI_CoD_Init",
+  "anchors": 4,
+  "size": 1431,
+  "sample": [
+   "LUI: Unable to start the LUI system due to errors in main.lua\n",
+   "LUI: Unable to start the LUI system due to errors in LUI.lua\n",
+   "LUI.mp_menus.main"
+  ]
+ },
+ {
+  "s2_func": "0x31bae0",
+  "cur": "LUI_CoD_UpdateStickInput",
+  "aw_name": "LUI_CoD_UpdateStickInput",
+  "anchors": 5,
+  "size": 637,
+  "sample": [
+   "rightStickDirection",
+   "rightStickMagnitude",
+   "leftStickDirection"
+  ]
+ },
+ {
+  "s2_func": "0x318810",
+  "cur": "LUI_CoD_HandleKeyBind",
+  "aw_name": "LUI_CoD_HandleKeyBind",
+  "anchors": 1,
+  "size": 475,
+  "sample": [
+   "key_bound"
+  ]
+ },
+ {
+  "s2_func": "0x31fe10",
+  "cur": "LUI_Interface_Panic",
+  "aw_name": "LUI_Interface_Panic",
+  "anchors": 1,
+  "size": 414,
+  "sample": [
+   "LUI Panic during init"
+  ]
+ },
+ {
+  "s2_func": "0x31c940",
+  "cur": "LUI_Interface_DrawText",
+  "aw_name": "LUI_Interface_DrawText",
+  "anchors": 1,
+  "size": 8088,
+  "sample": [
+   "m_forceLineBreaks"
+  ]
+ },
+ {
+  "s2_func": "0x32e990",
+  "cur": "LUI_PushScoreInfo",
+  "aw_name": "LUI_PushScoreInfo",
+  "anchors": 5,
+  "size": 1259,
+  "sample": [
+   "killstreakCount",
+   "partyIcon",
+   "voiceIcon"
+  ]
+ },
+ {
+  "s2_func": "0x325c20",
+  "cur": "LUI_LuaCall_Game_GetWeaponCrosshairColor",
+  "aw_name": "LUI_LuaCall_Game_GetWeaponCrosshairColor",
+  "anchors": 1,
+  "size": 193,
+  "sample": [
+   "crosshairEntityType"
+  ]
+ },
+ {
+  "s2_func": "0x746a50",
+  "cur": "sub_746A50",
+  "aw_name": "UI_RunMenuScript",
+  "anchors": 45,
+  "size": 4670,
+  "sample": [
+   "RecentPlayerFriendRequest",
+   "clearLoadErrorsSummary",
+   "RecentPlayerShowGroups"
+  ]
+ },
+ {
+  "s2_func": "0x6e32f0",
+  "cur": "SendMigrateToMessages",
+  "aw_name": "SendMigrateToMessages",
+  "anchors": 3,
+  "size": 1292,
+  "sample": [
+   "%08x%02x%02x%08x%08x",
+   ",%s%08x%04x%02x%02x",
+   "0000000000000000"
+  ]
+ },
+ {
+  "s2_func": "0x33d3c0",
+  "cur": "LUI_SetLoadoutAndBroadcast",
+  "aw_name": "LUI_SetLoadoutAndBroadcast",
+  "anchors": 8,
+  "size": 3536,
+  "sample": [
+   "secondaryAttachment1",
+   "secondaryAttachment2",
+   "primaryAttachment1"
+  ]
+ },
+ {
+  "s2_func": "0x33e1f0",
+  "cur": "Lua_Broadcaster_FollowNext",
+  "aw_name": "LUI_CoD_LuaCall_FollowNext",
+  "anchors": 1,
+  "size": 113,
+  "sample": [
+   "follownext\n"
+  ]
+ },
+ {
+  "s2_func": "0x33e270",
+  "cur": "Lua_Broadcaster_FollowPrev",
+  "aw_name": "LUI_CoD_LuaCall_FollowPrev",
+  "anchors": 1,
+  "size": 113,
+  "sample": [
+   "followprev\n"
+  ]
+ },
+ {
+  "s2_func": "0x33e2f0",
+  "cur": "LUI_CoD_LuaCall_FollowClientnum",
+  "aw_name": "LUI_CoD_LuaCall_FollowClientnum",
+  "anchors": 1,
+  "size": 304,
+  "sample": [
+   "followclientnum %i\n"
+  ]
+ },
+ {
+  "s2_func": "0x3400e0",
+  "cur": "Lua_Broadcaster_StopFollow",
+  "aw_name": "LUI_CoD_LuaCall_StopFollow",
+  "anchors": 1,
+  "size": 122,
+  "sample": [
+   "stopfollow\n"
+  ]
+ },
+ {
+  "s2_func": "0x3433b0",
+  "cur": "LUI_CoD_UpdateWeaponChangeSystem",
+  "aw_name": "LUI_CoD_UpdateWeaponChangeSystem",
+  "anchors": 3,
+  "size": 330,
+  "sample": [
+   "display_name",
+   "weapon_name",
+   "in_alt"
+  ]
+ },
+ {
+  "s2_func": "0x343500",
+  "cur": "LUI_CoD_UpdateLiveConnectionSystem",
+  "aw_name": "LUI_CoD_UpdateLiveConnectionSystem",
+  "anchors": 1,
+  "size": 95,
+  "sample": [
+   "signed_in"
+  ]
+ },
+ {
+  "s2_func": "0x343630",
+  "cur": "LUI_CoD_UpdateCrosshairEntSystem",
+  "aw_name": "LUI_CoD_UpdateCrosshairEntSystem",
+  "anchors": 2,
+  "size": 187,
+  "sample": [
+   "friendlyTarget",
+   "enemyTarget"
+  ]
+ },
+ {
+  "s2_func": "0x58fc00",
+  "cur": "sub_58FC00",
+  "aw_name": "GScr_GetPlayerData",
+  "anchors": 1,
+  "size": 449,
+  "sample": [
+   "GetPlayerData"
+  ]
+ },
+ {
+  "s2_func": "0x110570",
+  "cur": "LUI_CoD_LuaCall_GetCombatRecordWeaponStatsData",
+  "aw_name": "LUI_CoD_LuaCall_GetCombatRecordWeaponStatsData",
+  "anchors": 12,
+  "size": 3478,
+  "sample": [
+   "MostHipfireKills",
+   "TotalHeadShots",
+   "MostHeadshots"
+  ]
+ },
+ {
+  "s2_func": "0x119650",
+  "cur": "LUI_CoD_LuaCall_GetHighestDifficultyForLevel",
+  "aw_name": "LUI_CoD_LuaCall_GetHighestDifficultyForLevel",
+  "anchors": 5,
+  "size": 433,
+  "sample": [
+   "missionhighestdifficulty",
+   "@MENU_HARDENED",
+   "@MENU_RECRUIT"
+  ]
+ },
+ {
+  "s2_func": "0x115740",
+  "cur": "LUI_CoD_LuaCall_GetIString",
+  "aw_name": "LUI_CoD_LuaCall_GetIString",
+  "anchors": 2,
+  "size": 395,
+  "sample": [
+   "CS_LOCALIZED_STRINGS",
+   "CS_SCRIPT_MENUS"
+  ]
+ },
+ {
+  "s2_func": "0x140910",
+  "cur": "LUI_CoD_LuaCall_GetBinding",
+  "aw_name": "LUI_CoD_LuaCall_GetBinding",
+  "anchors": 1,
+  "size": 451,
+  "sample": [
+   "MENU_BIND_KEY_PENDING"
+  ]
+ },
+ {
+  "s2_func": "0x13fa30",
+  "cur": "FormatDateTime",
+  "aw_name": "FormatDateTime",
+  "anchors": 17,
+  "size": 2296,
+  "sample": [
+   "LUA_MENU_DAYS_HOURS_MINUTES_SECONDS",
+   "LUA_MENU_HOURS_MINUTES_SECONDS",
+   "LUA_MENU_DATE_TIME_EVENT"
+  ]
+ },
+ {
+  "s2_func": "0x11df90",
+  "cur": "LUI_CoD_LuaCall_Inventory_GetAllItems",
+  "aw_name": "LUI_CoD_LuaCall_Inventory_GetAllItems",
+  "anchors": 1,
+  "size": 627,
+  "sample": [
+   "expiryDuration"
+  ]
+ },
+ {
+  "s2_func": "0x11e210",
+  "cur": "LUI_CoD_LuaCall_Inventory_GetArmoryItems",
+  "aw_name": "LUI_CoD_LuaCall_Inventory_GetArmoryItems",
+  "anchors": 3,
+  "size": 726,
+  "sample": [
+   "expirationType",
+   "rentalDuration",
+   "usageDuration"
+  ]
+ },
+ {
+  "s2_func": "0x127210",
+  "cur": "LUI_CoD_LuaCall_GetSupportedLanguages",
+  "aw_name": "LUI_CoD_LuaCall_GetSupportedLanguages",
+  "anchors": 1,
+  "size": 203,
+  "sample": [
+   "MENU_%s"
+  ]
+ },
+ {
+  "s2_func": "0x361d00",
+  "cur": "LUIElement_UIList_AnimateToState",
+  "aw_name": "LUIElement_UIList_AnimateToState",
+  "anchors": 1,
+  "size": 782,
+  "sample": [
+   "animateToState"
+  ]
+ },
+ {
+  "s2_func": "0x3608c0",
+  "cur": "LUIElement_UIHorizontalListLayout",
+  "aw_name": "LUIElement_UIHorizontalListLayout",
+  "anchors": 3,
+  "size": 2956,
+  "sample": [
+   "focusRotationFactor",
+   "beforeFocusCount",
+   "focusRadius"
+  ]
+ },
+ {
+  "s2_func": "0x369640",
+  "cur": "LUI_LuaCall_LUIElement_SetupUIVerticalList",
+  "aw_name": "LUI_LuaCall_LUIElement_SetupUIVerticalList",
+  "anchors": 1,
+  "size": 263,
+  "sample": [
+   "scrollByChildHeight"
+  ]
+ },
+ {
+  "s2_func": "0x35d610",
+  "cur": "sub_35D610",
+  "aw_name": "LUIElement_MinimapElementsRender",
+  "anchors": 1,
+  "size": 1222,
+  "sample": [
+   "drawPlayer"
+  ]
+ },
+ {
+  "s2_func": "0x361880",
+  "cur": "LUIElement_UIIntWatchLayout",
+  "aw_name": "LUIElement_UIIntWatchLayout",
+  "anchors": 1,
+  "size": 675,
+  "sample": [
+   "int_watch_alert"
+  ]
+ },
+ {
+  "s2_func": "0x35f5a0",
+  "cur": "LUIElement_UIBindImageLayout",
+  "aw_name": "LUIElement_UIBindImageLayout",
+  "anchors": 1,
+  "size": 306,
+  "sample": [
+   "material_bind_change"
+  ]
+ },
+ {
+  "s2_func": "0x362470",
+  "cur": "LUIElement_UIScorebarLayout",
+  "aw_name": "LUIElement_UIScorebarLayout",
+  "anchors": 2,
+  "size": 920,
+  "sample": [
+   "m_maxWidth",
+   "m_maxScore"
+  ]
+ },
+ {
+  "s2_func": "0x35fba0",
+  "cur": "LUIElement_UICountdownLayout",
+  "aw_name": "LUIElement_UICountdownLayout",
+  "anchors": 7,
+  "size": 2873,
+  "sample": [
+   "time30sec",
+   "timeReset",
+   "0:%02d.%d"
+  ]
+ },
+ {
+  "s2_func": "0x3622a0",
+  "cur": "sub_3622A0",
+  "aw_name": "LUIElement_UILongCountdownLayout",
+  "anchors": 2,
+  "size": 462,
+  "sample": [
+   "%02u:%02u:%02u",
+   "00:00:00"
+  ]
+ },
+ {
+  "s2_func": "0x362810",
+  "cur": "LUIElement_UITechyDigitsLayout",
+  "aw_name": "LUIElement_UITechyDigitsLayout",
+  "anchors": 6,
+  "size": 1996,
+  "sample": [
+   "shortWaitMin",
+   "shortWaitMax",
+   "pulsesMin"
+  ]
+ },
+ {
+  "s2_func": "0x359870",
+  "cur": "LUIElement_CustomButton_Background",
+  "aw_name": "LUIElement_CustomButton_Background",
+  "anchors": 2,
+  "size": 1430,
+  "sample": [
+   "menu_mp_cac_grad_stretch_add_v2",
+   "menu_mp_cac_grad_stretch_add"
+  ]
+ },
+ {
+  "s2_func": "0x35d000",
+  "cur": "LUIElement_HighlightedButtonPositionText",
+  "aw_name": "LUIElement_HighlightedButtonPositionText",
+  "anchors": 2,
+  "size": 938,
+  "sample": [
+   "MENU_SHOWING_X_OF_Y",
+   "ui_arrow_right"
+  ]
+ },
+ {
+  "s2_func": "0x36e650",
+  "cur": "Lua_Store_GetCategoryInfo",
+  "aw_name": "LUI_LuaCall_Store_GetCategoryInfo",
+  "anchors": 1,
+  "size": 463,
+  "sample": [
+   "hasNew"
+  ]
+ },
+ {
+  "s2_func": "0x36ec20",
+  "cur": "Lua_Store_GetItemInfoByCategory",
+  "aw_name": "LUI_LuaCall_Store_GetItemInfoByCategory",
+  "anchors": 1,
+  "size": 591,
+  "sample": [
+   "dlcName"
+  ]
+ },
+ {
+  "s2_func": "0x370500",
+  "cur": "sub_370500",
+  "aw_name": "LUI_CoD_RegisterStoreFunctions",
+  "anchors": 1,
+  "size": 84,
+  "sample": [
+   "Store"
+  ]
+ },
+ {
+  "s2_func": "0x372f50",
+  "cur": "NetConstBaselines_ReadBaselineDataFromFile",
+  "aw_name": "NetConstBaselines_ReadBaselineDataFromFile",
+  "anchors": 1,
+  "size": 556,
+  "sample": [
+   "mp/constBaselines/bl_%s_%s_%s.%s"
+  ]
+ },
+ {
+  "s2_func": "0x378830",
+  "cur": "sub_378830",
+  "aw_name": "BG_FinalizePlayerAnims",
+  "anchors": 1,
+  "size": 1280,
+  "sample": [
+   "unused"
+  ]
+ },
+ {
+  "s2_func": "0x37bd20",
+  "cur": "sub_37BD20",
+  "aw_name": "BG_ParseConditionBits",
+  "anchors": 2,
+  "size": 1324,
+  "sample": [
+   "none,",
+   "MINUS"
+  ]
+ },
+ {
+  "s2_func": "0x37c9f0",
+  "cur": "BG_ParseTransitionTrigger",
+  "aw_name": "BG_ParseTransitionTrigger",
+  "anchors": 4,
+  "size": 569,
+  "sample": [
+   "anim_complete",
+   "not_strafing",
+   "anim_change"
+  ]
+ },
+ {
+  "s2_func": "0x37c780",
+  "cur": "BG_ParseIdleTurn",
+  "aw_name": "BG_ParseIdleTurn",
+  "anchors": 2,
+  "size": 612,
+  "sample": [
+   "turnright",
+   "turnleft"
+  ]
+ },
+ {
+  "s2_func": "0x37b0c0",
+  "cur": "BG_ParseCommands",
+  "aw_name": "BG_ParseCommands",
+  "anchors": 10,
+  "size": 3163,
+  "sample": [
+   "speed_scaled_transition",
+   "knife_in_right_hand",
+   "local_melee_victim"
+  ]
+ },
+ {
+  "s2_func": "0x3790e0",
+  "cur": "BG_FindAnims",
+  "aw_name": "BG_FindAnims",
+  "anchors": 21,
+  "size": 1289,
+  "sample": [
+   "stndrd_aim_1",
+   "stndrd_aim_2",
+   "stndrd_aim_3"
+  ]
+ },
+ {
+  "s2_func": "0x38dc60",
+  "cur": "G_InitGame",
+  "aw_name": "BG_RegisterNetworkDvars",
+  "anchors": 9,
+  "size": 1423,
+  "sample": [
+   "scr_game_lockspectatorpov",
+   "faction_128_usmc_blue",
+   "faction_128_arab_blue"
+  ]
+ },
+ {
+  "s2_func": "0x38ce90",
+  "cur": "BG_RegisterDvars",
+  "aw_name": "BG_RegisterDvars",
+  "anchors": 3,
+  "size": 3529,
+  "sample": [
+   "shellshock_loop_silent",
+   "shellshock_loop",
+   "shellshock_end"
+  ]
+ },
+ {
+  "s2_func": "0x38ba30",
+  "cur": "BG_LoadShellShockDvars",
+  "aw_name": "BG_LoadShellShockDvars",
+  "anchors": 2,
+  "size": 299,
+  "sample": [
+   "shock/default.shock",
+   "shock/%s.shock"
+  ]
+ },
+ {
+  "s2_func": "0xabf480",
+  "cur": "sub_ABF480",
+  "aw_name": "BG_ClientSideSpawn_ApplySpawnMod",
+  "anchors": 1,
+  "size": 88,
+  "sample": [
+   "%s:%d"
+  ]
+ },
+ {
+  "s2_func": "0x38fa80",
+  "cur": "Perks_RegisterDvars",
+  "aw_name": "Perks_RegisterDvars",
+  "anchors": 2,
+  "size": 2124,
+  "sample": [
+   "frag_grenade_short_mp",
+   "specialty_parabolic"
+  ]
+ },
+ {
+  "s2_func": "0x3af290",
+  "cur": "sub_3AF290",
+  "aw_name": "PM_Weapon_Mantle_CanBlendOut",
+  "anchors": 1,
+  "size": 320,
+  "sample": [
+   "start blend"
+  ]
+ },
+ {
+  "s2_func": "0x3b7860",
+  "cur": "BG_LoadPenetrationDepthTable",
+  "aw_name": "BG_LoadPenetrationDepthTable",
+  "anchors": 6,
+  "size": 216,
+  "sample": [
+   "info/bullet_penetration_mp",
+   "bullet penetration table",
+   "BULLET_PEN_TABLE"
+  ]
+ },
+ {
+  "s2_func": "0x5ac420",
+  "cur": "ScrCmd_SetScriptMoverKillCam",
+  "aw_name": "ScrCmd_SetScriptMoverKillCam",
+  "anchors": 5,
+  "size": 499,
+  "sample": [
+   "rocket_corpse",
+   "helicopter",
+   "airstrike"
+  ]
+ },
+ {
+  "s2_func": "0x3b4f00",
+  "cur": "BG_LoadPlayerAnimTypes",
+  "aw_name": "BG_LoadPlayerAnimTypes",
+  "anchors": 2,
+  "size": 275,
+  "sample": [
+   "mp/playeranimtypes.txt",
+   "BG_AnimParseAnimScript"
+  ]
+ },
+ {
+  "s2_func": "0x3c9770",
+  "cur": "CG_DrawPlayerWeaponLowAmmoWarning",
+  "aw_name": "CG_DrawPlayerWeaponLowAmmoWarning",
+  "anchors": 2,
+  "size": 1417,
+  "sample": [
+   "PLATFORM_LOW_AMMO_NO_RELOAD",
+   "PLATFORM_RELOAD"
+  ]
+ },
+ {
+  "s2_func": "0x3cfbb0",
+  "cur": "CG_ParseVec3x2Finish",
+  "aw_name": "CG_ParseVec3x2Finish",
+  "anchors": 1,
+  "size": 210,
+  "sample": [
+   "( %f, %f, %f ), ( %f, %f, %f )"
+  ]
+ },
+ {
+  "s2_func": "0x3cf430",
+  "cur": "CG_ParseReactiveSound",
+  "aw_name": "CG_ParseReactiveSound",
+  "anchors": 1,
+  "size": 802,
+  "sample": [
+   "ent.v[ \"reactive_radius\" ] = "
+  ]
+ },
+ {
+  "s2_func": "0x3cde30",
+  "cur": "CG_ParseDynamicAmbience",
+  "aw_name": "CG_ParseDynamicAmbience",
+  "anchors": 2,
+  "size": 758,
+  "sample": [
+   "ent.v[ \"dynamic_distance\" ] = ",
+   "ent.v[ \"ambiencename\" ] = "
+  ]
+ },
+ {
+  "s2_func": "0x3ce620",
+  "cur": "CG_ParseExploder",
+  "aw_name": "CG_ParseExploder",
+  "anchors": 6,
+  "size": 1924,
+  "sample": [
+   "ent.v[ \"loopsound\" ] = ",
+   "ent = createExploder( ",
+   "ent.v[ \"exploder\" ] = "
+  ]
+ },
+ {
+  "s2_func": "0x3cd9d0",
+  "cur": "CG_ParseClientEffects",
+  "aw_name": "CG_ParseClientEffects",
+  "anchors": 4,
+  "size": 1116,
+  "sample": [
+   "#include common_scripts\\_createfx;",
+   "#include common_scripts\\utility;",
+   "// CreateFX fx entities placed: "
+  ]
+ },
+ {
+  "s2_func": "0x3d0140",
+  "cur": "CG_StartClientSideEffects",
+  "aw_name": "CG_StartClientSideEffects",
+  "anchors": 2,
+  "size": 505,
+  "sample": [
+   "maps/createfx/%s_fx.gsc",
+   "maps/mp/%s_fx.gsc"
+  ]
+ },
+ {
+  "s2_func": "0x3d5bf0",
+  "cur": "CG_GetOmnvar_FloatByName",
+  "aw_name": "CG_GetOmnvar_FloatByName",
+  "anchors": 1,
+  "size": 995,
+  "sample": [
+   "ui_map_location_height"
+  ]
+ },
+ {
+  "s2_func": "0x3d42d0",
+  "cur": "sub_3D42D0",
+  "aw_name": "CG_BuildCompassDistanceString",
+  "anchors": 1,
+  "size": 2298,
+  "sample": [
+   "%.1fm"
+  ]
+ },
+ {
+  "s2_func": "0x3e43c0",
+  "cur": "CG_RelativePlayerName",
+  "aw_name": "CG_RelativePlayerName",
+  "anchors": 2,
+  "size": 238,
+  "sample": [
+   "MPUI_FRIENDLY",
+   "MPUI_ENEMY"
+  ]
+ },
+ {
+  "s2_func": "0x3ece20",
+  "cur": "CG_ProcessClientNoteTracks",
+  "aw_name": "CG_ProcessEntityNoteTracks",
+  "anchors": 2,
+  "size": 3356,
+  "sample": [
+   "anim_gunhand = \"right\"",
+   "anim_gunhand = \"left\""
+  ]
+ },
+ {
+  "s2_func": "0x3f5df0",
+  "cur": "CG_Obituary",
+  "aw_name": "CG_Obituary",
+  "anchors": 1,
+  "size": 1236,
+  "sample": [
+   "killiconimpact"
+  ]
+ },
+ {
+  "s2_func": "0x3f0e30",
+  "cur": "CG_EntityEvent",
+  "aw_name": "CG_EntityEvent",
+  "anchors": 1,
+  "size": 16208,
+  "sample": [
+   "slide_start"
+  ]
+ },
+ {
+  "s2_func": "0x3faf40",
+  "cur": "sub_3FAF40",
+  "aw_name": "DrawHudElemClock",
+  "anchors": 1,
+  "size": 623,
+  "sample": [
+   "needle"
+  ]
+ },
+ {
+  "s2_func": "0x3fe040",
+  "cur": "sub_3FE040",
+  "aw_name": "CG_InitLasers",
+  "anchors": 1,
+  "size": 134,
+  "sample": [
+   "defaultlaser"
+  ]
+ },
+ {
+  "s2_func": "0x41d690",
+  "cur": "CG_RegisterDvars",
+  "aw_name": "CG_RegisterDvars",
+  "anchors": 1,
+  "size": 7099,
+  "sample": [
+   "movement_foliage"
+  ]
+ },
+ {
+  "s2_func": "0x425990",
+  "cur": "MotionTrackerLoadMedia",
+  "aw_name": "MotionTrackerLoadMedia",
+  "anchors": 7,
+  "size": 185,
+  "sample": [
+   "vfx/lights/global/light_motion_tracker",
+   "cb_motiontracker3d_ping_friendly_mp",
+   "cb_motiontracker3d_ping_enemy_mp"
+  ]
+ },
+ {
+  "s2_func": "0x492d0",
+  "cur": "sub_492D0",
+  "aw_name": "CG_GetWeaponUseString",
+  "anchors": 1,
+  "size": 742,
+  "sample": [
+   "[%s %s]"
+  ]
+ },
+ {
+  "s2_func": "0x3d6f0",
+  "cur": "CG_DrawSpectatorControls",
+  "aw_name": "CG_DrawSpectatorControls",
+  "anchors": 7,
+  "size": 1300,
+  "sample": [
+   "PLATFORM_FOLLOWNEXTPLAYER",
+   "PLATFORM_FOLLOW_LOADING",
+   "PLATFORM_MP_OPEN_MENU"
+  ]
+ },
+ {
+  "s2_func": "0x3b230",
+  "cur": "CG_DrawMantleHint",
+  "aw_name": "CG_DrawMantleHint",
+  "anchors": 2,
+  "size": 603,
+  "sample": [
+   "PLATFORM_MANTLE",
+   "+gostand"
+  ]
+ },
+ {
+  "s2_func": "0x3af00",
+  "cur": "CG_DrawInvalidCmdHint",
+  "aw_name": "CG_DrawInvalidCmdHint",
+  "anchors": 12,
+  "size": 816,
+  "sample": [
+   "WEAPON_TARGET_NOT_ENOUGH_CLEARANCE",
+   "WEAPON_EQUIPMENT_DISABLED_BY_EMP",
+   "WEAPON_CANT_PLANT_EQUIPMENT"
+  ]
+ },
+ {
+  "s2_func": "0x430710",
+  "cur": "ReadRumbleGraph",
+  "aw_name": "ReadRumbleGraph",
+  "anchors": 2,
+  "size": 444,
+  "sample": [
+   "rumble graph file",
+   "RUMBLEGRAPHFILE"
+  ]
+ },
+ {
+  "s2_func": "0x42ef80",
+  "cur": "CG_LoadRumble",
+  "aw_name": "CG_LoadRumble",
+  "anchors": 4,
+  "size": 742,
+  "sample": [
+   "rumble info file",
+   "highRumbleFile",
+   "lowRumbleFile"
+  ]
+ },
+ {
+  "s2_func": "0x431eb0",
+  "cur": "CG_ServerCommand",
+  "aw_name": "CG_SetClientDvarFromServer",
+  "anchors": 2,
+  "size": 12832,
+  "sample": [
+   "cg_objectiveText",
+   "g_scriptMainMenu"
+  ]
+ },
+ {
+  "s2_func": "0x4427e0",
+  "cur": "CG_RegisterBulletFleshSounds",
+  "aw_name": "CG_RegisterBulletFleshSounds",
+  "anchors": 6,
+  "size": 618,
+  "sample": [
+   "%s_%s_fatal_head_plr",
+   "%s_%s_fatal_head_npc",
+   "%s_%s_fatal_plr"
+  ]
+ },
+ {
+  "s2_func": "0x442a50",
+  "cur": "CG_RegisterFootstepSounds",
+  "aw_name": "CG_RegisterFootstepSounds",
+  "anchors": 4,
+  "size": 418,
+  "sample": [
+   "%s_default_r",
+   "%s_default_l",
+   "%s_%s_r"
+  ]
+ },
+ {
+  "s2_func": "0x4446b0",
+  "cur": "sub_4446B0",
+  "aw_name": "CG_RegisterWhizbySounds",
+  "anchors": 2,
+  "size": 322,
+  "sample": [
+   "%s_%02d",
+   "whizby"
+  ]
+ },
+ {
+  "s2_func": "0x4434c0",
+  "cur": "CG_RegisterSounds",
+  "aw_name": "CG_RegisterSounds",
+  "anchors": 36,
+  "size": 4580,
+  "sample": [
+   "bulletspray_small_exit",
+   "step_prone_plr_stand",
+   "step_prone_plr_drop"
+  ]
+ },
+ {
+  "s2_func": "0x448e90",
+  "cur": "CG_FogVisionStaticSingleStagedLerp_To",
+  "aw_name": "CG_FogVisionStaticSingleStagedLerp_To",
+  "anchors": 1,
+  "size": 2931,
+  "sample": [
+   "__retrieved_fog"
+  ]
+ },
+ {
+  "s2_func": "0x44da00",
+  "cur": "CG_ParseFog",
+  "aw_name": "CG_ParseFog",
+  "anchors": 27,
+  "size": 6289,
+  "sample": [
+   "maps\\_utility::vision_set_fog_changes",
+   "maps\\mp\\_art::vision_set_fog_changes",
+   "ent.atmosFogSkyAngularFalloffEnabled"
+  ]
+ },
+ {
+  "s2_func": "0x44d200",
+  "cur": "CG_ParseClientVisionSetTriggers",
+  "aw_name": "CG_ParseClientVisionSetTriggers",
+  "anchors": 4,
+  "size": 1366,
+  "sample": [
+   "ent=maps\\_utility::create_vision_set_fog(",
+   "ent=maps\\mp\\_art::create_vision_set_fog(",
+   "ent.stagedvisionsets=["
+  ]
+ },
+ {
+  "s2_func": "0x44f320",
+  "cur": "CG_ParseIsSectionBreak",
+  "aw_name": "CG_ParseIsSectionBreak",
+  "anchors": 6,
+  "size": 316,
+  "sample": [
+   "adsr_zone_player",
+   "timescale_names",
+   "adsr_zone_npc"
+  ]
+ },
+ {
+  "s2_func": "0x450160",
+  "cur": "sub_450160",
+  "aw_name": "CG_SetAudioLerpOverride",
+  "anchors": 1,
+  "size": 315,
+  "sample": [
+   "<current>"
+  ]
+ },
+ {
+  "s2_func": "0x36910",
+  "cur": "CG_ClientViewVisionSetUpdate",
+  "aw_name": "CG_ClientViewVisionSetUpdate",
+  "anchors": 1,
+  "size": 440,
+  "sample": [
+   "clut_thermal"
+  ]
+ },
+ {
+  "s2_func": "0x4e510",
+  "cur": "CG_PrecacheWeaponAnimations",
+  "aw_name": "CG_PrecacheWeaponAnimations",
+  "anchors": 1,
+  "size": 263,
+  "sample": [
+   "WEAPON_CUSTOM_ATTACHMENT"
+  ]
+ },
+ {
+  "s2_func": "0x45a270",
+  "cur": "SCR_StopCinematic",
+  "aw_name": "SCR_StopCinematic",
+  "anchors": 1,
+  "size": 486,
+  "sample": [
+   "autocinematic %s\n"
+  ]
+ },
+ {
+  "s2_func": "0x45adf0",
+  "cur": "CL_PlayTextFXPulseSounds",
+  "aw_name": "CL_PlayTextFXPulseSounds",
+  "anchors": 2,
+  "size": 133,
+  "sample": [
+   "ui_pulse_text_delete",
+   "ui_pulse_text_type"
+  ]
+ },
+ {
+  "s2_func": "0x657270",
+  "cur": "Playlist_ParsePlaylists",
+  "aw_name": "Playlist_ParsePlaylists",
+  "anchors": 25,
+  "size": 10460,
+  "sample": [
+   "showonlywhenhavemaps",
+   "party_minplayers ",
+   "party_maxplayers "
+  ]
+ },
+ {
+  "s2_func": "0x7f280",
+  "cur": "CL_Live_PrivatePartyBackout",
+  "aw_name": "CL_Live_PrivatePartyBackout",
+  "anchors": 1,
+  "size": 110,
+  "sample": [
+   "partybackout"
+  ]
+ },
+ {
+  "s2_func": "0xd79d0",
+  "cur": "LoadMapLoadscreen",
+  "aw_name": "LoadMapLoadscreen",
+  "anchors": 3,
+  "size": 495,
+  "sample": [
+   "mp/didyouknow.csv",
+   "didyouknow",
+   "%s_load"
+  ]
+ },
+ {
+  "s2_func": "0x6b220",
+  "cur": "CL_CheckForResend_Challenging",
+  "aw_name": "CL_CheckForResend_Challenging",
+  "anchors": 1,
+  "size": 1886,
+  "sample": [
+   "connect %s \"%s\""
+  ]
+ },
+ {
+  "s2_func": "0x6af20",
+  "cur": "Cl_CheckForResend_Connecting",
+  "aw_name": "Cl_CheckForResend_Connecting",
+  "anchors": 1,
+  "size": 762,
+  "sample": [
+   "getchallenge 0 \"%s\""
+  ]
+ },
+ {
+  "s2_func": "0x6f170",
+  "cur": "CL_DisconnectError",
+  "aw_name": "CL_DisconnectError",
+  "anchors": 1,
+  "size": 1044,
+  "sample": [
+   "EXE_SERVERQUIT"
+  ]
+ },
+ {
+  "s2_func": "0x86bd0",
+  "cur": "CL_ServerTimedOut",
+  "aw_name": "CL_ServerTimedOut",
+  "anchors": 1,
+  "size": 317,
+  "sample": [
+   "EXE_ERR_SERVER_TIMEOUT"
+  ]
+ },
+ {
+  "s2_func": "0x119638bb",
+  "cur": "sub_119638BB",
+  "aw_name": "CL_RunOncePerClientFrame",
+  "anchors": 1,
+  "size": 38,
+  "sample": [
+   "paused"
+  ]
+ },
+ {
+  "s2_func": "0x7dba0",
+  "cur": "sub_7DBA0",
+  "aw_name": "CL_InitRenderer",
+  "anchors": 1,
+  "size": 215,
+  "sample": [
+   "console"
+  ]
+ },
+ {
+  "s2_func": "0x6d7600",
+  "cur": "sub_6D7600",
+  "aw_name": "CL_InitOnceForAllClients",
+  "anchors": 1,
+  "size": 3065,
+  "sample": [
+   "xstartlocalprivateparty"
+  ]
+ },
+ {
+  "s2_func": "0x9a130",
+  "cur": "sub_9A130",
+  "aw_name": "CL_InitOnceForAllClients",
+  "anchors": 2,
+  "size": 1062,
+  "sample": [
+   "autocinematic",
+   "closemenu"
+  ]
+ },
+ {
+  "s2_func": "0x808f0",
+  "cur": "sub_808F0",
+  "aw_name": "CL_LocalServers",
+  "anchors": 1,
+  "size": 945,
+  "sample": [
+   "%igetinfo xxx"
+  ]
+ },
+ {
+  "s2_func": "0x460620",
+  "cur": "CL_PC_RegisterCommands",
+  "aw_name": "CL_Xenon_RegisterCommands",
+  "anchors": 2,
+  "size": 86,
+  "sample": [
+   "xplaylistchoosegame",
+   "xshowmarketplace"
+  ]
+ },
+ {
+  "s2_func": "0x6e3240",
+  "cur": "sub_6E3240",
+  "aw_name": "SendHeader",
+  "anchors": 1,
+  "size": 174,
+  "sample": [
+   "mhead"
+  ]
+ },
+ {
+  "s2_func": "0x461180",
+  "cur": "CL_GetLocalClientMigrationString",
+  "aw_name": "CL_GetLocalClientMigrationString",
+  "anchors": 3,
+  "size": 341,
+  "sample": [
+   "MP_MIGRATION_EVALUATING",
+   "MP_MIGRATION_SENDING",
+   "MP_MIGRATING_SESSION"
+  ]
+ },
+ {
+  "s2_func": "0x460bd0",
+  "cur": "HandlePingMsg",
+  "aw_name": "CL_SendPingAck",
+  "anchors": 1,
+  "size": 246,
+  "sample": [
+   "pinga"
+  ]
+ },
+ {
+  "s2_func": "0x460dc0",
+  "cur": "HandleHeaderMsg",
+  "aw_name": "HandleHeaderMsg",
+  "anchors": 1,
+  "size": 271,
+  "sample": [
+   "mhack"
+  ]
+ },
+ {
+  "s2_func": "0x465ee0",
+  "cur": "sub_465EE0",
+  "aw_name": "CL_GetClientNameAndClanTagColorize",
+  "anchors": 2,
+  "size": 978,
+  "sample": [
+   "[^3%s^%c]",
+   "[^1%s^%c]"
+  ]
+ },
+ {
+  "s2_func": "0x468560",
+  "cur": "CL_SendPeerVoiceData",
+  "aw_name": "CL_SendPeerVoiceData",
+  "anchors": 1,
+  "size": 395,
+  "sample": [
+   "%icanthear %i"
+  ]
+ },
+ {
+  "s2_func": "0x761830",
+  "cur": "GScr_GetSndAliasValue",
+  "aw_name": "GScr_GetSndAliasValue",
+  "anchors": 5,
+  "size": 723,
+  "sample": [
+   "secondaryaliasname",
+   "chainaliasname",
+   "squelchname"
+  ]
+ },
+ {
+  "s2_func": "0x46af00",
+  "cur": "GamerProfile_GetEliteClanClanTagText",
+  "aw_name": "GamerProfile_GetEliteClanClanTagText",
+  "anchors": 1,
+  "size": 79,
+  "sample": [
+   "eliteClanTagText"
+  ]
+ },
+ {
+  "s2_func": "0x46dcd0",
+  "cur": "GamerProfile_UpdateProfileFromStats",
+  "aw_name": "GamerProfile_UpdateProfileExperience",
+  "anchors": 2,
+  "size": 433,
+  "sample": [
+   "experience_MP",
+   "prestige_MP"
+  ]
+ },
+ {
+  "s2_func": "0x46c7e0",
+  "cur": "GamerProfile_RegisterCommands",
+  "aw_name": "GamerProfile_RegisterCommands",
+  "anchors": 18,
+  "size": 1386,
+  "sample": [
+   "profile_toggleCanSkipOffensiveMissions",
+   "profile_SetHasEverPlayed_MainMenu",
+   "profile_updatePatchNotesVersion"
+  ]
+ },
+ {
+  "s2_func": "0x48fc40",
+  "cur": "sub_48FC40",
+  "aw_name": "PartyAtomicHost_HandleMemberJoin",
+  "anchors": 1,
+  "size": 208,
+  "sample": [
+   "pa_joined"
+  ]
+ },
+ {
+  "s2_func": "0x4780f0",
+  "cur": "PartyClient_SendDisconnectMessage",
+  "aw_name": "PartyClient_SendDisconnectMessage",
+  "anchors": 1,
+  "size": 278,
+  "sample": [
+   "%ipa_dis"
+  ]
+ },
+ {
+  "s2_func": "0x478370",
+  "cur": "sub_478370",
+  "aw_name": "PartyClient_SendHeartbeatAck",
+  "anchors": 1,
+  "size": 169,
+  "sample": [
+   "%ipha"
+  ]
+ },
+ {
+  "s2_func": "0x4720b0",
+  "cur": "PartyClient_HandleKickedFromParty",
+  "aw_name": "PartyClient_HandleKickedFromParty",
+  "anchors": 1,
+  "size": 268,
+  "sample": [
+   "@PLATFORM_KICKEDFROMPARTY"
+  ]
+ },
+ {
+  "s2_func": "0x4726d0",
+  "cur": "PartyClient_SendHostBackoutMessage",
+  "aw_name": "PartyClient_SendHostBackoutMessage",
+  "anchors": 1,
+  "size": 411,
+  "sample": [
+   "%ipa_clientpres"
+  ]
+ },
+ {
+  "s2_func": "0x478990",
+  "cur": "PartyClient_SendQoSResults",
+  "aw_name": "PartyClient_SendQoSResults",
+  "anchors": 1,
+  "size": 697,
+  "sample": [
+   "%iqosres"
+  ]
+ },
+ {
+  "s2_func": "0x478520",
+  "cur": "PartyClient_SendOurMemberInfo",
+  "aw_name": "PartyClient_SendOurMemberInfo",
+  "anchors": 1,
+  "size": 399,
+  "sample": [
+   "%iclientInfo"
+  ]
+ },
+ {
+  "s2_func": "0x4828b0",
+  "cur": "Party_PlayPlayerJoinSound",
+  "aw_name": "Party_PlayPlayerJoinSound",
+  "anchors": 1,
+  "size": 128,
+  "sample": [
+   "mp_player_join"
+  ]
+ },
+ {
+  "s2_func": "0x482930",
+  "cur": "Party_PlayPlayerLeaveSound",
+  "aw_name": "Party_PlayPlayerLeaveSound",
+  "anchors": 1,
+  "size": 128,
+  "sample": [
+   "mp_player_leave"
+  ]
+ },
+ {
+  "s2_func": "0x47ab90",
+  "cur": "Party_Backout",
+  "aw_name": "Party_Backout",
+  "anchors": 1,
+  "size": 1705,
+  "sample": [
+   "xpartybackout; disconnect\n"
+  ]
+ },
+ {
+  "s2_func": "0x47c7b0",
+  "cur": "sub_47C7B0",
+  "aw_name": "Party_UpdateStatusString",
+  "anchors": 1,
+  "size": 1113,
+  "sample": [
+   "%s:  %d"
+  ]
+ },
+ {
+  "s2_func": "0x47e8c0",
+  "cur": "Party_GetStatus",
+  "aw_name": "Party_GetStatus",
+  "anchors": 19,
+  "size": 1587,
+  "sample": [
+   "MENU_WAITING_FOR_MORE_PLAYERS_TEAMS",
+   "PATCH_MENU_WAITING_FOR_GOOD_HOST",
+   "MPUI_WAITING_FOR_PARTY_MEMBERS"
+  ]
+ },
+ {
+  "s2_func": "0x196d70",
+  "cur": "Party_SetLobbyParamFromCmd",
+  "aw_name": "Party_Init",
+  "anchors": 2,
+  "size": 662,
+  "sample": [
+   "party_minplayers",
+   "party_maxplayers"
+  ]
+ },
+ {
+  "s2_func": "0x4829b0",
+  "cur": "sub_4829B0",
+  "aw_name": "Party_PlayerJoined_NotifyLUI",
+  "anchors": 1,
+  "size": 88,
+  "sample": [
+   "player_joined"
+  ]
+ },
+ {
+  "s2_func": "0x48cd70",
+  "cur": "PartyHost_KickPlayer",
+  "aw_name": "PartyHost_KickPlayer",
+  "anchors": 2,
+  "size": 285,
+  "sample": [
+   "%ikickedFromParty",
+   "kicked"
+  ]
+ },
+ {
+  "s2_func": "0x4914e0",
+  "cur": "PartyHost_ShareSearchResults",
+  "aw_name": "PartyHost_ShareSearchResults",
+  "anchors": 1,
+  "size": 461,
+  "sample": [
+   "%idoqos"
+  ]
+ },
+ {
+  "s2_func": "0x492d50",
+  "cur": "PartyHost_TellPartyMembersToStopQoS",
+  "aw_name": "PartyHost_TellPartyMembersToStopQoS",
+  "anchors": 1,
+  "size": 137,
+  "sample": [
+   "%istopqos"
+  ]
+ },
+ {
+  "s2_func": "0x48cfa0",
+  "cur": "PartyHost_MakeTeams",
+  "aw_name": "PartyHost_MakeTeams",
+  "anchors": 3,
+  "size": 1047,
+  "sample": [
+   "AXIS = %d, ALLIES = %d, diff = %d\n",
+   "Team %-6s (%4d:%d)- %s (%d)\n",
+   "ALLIES"
+  ]
+ },
+ {
+  "s2_func": "0x48f980",
+  "cur": "PartyHost_SendHeartbeats",
+  "aw_name": "PartyHost_SendHeartbeats",
+  "anchors": 1,
+  "size": 691,
+  "sample": [
+   "sendFailed"
+  ]
+ },
+ {
+  "s2_func": "0x48aa80",
+  "cur": "PartyHost_DropPlayersToMatchSlots",
+  "aw_name": "PartyHost_DropPlayersToMatchSlots",
+  "anchors": 1,
+  "size": 221,
+  "sample": [
+   "@EXE_SERVERISFULL"
+  ]
+ },
+ {
+  "s2_func": "0x485d30",
+  "cur": "PartyHost_HandleHeartbeatAck",
+  "aw_name": "PartyHost_HandleHeartbeatAck",
+  "anchors": 1,
+  "size": 414,
+  "sample": [
+   "%inotpresent"
+  ]
+ },
+ {
+  "s2_func": "0x485ed0",
+  "cur": "PartyHost_HandleClientPresence",
+  "aw_name": "PartyHost_HandleClientPresence",
+  "anchors": 1,
+  "size": 264,
+  "sample": [
+   "MPUI_PARTY_MEMBER_LOST_BACKOUT"
+  ]
+ },
+ {
+  "s2_func": "0x489300",
+  "cur": "PartyAtomicHost_SendJoinFailedResponseWithPayload",
+  "aw_name": "PartyAtomicHost_SendJoinFailedResponseWithPayload",
+  "anchors": 1,
+  "size": 176,
+  "sample": [
+   "%ipa_joinfailed"
+  ]
+ },
+ {
+  "s2_func": "0x4890d0",
+  "cur": "PartyAtomicHost_RemoveAnonymousMembersWithChallengeXuid",
+  "aw_name": "PartyAtomicHost_RemoveAnonymousMembersWithChallengeXuid",
+  "anchors": 1,
+  "size": 130,
+  "sample": [
+   "removingAnonymousChallengeXuid"
+  ]
+ },
+ {
+  "s2_func": "0x486bc0",
+  "cur": "PartyAtomicHost_HandleMemberJoin",
+  "aw_name": "PartyAtomicHost_HandleMemberJoin",
+  "anchors": 1,
+  "size": 2180,
+  "sample": [
+   "rejoin"
+  ]
+ },
+ {
+  "s2_func": "0x488380",
+  "cur": "PartyHost_HandleCantHearMsg",
+  "aw_name": "PartyHost_HandleCantHearMsg",
+  "anchors": 1,
+  "size": 316,
+  "sample": [
+   "%ivoicefail %i"
+  ]
+ },
+ {
+  "s2_func": "0x4884c0",
+  "cur": "PartyHost_HandleClientDisconnect_Internal",
+  "aw_name": "PartyHost_HandleClientDisconnect_Internal",
+  "anchors": 1,
+  "size": 514,
+  "sample": [
+   "disconnectMessage"
+  ]
+ },
+ {
+  "s2_func": "0x495c20",
+  "cur": "PartyAtomicClient_SendMemberActionResponse",
+  "aw_name": "PartyAtomicClient_SendMemberActionResponse_Internal",
+  "anchors": 1,
+  "size": 273,
+  "sample": [
+   "%ipa_memberjoinresponse"
+  ]
+ },
+ {
+  "s2_func": "0x495650",
+  "cur": "PartyAtomic_OnError_Failed",
+  "aw_name": "PartyAtomic_HandleFailedJoinAttempt",
+  "anchors": 1,
+  "size": 155,
+  "sample": [
+   "@MPUI_PARTY_LOST_HOST"
+  ]
+ },
+ {
+  "s2_func": "0x496820",
+  "cur": "PartyAtomic_AskToJoinParty_Internal",
+  "aw_name": "PartyAtomic_AskToJoinParty_Internal",
+  "anchors": 1,
+  "size": 495,
+  "sample": [
+   "%ipa_joinrequest"
+  ]
+ },
+ {
+  "s2_func": "0x4958d0",
+  "cur": "PartyAtomicClient_JoinAcceptedParty_Internal",
+  "aw_name": "PartyAtomicClient_JoinAcceptedParty_Internal",
+  "anchors": 1,
+  "size": 700,
+  "sample": [
+   "%ipa_memberjoin"
+  ]
+ },
+ {
+  "s2_func": "0x4957f0",
+  "cur": "PartyAtomicClient_CommitToJoinedParty_Internal",
+  "aw_name": "PartyAtomicClient_CommitToJoinedParty_Internal",
+  "anchors": 1,
+  "size": 218,
+  "sample": [
+   "%ipa_membercommit"
+  ]
+ },
+ {
+  "s2_func": "0x495f80",
+  "cur": "PartyAtomic_OnFrame_WaitHost",
+  "aw_name": "PartyAtomicHost_BuildJoinLobbyMessage",
+  "anchors": 1,
+  "size": 470,
+  "sample": [
+   "%ipa_joinlobbyrequest"
+  ]
+ },
+ {
+  "s2_func": "0x495da0",
+  "cur": "PartyAtomicHost_SendJoinHostResponse",
+  "aw_name": "PartyAtomicHost_SendJoinHostResponse",
+  "anchors": 1,
+  "size": 472,
+  "sample": [
+   "%ipa_actionresponse"
+  ]
+ },
+ {
+  "s2_func": "0x49d570",
+  "cur": "PartyMigrate_SendNomineeMsg",
+  "aw_name": "PartyMigrate_SendNomineeMsg",
+  "anchors": 1,
+  "size": 295,
+  "sample": [
+   "%inominee"
+  ]
+ },
+ {
+  "s2_func": "0x49c790",
+  "cur": "PartyMigrate_TellNoNewHost",
+  "aw_name": "PartyMigrate_TellNoNewHost",
+  "anchors": 1,
+  "size": 639,
+  "sample": [
+   "%inomigrate %i"
+  ]
+ },
+ {
+  "s2_func": "0x49ba50",
+  "cur": "PartyMigrate_GetPings",
+  "aw_name": "PartyMigrate_GetPings",
+  "anchors": 1,
+  "size": 569,
+  "sample": [
+   "%impng %i"
+  ]
+ },
+ {
+  "s2_func": "0x4983b0",
+  "cur": "PartyMigrate_HandlePingMsg",
+  "aw_name": "PartyMigrate_HandlePingMsg",
+  "anchors": 1,
+  "size": 184,
+  "sample": [
+   "%impck %i"
+  ]
+ },
+ {
+  "s2_func": "0x499700",
+  "cur": "PartyMigrate_AskForPredeterminedHostNominee",
+  "aw_name": "PartyMigrate_AskForPredeterminedHostNominee",
+  "anchors": 1,
+  "size": 377,
+  "sample": [
+   "%imakehosttest"
+  ]
+ },
+ {
+  "s2_func": "0x49de60",
+  "cur": "PartyMigrate_UpdateMakeHost",
+  "aw_name": "PartyMigrate_UpdateMakeHost",
+  "anchors": 1,
+  "size": 120,
+  "sample": [
+   "@MPUI_MAKEHOSTTIMEOUT"
+  ]
+ },
+ {
+  "s2_func": "0x499570",
+  "cur": "PartyMigrate_AskArbitratorToChangeHost",
+  "aw_name": "PartyMigrate_AskArbitratorToChangeHost",
+  "anchors": 1,
+  "size": 388,
+  "sample": [
+   "%imakehost"
+  ]
+ },
+ {
+  "s2_func": "0x49bc90",
+  "cur": "PartyMigrate_HandleMigrationFailure",
+  "aw_name": "PartyMigrate_HandleMigrationFailure",
+  "anchors": 1,
+  "size": 1218,
+  "sample": [
+   "@MP_ENDED_GAME_MIGRATION_FAILED"
+  ]
+ },
+ {
+  "s2_func": "0x499880",
+  "cur": "PartyMigrate_BuildSessionInfoMessage",
+  "aw_name": "PartyMigrate_BuildSessionInfoMessage",
+  "anchors": 1,
+  "size": 495,
+  "sample": [
+   "%isessinfo"
+  ]
+ },
+ {
+  "s2_func": "0x49d480",
+  "cur": "PartyMigrate_SendMakeHostError",
+  "aw_name": "PartyMigrate_SendMakeHostError",
+  "anchors": 1,
+  "size": 240,
+  "sample": [
+   "%imakehosterror"
+  ]
+ },
+ {
+  "s2_func": "0x49aed0",
+  "cur": "PartyMigrate_DetermineBestHost_LogResults",
+  "aw_name": "PartyMigrate_DetermineBestHost_LogResults",
+  "anchors": 1,
+  "size": 553,
+  "sample": [
+   "besthost%i:%i(c%s)"
+  ]
+ },
+ {
+  "s2_func": "0x49ca10",
+  "cur": "PartyMigrate_RequestFindBestHost",
+  "aw_name": "PartyMigrate_RequestFindBestHost",
+  "anchors": 1,
+  "size": 900,
+  "sample": [
+   "%ifindbest %i"
+  ]
+ },
+ {
+  "s2_func": "0x49e950",
+  "cur": "sub_49E950",
+  "aw_name": "PartyUI_MemberStat",
+  "anchors": 1,
+  "size": 476,
+  "sample": [
+   "%0.3f"
+  ]
+ },
+ {
+  "s2_func": "0x49f1b0",
+  "cur": "Party_SetUIPlayerCount",
+  "aw_name": "Party_SetUIPlayerCount",
+  "anchors": 2,
+  "size": 377,
+  "sample": [
+   "MENU_LOBBYPLAYERCOUNT",
+   "MENU_PARTYPLAYERCOUNT"
+  ]
+ },
+ {
+  "s2_func": "0x49eff0",
+  "cur": "Party_ClosePartyUI",
+  "aw_name": "Party_ClosePartyUI",
+  "anchors": 2,
+  "size": 294,
+  "sample": [
+   "leavelobbyandpartywarning",
+   "leavelobbywarning"
+  ]
+ },
+ {
+  "s2_func": "0x4a2380",
+  "cur": "CL_MakeLocalClientInactive",
+  "aw_name": "CL_MakeLocalClientInactive",
+  "anchors": 1,
+  "size": 507,
+  "sample": [
+   "endsplitscreensignin; closemenu menu_splitscreensignin\n"
+  ]
+ },
+ {
+  "s2_func": "0x4a18a0",
+  "cur": "GuestSponsorErrorMessage",
+  "aw_name": "GuestSponsorErrorMessage",
+  "anchors": 1,
+  "size": 1076,
+  "sample": [
+   "MPUI_GUEST_SPONSOR_ERROR"
+  ]
+ },
+ {
+  "s2_func": "0x4a2690",
+  "cur": "CL_Splitscreen_Init",
+  "aw_name": "CL_Splitscreen_RegisterCommands",
+  "anchors": 7,
+  "size": 257,
+  "sample": [
+   "forcenosplitscreencontrol",
+   "incnosplitscreencontrol",
+   "decnosplitscreencontrol"
+  ]
+ },
+ {
+  "s2_func": "0x5c62c0",
+  "cur": "G_SetupWeaponDef",
+  "aw_name": "G_SetupWeaponDef",
+  "anchors": 1,
+  "size": 379,
+  "sample": [
+   "defaultweapon_mp"
+  ]
+ },
+ {
+  "s2_func": "0x897dd0",
+  "cur": "R_InitImages",
+  "aw_name": "R_InitCodeImages",
+  "anchors": 4,
+  "size": 681,
+  "sample": [
+   "$identitynormalmap",
+   "$white",
+   "$black"
+  ]
+ },
+ {
+  "s2_func": "0x4a7a80",
+  "cur": "DB_ReadXFileStageStreaming2",
+  "aw_name": "DB_ReadXFileStageStreaming2",
+  "anchors": 1,
+  "size": 103,
+  "sample": [
+   "Read error of file '%s'"
+  ]
+ },
+ {
+  "s2_func": "0xa4390",
+  "cur": "DB_DelayedCloneXAsset",
+  "aw_name": "DB_DelayedCloneXAsset",
+  "anchors": 1,
+  "size": 1082,
+  "sample": [
+   "g_copyInfo exceeded"
+  ]
+ },
+ {
+  "s2_func": "0x9fc40",
+  "cur": "DB_CreateDefaultEntry",
+  "aw_name": "DB_CreateDefaultEntry",
+  "anchors": 2,
+  "size": 459,
+  "sample": [
+   "Couldn't find the bsp for this map.  Please build the fast file associated with %s and try again.",
+   "Could not load default asset '%s' for asset type '%s'.\nTried to load asset '%s'."
+  ]
+ },
+ {
+  "s2_func": "0xa58d0",
+  "cur": "DB_LoadXZone",
+  "aw_name": "DB_LoadXZone",
+  "anchors": 3,
+  "size": 893,
+  "sample": [
+   "Max zone count exceeded",
+   "common_vo_mtx",
+   "%s_%s%s"
+  ]
+ },
+ {
+  "s2_func": "0xace30",
+  "cur": "DB_TryLoadXFileInternal",
+  "aw_name": "DB_TryLoadXFileInternal",
+  "anchors": 3,
+  "size": 1866,
+  "sample": [
+   "MENU_CONTENT_NOT_AVAILABLE",
+   "%s.ff",
+   "_path"
+  ]
+ },
+ {
+  "s2_func": "0x5347b0",
+  "cur": "G_SpawnPathnodeDynamic",
+  "aw_name": "G_SpawnPathnodeDynamic",
+  "anchors": 1,
+  "size": 870,
+  "sample": [
+   "script_angles"
+  ]
+ },
+ {
+  "s2_func": "0x534ca0",
+  "cur": "sub_534CA0",
+  "aw_name": "GetNodesInRadius",
+  "anchors": 1,
+  "size": 687,
+  "sample": [
+   "Cover"
+  ]
+ },
+ {
+  "s2_func": "0x541340",
+  "cur": "ClientInactivityTimer",
+  "aw_name": "SV_GameDropClient",
+  "anchors": 1,
+  "size": 4751,
+  "sample": [
+   "GAME_DROPPEDFORINACTIVITY"
+  ]
+ },
+ {
+  "s2_func": "0x119de0",
+  "cur": "sub_119DE0",
+  "aw_name": "PlayerCmd_OpenPopupMenuNoMouse",
+  "anchors": 1,
+  "size": 317,
+  "sample": [
+   "%c %i 1"
+  ]
+ },
+ {
+  "s2_func": "0x5a9b70",
+  "cur": "sub_5A9B70",
+  "aw_name": "PlayerCmd_SetClientSpawnSightTraces",
+  "anchors": 1,
+  "size": 164,
+  "sample": [
+   "%c %d"
+  ]
+ },
+ {
+  "s2_func": "0x226330",
+  "cur": "sub_226330",
+  "aw_name": "PlayerCmd_SetVolMod",
+  "anchors": 1,
+  "size": 315,
+  "sample": [
+   "%c %i %g %g"
+  ]
+ },
+ {
+  "s2_func": "0x226470",
+  "cur": "sub_226470",
+  "aw_name": "PlayerCmd_PlayDynamicAmbience",
+  "anchors": 1,
+  "size": 319,
+  "sample": [
+   "%c \"%s\" %1.2f %1.2f %1.2f %i \"%s\""
+  ]
+ },
+ {
+  "s2_func": "0x134e00",
+  "cur": "sub_134E00",
+  "aw_name": "Scr_VisionSyncWithPlayer",
+  "anchors": 1,
+  "size": 269,
+  "sample": [
+   "%c \"%s\" 0"
+  ]
+ },
+ {
+  "s2_func": "0x144970",
+  "cur": "sub_144970",
+  "aw_name": "VisionSetForPlayer",
+  "anchors": 1,
+  "size": 335,
+  "sample": [
+   "%c \"%s\" %i"
+  ]
+ },
+ {
+  "s2_func": "0x135d10",
+  "cur": "Scr_SetBlurForPlayer",
+  "aw_name": "Scr_SetBlurForPlayer",
+  "anchors": 2,
+  "size": 381,
+  "sample": [
+   "blur_duration_ms",
+   "blur_target"
+  ]
+ },
+ {
+  "s2_func": "0x137750",
+  "cur": "sub_137750",
+  "aw_name": "GScr_EnableSlowAim",
+  "anchors": 1,
+  "size": 360,
+  "sample": [
+   "%c 1 %f %f %f %f"
+  ]
+ },
+ {
+  "s2_func": "0x54ee80",
+  "cur": "ClientCommand",
+  "aw_name": "ClientCommand",
+  "anchors": 4,
+  "size": 1012,
+  "sample": [
+   "followclientnum",
+   "follownext",
+   "followprev"
+  ]
+ },
+ {
+  "s2_func": "0x552050",
+  "cur": "G_ParseHitLocDmgTable",
+  "aw_name": "G_ParseHitLocDmgTable",
+  "anchors": 3,
+  "size": 334,
+  "sample": [
+   "info/mp_lochit_dmgtable",
+   "hitloc damage table",
+   "LOCDMGTABLE"
+  ]
+ },
+ {
+  "s2_func": "0x558ff0",
+  "cur": "HudElem_SetEnumString",
+  "aw_name": "HudElem_SetEnumString",
+  "anchors": 1,
+  "size": 303,
+  "sample": [
+   "\"%s\" is not a valid value for hudelem field \"%s\"\nShould be one of:"
+  ]
+ },
+ {
+  "s2_func": "0x559aa0",
+  "cur": "G_GetItemClassname",
+  "aw_name": "G_GetItemClassname",
+  "anchors": 1,
+  "size": 495,
+  "sample": [
+   "weapon_%s"
+  ]
+ },
+ {
+  "s2_func": "0x5612b0",
+  "cur": "G_RegisterServerDemoDvars",
+  "aw_name": "G_RegisterServerDemoDvars",
+  "anchors": 2,
+  "size": 1525,
+  "sample": [
+   "scr_game_allowkillcam",
+   "scr_team_fftype"
+  ]
+ },
+ {
+  "s2_func": "0x55fc90",
+  "cur": "G_RegisterGametypeDvars",
+  "aw_name": "G_RegisterGametypeDvars",
+  "anchors": 2,
+  "size": 3227,
+  "sample": [
+   "scr_%s_scorelimit",
+   "scr_%s_roundlimit"
+  ]
+ },
+ {
+  "s2_func": "0x59cce0",
+  "cur": "GScr_StructuredDataPrintArgs",
+  "aw_name": "GScr_StructuredDataPrintArgs",
+  "anchors": 2,
+  "size": 397,
+  "sample": [
+   "[unhandled type %s]",
+   "In call to %s( "
+  ]
+ },
+ {
+  "s2_func": "0x589d80",
+  "cur": "GScr_GetIndexForLuiNCString",
+  "aw_name": "GScr_GetIndexForLuiNCString",
+  "anchors": 1,
+  "size": 88,
+  "sample": [
+   "Couldn't find 'unknown' in the Lui NetConstStrings."
+  ]
+ },
+ {
+  "s2_func": "0x589de0",
+  "cur": "GScr_LoadLuiFile",
+  "aw_name": "GScr_LoadLuiFile",
+  "anchors": 1,
+  "size": 85,
+  "sample": [
+   "Unable to load LUI lua file %s"
+  ]
+ },
+ {
+  "s2_func": "0x591d50",
+  "cur": "sub_591D50",
+  "aw_name": "GScr_SetConvergenceTime",
+  "anchors": 1,
+  "size": 249,
+  "sample": [
+   "pitch"
+  ]
+ },
+ {
+  "s2_func": "0x59e650",
+  "cur": "Scr_FxParamError",
+  "aw_name": "Scr_FxParamError",
+  "anchors": 1,
+  "size": 147,
+  "sample": [
+   "not successfully loaded"
+  ]
+ },
+ {
+  "s2_func": "0x586330",
+  "cur": "Scr_GetActiveAnimations",
+  "aw_name": "Scr_GetActiveAnimations",
+  "anchors": 2,
+  "size": 175,
+  "sample": [
+   "NO_DOBJ",
+   "NO TREE"
+  ]
+ },
+ {
+  "s2_func": "0x587d20",
+  "cur": "sub_587D20",
+  "aw_name": "GScr_SetMiniMap",
+  "anchors": 1,
+  "size": 460,
+  "sample": [
+   "\"%s\" %f %f %f %f"
+  ]
+ },
+ {
+  "s2_func": "0x227b80",
+  "cur": "AddSoundSubmixParseDynamicArguments",
+  "aw_name": "AddSoundSubmixParseDynamicArguments",
+  "anchors": 2,
+  "size": 497,
+  "sample": [
+   "%s %i %.2f",
+   "set_all"
+  ]
+ },
+ {
+  "s2_func": "0x225ef0",
+  "cur": "sub_225EF0",
+  "aw_name": "PlayerCmd_SetClientTriggerAudioZone",
+  "anchors": 2,
+  "size": 221,
+  "sample": [
+   "%c %c %s %g",
+   "%c %c %s"
+  ]
+ },
+ {
+  "s2_func": "0x225fd0",
+  "cur": "sub_225FD0",
+  "aw_name": "PlayerCmd_SetClientTriggerAudioZoneLerp",
+  "anchors": 1,
+  "size": 202,
+  "sample": [
+   "%c %c %s %s %g"
+  ]
+ },
+ {
+  "s2_func": "0x2260a0",
+  "cur": "PlayerCmd_SetClientTriggerAudioZonePartial",
+  "aw_name": "PlayerCmd_SetClientTriggerAudioZonePartial",
+  "anchors": 5,
+  "size": 372,
+  "sample": [
+   "ambient_events",
+   "%c %c %s %d",
+   "occlusion"
+  ]
+ },
+ {
+  "s2_func": "0x226220",
+  "cur": "sub_226220",
+  "aw_name": "PlayerCmd_ClearClientTriggerAudioZone",
+  "anchors": 1,
+  "size": 184,
+  "sample": [
+   "%c %c %g"
+  ]
+ },
+ {
+  "s2_func": "0x590460",
+  "cur": "GScr_GetCaCPlayerData",
+  "aw_name": "GScr_GetCaCPlayerData",
+  "anchors": 1,
+  "size": 345,
+  "sample": [
+   "GetCaCPlayerData"
+  ]
+ },
+ {
+  "s2_func": "0x590800",
+  "cur": "GScr_SetCaCPlayerData",
+  "aw_name": "GScr_SetCaCPlayerData",
+  "anchors": 1,
+  "size": 892,
+  "sample": [
+   "SetCacPlayerData"
+  ]
+ },
+ {
+  "s2_func": "0x590e70",
+  "cur": "GScr_GetCaCPlayerDataForGroup",
+  "aw_name": "GScr_GetCaCPlayerDataForGroup",
+  "anchors": 1,
+  "size": 414,
+  "sample": [
+   "GetCaCPlayerDataForGroup"
+  ]
+ },
+ {
+  "s2_func": "0x1384e0",
+  "cur": "sub_1384E0",
+  "aw_name": "GScr_LUINotifyEvent_Internal",
+  "anchors": 1,
+  "size": 365,
+  "sample": [
+   "%c %c %d %d"
+  ]
+ },
+ {
+  "s2_func": "0x7613d0",
+  "cur": "sub_7613D0",
+  "aw_name": "GScr_GetSndAliasValue",
+  "anchors": 1,
+  "size": 879,
+  "sample": [
+   "length"
+  ]
+ },
+ {
+  "s2_func": "0x599930",
+  "cur": "sub_599930",
+  "aw_name": "ScrCmd_initWaterClientTrigger",
+  "anchors": 1,
+  "size": 243,
+  "sample": [
+   "%c %s %d"
+  ]
+ },
+ {
+  "s2_func": "0x5adac0",
+  "cur": "GScr_LoadGameTypeScript",
+  "aw_name": "GScr_LoadGameTypeScript",
+  "anchors": 1,
+  "size": 1695,
+  "sample": [
+   "maps/mp/gametypes/%s"
+  ]
+ },
+ {
+  "s2_func": "0x5ad800",
+  "cur": "GScr_LoadAgentScript",
+  "aw_name": "GScr_LoadAgentScript",
+  "anchors": 4,
+  "size": 689,
+  "sample": [
+   "maps/mp/agents/_agents_gametype_%s",
+   "maps/mp/agents/_scriptedAgents",
+   "maps/mp/agents/_agent_common"
+  ]
+ },
+ {
+  "s2_func": "0x5af7a0",
+  "cur": "sub_5AF7A0",
+  "aw_name": "Scr_MakeGameMessage",
+  "anchors": 1,
+  "size": 177,
+  "sample": [
+   "%s \"%s\""
+  ]
+ },
+ {
+  "s2_func": "0x5a3b40",
+  "cur": "GScr_SetClientMatchData",
+  "aw_name": "GScr_SetClientMatchData",
+  "anchors": 1,
+  "size": 130,
+  "sample": [
+   "SetClientMatchData"
+  ]
+ },
+ {
+  "s2_func": "0x5a4d40",
+  "cur": "sub_5A4D40",
+  "aw_name": "GScr_SetMatchData",
+  "anchors": 1,
+  "size": 130,
+  "sample": [
+   "SetMatchData"
+  ]
+ },
+ {
+  "s2_func": "0x5a5040",
+  "cur": "GScr_GetMatchRulesData",
+  "aw_name": "GScr_GetMatchRulesData",
+  "anchors": 1,
+  "size": 151,
+  "sample": [
+   "GetMatchRulesData"
+  ]
+ },
+ {
+  "s2_func": "0x5a6470",
+  "cur": "GScr_EndLobby",
+  "aw_name": "GScr_EndLobby",
+  "anchors": 1,
+  "size": 99,
+  "sample": [
+   "xpartydisbandafterround\n"
+  ]
+ },
+ {
+  "s2_func": "0x5b3680",
+  "cur": "ScriptEntCmd_SetLookAtTarget",
+  "aw_name": "ScriptEntCmd_SetLookAtTarget",
+  "anchors": 3,
+  "size": 519,
+  "sample": [
+   "followstance",
+   "randomoffset",
+   "fixedoffset"
+  ]
+ },
+ {
+  "s2_func": "0x5b79c0",
+  "cur": "G_LoadStructs",
+  "aw_name": "G_LoadStructs",
+  "anchors": 1,
+  "size": 293,
+  "sample": [
+   "script_struct"
+  ]
+ },
+ {
+  "s2_func": "0x5b7460",
+  "cur": "G_CallSpawn",
+  "aw_name": "G_CallSpawn",
+  "anchors": 1,
+  "size": 734,
+  "sample": [
+   "info_vehicle_node"
+  ]
+ },
+ {
+  "s2_func": "0x5bbc40",
+  "cur": "ConsoleCommand",
+  "aw_name": "ConsoleCommand",
+  "anchors": 4,
+  "size": 616,
+  "sample": [
+   "g_banIPs\n",
+   "removeip",
+   "listip"
+  ]
+ },
+ {
+  "s2_func": "0x5cd440",
+  "cur": "G_ReadStruct",
+  "aw_name": "ReadField",
+  "anchors": 6,
+  "size": 1288,
+  "sample": [
+   "sentient out of range (%i)",
+   "vehicle out of range (%i)",
+   "entity out of range (%i)"
+  ]
+ },
+ {
+  "s2_func": "0xd63b0",
+  "cur": "sub_D63B0",
+  "aw_name": "GScr_LoadConsts",
+  "anchors": 1,
+  "size": 1229,
+  "sample": [
+   "playerID"
+  ]
+ },
+ {
+  "s2_func": "0x5dc7f0",
+  "cur": "NetConstStrings_BuildDvarMaps",
+  "aw_name": "NetConstStrings_BuildDvarMaps",
+  "anchors": 2,
+  "size": 290,
+  "sample": [
+   "ncs_codinfo_dvar",
+   "ncs_network_dvar"
+  ]
+ },
+ {
+  "s2_func": "0x650a70",
+  "cur": "GameInfo_UpdateArenas",
+  "aw_name": "GameInfo_UpdateArenas",
+  "anchors": 3,
+  "size": 1557,
+  "sample": [
+   ".arena files : %s",
+   "mp/mapLoad.csv",
+   "mappack"
+  ]
+ },
+ {
+  "s2_func": "0x64ff00",
+  "cur": "UI_GetMapCustom",
+  "aw_name": "GameInfo_GetMapCustom",
+  "anchors": 2,
+  "size": 471,
+  "sample": [
+   "loadscreen_mp_bonusmaps",
+   "DLC_MAPS_DESC"
+  ]
+ },
+ {
+  "s2_func": "0x6513d0",
+  "cur": "ComGroups_Init",
+  "aw_name": "ComGroups_Init",
+  "anchors": 2,
+  "size": 334,
+  "sample": [
+   "leaveLiveGroup",
+   "joinLiveGroup"
+  ]
+ },
+ {
+  "s2_func": "0x651910",
+  "cur": "ComGroups_SetGroups",
+  "aw_name": "ComGroups_UpdateGroupMemberships",
+  "anchors": 6,
+  "size": 766,
+  "sample": [
+   "matchtype/systemlink",
+   "matchtype/private",
+   "matchtype/online"
+  ]
+ },
+ {
+  "s2_func": "0xd3360",
+  "cur": "LiveStorage_ResetStatsWithConfirmation",
+  "aw_name": "LiveStorage_ResetStatsWithConfirmation",
+  "anchors": 5,
+  "size": 883,
+  "sample": [
+   "MENU_CORRUPT_STATS_WARNING_OFFLINE",
+   "MENU_CORRUPT_STATS_WARNING_ONLINE",
+   "MENU_STATS_WRONG_VERSION_WARNING"
+  ]
+ },
+ {
+  "s2_func": "0xd3e90",
+  "cur": "LiveStorage_StatsInit",
+  "aw_name": "LiveStorage_SetCustomClassNames",
+  "anchors": 1,
+  "size": 3833,
+  "sample": [
+   "CLASS_SLOT%i"
+  ]
+ },
+ {
+  "s2_func": "0xd25c0",
+  "cur": "LiveStorage_OpenPlayerDataRead",
+  "aw_name": "LiveStorage_OpenPlayerDataRead",
+  "anchors": 2,
+  "size": 1172,
+  "sample": [
+   "incnosplitscreencontrol LiveStorage_OpenPlayerDataRead\n",
+   "decnosplitscreencontrol LiveStorage_OpenPlayerDataRead\n"
+  ]
+ },
+ {
+  "s2_func": "0xd60f0",
+  "cur": "LiveStorage_UpdatePersistentDataVersion",
+  "aw_name": "LiveStorage_UpdatePersistentDataVersion",
+  "anchors": 1,
+  "size": 699,
+  "sample": [
+   "LiveStorage_CheckPersistentDataVersion"
+  ]
+ },
+ {
+  "s2_func": "0x18e610",
+  "cur": "LiveStorage_InitCommon",
+  "aw_name": "LiveStorage_InitCommon",
+  "anchors": 2,
+  "size": 372,
+  "sample": [
+   "prestigeReset",
+   "statsReset"
+  ]
+ },
+ {
+  "s2_func": "0xcfad0",
+  "cur": "LiveStorage_GetItemUnlockMessageByItemRef",
+  "aw_name": "LiveStorage_GetItemUnlockMessageByItemRef",
+  "anchors": 4,
+  "size": 892,
+  "sample": [
+   "LUA_MENU_ITEM_PRESTIGE_UNLOCK_DESC",
+   "LUA_MENU_ITEM_LEVEL_UNLOCK_DESC",
+   "LUA_MENU_ITEM_ALL_LOCKED_DESC"
+  ]
+ },
+ {
+  "s2_func": "0x65b340",
+  "cur": "LiveStorage_CS_Init",
+  "aw_name": "LiveStorage_CS_Init",
+  "anchors": 1,
+  "size": 347,
+  "sample": [
+   "Failed initialization of DW content server.\n"
+  ]
+ },
+ {
+  "s2_func": "0x65c210",
+  "cur": "LiveStorage_CS_RefreshPrivateData_Success",
+  "aw_name": "LiveStorage_CS_RefreshPrivateData_Success",
+  "anchors": 1,
+  "size": 76,
+  "sample": [
+   "live_storage_private_data_update"
+  ]
+ },
+ {
+  "s2_func": "0x788ca0",
+  "cur": "Live_CheckNetConnection",
+  "aw_name": "Live_CheckNetConnection",
+  "anchors": 1,
+  "size": 1033,
+  "sample": [
+   "XBOXLIVE_NETCONNECTION"
+  ]
+ },
+ {
+  "s2_func": "0x909d0",
+  "cur": "Com_ErrorCleanup",
+  "aw_name": "Com_ErrorCleanup",
+  "anchors": 1,
+  "size": 2671,
+  "sample": [
+   "EXE_DISCONNECTEDFROMOWNLISTENSERVER"
+  ]
+ },
+ {
+  "s2_func": "0x93260",
+  "cur": "Com_InitDvars",
+  "aw_name": "Com_InitDvars",
+  "anchors": 2,
+  "size": 3867,
+  "sample": [
+   "playlists.info",
+   "com_maxfps"
+  ]
+ },
+ {
+  "s2_func": "0x91f40",
+  "cur": "Com_ExecStartupConfigs",
+  "aw_name": "Com_ExecStartupConfigs",
+  "anchors": 1,
+  "size": 619,
+  "sample": [
+   "exec default_mp.cfg\n"
+  ]
+ },
+ {
+  "s2_func": "0x9bfd0",
+  "cur": "Com_StartHunkUsers",
+  "aw_name": "Com_StartHunkUsers",
+  "anchors": 1,
+  "size": 140,
+  "sample": [
+   "Failed init after: %s"
+  ]
+ },
+ {
+  "s2_func": "0x664ab0",
+  "cur": "Dvar_InfoString",
+  "aw_name": "Dvar_InfoString",
+  "anchors": 1,
+  "size": 1187,
+  "sample": [
+   "ucd_ID"
+  ]
+ },
+ {
+  "s2_func": "0x6647d0",
+  "cur": "Dvar_AddCommands",
+  "aw_name": "Dvar_AddCommands",
+  "anchors": 3,
+  "size": 164,
+  "sample": [
+   "setfromdvar",
+   "togglep",
+   "toggle"
+  ]
+ },
+ {
+  "s2_func": "0x6657b0",
+  "cur": "GraphFloat_Load",
+  "aw_name": "GraphFloat_Load",
+  "anchors": 2,
+  "size": 474,
+  "sample": [
+   "GRAPH_FLOAT_FILE",
+   "graph"
+  ]
+ },
+ {
+  "s2_func": "0x6774f0",
+  "cur": "sub_6774F0",
+  "aw_name": "ScriptableCl_AnimNotetrackEvent",
+  "anchors": 1,
+  "size": 455,
+  "sample": [
+   "#snd_"
+  ]
+ },
+ {
+  "s2_func": "0x680550",
+  "cur": "ScriptableSv_DoEventExplosion",
+  "aw_name": "ScriptableSv_DoEventExplosion",
+  "anchors": 1,
+  "size": 1196,
+  "sample": [
+   "destructible_toy"
+  ]
+ },
+ {
+  "s2_func": "0x684480",
+  "cur": "Scr_EmitAnimation",
+  "aw_name": "Scr_EmitAnimation",
+  "anchors": 1,
+  "size": 36,
+  "sample": [
+   "#using_animtree was not specified"
+  ]
+ },
+ {
+  "s2_func": "0x684aa0",
+  "cur": "Scr_UsingTree",
+  "aw_name": "Scr_UsingTree",
+  "anchors": 1,
+  "size": 89,
+  "sample": [
+   "bad anim tree name: %s"
+  ]
+ },
+ {
+  "s2_func": "0x686490",
+  "cur": "MT_GetSize",
+  "aw_name": "MT_GetSize",
+  "anchors": 1,
+  "size": 118,
+  "sample": [
+   "MT_GetSize: max allocation size of %d bytes exceeded"
+  ]
+ },
+ {
+  "s2_func": "0x685e80",
+  "cur": "MT_AllocIndex",
+  "aw_name": "MT_AllocIndex",
+  "anchors": 1,
+  "size": 1000,
+  "sample": [
+   "MT_AllocIndex"
+  ]
+ },
+ {
+  "s2_func": "0x689910",
+  "cur": "SL_GetStringOfSize",
+  "aw_name": "SL_GetStringOfSize",
+  "anchors": 1,
+  "size": 1103,
+  "sample": [
+   "exceeded maximum number of script strings %u (see console log for more info)"
+  ]
+ },
+ {
+  "s2_func": "0x689320",
+  "cur": "sub_689320",
+  "aw_name": "SL_GetStringForVector",
+  "anchors": 1,
+  "size": 151,
+  "sample": [
+   "(%g, %g, %g)"
+  ]
+ },
+ {
+  "s2_func": "0x69c250",
+  "cur": "sub_69C250",
+  "aw_name": "Agent_Spawn",
+  "anchors": 1,
+  "size": 3329,
+  "sample": [
+   "agent%i"
+  ]
+ },
+ {
+  "s2_func": "0x7167b0",
+  "cur": "sub_7167B0",
+  "aw_name": "Bot_GetPathingStyleFromString",
+  "anchors": 1,
+  "size": 187,
+  "sample": [
+   "undefined"
+  ]
+ },
+ {
+  "s2_func": "0x6c3600",
+  "cur": "SV_BotGetRandomName",
+  "aw_name": "SV_BotGetRandomName",
+  "anchors": 1,
+  "size": 484,
+  "sample": [
+   "BotPlayer"
+  ]
+ },
+ {
+  "s2_func": "0x6d6cc0",
+  "cur": "SV_KickClient",
+  "aw_name": "SV_KickClient",
+  "anchors": 1,
+  "size": 448,
+  "sample": [
+   "%c \"EXE_CANNOTKICKHOSTPLAYER\""
+  ]
+ },
+ {
+  "s2_func": "0x6d6a90",
+  "cur": "SV_AddOperatorCommands",
+  "aw_name": "SV_AddOperatorCommands",
+  "anchors": 3,
+  "size": 192,
+  "sample": [
+   "hostmigration_start_backout",
+   "hostmigration_start",
+   "virtuallobby"
+  ]
+ },
+ {
+  "s2_func": "0xf5560",
+  "cur": "SV_ICantHear",
+  "aw_name": "SV_ICantHear",
+  "anchors": 1,
+  "size": 203,
+  "sample": [
+   "voicefail %i"
+  ]
+ },
+ {
+  "s2_func": "0xf49d0",
+  "cur": "SV_FreeClients",
+  "aw_name": "SV_FreeClients",
+  "anchors": 1,
+  "size": 805,
+  "sample": [
+   "SV_Shutdown"
+  ]
+ },
+ {
+  "s2_func": "0xf31d5",
+  "cur": "SV_DirectConnect",
+  "aw_name": "SV_DirectConnect",
+  "anchors": 1,
+  "size": 409,
+  "sample": [
+   "error\nEXE_MIGRATION_IN_PROGRESS"
+  ]
+ },
+ {
+  "s2_func": "0xf336e",
+  "cur": "sub_F336E",
+  "aw_name": "SV_DirectConnect",
+  "anchors": 6,
+  "size": 3255,
+  "sample": [
+   "error\nEXE_ERR_UNREGISTERED_CONNECTION",
+   "EXE_PLAYERKICKED_BOT_MAKE_ROOM",
+   "error\nEXE_BAD_CHALLENGE"
+  ]
+ },
+ {
+  "s2_func": "0xf5e90",
+  "cur": "SV_SendClientGameState",
+  "aw_name": "SV_SendClientGameState",
+  "anchors": 1,
+  "size": 491,
+  "sample": [
+   "EXE_NEEDSTATS"
+  ]
+ },
+ {
+  "s2_func": "0xf7110",
+  "cur": "SV_UserinfoChanged",
+  "aw_name": "SV_UpdateUserSession",
+  "anchors": 1,
+  "size": 937,
+  "sample": [
+   "New XUID claiming client num"
+  ]
+ },
+ {
+  "s2_func": "0xf5070",
+  "cur": "SV_GeneratePresetTestClientCustomization",
+  "aw_name": "SV_GeneratePresetTestClientCustomization",
+  "anchors": 1,
+  "size": 150,
+  "sample": [
+   "mp/botcostumetable.csv"
+  ]
+ },
+ {
+  "s2_func": "0x6dbac0",
+  "cur": "sub_6DBAC0",
+  "aw_name": "SV_SetConfigstring",
+  "anchors": 1,
+  "size": 401,
+  "sample": [
+   "%c %i %s"
+  ]
+ },
+ {
+  "s2_func": "0x6da5f0",
+  "cur": "SV_AllocateClientMemory",
+  "aw_name": "SV_AllocateClientMemory",
+  "anchors": 1,
+  "size": 385,
+  "sample": [
+   "g_serverHunkUser"
+  ]
+ },
+ {
+  "s2_func": "0x6dc350",
+  "cur": "SV_SpawnServer",
+  "aw_name": "SV_SpawnServer",
+  "anchors": 2,
+  "size": 2654,
+  "sample": [
+   "loadingnewmap\n%s\n%s",
+   "map_restart"
+  ]
+ },
+ {
+  "s2_func": "0x6dd8c0",
+  "cur": "sub_6DD8C0",
+  "aw_name": "SVC_GetStatus",
+  "anchors": 1,
+  "size": 563,
+  "sample": [
+   "%i %i \"%s\"\n"
+  ]
+ },
+ {
+  "s2_func": "0x6ddf50",
+  "cur": "SVC_Status",
+  "aw_name": "SVC_Status",
+  "anchors": 1,
+  "size": 141,
+  "sample": [
+   "statusResponse\n"
+  ]
+ },
+ {
+  "s2_func": "0x6ddb00",
+  "cur": "sub_6DDB00",
+  "aw_name": "SVC_Info",
+  "anchors": 1,
+  "size": 1090,
+  "sample": [
+   "infoResponse\n"
+  ]
+ },
+ {
+  "s2_func": "0x6de420",
+  "cur": "SV_CalcPings",
+  "aw_name": "SV_CalcPings",
+  "anchors": 1,
+  "size": 912,
+  "sample": [
+   "hostmigration_start %i\n"
+  ]
+ },
+ {
+  "s2_func": "0x6de970",
+  "cur": "SV_Frame",
+  "aw_name": "SV_CheckOverflow",
+  "anchors": 9,
+  "size": 444,
+  "sample": [
+   "scriptableSnapshots.cachedSnapNextIndex",
+   "scriptableSnapshots.snapNextIndex",
+   "nextCachedSnapshotEntities"
+  ]
+ },
+ {
+  "s2_func": "0x6dfeb0",
+  "cur": "MatchEnd_Party",
+  "aw_name": "MatchEnd_Party",
+  "anchors": 1,
+  "size": 356,
+  "sample": [
+   "EXE_MIGRATIONLIMIT"
+  ]
+ },
+ {
+  "s2_func": "0x6e2c20",
+  "cur": "sub_6E2C20",
+  "aw_name": "SaveMemory_CreateHeaderInternal",
+  "anchors": 1,
+  "size": 1533,
+  "sample": [
+   "migration"
+  ]
+ },
+ {
+  "s2_func": "0x6e2330",
+  "cur": "PickNewHost",
+  "aw_name": "PickNewHost",
+  "anchors": 2,
+  "size": 482,
+  "sample": [
+   "disconnect EXE_MIGRATIONABORTED_BACKOUT",
+   "disconnect EXE_MIGRATIONABORTED"
+  ]
+ },
+ {
+  "s2_func": "0x726990",
+  "cur": "CODAnywhere_Init",
+  "aw_name": "CODAnywhere_Init",
+  "anchors": 2,
+  "size": 359,
+  "sample": [
+   "Success Message",
+   "CODAnywhere"
+  ]
+ },
+ {
+  "s2_func": "0x726d60",
+  "cur": "CODAnywhere_OpenSuccessPopup",
+  "aw_name": "CODAnywhere_OpenSuccessPopup",
+  "anchors": 3,
+  "size": 158,
+  "sample": [
+   "LUA_MENU_COD_ANYWHERE_CREATE_LINK_SUCCESS",
+   "LUA_MENU_COD_ANYWHERE_LINK_SUCCESS",
+   "UNKNOWN TASK!"
+  ]
+ },
+ {
+  "s2_func": "0x726c40",
+  "cur": "CODAnywhere_OpenErrorPopup",
+  "aw_name": "CODAnywhere_OpenErrorPopup",
+  "anchors": 10,
+  "size": 284,
+  "sample": [
+   "LUA_MENU_COD_ANYWHERE_ERROR_EMAIL_REGISTERED",
+   "LUA_MENU_COD_ANYWHERE_ERROR_INVALID_PASSWORD",
+   "LUA_MENU_COD_ANYWHERE_ERROR_FIRSTNAME"
+  ]
+ },
+ {
+  "s2_func": "0x725c00",
+  "cur": "CODAnywhere_GetUserUcdDataUpdateComplete",
+  "aw_name": "CODAnywhere_GetUserUcdDataUpdateComplete",
+  "anchors": 1,
+  "size": 660,
+  "sample": [
+   "cod_anywhere_link_ucd_popup_menu"
+  ]
+ },
+ {
+  "s2_func": "0x72d880",
+  "cur": "SEH_LanguageHasAssets",
+  "aw_name": "SEH_LanguageHasAssets",
+  "anchors": 1,
+  "size": 155,
+  "sample": [
+   "%s_code_post_gfx_mp.ff"
+  ]
+ },
+ {
+  "s2_func": "0x1f66d0",
+  "cur": "sub_1F66D0",
+  "aw_name": "GetContentServerTaskProgress",
+  "anchors": 1,
+  "size": 470,
+  "sample": [
+   "upload"
+  ]
+ },
+ {
+  "s2_func": "0x7425f0",
+  "cur": "UI_DrawSpawnLocationMap",
+  "aw_name": "UI_DrawSpawnLocationMap",
+  "anchors": 8,
+  "size": 1311,
+  "sample": [
+   "img_load_friendly_spawn",
+   "img_load_noteam_spawn",
+   "img_load_enemy_spawn"
+  ]
+ },
+ {
+  "s2_func": "0x742b10",
+  "cur": "UI_DrawSpawnLocationMap_DrawSpawnPoint",
+  "aw_name": "UI_DrawSpawnLocationMap_DrawSpawnPoint",
+  "anchors": 1,
+  "size": 705,
+  "sample": [
+   "img_load_faction_bg"
+  ]
+ },
+ {
+  "s2_func": "0x745ef0",
+  "cur": "UI_RegisterDvars",
+  "aw_name": "UI_RegisterDvars",
+  "anchors": 1,
+  "size": 2804,
+  "sample": [
+   "ui_drawCrosshair"
+  ]
+ },
+ {
+  "s2_func": "0x743e40",
+  "cur": "UI_GetMapDescByIndex",
+  "aw_name": "UI_GetMapDescByIndex",
+  "anchors": 2,
+  "size": 87,
+  "sample": [
+   "@DLC_MAPS_DESC",
+   "@DLC_MAPSTORE"
+  ]
+ },
+ {
+  "s2_func": "0x740db0",
+  "cur": "UI_BuildServerDisplayList",
+  "aw_name": "UI_BuildServerDisplayList",
+  "anchors": 2,
+  "size": 1601,
+  "sample": [
+   "EXE_COD_MULTIPLAYER",
+   "000.000.000.000"
+  ]
+ },
+ {
+  "s2_func": "0x3386b0",
+  "cur": "UI_FeederItemText_NonPlayingLocalClients",
+  "aw_name": "UI_FeederItemText_NonPlayingLocalClients",
+  "anchors": 3,
+  "size": 356,
+  "sample": [
+   "PLATFORM_UI_FEEDER_SECONDARY_CONTROLLER_SIGNIN",
+   "PLATFORM_UI_FEEDER_SECONDARY_CONTROLLER_PLUGIN",
+   "PLATFORM_UI_FEEDER_SECONDARY_CONTROLLER_PLAY"
+  ]
+ },
+ {
+  "s2_func": "0x747df0",
+  "cur": "UI_SetActiveMenu",
+  "aw_name": "UI_SetActiveMenu",
+  "anchors": 5,
+  "size": 8796,
+  "sample": [
+   "forcenosplitscreencontrol UI_SetActiveMenu_SYSTEMLINKJOINGAME\n",
+   "forcenosplitscreencontrol UI_SetActiveMenu_PRIVATELOBBY\n",
+   "forcenosplitscreencontrol UI_SetActiveMenu_GAMELOBBY\n"
+  ]
+ },
+ {
+  "s2_func": "0x74a2d0",
+  "cur": "UI_ShowAcceptInviteWarning",
+  "aw_name": "UI_ShowAcceptInviteWarning",
+  "anchors": 1,
+  "size": 54,
+  "sample": [
+   "acceptinvite_warning"
+  ]
+ },
+ {
+  "s2_func": "0x743c20",
+  "cur": "UI_GetConnectInfoString",
+  "aw_name": "UI_GetConnectInfoString",
+  "anchors": 5,
+  "size": 220,
+  "sample": [
+   "EXE_AWAITINGCONNECTION",
+   "EXE_AWAITINGCHALLENGE",
+   "EXE_AWAITINGGAMESTATE"
+  ]
+ },
+ {
+  "s2_func": "0x74a610",
+  "cur": "sub_74A610",
+  "aw_name": "UI_StartServerRefresh",
+  "anchors": 1,
+  "size": 410,
+  "sample": [
+   "%s %i, %i   %i:%02i"
+  ]
+ },
+ {
+  "s2_func": "0x74afe0",
+  "cur": "RunOp",
+  "aw_name": "GetPrivateLobbyStatus",
+  "anchors": 1,
+  "size": 185,
+  "sample": [
+   "MENU_WAITING_FOR_HOST_TO_START"
+  ]
+ },
+ {
+  "s2_func": "0x74eb10",
+  "cur": "Script_GetHostMigrateQuestionString",
+  "aw_name": "UI_GetHostMigrateQuestionString",
+  "anchors": 2,
+  "size": 202,
+  "sample": [
+   "MPUI_MAKEHOSTQUESTION",
+   "hostchangewarning"
+  ]
+ },
+ {
+  "s2_func": "0x750240",
+  "cur": "UI_TogglePlayerMute",
+  "aw_name": "UI_TogglePlayerMute",
+  "anchors": 1,
+  "size": 360,
+  "sample": [
+   "playerUnmutable"
+  ]
+ },
+ {
+  "s2_func": "0x758540",
+  "cur": "Alloc",
+  "aw_name": "Alloc",
+  "anchors": 1,
+  "size": 528,
+  "sample": [
+   "Out of immutable memory pool\n"
+  ]
+ },
+ {
+  "s2_func": "0x7660b0",
+  "cur": "Content_Clear",
+  "aw_name": "Content_Clear",
+  "anchors": 1,
+  "size": 151,
+  "sample": [
+   "MP_ORIGINAL_MAPS"
+  ]
+ },
+ {
+  "s2_func": "0x765ed0",
+  "cur": "Content_RegisterEntitlements",
+  "aw_name": "Content_GetContentPackNameByContentID",
+  "anchors": 1,
+  "size": 354,
+  "sample": [
+   "DLC_UNKNOWN"
+  ]
+ },
+ {
+  "s2_func": "0x766b00",
+  "cur": "SegmentSentinelReadAndVerify",
+  "aw_name": "SegmentSentinelReadAndVerify",
+  "anchors": 1,
+  "size": 508,
+  "sample": [
+   "MENU_SAVEDATA_CORRUPTED"
+  ]
+ },
+ {
+  "s2_func": "0x76fb10",
+  "cur": "PakFile_Open",
+  "aw_name": "PakFile_Open",
+  "anchors": 2,
+  "size": 719,
+  "sample": [
+   "soundfile",
+   "imagefile"
+  ]
+ },
+ {
+  "s2_func": "0x7b5e90",
+  "cur": "DObjCreateDuplicateParts",
+  "aw_name": "DObjCreateDuplicateParts",
+  "anchors": 3,
+  "size": 1695,
+  "sample": [
+   "dobj for xmodel '%s' has more than %d blend shape weights. (see console for details)",
+   "dobj for xmodel '%s' has more than %d blend shape targets. (see console for details)",
+   "dobj for xmodel '%s' has more than %d bones (%d, %d, %d) (see console for details)"
+  ]
+ },
+ {
+  "s2_func": "0xd820",
+  "cur": "sub_D820",
+  "aw_name": "DObjSetEmblemMaterialOverride",
+  "anchors": 1,
+  "size": 117,
+  "sample": [
+   "colorMap"
+  ]
+ },
+ {
+  "s2_func": "0x7c5530",
+  "cur": "XAnimAllocInfoWithParent",
+  "aw_name": "XAnimAllocInfoWithParent",
+  "anchors": 1,
+  "size": 389,
+  "sample": [
+   "exceeded maximum number of anim info"
+  ]
+ },
+ {
+  "s2_func": "0x7d5910",
+  "cur": "XAnimSetIKSettings",
+  "aw_name": "XAnimSetIKSettings",
+  "anchors": 4,
+  "size": 374,
+  "sample": [
+   "ik_out_start_",
+   "ik_in_start_",
+   "ik_out_end_"
+  ]
+ },
+ {
+  "s2_func": "0x78b020",
+  "cur": "sub_78B020",
+  "aw_name": "Sys_GetTextSection",
+  "anchors": 1,
+  "size": 149,
+  "sample": [
+   ".text"
+  ]
+ },
+ {
+  "s2_func": "0x7f8b50",
+  "cur": "Ragdoll_InitDvars",
+  "aw_name": "Ragdoll_InitDvars",
+  "anchors": 2,
+  "size": 652,
+  "sample": [
+   "ragdoll_mp_limit",
+   "ragdoll_enable"
+  ]
+ },
+ {
+  "s2_func": "0x7f9ab0",
+  "cur": "Ragdoll_InitCommands",
+  "aw_name": "Ragdoll_InitCommands",
+  "anchors": 5,
+  "size": 164,
+  "sample": [
+   "ragdoll_hitloc_mapping",
+   "ragdoll_baselerp_bone",
+   "ragdoll_clear"
+  ]
+ },
+ {
+  "s2_func": "0x81a210",
+  "cur": "sub_81A210",
+  "aw_name": "HeliPath_SetYawSpeedMode",
+  "anchors": 1,
+  "size": 314,
+  "sample": [
+   "faster"
+  ]
+ },
+ {
+  "s2_func": "0x81fbb0",
+  "cur": "VehPath_SpawnNode",
+  "aw_name": "VehPath_SpawnNode",
+  "anchors": 2,
+  "size": 345,
+  "sample": [
+   "info_vehicle_node_rotate",
+   "info_vehicle_node_notify"
+  ]
+ },
+ {
+  "s2_func": "0x6fdeb0",
+  "cur": "Session_Init",
+  "aw_name": "Session_Init",
+  "anchors": 2,
+  "size": 562,
+  "sample": [
+   "partySession",
+   "gameSession"
+  ]
+ },
+ {
+  "s2_func": "0x82aea0",
+  "cur": "Turret_PlaceSentry_SatCom_Hack",
+  "aw_name": "Turret_PlaceSentry_SatCom_Hack",
+  "anchors": 2,
+  "size": 376,
+  "sample": [
+   "mp_satcom_obj_red",
+   "mp_satcom_obj"
+  ]
+ },
+ {
+  "s2_func": "0x831d10",
+  "cur": "LiveCounter_Init",
+  "aw_name": "LiveCounter_Init",
+  "anchors": 1,
+  "size": 136,
+  "sample": [
+   "incrementcounter"
+  ]
+ },
+ {
+  "s2_func": "0x83af00",
+  "cur": "dwLobbyErrorCodeToString",
+  "aw_name": "dwLobbyErrorCodeToString",
+  "anchors": 394,
+  "size": 8787,
+  "sample": [
+   "BD_CONTENTSTREAMING_NOT_ENOUGH_DOWNLOAD_BUFFER_SPACE",
+   "BD_CONTENTSTREAMING_APPLE_RECEIPT_FILENAME_MISMATCH",
+   "BD_CONTENTSTREAMING_FILENAME_MAX_LENGTH_EXCEEDED"
+  ]
+ },
+ {
+  "s2_func": "0x839e60",
+  "cur": "dwConnectionErrorHandler",
+  "aw_name": "dwConnectionErrorHandler",
+  "anchors": 1,
+  "size": 126,
+  "sample": [
+   "XBOXLIVE_LOBBY_CONNECTION_ERR"
+  ]
+ },
+ {
+  "s2_func": "0x839ca0",
+  "cur": "dwAssertHandler",
+  "aw_name": "dwAssertHandler",
+  "anchors": 2,
+  "size": 369,
+  "sample": [
+   "BD_ASSERT(%s) failed. \"%s\"\n",
+   "BD_ASSERT failed. \"%s\"\n"
+  ]
+ },
+ {
+  "s2_func": "0x83e860",
+  "cur": "EliteClan_CreateUpdate",
+  "aw_name": "EliteClan_CreateUpdate",
+  "anchors": 1,
+  "size": 643,
+  "sample": [
+   "MENU_CLAN_CREATED"
+  ]
+ },
+ {
+  "s2_func": "0x83e800",
+  "cur": "EliteClan_Create",
+  "aw_name": "EliteClan_Create",
+  "anchors": 1,
+  "size": 84,
+  "sample": [
+   "CLANS_NAME_YOUR_CLAN"
+  ]
+ },
+ {
+  "s2_func": "0x7ca384",
+  "cur": "EliteClan_TransferOwnership",
+  "aw_name": "EliteClan_TransferOwnership",
+  "anchors": 1,
+  "size": 12,
+  "sample": [
+   "CLANS_TRANSFER_OWNER_PROBLEM"
+  ]
+ },
+ {
+  "s2_func": "0x841430",
+  "cur": "EliteClan_RegisterCommands",
+  "aw_name": "EliteClan_RegisterCommands",
+  "anchors": 2,
+  "size": 60,
+  "sample": [
+   "eliteclan_refresh",
+   "starteliteclan"
+  ]
+ },
+ {
+  "s2_func": "0x848350",
+  "cur": "Facebook_RegisterCommands",
+  "aw_name": "Facebook_RegisterCommands",
+  "anchors": 6,
+  "size": 164,
+  "sample": [
+   "refreshfacebookfriends",
+   "editfacebookusername",
+   "editfacebookpassword"
+  ]
+ },
+ {
+  "s2_func": "0x849b10",
+  "cur": "PlayercardCache_RegisterCommands",
+  "aw_name": "PlayercardCache_RegisterCommands",
+  "anchors": 2,
+  "size": 60,
+  "sample": [
+   "download_playercard",
+   "upload_playercard"
+  ]
+ },
+ {
+  "s2_func": "0x5dcfb0",
+  "cur": "sub_5DCFB0",
+  "aw_name": "SocialConfig_HandleInstantMessage",
+  "anchors": 1,
+  "size": 95,
+  "sample": [
+   "SOUG:"
+  ]
+ },
+ {
+  "s2_func": "0x84b900",
+  "cur": "FriendsMenu_IsUserJoinable",
+  "aw_name": "FriendsMenu_IsUserJoinable_Internal",
+  "anchors": 2,
+  "size": 311,
+  "sample": [
+   "MENU_FRIEND_STILL_PENDING",
+   "MENU_FRIEND_NOT_CONFIRMED"
+  ]
+ },
+ {
+  "s2_func": "0x84b6c0",
+  "cur": "FriendsMenu_IsUserInvitable",
+  "aw_name": "FriendsMenu_IsUserInvitable",
+  "anchors": 2,
+  "size": 363,
+  "sample": [
+   "MENU_FRIEND_OFFLINE",
+   "MENU_INVITE_SPAM"
+  ]
+ },
+ {
+  "s2_func": "0x84c390",
+  "cur": "MeetPlayer_GetPresenceForSlot",
+  "aw_name": "MeetPlayer_GetStatus",
+  "anchors": 4,
+  "size": 292,
+  "sample": [
+   "MENU_LAST_MET_LESS_THAN_A_MIN_AGO",
+   "MENU_LAST_MET_N_HOURS_AGO",
+   "MENU_LAST_MET_N_DAYS_AGO"
+  ]
+ },
+ {
+  "s2_func": "0x84f4b0",
+  "cur": "UserGroups_GetGroupPopupText",
+  "aw_name": "UserGroups_GetGroupPopupText",
+  "anchors": 2,
+  "size": 345,
+  "sample": [
+   "MENU_USER_GROUP_SEPERATOR",
+   "MENU_NO_COMMON_GROUPS"
+  ]
+ },
+ {
+  "s2_func": "0x84f100",
+  "cur": "UserGroups_SendAck",
+  "aw_name": "UserGroups_SendAck",
+  "anchors": 1,
+  "size": 573,
+  "sample": [
+   "ug_groups_confirmed"
+  ]
+ },
+ {
+  "s2_func": "0x8507d0",
+  "cur": "LiveAntiCheat_DWPlayerBanned",
+  "aw_name": "LiveAntiCheat_DWPlayerBanned",
+  "anchors": 1,
+  "size": 249,
+  "sample": [
+   "EXE_DEMONWARE_PLAYER_BAN"
+  ]
+ },
+ {
+  "s2_func": "0x852cb0",
+  "cur": "sub_852CB0",
+  "aw_name": "LiveCommon_Init",
+  "anchors": 1,
+  "size": 442,
+  "sample": [
+   "onPlayerQuit"
+  ]
+ },
+ {
+  "s2_func": "0x856a20",
+  "cur": "Live_SyncOnlineDataPopupTimeout",
+  "aw_name": "Live_SyncOnlineDataPopupTimeout",
+  "anchors": 1,
+  "size": 467,
+  "sample": [
+   "EXE_ERR_ONLINE_DATA"
+  ]
+ },
+ {
+  "s2_func": "0x857ce0",
+  "cur": "Live_SyncOnlineDataFrame",
+  "aw_name": "Live_SyncOnlineDataFrame",
+  "anchors": 2,
+  "size": 1403,
+  "sample": [
+   "onSystemLinkNetwork",
+   "onOnlineDataFetched"
+  ]
+ },
+ {
+  "s2_func": "0x8665f0",
+  "cur": "sub_8665F0",
+  "aw_name": "R_EmitSModelSurfs_Camera",
+  "anchors": 1,
+  "size": 2039,
+  "sample": [
+   "camera"
+  ]
+ },
+ {
+  "s2_func": "0x866df0",
+  "cur": "sub_866DF0",
+  "aw_name": "R_EmitSModelSurfs_Shadow",
+  "anchors": 1,
+  "size": 1123,
+  "sample": [
+   "shadow"
+  ]
+ },
+ {
+  "s2_func": "0x86e600",
+  "cur": "R_Cinematic_BinkOpenPath_MemoryResident",
+  "aw_name": "R_Cinematic_BinkOpenPath_MemoryResident",
+  "anchors": 2,
+  "size": 364,
+  "sample": [
+   "Zero file size",
+   "Open failed"
+  ]
+ },
+ {
+  "s2_func": "0x86e3b0",
+  "cur": "sub_86E3B0",
+  "aw_name": "R_Cinematic_BinkOpenPath",
+  "anchors": 1,
+  "size": 579,
+  "sample": [
+   "BinkOpen: %s"
+  ]
+ },
+ {
+  "s2_func": "0x86e0a0",
+  "cur": "R_Cinematic_BinkLocalizedAudioTracksFromStringtable",
+  "aw_name": "R_Cinematic_BinkLocalizedAudioTracksFromStringtable",
+  "anchors": 1,
+  "size": 301,
+  "sample": [
+   "language_channels"
+  ]
+ },
+ {
+  "s2_func": "0x870b00",
+  "cur": "sub_870B00",
+  "aw_name": "R_UnregisterCmds",
+  "anchors": 1,
+  "size": 104,
+  "sample": [
+   "imagelist"
+  ]
+ },
+ {
+  "s2_func": "0x88ece0",
+  "cur": "R_RegisterDvars",
+  "aw_name": "R_RegisterDvars",
+  "anchors": 9,
+  "size": 19048,
+  "sample": [
+   "r_smp_worker_thread0",
+   "r_smp_worker_thread1",
+   "r_smp_worker_thread2"
+  ]
+ },
+ {
+  "s2_func": "0x8abf50",
+  "cur": "Material_Init",
+  "aw_name": "Material_Init",
+  "anchors": 1,
+  "size": 527,
+  "sample": [
+   "mtl_ovrd_%d"
+  ]
+ },
+ {
+  "s2_func": "0x8e5c10",
+  "cur": "RB_InitCodeImages",
+  "aw_name": "RB_InitCodeImages",
+  "anchors": 12,
+  "size": 2588,
+  "sample": [
+   "TEXTURE_SRC_CODE_DALTONIZE_CLUT",
+   "shadowmapSamplerSpot",
+   "shadowmapSamplerSun"
+  ]
+ },
+ {
+  "s2_func": "0x8c8480",
+  "cur": "R_RegisterSunDvars",
+  "aw_name": "R_RegisterSunDvars",
+  "anchors": 1,
+  "size": 874,
+  "sample": [
+   "sun_flare"
+  ]
+ },
+ {
+  "s2_func": "0x8c8c40",
+  "cur": "sub_8C8C40",
+  "aw_name": "R_AddSparkSurf",
+  "anchors": 1,
+  "size": 244,
+  "sample": [
+   "<sparksurf>"
+  ]
+ },
+ {
+  "s2_func": "0x9212f0",
+  "cur": "build_huffman",
+  "aw_name": "build_huffman",
+  "anchors": 1,
+  "size": 432,
+  "sample": [
+   "bad code lengths"
+  ]
+ },
+ {
+  "s2_func": "0x921530",
+  "cur": "decode_block",
+  "aw_name": "decode_block",
+  "anchors": 1,
+  "size": 899,
+  "sample": [
+   "bad huffman code"
+  ]
+ },
+ {
+  "s2_func": "0x923500",
+  "cur": "process_marker",
+  "aw_name": "process_marker",
+  "anchors": 6,
+  "size": 1059,
+  "sample": [
+   "progressive jpeg",
+   "expected marker",
+   "bad DHT header"
+  ]
+ },
+ {
+  "s2_func": "0x923930",
+  "cur": "decode_jpeg_image",
+  "aw_name": "process_scan_header",
+  "anchors": 5,
+  "size": 716,
+  "sample": [
+   "bad SOS component count",
+   "bad SOS len",
+   "bad DC huff"
+  ]
+ },
+ {
+  "s2_func": "0x922fb0",
+  "cur": "decode_jpeg_header",
+  "aw_name": "process_frame_header",
+  "anchors": 10,
+  "size": 1349,
+  "sample": [
+   "bad component count",
+   "no header height",
+   "bad component ID"
+  ]
+ },
+ {
+  "s2_func": "0x927370",
+  "cur": "MatchRules_Notify",
+  "aw_name": "MatchRules_Notify",
+  "anchors": 1,
+  "size": 1182,
+  "sample": [
+   "recipe_save_failed_popup"
+  ]
+ },
+ {
+  "s2_func": "0x927f70",
+  "cur": "MatchRules_ValidateCustomClass",
+  "aw_name": "MatchRules_ValidateCustomClass",
+  "anchors": 5,
+  "size": 478,
+  "sample": [
+   "Perk_Slot1",
+   "Perk_Slot2",
+   "Perk_Slot3"
+  ]
+ },
+ {
+  "s2_func": "0x926060",
+  "cur": "GetLocalizedMatchRulesName",
+  "aw_name": "GetLocalizedMatchRulesName",
+  "anchors": 1,
+  "size": 1118,
+  "sample": [
+   "LUA_MENU_MLG_RECIPE_NAME"
+  ]
+ },
+ {
+  "s2_func": "0x9259d0",
+  "cur": "sub_9259D0",
+  "aw_name": "GetMatchRulesLookupFromString",
+  "anchors": 1,
+  "size": 158,
+  "sample": [
+   "rawgametype"
+  ]
+ },
+ {
+  "s2_func": "0x925a70",
+  "cur": "sub_925A70",
+  "aw_name": "GetMatchRulesSaveLocationFromString",
+  "anchors": 1,
+  "size": 88,
+  "sample": [
+   "history"
+  ]
+ },
+ {
+  "s2_func": "0x71e1b0",
+  "cur": "SND_ParseDspBusesFile",
+  "aw_name": "SND_ParseDspBusesFile",
+  "anchors": 3,
+  "size": 747,
+  "sample": [
+   "replaceQuieter",
+   "replaceOldest",
+   "unlimited"
+  ]
+ },
+ {
+  "s2_func": "0x717360",
+  "cur": "SND_InitHealthFx",
+  "aw_name": "SND_InitHealthFx",
+  "anchors": 3,
+  "size": 546,
+  "sample": [
+   "deathsDoorHPChunkSize",
+   "normalHPChunkSize",
+   "deathsDoorHPCeil"
+  ]
+ },
+ {
+  "s2_func": "0xae6d80",
+  "cur": "error_to_string",
+  "aw_name": "error_to_string",
+  "anchors": 1,
+  "size": 28,
+  "sample": [
+   "Invalid error code."
+  ]
+ }
+]

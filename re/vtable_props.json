@@ -1,0 +1,10 @@
+[
+ {
+  "s2_func": "0xb7700",
+  "name": "bdAuth::getStatus",
+  "s2_table": "0xb33318",
+  "aw_table": "0x8202b068",
+  "anchors": 2,
+  "mode": "anchored"
+ }
+]

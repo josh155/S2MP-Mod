@@ -1,0 +1,182 @@
+[
+ {
+  "s2_func": "0x72d920",
+  "name": "SEH_LocalizeTextMessage",
+  "seeds": 1,
+  "via": [
+   "UI_SafeLocalizeTextMessage"
+  ],
+  "size": 1083,
+  "gen": 1
+ },
+ {
+  "s2_func": "0xa1080",
+  "name": "DB_FindXAssetHeader",
+  "seeds": 1,
+  "via": [
+   "R_InitLightDefs"
+  ],
+  "size": 841,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x769910",
+  "name": "PMem_AllocFromSource_NoDebug",
+  "seeds": 1,
+  "via": [
+   "FX_MarkAllocateClientMemory"
+  ],
+  "size": 364,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x9a4350",
+  "name": "raccess_make_file_name",
+  "seeds": 1,
+  "via": [
+   "raccess_guess_vfat"
+  ],
+  "size": 279,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x74f0b0",
+  "name": "UI_GetMapIdForNum",
+  "seeds": 1,
+  "via": [
+   "UI_GetMapDescByIndex"
+  ],
+  "size": 255,
+  "gen": 1
+ },
+ {
+  "s2_func": "0xa99650",
+  "name": "bdUPnPDevice__genUPnPCommand",
+  "seeds": 1,
+  "via": [
+   "bdUPnPDevice__prepareGetExternalIPRequest"
+  ],
+  "size": 240,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x2e31a0",
+  "name": "luaL_error",
+  "seeds": 1,
+  "via": [
+   "hks__profile_tick"
+  ],
+  "size": 124,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x64b830",
+  "name": "Cmd_RemoveCommand",
+  "seeds": 1,
+  "via": [
+   "R_UnregisterCmds"
+  ],
+  "size": 97,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x4a0b80",
+  "name": "CL_ControllerIndexFromClientNum",
+  "seeds": 1,
+  "via": [
+   "LiveStorage_ResetStatsConfirm"
+  ],
+  "size": 92,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x788aa0",
+  "name": "Live_CanUserPlaySystemLink",
+  "seeds": 1,
+  "via": [
+   "Live_CanAccessSystemLinkMenu"
+  ],
+  "size": 74,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x308f80",
+  "name": "hksi_hks_getname",
+  "seeds": 1,
+  "via": [
+   "hks::HeapVisualizer::firstVisitCallback_pre"
+  ],
+  "size": 70,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x199b50",
+  "name": "PLfprintf",
+  "seeds": 1,
+  "via": [
+   "LuaPlus__hks_default_luaplus_errorFunc"
+  ],
+  "size": 69,
+  "gen": 1
+ },
+ {
+  "s2_func": "0xa04f40",
+  "name": "I_strcmp",
+  "seeds": 1,
+  "via": [
+   "CG_ParseIsSectionBreak"
+  ],
+  "size": 67,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x785730",
+  "name": "Live_GetUploadSpeed",
+  "seeds": 1,
+  "via": [
+   "Live_HowManyPlayersCanWeHost"
+  ],
+  "size": 18,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x744bb0",
+  "name": "UI_IsFullscreen",
+  "seeds": 1,
+  "via": [
+   "Live_InLoadingScreen"
+  ],
+  "size": 3,
+  "gen": 1
+ },
+ {
+  "s2_func": "0x2e2eb0",
+  "name": "luaL_checkoption",
+  "seeds": 1,
+  "via": [
+   "hks__compiler_settings"
+  ],
+  "size": 308,
+  "gen": 2
+ },
+ {
+  "s2_func": "0xcecd0",
+  "name": "LiveStorage_DoWeHavePlaylists",
+  "seeds": 1,
+  "via": [
+   "Playlist_GetItemCategoryClass"
+  ],
+  "size": 11,
+  "gen": 2
+ },
+ {
+  "s2_func": "0x1051d0",
+  "name": "hksDefaultErrorFunction",
+  "seeds": 1,
+  "via": [
+   "hksi_hks_getname"
+  ],
+  "size": 8,
+  "gen": 2
+ }
+]

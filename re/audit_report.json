@@ -1,0 +1,6121 @@
+{
+ "A_no_basis": [
+  {
+   "func": "0xc790",
+   "name": "hks__StaticStringCache__s_strings",
+   "size": 2427,
+   "has_comment": true
+  },
+  {
+   "func": "0x15330",
+   "name": "CG_GetLocalClientGlobals",
+   "size": 6648,
+   "has_comment": false
+  },
+  {
+   "func": "0x2f1b0",
+   "name": "CG_AddPlayerWeapon",
+   "size": 2740,
+   "has_comment": false
+  },
+  {
+   "func": "0x2fc80",
+   "name": "CG_DrawViewWeapon",
+   "size": 1857,
+   "has_comment": false
+  },
+  {
+   "func": "0x36910",
+   "name": "CG_ClientViewVisionSetUpdate",
+   "size": 440,
+   "has_comment": true
+  },
+  {
+   "func": "0x3af00",
+   "name": "CG_DrawInvalidCmdHint",
+   "size": 816,
+   "has_comment": true
+  },
+  {
+   "func": "0x3b230",
+   "name": "CG_DrawMantleHint",
+   "size": 603,
+   "has_comment": true
+  },
+  {
+   "func": "0x3d6f0",
+   "name": "CG_DrawSpectatorControls",
+   "size": 1300,
+   "has_comment": true
+  },
+  {
+   "func": "0x461e0",
+   "name": "CG_GetServerCommandsState",
+   "size": 6528,
+   "has_comment": false
+  },
+  {
+   "func": "0x4a850",
+   "name": "CG_ApplyFov",
+   "size": 210,
+   "has_comment": false
+  },
+  {
+   "func": "0x4e620",
+   "name": "CG_UpdateLocalPlayerStateToClientActive",
+   "size": 2429,
+   "has_comment": false
+  },
+  {
+   "func": "0x4efa0",
+   "name": "CG_PredictPlayerState",
+   "size": 3317,
+   "has_comment": false
+  },
+  {
+   "func": "0x507e0",
+   "name": "CG_RegisterFovDvars",
+   "size": 1445,
+   "has_comment": false
+  },
+  {
+   "func": "0x50f60",
+   "name": "CG_SetupViewmodelWorkspace",
+   "size": 213,
+   "has_comment": false
+  },
+  {
+   "func": "0x520d0",
+   "name": "CG_CalcEntityLerpOrigins",
+   "size": 965,
+   "has_comment": false
+  },
+  {
+   "func": "0x527c0",
+   "name": "CG_FovChanged",
+   "size": 148,
+   "has_comment": false
+  },
+  {
+   "func": "0x52860",
+   "name": "CG_GunFovChanged",
+   "size": 96,
+   "has_comment": false
+  },
+  {
+   "func": "0x5d0c0",
+   "name": "CG_UpdateViewModel",
+   "size": 1280,
+   "has_comment": false
+  },
+  {
+   "func": "0x5e980",
+   "name": "CG_BuildViewmodelDObj",
+   "size": 5209,
+   "has_comment": false
+  },
+  {
+   "func": "0x608b0",
+   "name": "CL_AdjustTimeDelta",
+   "size": 375,
+   "has_comment": true
+  },
+  {
+   "func": "0x68dc0",
+   "name": "CG_DrawActiveFrame",
+   "size": 8238,
+   "has_comment": false
+  },
+  {
+   "func": "0x6ae70",
+   "name": "CL_CalcSnapshotMemory",
+   "size": 99,
+   "has_comment": true
+  },
+  {
+   "func": "0x6af20",
+   "name": "Cl_CheckForResend_Connecting",
+   "size": 762,
+   "has_comment": true
+  },
+  {
+   "func": "0x6b220",
+   "name": "CL_CheckForResend_Challenging",
+   "size": 1886,
+   "has_comment": true
+  },
+  {
+   "func": "0x6ca80",
+   "name": "CL_ConfigstringChanged_f",
+   "size": 531,
+   "has_comment": false
+  },
+  {
+   "func": "0x6d280",
+   "name": "CL_Demo_GetNetMsgInfo",
+   "size": 424,
+   "has_comment": false
+  },
+  {
+   "func": "0x6dc50",
+   "name": "CL_Disconnect",
+   "size": 5393,
+   "has_comment": false
+  },
+  {
+   "func": "0x6f170",
+   "name": "CL_DisconnectError",
+   "size": 1044,
+   "has_comment": true
+  },
+  {
+   "func": "0x74910",
+   "name": "CL_FirstSnapshot",
+   "size": 1295,
+   "has_comment": true
+  },
+  {
+   "func": "0x74e20",
+   "name": "LUI_Survey_onFirstSnapshot",
+   "size": 490,
+   "has_comment": false
+  },
+  {
+   "func": "0x79160",
+   "name": "CL_GetConfigString",
+   "size": 168,
+   "has_comment": false
+  },
+  {
+   "func": "0x795d0",
+   "name": "CL_GetLocalClientActive",
+   "size": 6344,
+   "has_comment": false
+  },
+  {
+   "func": "0x7b0b0",
+   "name": "GetRenderTargetDimensions",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x7bfd0",
+   "name": "CL_InitCGame",
+   "size": 2803,
+   "has_comment": false
+  },
+  {
+   "func": "0x7f280",
+   "name": "CL_Live_PrivatePartyBackout",
+   "size": 110,
+   "has_comment": true
+  },
+  {
+   "func": "0x81350",
+   "name": "Mouse_ShouldCaptureAndAccumulateDelta",
+   "size": 6440,
+   "has_comment": true
+  },
+  {
+   "func": "0x84c10",
+   "name": "CL_WritePacket",
+   "size": 3932,
+   "has_comment": false
+  },
+  {
+   "func": "0x86d30",
+   "name": "CL_SetCGameTime",
+   "size": 808,
+   "has_comment": true
+  },
+  {
+   "func": "0x87070",
+   "name": "CL_SetClientState",
+   "size": 120,
+   "has_comment": true
+  },
+  {
+   "func": "0x8c9c0",
+   "name": "CG_CalcViewValues",
+   "size": 3018,
+   "has_comment": false
+  },
+  {
+   "func": "0x90750",
+   "name": "Com_Error",
+   "size": 607,
+   "has_comment": false
+  },
+  {
+   "func": "0x9a8b0",
+   "name": "Com_ResetFrametime",
+   "size": 48,
+   "has_comment": false
+  },
+  {
+   "func": "0x9dc60",
+   "name": "CL_CreateCmd",
+   "size": 999,
+   "has_comment": false
+  },
+  {
+   "func": "0x9e640",
+   "name": "DB_AllocXAssetEntry_Checked",
+   "size": 173,
+   "has_comment": true
+  },
+  {
+   "func": "0x9f0e0",
+   "name": "Image_SwapCacheSlots",
+   "size": 1357,
+   "has_comment": false
+  },
+  {
+   "func": "0xa29e0",
+   "name": "DB_GetXAssetPoolSize",
+   "size": 14,
+   "has_comment": false
+  },
+  {
+   "func": "0xa2d20",
+   "name": "XModel_GetStreamIndex",
+   "size": 38,
+   "has_comment": false
+  },
+  {
+   "func": "0xa4390",
+   "name": "DB_DelayedCloneXAsset",
+   "size": 1082,
+   "has_comment": true
+  },
+  {
+   "func": "0xa4f60",
+   "name": "DB_LoadXAssets",
+   "size": 2414,
+   "has_comment": true
+  },
+  {
+   "func": "0xa58d0",
+   "name": "DB_LoadXZone",
+   "size": 893,
+   "has_comment": true
+  },
+  {
+   "func": "0xabcc0",
+   "name": "DObj_MaterialsReady",
+   "size": 1535,
+   "has_comment": false
+  },
+  {
+   "func": "0xace30",
+   "name": "DB_TryLoadXFileInternal",
+   "size": 1866,
+   "has_comment": true
+  },
+  {
+   "func": "0xae040",
+   "name": "Image_UpdateGroupResidencyBits",
+   "size": 385,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf180",
+   "name": "Dvar_GetBool_Obfuscated",
+   "size": 159,
+   "has_comment": false
+  },
+  {
+   "func": "0xb1fd0",
+   "name": "Dvar_SetBool",
+   "size": 76,
+   "has_comment": false
+  },
+  {
+   "func": "0xb29c0",
+   "name": "Dvar_SetInt",
+   "size": 127,
+   "has_comment": false
+  },
+  {
+   "func": "0xb3070",
+   "name": "Dvar_SetString",
+   "size": 71,
+   "has_comment": false
+  },
+  {
+   "func": "0xb8c70",
+   "name": "Com_IsScorestreakTraining",
+   "size": 50,
+   "has_comment": false
+  },
+  {
+   "func": "0xb8d80",
+   "name": "SV_BuildBotUserinfo",
+   "size": 238,
+   "has_comment": true
+  },
+  {
+   "func": "0xb9610",
+   "name": "CG_InterpolatePlayerState",
+   "size": 3029,
+   "has_comment": false
+  },
+  {
+   "func": "0xbb110",
+   "name": "LUIElement_FireCompletionEvent",
+   "size": 980,
+   "has_comment": true
+  },
+  {
+   "func": "0xbcad0",
+   "name": "LUI_ActionSlotPressed",
+   "size": 377,
+   "has_comment": true
+  },
+  {
+   "func": "0xbd960",
+   "name": "LUI_CoD_NotifySplitscreenControllerUnplugged",
+   "size": 377,
+   "has_comment": true
+  },
+  {
+   "func": "0xbed10",
+   "name": "LUI_GameMessage",
+   "size": 414,
+   "has_comment": true
+  },
+  {
+   "func": "0xc3600",
+   "name": "LUI_GetAnimationStateFromStack",
+   "size": 460,
+   "has_comment": true
+  },
+  {
+   "func": "0xc4460",
+   "name": "LUI_Init",
+   "size": 3753,
+   "has_comment": true
+  },
+  {
+   "func": "0xc5dd0",
+   "name": "LUI_Layout",
+   "size": 418,
+   "has_comment": false
+  },
+  {
+   "func": "0xc66d0",
+   "name": "LUI_LuaCall_GetTextDimensions",
+   "size": 924,
+   "has_comment": true
+  },
+  {
+   "func": "0xc7b00",
+   "name": "LUI_NotifyDvarChanged",
+   "size": 960,
+   "has_comment": true
+  },
+  {
+   "func": "0xc9c10",
+   "name": "LUI_NotifyOmnvarChanged",
+   "size": 1143,
+   "has_comment": true
+  },
+  {
+   "func": "0xca0f0",
+   "name": "LUI_ObituaryHandler",
+   "size": 824,
+   "has_comment": false
+  },
+  {
+   "func": "0xca550",
+   "name": "PartyClient_DisconnectFromHost",
+   "size": 804,
+   "has_comment": true
+  },
+  {
+   "func": "0xcbc50",
+   "name": "LUI_RestoreOldMenu",
+   "size": 666,
+   "has_comment": true
+  },
+  {
+   "func": "0xcfad0",
+   "name": "LiveStorage_GetItemUnlockMessageByItemRef",
+   "size": 892,
+   "has_comment": true
+  },
+  {
+   "func": "0xd25c0",
+   "name": "LiveStorage_OpenPlayerDataRead",
+   "size": 1172,
+   "has_comment": true
+  },
+  {
+   "func": "0xd79d0",
+   "name": "LoadMapLoadscreen",
+   "size": 495,
+   "has_comment": true
+  },
+  {
+   "func": "0xdc720",
+   "name": "MSG_InitWrite",
+   "size": 33,
+   "has_comment": false
+  },
+  {
+   "func": "0xdc910",
+   "name": "MSG_ReadBits",
+   "size": 413,
+   "has_comment": false
+  },
+  {
+   "func": "0xdcb40",
+   "name": "MSG_ReadByte",
+   "size": 111,
+   "has_comment": false
+  },
+  {
+   "func": "0xdcbb0",
+   "name": "MSG_ReadData",
+   "size": 255,
+   "has_comment": false
+  },
+  {
+   "func": "0xdce60",
+   "name": "MSG_ReadInt64",
+   "size": 579,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd0b0",
+   "name": "MSG_ReadLong",
+   "size": 331,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd200",
+   "name": "MSG_ReadShort",
+   "size": 191,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd310",
+   "name": "MSG_ReadString",
+   "size": 173,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd7c0",
+   "name": "MSG_WriteConfigString",
+   "size": 74,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd810",
+   "name": "MSG_WriteBit0",
+   "size": 56,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd850",
+   "name": "MSG_WriteBit1",
+   "size": 85,
+   "has_comment": false
+  },
+  {
+   "func": "0xdd8b0",
+   "name": "MSG_WriteBits",
+   "size": 300,
+   "has_comment": false
+  },
+  {
+   "func": "0xdda40",
+   "name": "MSG_WriteBit",
+   "size": 141,
+   "has_comment": false
+  },
+  {
+   "func": "0xddad0",
+   "name": "MSG_WriteByte",
+   "size": 31,
+   "has_comment": false
+  },
+  {
+   "func": "0xddaf0",
+   "name": "MSG_WriteData",
+   "size": 72,
+   "has_comment": false
+  },
+  {
+   "func": "0xddd60",
+   "name": "MSG_WriteLong",
+   "size": 37,
+   "has_comment": false
+  },
+  {
+   "func": "0xddd90",
+   "name": "MSG_WriteShort",
+   "size": 38,
+   "has_comment": false
+  },
+  {
+   "func": "0xdde70",
+   "name": "MSG_WriteString",
+   "size": 216,
+   "has_comment": false
+  },
+  {
+   "func": "0xdfc80",
+   "name": "NetConstStrings_HasIndex",
+   "size": 32,
+   "has_comment": false
+  },
+  {
+   "func": "0xe5e90",
+   "name": "CG_AddViewmodelToScene",
+   "size": 1290,
+   "has_comment": false
+  },
+  {
+   "func": "0xf20d0",
+   "name": "SCR_DrawScreen",
+   "size": 1144,
+   "has_comment": false
+  },
+  {
+   "func": "0xf49d0",
+   "name": "SV_FreeClients",
+   "size": 805,
+   "has_comment": true
+  },
+  {
+   "func": "0xf5070",
+   "name": "SV_GeneratePresetTestClientCustomization",
+   "size": 150,
+   "has_comment": true
+  },
+  {
+   "func": "0xf5110",
+   "name": "SV_GetChallenge",
+   "size": 512,
+   "has_comment": true
+  },
+  {
+   "func": "0xf5560",
+   "name": "SV_ICantHear",
+   "size": 203,
+   "has_comment": true
+  },
+  {
+   "func": "0xf5e90",
+   "name": "SV_SendClientGameState",
+   "size": 491,
+   "has_comment": true
+  },
+  {
+   "func": "0xf7110",
+   "name": "SV_UserinfoChanged",
+   "size": 937,
+   "has_comment": true
+  },
+  {
+   "func": "0xfc310",
+   "name": "CompareFunction",
+   "size": 51,
+   "has_comment": false
+  },
+  {
+   "func": "0xfce80",
+   "name": "CG_UpdateViewmodelDObjAnims",
+   "size": 857,
+   "has_comment": false
+  },
+  {
+   "func": "0x110570",
+   "name": "LUI_CoD_LuaCall_GetCombatRecordWeaponStatsData",
+   "size": 3478,
+   "has_comment": true
+  },
+  {
+   "func": "0x115740",
+   "name": "LUI_CoD_LuaCall_GetIString",
+   "size": 395,
+   "has_comment": true
+  },
+  {
+   "func": "0x119650",
+   "name": "LUI_CoD_LuaCall_GetHighestDifficultyForLevel",
+   "size": 433,
+   "has_comment": true
+  },
+  {
+   "func": "0x11df90",
+   "name": "LUI_CoD_LuaCall_Inventory_GetAllItems",
+   "size": 627,
+   "has_comment": true
+  },
+  {
+   "func": "0x11e210",
+   "name": "LUI_CoD_LuaCall_Inventory_GetArmoryItems",
+   "size": 726,
+   "has_comment": true
+  },
+  {
+   "func": "0x125f80",
+   "name": "LUI_GetPartyMaxPlayers",
+   "size": 71,
+   "has_comment": false
+  },
+  {
+   "func": "0x125fd0",
+   "name": "LUI_SetPartyMaxPlayers",
+   "size": 131,
+   "has_comment": false
+  },
+  {
+   "func": "0x126060",
+   "name": "LUI_GetPrivatePartyMaxPlayers",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x1260a0",
+   "name": "LUI_SetPrivatePartyMaxPlayers",
+   "size": 113,
+   "has_comment": false
+  },
+  {
+   "func": "0x1261e0",
+   "name": "LUI_SetGamePartyMaxPlayers",
+   "size": 133,
+   "has_comment": false
+  },
+  {
+   "func": "0x127210",
+   "name": "LUI_CoD_LuaCall_GetSupportedLanguages",
+   "size": 203,
+   "has_comment": true
+  },
+  {
+   "func": "0x12afc0",
+   "name": "LUI_WorldToScreenPosition",
+   "size": 666,
+   "has_comment": false
+  },
+  {
+   "func": "0x135d10",
+   "name": "Scr_SetBlurForPlayer",
+   "size": 381,
+   "has_comment": true
+  },
+  {
+   "func": "0x13fa30",
+   "name": "FormatDateTime",
+   "size": 2296,
+   "has_comment": true
+  },
+  {
+   "func": "0x140910",
+   "name": "LUI_CoD_LuaCall_GetBinding",
+   "size": 451,
+   "has_comment": true
+  },
+  {
+   "func": "0x14f6f0",
+   "name": "BG_ParseEmblemCategoriesOrLayers",
+   "size": 806,
+   "has_comment": true
+  },
+  {
+   "func": "0x15a2f0",
+   "name": "CG_ColorGradingInitDefault",
+   "size": 145,
+   "has_comment": true
+  },
+  {
+   "func": "0x15c790",
+   "name": "CG_HudLighting_RegisterDvars",
+   "size": 1545,
+   "has_comment": true
+  },
+  {
+   "func": "0x176070",
+   "name": "CG_ParseDofSettings",
+   "size": 575,
+   "has_comment": true
+  },
+  {
+   "func": "0x1762b0",
+   "name": "CG_ParseFixedCameraToken",
+   "size": 639,
+   "has_comment": true
+  },
+  {
+   "func": "0x176530",
+   "name": "CG_ParsePanCameraToken",
+   "size": 1740,
+   "has_comment": true
+  },
+  {
+   "func": "0x176cf0",
+   "name": "CG_ParseRotateCameraToken",
+   "size": 1024,
+   "has_comment": true
+  },
+  {
+   "func": "0x1770f0",
+   "name": "CG_ParseZoomCameraToken",
+   "size": 1328,
+   "has_comment": true
+  },
+  {
+   "func": "0x192300",
+   "name": "CL_StreamSync_ParseModelPackage",
+   "size": 180,
+   "has_comment": false
+  },
+  {
+   "func": "0x1923c0",
+   "name": "CL_StreamSync_CommitModelPackage",
+   "size": 300,
+   "has_comment": false
+  },
+  {
+   "func": "0x193100",
+   "name": "CL_StreamSync_DataList_CommitNewSyncData",
+   "size": 536,
+   "has_comment": false
+  },
+  {
+   "func": "0x193630",
+   "name": "CL_StreamSync_IsCustomizationEnabled",
+   "size": 21,
+   "has_comment": true
+  },
+  {
+   "func": "0x193b20",
+   "name": "CL_StreamSync_ParseServerLoadRequest",
+   "size": 477,
+   "has_comment": false
+  },
+  {
+   "func": "0x1961f0",
+   "name": "XModel_AreImagesResident",
+   "size": 41,
+   "has_comment": false
+  },
+  {
+   "func": "0x196d70",
+   "name": "Party_SetLobbyParamFromCmd",
+   "size": 662,
+   "has_comment": true
+  },
+  {
+   "func": "0x197070",
+   "name": "Lobby_GetLiveParams",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0x1970a0",
+   "name": "LobbyParams_GetUiGametype",
+   "size": 8,
+   "has_comment": false
+  },
+  {
+   "func": "0x1970d0",
+   "name": "LobbyParams_GetUiMapName_P",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x1970e0",
+   "name": "LobbyParams_GetUiMapName",
+   "size": 8,
+   "has_comment": false
+  },
+  {
+   "func": "0x197110",
+   "name": "LobbyParams_GetMaxPlayers",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x197130",
+   "name": "LobbyParams_GetMinPlayers",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x197150",
+   "name": "LobbyParams_GetPrivate",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x197190",
+   "name": "LobbyParams_GetRequireOpenNat",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x1971a0",
+   "name": "LobbyParams_GetPlaylistNum",
+   "size": 4,
+   "has_comment": false
+  },
+  {
+   "func": "0x197280",
+   "name": "LobbyParams_SetActiveEditTarget",
+   "size": 8,
+   "has_comment": false
+  },
+  {
+   "func": "0x197320",
+   "name": "LobbyParams_SetUiGametype_P",
+   "size": 114,
+   "has_comment": false
+  },
+  {
+   "func": "0x1973a0",
+   "name": "LobbyParams_SetUiGametype",
+   "size": 12,
+   "has_comment": false
+  },
+  {
+   "func": "0x1973b0",
+   "name": "LobbyParams_SetUiMapName_P",
+   "size": 9,
+   "has_comment": false
+  },
+  {
+   "func": "0x1973c0",
+   "name": "LobbyParams_SetUiMapName",
+   "size": 12,
+   "has_comment": false
+  },
+  {
+   "func": "0x1973d0",
+   "name": "LobbyParams_SetMaxPlayers",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x1973e0",
+   "name": "LobbyParams_SetMinPlayers",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x197460",
+   "name": "LobbyParams_SetPlaylistNum",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x198e00",
+   "name": "GetCurrentProcessId",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x199c20",
+   "name": "StartAddress",
+   "size": 44,
+   "has_comment": false
+  },
+  {
+   "func": "0x1a42f0",
+   "name": "XModel_TestImageResidencyBits",
+   "size": 654,
+   "has_comment": false
+  },
+  {
+   "func": "0x1b3ac0",
+   "name": "TlsCallback_0",
+   "size": 5,
+   "has_comment": false
+  },
+  {
+   "func": "0x1d0b9d",
+   "name": "UserGroups_HandlePacket",
+   "size": 35,
+   "has_comment": true
+  },
+  {
+   "func": "0x1d8aa5",
+   "name": "TlsCallback_0_0",
+   "size": 72,
+   "has_comment": false
+  },
+  {
+   "func": "0x1f0460",
+   "name": "ComScoreEvent_SetCommonFields",
+   "size": 419,
+   "has_comment": true
+  },
+  {
+   "func": "0x1f1380",
+   "name": "ComScore_Init",
+   "size": 151,
+   "has_comment": true
+  },
+  {
+   "func": "0x2017c0",
+   "name": "getUmbrellaURL",
+   "size": 358,
+   "has_comment": true
+  },
+  {
+   "func": "0x207500",
+   "name": "dwSingleIdentity_Init",
+   "size": 165,
+   "has_comment": true
+  },
+  {
+   "func": "0x208ed0",
+   "name": "ParseUserAccountReply",
+   "size": 370,
+   "has_comment": true
+  },
+  {
+   "func": "0x209050",
+   "name": "dwUmbrella_AcquireAccessTokenFromLSGTicket",
+   "size": 777,
+   "has_comment": true
+  },
+  {
+   "func": "0x209470",
+   "name": "dwUmbrella_GetUserByAccessToken",
+   "size": 513,
+   "has_comment": true
+  },
+  {
+   "func": "0x209720",
+   "name": "dwUmbrella_LinkAccount",
+   "size": 717,
+   "has_comment": true
+  },
+  {
+   "func": "0x20a050",
+   "name": "dwUno_CreateAccount",
+   "size": 584,
+   "has_comment": true
+  },
+  {
+   "func": "0x2260a0",
+   "name": "PlayerCmd_SetClientTriggerAudioZonePartial",
+   "size": 372,
+   "has_comment": true
+  },
+  {
+   "func": "0x227b80",
+   "name": "AddSoundSubmixParseDynamicArguments",
+   "size": 497,
+   "has_comment": true
+  },
+  {
+   "func": "0x2389e0",
+   "name": "AnimStateCmd_EnableAnimState",
+   "size": 337,
+   "has_comment": true
+  },
+  {
+   "func": "0x23aa10",
+   "name": "CG_GetHudOutlineColor",
+   "size": 97,
+   "has_comment": false
+  },
+  {
+   "func": "0x23aa80",
+   "name": "CG_ShouldDrawHudOutline",
+   "size": 39,
+   "has_comment": false
+  },
+  {
+   "func": "0x25d120",
+   "name": "Image_EvictResidencyTier",
+   "size": 450,
+   "has_comment": false
+  },
+  {
+   "func": "0x2705f0",
+   "name": "Html_GetStyle",
+   "size": 864,
+   "has_comment": true
+  },
+  {
+   "func": "0x2736c0",
+   "name": "InGameStore_CmdInit",
+   "size": 86,
+   "has_comment": true
+  },
+  {
+   "func": "0x275e80",
+   "name": "CL_GameInventory_OnMarketplaceItemsExpired",
+   "size": 691,
+   "has_comment": true
+  },
+  {
+   "func": "0x27c480",
+   "name": "bdMarketplaceCurrency__deserializeJSON",
+   "size": 446,
+   "has_comment": true
+  },
+  {
+   "func": "0x285da0",
+   "name": "Matchmaking_BuildSearchParams",
+   "size": 923,
+   "has_comment": false
+  },
+  {
+   "func": "0x287720",
+   "name": "Hunk_RaiseMemoryError",
+   "size": 17,
+   "has_comment": false
+  },
+  {
+   "func": "0x287740",
+   "name": "Hunk_Alloc",
+   "size": 138,
+   "has_comment": false
+  },
+  {
+   "func": "0x2877d0",
+   "name": "Hunk_UserCreate",
+   "size": 128,
+   "has_comment": true
+  },
+  {
+   "func": "0x29a890",
+   "name": "Lobby_GetParams",
+   "size": 8,
+   "has_comment": false
+  },
+  {
+   "func": "0x29c540",
+   "name": "PartyHost_SearchComplete",
+   "size": 214,
+   "has_comment": true
+  },
+  {
+   "func": "0x29ca40",
+   "name": "Search_ClearResultQosStatus",
+   "size": 19,
+   "has_comment": true
+  },
+  {
+   "func": "0x29cf80",
+   "name": "Search_HasQosResult",
+   "size": 19,
+   "has_comment": true
+  },
+  {
+   "func": "0x29dbb0",
+   "name": "GameBattles_AllowListenServers",
+   "size": 24,
+   "has_comment": false
+  },
+  {
+   "func": "0x29e910",
+   "name": "GameBattles_IsRestrictedToListenServers",
+   "size": 45,
+   "has_comment": false
+  },
+  {
+   "func": "0x2a6620",
+   "name": "Live_IsQoSProbeActive",
+   "size": 4,
+   "has_comment": true
+  },
+  {
+   "func": "0x2a66d0",
+   "name": "Live_StartQoSProbe",
+   "size": 351,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b3960",
+   "name": "hks__serialize_persist",
+   "size": 619,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b3bd0",
+   "name": "hks__serialize_unpersist",
+   "size": 596,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b3e30",
+   "name": "hks__string_format",
+   "size": 2360,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b4770",
+   "name": "hks__string_gmatch",
+   "size": 804,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b4ac0",
+   "name": "hks__string_gsub",
+   "size": 2406,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b6550",
+   "name": "hks__string_dump",
+   "size": 1251,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b6d10",
+   "name": "hks__struct_describe",
+   "size": 1959,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b7ca0",
+   "name": "hks__table_insert",
+   "size": 632,
+   "has_comment": true
+  },
+  {
+   "func": "0x2b8390",
+   "name": "luaopen_base",
+   "size": 1899,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ba0b0",
+   "name": "LuaPlus__hks_default_luaplus_errorFunc",
+   "size": 45,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ba230",
+   "name": "hks__base_loadfile",
+   "size": 136,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ba3f0",
+   "name": "hks__base_print",
+   "size": 284,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ba680",
+   "name": "hks__base_setfenv",
+   "size": 530,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ba8a0",
+   "name": "hks__base_getfenv",
+   "size": 829,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bacf0",
+   "name": "hks__base_setmetatable",
+   "size": 317,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bb570",
+   "name": "hks__base_unpack",
+   "size": 286,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bb690",
+   "name": "hks__base_assert",
+   "size": 176,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bb740",
+   "name": "hks__base_tonumber",
+   "size": 702,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bbd80",
+   "name": "hks__base_select",
+   "size": 341,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bbf60",
+   "name": "hks__coroutine_resume",
+   "size": 208,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bc150",
+   "name": "hks__coroutine_wrap",
+   "size": 425,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bc2f9",
+   "name": "hksi_lua_yield",
+   "size": 199,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bc4e0",
+   "name": "hks__coroutine_getname",
+   "size": 256,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bc900",
+   "name": "hks__debug_getinfo",
+   "size": 2910,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bd460",
+   "name": "hks__debug_getlocal",
+   "size": 443,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bd7e0",
+   "name": "hks__debug_setlocal",
+   "size": 349,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bd940",
+   "name": "hks__debug_setmetatable",
+   "size": 207,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bdcd0",
+   "name": "hks__debug_inspect",
+   "size": 3488,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bea70",
+   "name": "hks__compiler_settings",
+   "size": 246,
+   "has_comment": true
+  },
+  {
+   "func": "0x2beb70",
+   "name": "hks__set_garbage_collector_weights",
+   "size": 1201,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bf340",
+   "name": "hks__io_close_file",
+   "size": 281,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bf500",
+   "name": "hks__io_read_file",
+   "size": 871,
+   "has_comment": true
+  },
+  {
+   "func": "0x2bf870",
+   "name": "hks__io_read",
+   "size": 176,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c02b0",
+   "name": "hks__io_seek_file",
+   "size": 311,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c0af0",
+   "name": "hks__math_random",
+   "size": 369,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c1350",
+   "name": "hks__os_tmpname",
+   "size": 133,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c20c0",
+   "name": "hks__os_time",
+   "size": 1199,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c2790",
+   "name": "hks__preloader",
+   "size": 661,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c34d0",
+   "name": "hks__package_module",
+   "size": 1411,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c3d90",
+   "name": "hks__profile_tick",
+   "size": 12,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c5fe0",
+   "name": "hks__HeapVisualizer__HeapVisualizer",
+   "size": 576,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c6330",
+   "name": "hks__MemoryAllocationsByType__print",
+   "size": 1162,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c7ee0",
+   "name": "hks__CompilerFunc",
+   "size": 1051,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c8300",
+   "name": "hks__Parser__parse",
+   "size": 394,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c9c00",
+   "name": "hks__base_load_reader",
+   "size": 315,
+   "has_comment": true
+  },
+  {
+   "func": "0x2c9fe0",
+   "name": "hks__callBinaryHandler",
+   "size": 285,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ca140",
+   "name": "hks__Parser__checkExectedClosing",
+   "size": 299,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ca2f0",
+   "name": "hks__CodeGenerator__signalLimitExceeded",
+   "size": 161,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ca690",
+   "name": "hks__CodeGenerator__checkStructSlotConstruct",
+   "size": 560,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ca8c0",
+   "name": "hks__CodeGenerator__checkTypedAssign",
+   "size": 270,
+   "has_comment": true
+  },
+  {
+   "func": "0x2cbdc0",
+   "name": "hks__GarbageCollector__createFinalizerState",
+   "size": 347,
+   "has_comment": true
+  },
+  {
+   "func": "0x2cbfc0",
+   "name": "hks__CodeGenerator__createLocalVariable",
+   "size": 826,
+   "has_comment": true
+  },
+  {
+   "func": "0x2cc300",
+   "name": "hks__Serializer__createPersistReference",
+   "size": 192,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d0b30",
+   "name": "hks__StructInst__ensureBackTableForArrayInsert",
+   "size": 163,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d0be0",
+   "name": "hks__StructInst__ensureBackTableForStringInsert",
+   "size": 167,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d1e60",
+   "name": "hks__CodeGenerator__flushList",
+   "size": 230,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d2100",
+   "name": "hks__createFunctionName",
+   "size": 589,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d6610",
+   "name": "hks__gettimetablefield",
+   "size": 432,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d6fd0",
+   "name": "hksDefaultPanic",
+   "size": 835,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d7320",
+   "name": "hksI_openlib",
+   "size": 613,
+   "has_comment": true
+  },
+  {
+   "func": "0x2d9be0",
+   "name": "hks__Serializer__unpersist",
+   "size": 528,
+   "has_comment": true
+  },
+  {
+   "func": "0x2da170",
+   "name": "hks__BytecodeWriter__dumpFunction",
+   "size": 1324,
+   "has_comment": true
+  },
+  {
+   "func": "0x2da6a0",
+   "name": "hksi_hks_dumpstats",
+   "size": 262,
+   "has_comment": true
+  },
+  {
+   "func": "0x2db010",
+   "name": "hksi_hks_traceback",
+   "size": 711,
+   "has_comment": true
+  },
+  {
+   "func": "0x2db600",
+   "name": "hksi_luaL_argerror",
+   "size": 386,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e0880",
+   "name": "hks__StructInst__insert",
+   "size": 443,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e0ef0",
+   "name": "hks__StructInst__insertNumber",
+   "size": 193,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e1210",
+   "name": "hks__inspectPrintConstant",
+   "size": 418,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e1ab0",
+   "name": "hks__io_input_or_output",
+   "size": 620,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e1d20",
+   "name": "hks__io_lines_iterator",
+   "size": 360,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e5a80",
+   "name": "hks__StructUtil__newInstance",
+   "size": 228,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e6a80",
+   "name": "hks__CodeGenerator__onBreak",
+   "size": 213,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e7190",
+   "name": "hks__CodeGenerator__onConstructorListFieldEnd",
+   "size": 102,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e77d0",
+   "name": "hks__CodeGenerator__onDefstruct",
+   "size": 587,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e7ae0",
+   "name": "hks__CodeGenerator__onDefstructBacktable",
+   "size": 52,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e7bd0",
+   "name": "hks__CodeGenerator__onDefstructDefSlot",
+   "size": 467,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e7e80",
+   "name": "hks__CodeGenerator__onDefstructEnd",
+   "size": 376,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e80b0",
+   "name": "hks__CodeGenerator__onDefstructMetaslot",
+   "size": 300,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e86c0",
+   "name": "hks__CodeGenerator__onExpressionDots",
+   "size": 173,
+   "has_comment": true
+  },
+  {
+   "func": "0x2e8c00",
+   "name": "hks__CodeGenerator__onExpressionIntLiteral",
+   "size": 221,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ea380",
+   "name": "hks__CodeGenerator__onForListIteratorsStart",
+   "size": 263,
+   "has_comment": true
+  },
+  {
+   "func": "0x2eae00",
+   "name": "hks__CodeGenerator__onForNumericStart",
+   "size": 260,
+   "has_comment": true
+  },
+  {
+   "func": "0x2eeae0",
+   "name": "hks__CodeGenerator__onMkStructStart",
+   "size": 164,
+   "has_comment": true
+  },
+  {
+   "func": "0x2ef740",
+   "name": "hks__CodeGenerator__onRecordFieldIdent",
+   "size": 238,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f16a0",
+   "name": "hks__package_module_setfenv",
+   "size": 446,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f1860",
+   "name": "hks__Parser__parseAssignment",
+   "size": 332,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f1d10",
+   "name": "hks__Parser__parseDefstruct",
+   "size": 1344,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f2350",
+   "name": "hks__Parser__parseFor",
+   "size": 730,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f2bb0",
+   "name": "hks__Parser__parseFunctionArguments",
+   "size": 392,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f2d40",
+   "name": "hks__Parser__parseFunctionBody",
+   "size": 977,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f3930",
+   "name": "hks__Parser__parsePrefixExpression",
+   "size": 1070,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f5c30",
+   "name": "hks__Serializer__persistThread",
+   "size": 1470,
+   "has_comment": true
+  },
+  {
+   "func": "0x2f61f0",
+   "name": "hks__Serializer__persistTop",
+   "size": 1716,
+   "has_comment": true
+  },
+  {
+   "func": "0x2fa9a0",
+   "name": "hks__BytecodeReader__readConstants",
+   "size": 1160,
+   "has_comment": true
+  },
+  {
+   "func": "0x2fbe00",
+   "name": "hks__CompilerLexer__readLongString",
+   "size": 686,
+   "has_comment": true
+  },
+  {
+   "func": "0x2fc0b0",
+   "name": "hks__CompilerLexer__readNumeral",
+   "size": 1102,
+   "has_comment": true
+  },
+  {
+   "func": "0x2fe080",
+   "name": "hks__CodeGenerator__resolveTypeDecoration",
+   "size": 250,
+   "has_comment": true
+  },
+  {
+   "func": "0x2fecd0",
+   "name": "hks__CodeGenerator__setJumpTarget",
+   "size": 195,
+   "has_comment": true
+  },
+  {
+   "func": "0x2fedc0",
+   "name": "hks__StructInst__setMetaSlot",
+   "size": 417,
+   "has_comment": true
+  },
+  {
+   "func": "0x300580",
+   "name": "hks__CodeGenerator__signalSlotUnreadable",
+   "size": 116,
+   "has_comment": true
+  },
+  {
+   "func": "0x3010d0",
+   "name": "hks__CodeGenerator__storeVariable",
+   "size": 1593,
+   "has_comment": true
+  },
+  {
+   "func": "0x301c00",
+   "name": "hks__string_find_match",
+   "size": 880,
+   "has_comment": true
+  },
+  {
+   "func": "0x302d90",
+   "name": "hks__StructUtil__throwTypeError",
+   "size": 315,
+   "has_comment": true
+  },
+  {
+   "func": "0x303540",
+   "name": "tolower_0",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x3035f0",
+   "name": "toupper_0",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x303f10",
+   "name": "hks__StructProto__undumpPrototypes",
+   "size": 4914,
+   "has_comment": true
+  },
+  {
+   "func": "0x305250",
+   "name": "hks__Serializer__unpersistMethod",
+   "size": 717,
+   "has_comment": true
+  },
+  {
+   "func": "0x305520",
+   "name": "hks__Serializer__unpersistNext",
+   "size": 824,
+   "has_comment": true
+  },
+  {
+   "func": "0x306390",
+   "name": "hks__Serializer__unpersistUpValue",
+   "size": 596,
+   "has_comment": true
+  },
+  {
+   "func": "0x309150",
+   "name": "hks__write_file",
+   "size": 416,
+   "has_comment": true
+  },
+  {
+   "func": "0x3095e0",
+   "name": "LuaCoD_SetLuaLoader",
+   "size": 739,
+   "has_comment": true
+  },
+  {
+   "func": "0x315500",
+   "name": "LUI_LuaCall_Clan_GetRemoteClanCardData",
+   "size": 434,
+   "has_comment": true
+  },
+  {
+   "func": "0x3159f0",
+   "name": "LUI_COD_AnyActiveMenus",
+   "size": 750,
+   "has_comment": true
+  },
+  {
+   "func": "0x318810",
+   "name": "LUI_CoD_HandleKeyBind",
+   "size": 475,
+   "has_comment": true
+  },
+  {
+   "func": "0x3195b0",
+   "name": "UI_UpdateTime",
+   "size": 446,
+   "has_comment": false
+  },
+  {
+   "func": "0x319bf0",
+   "name": "LUI_CoD_KeyEvent",
+   "size": 1895,
+   "has_comment": true
+  },
+  {
+   "func": "0x31b3f0",
+   "name": "LUI_CoD_CheckForFFOTD",
+   "size": 504,
+   "has_comment": true
+  },
+  {
+   "func": "0x31bae0",
+   "name": "LUI_CoD_UpdateStickInput",
+   "size": 637,
+   "has_comment": true
+  },
+  {
+   "func": "0x31c940",
+   "name": "LUI_Interface_DrawText",
+   "size": 8088,
+   "has_comment": true
+  },
+  {
+   "func": "0x31fe10",
+   "name": "LUI_Interface_Panic",
+   "size": 414,
+   "has_comment": true
+  },
+  {
+   "func": "0x3205b0",
+   "name": "LUI_IsMenuInStack",
+   "size": 824,
+   "has_comment": true
+  },
+  {
+   "func": "0x3208f0",
+   "name": "LUI_IsMenuOpenAndVisible",
+   "size": 840,
+   "has_comment": true
+  },
+  {
+   "func": "0x320ea0",
+   "name": "LUI_IsTopSignInMenu",
+   "size": 824,
+   "has_comment": true
+  },
+  {
+   "func": "0x321300",
+   "name": "LUI_WantsInputDuringGameplay",
+   "size": 771,
+   "has_comment": true
+  },
+  {
+   "func": "0x325c20",
+   "name": "LUI_LuaCall_Game_GetWeaponCrosshairColor",
+   "size": 193,
+   "has_comment": true
+  },
+  {
+   "func": "0x32e990",
+   "name": "LUI_PushScoreInfo",
+   "size": 1259,
+   "has_comment": true
+  },
+  {
+   "func": "0x335270",
+   "name": "LUI_IsSearching",
+   "size": 86,
+   "has_comment": false
+  },
+  {
+   "func": "0x335990",
+   "name": "LUI_BotsAreAllowed",
+   "size": 81,
+   "has_comment": false
+  },
+  {
+   "func": "0x335e20",
+   "name": "LUI_GetBotsTeamLimit",
+   "size": 215,
+   "has_comment": false
+  },
+  {
+   "func": "0x335f00",
+   "name": "LUI_SetBotsTeamLimit",
+   "size": 364,
+   "has_comment": false
+  },
+  {
+   "func": "0x3386b0",
+   "name": "UI_FeederItemText_NonPlayingLocalClients",
+   "size": 356,
+   "has_comment": true
+  },
+  {
+   "func": "0x3393b0",
+   "name": "LUI_AddBot",
+   "size": 416,
+   "has_comment": false
+  },
+  {
+   "func": "0x33b9b0",
+   "name": "LUI_GetGameLobbyPlaylistNum",
+   "size": 63,
+   "has_comment": false
+  },
+  {
+   "func": "0x33d000",
+   "name": "LUI_CoD_RegisterLobbyMemberFunctions",
+   "size": 72,
+   "has_comment": true
+  },
+  {
+   "func": "0x33d3c0",
+   "name": "LUI_SetLoadoutAndBroadcast",
+   "size": 3536,
+   "has_comment": true
+  },
+  {
+   "func": "0x33e2f0",
+   "name": "LUI_CoD_LuaCall_FollowClientnum",
+   "size": 304,
+   "has_comment": true
+  },
+  {
+   "func": "0x3433b0",
+   "name": "LUI_CoD_UpdateWeaponChangeSystem",
+   "size": 330,
+   "has_comment": true
+  },
+  {
+   "func": "0x343500",
+   "name": "LUI_CoD_UpdateLiveConnectionSystem",
+   "size": 95,
+   "has_comment": true
+  },
+  {
+   "func": "0x343630",
+   "name": "LUI_CoD_UpdateCrosshairEntSystem",
+   "size": 187,
+   "has_comment": true
+  },
+  {
+   "func": "0x359870",
+   "name": "LUIElement_CustomButton_Background",
+   "size": 1430,
+   "has_comment": true
+  },
+  {
+   "func": "0x35d000",
+   "name": "LUIElement_HighlightedButtonPositionText",
+   "size": 938,
+   "has_comment": true
+  },
+  {
+   "func": "0x35f5a0",
+   "name": "LUIElement_UIBindImageLayout",
+   "size": 306,
+   "has_comment": true
+  },
+  {
+   "func": "0x35fba0",
+   "name": "LUIElement_UICountdownLayout",
+   "size": 2873,
+   "has_comment": true
+  },
+  {
+   "func": "0x3608c0",
+   "name": "LUIElement_UIHorizontalListLayout",
+   "size": 2956,
+   "has_comment": true
+  },
+  {
+   "func": "0x361880",
+   "name": "LUIElement_UIIntWatchLayout",
+   "size": 675,
+   "has_comment": true
+  },
+  {
+   "func": "0x361d00",
+   "name": "LUIElement_UIList_AnimateToState",
+   "size": 782,
+   "has_comment": true
+  },
+  {
+   "func": "0x362470",
+   "name": "LUIElement_UIScorebarLayout",
+   "size": 920,
+   "has_comment": true
+  },
+  {
+   "func": "0x362810",
+   "name": "LUIElement_UITechyDigitsLayout",
+   "size": 1996,
+   "has_comment": true
+  },
+  {
+   "func": "0x369640",
+   "name": "LUI_LuaCall_LUIElement_SetupUIVerticalList",
+   "size": 263,
+   "has_comment": true
+  },
+  {
+   "func": "0x372f50",
+   "name": "NetConstBaselines_ReadBaselineDataFromFile",
+   "size": 556,
+   "has_comment": true
+  },
+  {
+   "func": "0x3790e0",
+   "name": "BG_FindAnims",
+   "size": 1289,
+   "has_comment": true
+  },
+  {
+   "func": "0x37b0c0",
+   "name": "BG_ParseCommands",
+   "size": 3163,
+   "has_comment": true
+  },
+  {
+   "func": "0x37c780",
+   "name": "BG_ParseIdleTurn",
+   "size": 612,
+   "has_comment": true
+  },
+  {
+   "func": "0x37c9f0",
+   "name": "BG_ParseTransitionTrigger",
+   "size": 569,
+   "has_comment": true
+  },
+  {
+   "func": "0x388210",
+   "name": "Bots_AreAllowed",
+   "size": 65,
+   "has_comment": false
+  },
+  {
+   "func": "0x3882c0",
+   "name": "Bots_GetTeamLimit",
+   "size": 65,
+   "has_comment": false
+  },
+  {
+   "func": "0x388350",
+   "name": "Bots_UseCustomTeamLimits",
+   "size": 47,
+   "has_comment": false
+  },
+  {
+   "func": "0x38b810",
+   "name": "BG_IsThirdPersonMode",
+   "size": 140,
+   "has_comment": false
+  },
+  {
+   "func": "0x38dc60",
+   "name": "G_InitGame",
+   "size": 1423,
+   "has_comment": true
+  },
+  {
+   "func": "0x38e350",
+   "name": "Bots_SetTeamLimit",
+   "size": 71,
+   "has_comment": false
+  },
+  {
+   "func": "0x38efd0",
+   "name": "CG_ProjectViewDirToScreenPos",
+   "size": 469,
+   "has_comment": false
+  },
+  {
+   "func": "0x3b60f0",
+   "name": "BG_GetHeldWeapon",
+   "size": 147,
+   "has_comment": false
+  },
+  {
+   "func": "0x3bd8f0",
+   "name": "BG_GetViewModel",
+   "size": 112,
+   "has_comment": false
+  },
+  {
+   "func": "0x3cd500",
+   "name": "CG_ParseClientEffectMapping",
+   "size": 1231,
+   "has_comment": true
+  },
+  {
+   "func": "0x3cd9d0",
+   "name": "CG_ParseClientEffects",
+   "size": 1116,
+   "has_comment": true
+  },
+  {
+   "func": "0x3cde30",
+   "name": "CG_ParseDynamicAmbience",
+   "size": 758,
+   "has_comment": true
+  },
+  {
+   "func": "0x3ce620",
+   "name": "CG_ParseExploder",
+   "size": 1924,
+   "has_comment": true
+  },
+  {
+   "func": "0x3cf430",
+   "name": "CG_ParseReactiveSound",
+   "size": 802,
+   "has_comment": true
+  },
+  {
+   "func": "0x3d0140",
+   "name": "CG_StartClientSideEffects",
+   "size": 505,
+   "has_comment": true
+  },
+  {
+   "func": "0x3d5bf0",
+   "name": "CG_GetOmnvar_FloatByName",
+   "size": 995,
+   "has_comment": true
+  },
+  {
+   "func": "0x3e10a0",
+   "name": "CG_CalcCrosshairPosition",
+   "size": 379,
+   "has_comment": false
+  },
+  {
+   "func": "0x3e3250",
+   "name": "CG_ViewWeaponHideTransition",
+   "size": 217,
+   "has_comment": false
+  },
+  {
+   "func": "0x3e43c0",
+   "name": "CG_RelativePlayerName",
+   "size": 238,
+   "has_comment": true
+  },
+  {
+   "func": "0x3e6250",
+   "name": "CG_WorldPosToScreenPos",
+   "size": 280,
+   "has_comment": true
+  },
+  {
+   "func": "0x3e9be0",
+   "name": "CG_GetRenderFlagForRefEntity",
+   "size": 407,
+   "has_comment": false
+  },
+  {
+   "func": "0x3f0e30",
+   "name": "CG_EntityEvent",
+   "size": 16208,
+   "has_comment": true
+  },
+  {
+   "func": "0x3f5df0",
+   "name": "CG_Obituary",
+   "size": 1236,
+   "has_comment": true
+  },
+  {
+   "func": "0x41d690",
+   "name": "CG_RegisterDvars",
+   "size": 7099,
+   "has_comment": true
+  },
+  {
+   "func": "0x42ef80",
+   "name": "CG_LoadRumble",
+   "size": 742,
+   "has_comment": true
+  },
+  {
+   "func": "0x430710",
+   "name": "ReadRumbleGraph",
+   "size": 444,
+   "has_comment": true
+  },
+  {
+   "func": "0x431b20",
+   "name": "CG_ExecuteBinaryServerCommand",
+   "size": 898,
+   "has_comment": false
+  },
+  {
+   "func": "0x431eb0",
+   "name": "CG_ServerCommand",
+   "size": 12832,
+   "has_comment": true
+  },
+  {
+   "func": "0x4350d0",
+   "name": "CG_ExecuteNewServerCommands",
+   "size": 66,
+   "has_comment": false
+  },
+  {
+   "func": "0x4373f0",
+   "name": "CG_ExecuteServerCommand",
+   "size": 477,
+   "has_comment": false
+  },
+  {
+   "func": "0x4427e0",
+   "name": "CG_RegisterBulletFleshSounds",
+   "size": 618,
+   "has_comment": true
+  },
+  {
+   "func": "0x442a50",
+   "name": "CG_RegisterFootstepSounds",
+   "size": 418,
+   "has_comment": true
+  },
+  {
+   "func": "0x4434c0",
+   "name": "CG_RegisterSounds",
+   "size": 4580,
+   "has_comment": true
+  },
+  {
+   "func": "0x448e90",
+   "name": "CG_FogVisionStaticSingleStagedLerp_To",
+   "size": 2931,
+   "has_comment": true
+  },
+  {
+   "func": "0x44d200",
+   "name": "CG_ParseClientVisionSetTriggers",
+   "size": 1366,
+   "has_comment": true
+  },
+  {
+   "func": "0x44da00",
+   "name": "CG_ParseFog",
+   "size": 6289,
+   "has_comment": true
+  },
+  {
+   "func": "0x44f320",
+   "name": "CG_ParseIsSectionBreak",
+   "size": 316,
+   "has_comment": true
+  },
+  {
+   "func": "0x450dd0",
+   "name": "CG_LoadWaterClientTriggerData",
+   "size": 2020,
+   "has_comment": true
+  },
+  {
+   "func": "0x45a270",
+   "name": "SCR_StopCinematic",
+   "size": 486,
+   "has_comment": true
+  },
+  {
+   "func": "0x462650",
+   "name": "CL_GetPredictedPlayerInformationForServerTime",
+   "size": 208,
+   "has_comment": true
+  },
+  {
+   "func": "0x462720",
+   "name": "CL_GetPredictedVehicleForServerTime",
+   "size": 507,
+   "has_comment": true
+  },
+  {
+   "func": "0x462930",
+   "name": "CL_ParseConfigStrings_Internal",
+   "size": 455,
+   "has_comment": false
+  },
+  {
+   "func": "0x462b00",
+   "name": "CL_ParseGamestate",
+   "size": 873,
+   "has_comment": false
+  },
+  {
+   "func": "0x4636e0",
+   "name": "CL_ParseServerMessage_Internal",
+   "size": 832,
+   "has_comment": false
+  },
+  {
+   "func": "0x4649d0",
+   "name": "CL_ParseServerMessage",
+   "size": 553,
+   "has_comment": true
+  },
+  {
+   "func": "0x464c00",
+   "name": "CL_ParseSnapshot",
+   "size": 2428,
+   "has_comment": false
+  },
+  {
+   "func": "0x465580",
+   "name": "CL_SavePredictedPlayerInformationForServerTime",
+   "size": 461,
+   "has_comment": true
+  },
+  {
+   "func": "0x465a70",
+   "name": "CL_GetDemoViewAnglesFromArchive",
+   "size": 307,
+   "has_comment": false
+  },
+  {
+   "func": "0x468560",
+   "name": "CL_SendPeerVoiceData",
+   "size": 395,
+   "has_comment": true
+  },
+  {
+   "func": "0x46af00",
+   "name": "GamerProfile_GetEliteClanClanTagText",
+   "size": 79,
+   "has_comment": true
+  },
+  {
+   "func": "0x470d30",
+   "name": "Lobby_Get",
+   "size": 21,
+   "has_comment": false
+  },
+  {
+   "func": "0x4726d0",
+   "name": "PartyClient_SendHostBackoutMessage",
+   "size": 411,
+   "has_comment": true
+  },
+  {
+   "func": "0x475400",
+   "name": "PartyClient_Frame",
+   "size": 566,
+   "has_comment": true
+  },
+  {
+   "func": "0x4780f0",
+   "name": "PartyClient_SendDisconnectMessage",
+   "size": 278,
+   "has_comment": true
+  },
+  {
+   "func": "0x478520",
+   "name": "PartyClient_SendOurMemberInfo",
+   "size": 399,
+   "has_comment": true
+  },
+  {
+   "func": "0x478990",
+   "name": "PartyClient_SendQoSResults",
+   "size": 697,
+   "has_comment": true
+  },
+  {
+   "func": "0x479710",
+   "name": "PartyAtomic_HandleJoinFailed",
+   "size": 1621,
+   "has_comment": true
+  },
+  {
+   "func": "0x47e350",
+   "name": "Lobby_GetPrivateParty",
+   "size": 26,
+   "has_comment": false
+  },
+  {
+   "func": "0x4828b0",
+   "name": "Party_PlayPlayerJoinSound",
+   "size": 128,
+   "has_comment": true
+  },
+  {
+   "func": "0x482930",
+   "name": "Party_PlayPlayerLeaveSound",
+   "size": 128,
+   "has_comment": true
+  },
+  {
+   "func": "0x485d30",
+   "name": "PartyHost_HandleHeartbeatAck",
+   "size": 414,
+   "has_comment": true
+  },
+  {
+   "func": "0x488380",
+   "name": "PartyHost_HandleCantHearMsg",
+   "size": 316,
+   "has_comment": true
+  },
+  {
+   "func": "0x4884c0",
+   "name": "PartyHost_HandleClientDisconnect_Internal",
+   "size": 514,
+   "has_comment": true
+  },
+  {
+   "func": "0x489300",
+   "name": "PartyAtomicHost_SendJoinFailedResponseWithPayload",
+   "size": 176,
+   "has_comment": true
+  },
+  {
+   "func": "0x48aa80",
+   "name": "PartyHost_DropPlayersToMatchSlots",
+   "size": 221,
+   "has_comment": true
+  },
+  {
+   "func": "0x48c0c0",
+   "name": "Lobby_LoadMapForSession",
+   "size": 480,
+   "has_comment": false
+  },
+  {
+   "func": "0x48cd70",
+   "name": "PartyHost_KickPlayer",
+   "size": 285,
+   "has_comment": true
+  },
+  {
+   "func": "0x48cfa0",
+   "name": "PartyHost_MakeTeams",
+   "size": 1047,
+   "has_comment": true
+  },
+  {
+   "func": "0x48f980",
+   "name": "PartyHost_SendHeartbeats",
+   "size": 691,
+   "has_comment": true
+  },
+  {
+   "func": "0x4914e0",
+   "name": "PartyHost_ShareSearchResults",
+   "size": 461,
+   "has_comment": true
+  },
+  {
+   "func": "0x492d50",
+   "name": "PartyHost_TellPartyMembersToStopQoS",
+   "size": 137,
+   "has_comment": true
+  },
+  {
+   "func": "0x4957f0",
+   "name": "PartyAtomicClient_CommitToJoinedParty_Internal",
+   "size": 218,
+   "has_comment": true
+  },
+  {
+   "func": "0x4958d0",
+   "name": "PartyAtomicClient_JoinAcceptedParty_Internal",
+   "size": 700,
+   "has_comment": true
+  },
+  {
+   "func": "0x495da0",
+   "name": "PartyAtomicHost_SendJoinHostResponse",
+   "size": 472,
+   "has_comment": true
+  },
+  {
+   "func": "0x495f80",
+   "name": "PartyAtomic_OnFrame_WaitHost",
+   "size": 470,
+   "has_comment": true
+  },
+  {
+   "func": "0x496820",
+   "name": "PartyAtomic_AskToJoinParty_Internal",
+   "size": 495,
+   "has_comment": true
+  },
+  {
+   "func": "0x4983b0",
+   "name": "PartyMigrate_HandlePingMsg",
+   "size": 184,
+   "has_comment": true
+  },
+  {
+   "func": "0x499570",
+   "name": "PartyMigrate_AskArbitratorToChangeHost",
+   "size": 388,
+   "has_comment": true
+  },
+  {
+   "func": "0x499700",
+   "name": "PartyMigrate_AskForPredeterminedHostNominee",
+   "size": 377,
+   "has_comment": true
+  },
+  {
+   "func": "0x499880",
+   "name": "PartyMigrate_BuildSessionInfoMessage",
+   "size": 495,
+   "has_comment": true
+  },
+  {
+   "func": "0x49aed0",
+   "name": "PartyMigrate_DetermineBestHost_LogResults",
+   "size": 553,
+   "has_comment": true
+  },
+  {
+   "func": "0x49ba50",
+   "name": "PartyMigrate_GetPings",
+   "size": 569,
+   "has_comment": true
+  },
+  {
+   "func": "0x49c790",
+   "name": "PartyMigrate_TellNoNewHost",
+   "size": 639,
+   "has_comment": true
+  },
+  {
+   "func": "0x49ca10",
+   "name": "PartyMigrate_RequestFindBestHost",
+   "size": 900,
+   "has_comment": true
+  },
+  {
+   "func": "0x49d100",
+   "name": "PartyMigrate_SelectOurNominee",
+   "size": 891,
+   "has_comment": true
+  },
+  {
+   "func": "0x49d480",
+   "name": "PartyMigrate_SendMakeHostError",
+   "size": 240,
+   "has_comment": true
+  },
+  {
+   "func": "0x49d570",
+   "name": "PartyMigrate_SendNomineeMsg",
+   "size": 295,
+   "has_comment": true
+  },
+  {
+   "func": "0x49eff0",
+   "name": "Party_ClosePartyUI",
+   "size": 294,
+   "has_comment": true
+  },
+  {
+   "func": "0x4a0170",
+   "name": "CG_GetRefdefView",
+   "size": 41,
+   "has_comment": false
+  },
+  {
+   "func": "0x4a18a0",
+   "name": "GuestSponsorErrorMessage",
+   "size": 1076,
+   "has_comment": true
+  },
+  {
+   "func": "0x4a2380",
+   "name": "CL_MakeLocalClientInactive",
+   "size": 507,
+   "has_comment": true
+  },
+  {
+   "func": "0x4a2600",
+   "name": "CL_SetLocalClientActive",
+   "size": 86,
+   "has_comment": false
+  },
+  {
+   "func": "0x4a3f10",
+   "name": "DB_GetXAssetTypeName",
+   "size": 15,
+   "has_comment": false
+  },
+  {
+   "func": "0x4a7a80",
+   "name": "DB_ReadXFileStageStreaming2",
+   "size": 103,
+   "has_comment": true
+  },
+  {
+   "func": "0x4dd3a0",
+   "name": "XModel_StreamHard",
+   "size": 69,
+   "has_comment": false
+  },
+  {
+   "func": "0x4dd3f0",
+   "name": "XModel_StreamSoft",
+   "size": 80,
+   "has_comment": false
+  },
+  {
+   "func": "0x5347b0",
+   "name": "G_SpawnPathnodeDynamic",
+   "size": 870,
+   "has_comment": true
+  },
+  {
+   "func": "0x541340",
+   "name": "ClientInactivityTimer",
+   "size": 4751,
+   "has_comment": true
+  },
+  {
+   "func": "0x54ee80",
+   "name": "ClientCommand",
+   "size": 1012,
+   "has_comment": true
+  },
+  {
+   "func": "0x559aa0",
+   "name": "G_GetItemClassname",
+   "size": 495,
+   "has_comment": true
+  },
+  {
+   "func": "0x5612b0",
+   "name": "G_RegisterServerDemoDvars",
+   "size": 1525,
+   "has_comment": true
+  },
+  {
+   "func": "0x586330",
+   "name": "Scr_GetActiveAnimations",
+   "size": 175,
+   "has_comment": true
+  },
+  {
+   "func": "0x589d80",
+   "name": "GScr_GetIndexForLuiNCString",
+   "size": 88,
+   "has_comment": true
+  },
+  {
+   "func": "0x589de0",
+   "name": "GScr_LoadLuiFile",
+   "size": 85,
+   "has_comment": true
+  },
+  {
+   "func": "0x590460",
+   "name": "GScr_GetCaCPlayerData",
+   "size": 345,
+   "has_comment": true
+  },
+  {
+   "func": "0x590800",
+   "name": "GScr_SetCaCPlayerData",
+   "size": 892,
+   "has_comment": true
+  },
+  {
+   "func": "0x590e70",
+   "name": "GScr_GetCaCPlayerDataForGroup",
+   "size": 414,
+   "has_comment": true
+  },
+  {
+   "func": "0x59e650",
+   "name": "Scr_FxParamError",
+   "size": 147,
+   "has_comment": true
+  },
+  {
+   "func": "0x5a1b70",
+   "name": "Scr_AddBot",
+   "size": 165,
+   "has_comment": true
+  },
+  {
+   "func": "0x5a3b40",
+   "name": "GScr_SetClientMatchData",
+   "size": 130,
+   "has_comment": true
+  },
+  {
+   "func": "0x5a5040",
+   "name": "GScr_GetMatchRulesData",
+   "size": 151,
+   "has_comment": true
+  },
+  {
+   "func": "0x5ac420",
+   "name": "ScrCmd_SetScriptMoverKillCam",
+   "size": 499,
+   "has_comment": true
+  },
+  {
+   "func": "0x5ad800",
+   "name": "GScr_LoadAgentScript",
+   "size": 689,
+   "has_comment": true
+  },
+  {
+   "func": "0x5b3680",
+   "name": "ScriptEntCmd_SetLookAtTarget",
+   "size": 519,
+   "has_comment": true
+  },
+  {
+   "func": "0x5b7460",
+   "name": "G_CallSpawn",
+   "size": 734,
+   "has_comment": true
+  },
+  {
+   "func": "0x5b79c0",
+   "name": "G_LoadStructs",
+   "size": 293,
+   "has_comment": true
+  },
+  {
+   "func": "0x5bbc40",
+   "name": "ConsoleCommand",
+   "size": 616,
+   "has_comment": true
+  },
+  {
+   "func": "0x5c62c0",
+   "name": "G_SetupWeaponDef",
+   "size": 379,
+   "has_comment": true
+  },
+  {
+   "func": "0x5dc0e0",
+   "name": "CL_Demo_ReadNetConstStringTable",
+   "size": 673,
+   "has_comment": false
+  },
+  {
+   "func": "0x5dc7f0",
+   "name": "NetConstStrings_BuildDvarMaps",
+   "size": 290,
+   "has_comment": true
+  },
+  {
+   "func": "0x64a6b0",
+   "name": "Cmd_AddCommandInternal",
+   "size": 110,
+   "has_comment": false
+  },
+  {
+   "func": "0x64fd90",
+   "name": "fclose",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x650a70",
+   "name": "GameInfo_UpdateArenas",
+   "size": 1557,
+   "has_comment": true
+  },
+  {
+   "func": "0x654780",
+   "name": "Playlist_IsAlwaysSearch",
+   "size": 52,
+   "has_comment": true
+  },
+  {
+   "func": "0x6554e0",
+   "name": "Playlist_OrdinalToRow",
+   "size": 94,
+   "has_comment": false
+  },
+  {
+   "func": "0x6563d0",
+   "name": "Playlist_ApplyToLobby",
+   "size": 3249,
+   "has_comment": false
+  },
+  {
+   "func": "0x65b340",
+   "name": "LiveStorage_CS_Init",
+   "size": 347,
+   "has_comment": true
+  },
+  {
+   "func": "0x65c210",
+   "name": "LiveStorage_CS_RefreshPrivateData_Success",
+   "size": 76,
+   "has_comment": true
+  },
+  {
+   "func": "0x660870",
+   "name": "Com_StreamSync_InitModelPackage",
+   "size": 62,
+   "has_comment": false
+  },
+  {
+   "func": "0x6608d0",
+   "name": "CL_StreamSync_DataList_ParseRequiredData",
+   "size": 944,
+   "has_comment": false
+  },
+  {
+   "func": "0x663b40",
+   "name": "Session_GetRequiredUploadForPlayerCount",
+   "size": 87,
+   "has_comment": true
+  },
+  {
+   "func": "0x663ba0",
+   "name": "Session_GetRequiredPingForPlayerCount",
+   "size": 70,
+   "has_comment": true
+  },
+  {
+   "func": "0x6647d0",
+   "name": "Dvar_AddCommands",
+   "size": 164,
+   "has_comment": true
+  },
+  {
+   "func": "0x664ab0",
+   "name": "Dvar_InfoString",
+   "size": 1187,
+   "has_comment": true
+  },
+  {
+   "func": "0x6657b0",
+   "name": "GraphFloat_Load",
+   "size": 474,
+   "has_comment": true
+  },
+  {
+   "func": "0x665c00",
+   "name": "MSG_ResetDeltaIndex",
+   "size": 8,
+   "has_comment": true
+  },
+  {
+   "func": "0x668a90",
+   "name": "CG_InterpolatePlayerState_S2",
+   "size": 7675,
+   "has_comment": false
+  },
+  {
+   "func": "0x66b9e0",
+   "name": "MSG_ReadMonotonicDeltaIndex",
+   "size": 183,
+   "has_comment": true
+  },
+  {
+   "func": "0x66ea70",
+   "name": "CL_ServerInfoPacket",
+   "size": 115,
+   "has_comment": true
+  },
+  {
+   "func": "0x66f050",
+   "name": "MSG_SetupNetFieldListsForGame",
+   "size": 43,
+   "has_comment": false
+  },
+  {
+   "func": "0x675600",
+   "name": "Sleep",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x680550",
+   "name": "ScriptableSv_DoEventExplosion",
+   "size": 1196,
+   "has_comment": true
+  },
+  {
+   "func": "0x684aa0",
+   "name": "Scr_UsingTree",
+   "size": 89,
+   "has_comment": true
+  },
+  {
+   "func": "0x685e80",
+   "name": "MT_AllocIndex",
+   "size": 1000,
+   "has_comment": true
+  },
+  {
+   "func": "0x686490",
+   "name": "MT_GetSize",
+   "size": 118,
+   "has_comment": true
+  },
+  {
+   "func": "0x688b70",
+   "name": "Sys_InternedStringAssign",
+   "size": 182,
+   "has_comment": false
+  },
+  {
+   "func": "0x689910",
+   "name": "SL_GetStringOfSize",
+   "size": 1103,
+   "has_comment": true
+  },
+  {
+   "func": "0x6c3600",
+   "name": "SV_BotGetRandomName",
+   "size": 484,
+   "has_comment": true
+  },
+  {
+   "func": "0x6c7050",
+   "name": "Bots_GetTeamLimitForScript",
+   "size": 54,
+   "has_comment": false
+  },
+  {
+   "func": "0x6d6a90",
+   "name": "SV_AddOperatorCommands",
+   "size": 192,
+   "has_comment": true
+  },
+  {
+   "func": "0x6da7a0",
+   "name": "SV_RaiseMaxClients",
+   "size": 118,
+   "has_comment": false
+  },
+  {
+   "func": "0x6dcdb0",
+   "name": "SV_Init",
+   "size": 1378,
+   "has_comment": false
+  },
+  {
+   "func": "0x6ddf50",
+   "name": "SVC_Status",
+   "size": 141,
+   "has_comment": true
+  },
+  {
+   "func": "0x6de970",
+   "name": "SV_Frame",
+   "size": 444,
+   "has_comment": true
+  },
+  {
+   "func": "0x6dee70",
+   "name": "SV_ConnectionlessPacket",
+   "size": 1181,
+   "has_comment": true
+  },
+  {
+   "func": "0x6dfeb0",
+   "name": "MatchEnd_Party",
+   "size": 356,
+   "has_comment": true
+  },
+  {
+   "func": "0x6e0940",
+   "name": "CL_ClientFrame",
+   "size": 372,
+   "has_comment": true
+  },
+  {
+   "func": "0x6e32f0",
+   "name": "SendMigrateToMessages",
+   "size": 1292,
+   "has_comment": true
+  },
+  {
+   "func": "0x6f82f0",
+   "name": "SV_WriteVoicePackets",
+   "size": 658,
+   "has_comment": false
+  },
+  {
+   "func": "0x717360",
+   "name": "SND_InitHealthFx",
+   "size": 546,
+   "has_comment": true
+  },
+  {
+   "func": "0x71e1b0",
+   "name": "SND_ParseDspBusesFile",
+   "size": 747,
+   "has_comment": true
+  },
+  {
+   "func": "0x725c00",
+   "name": "CODAnywhere_GetUserUcdDataUpdateComplete",
+   "size": 660,
+   "has_comment": true
+  },
+  {
+   "func": "0x726990",
+   "name": "CODAnywhere_Init",
+   "size": 359,
+   "has_comment": true
+  },
+  {
+   "func": "0x726c40",
+   "name": "CODAnywhere_OpenErrorPopup",
+   "size": 284,
+   "has_comment": true
+  },
+  {
+   "func": "0x726d60",
+   "name": "CODAnywhere_OpenSuccessPopup",
+   "size": 158,
+   "has_comment": true
+  },
+  {
+   "func": "0x72d880",
+   "name": "SEH_LanguageHasAssets",
+   "size": 155,
+   "has_comment": true
+  },
+  {
+   "func": "0x733270",
+   "name": "ComScore_Test_f",
+   "size": 420,
+   "has_comment": true
+  },
+  {
+   "func": "0x740db0",
+   "name": "UI_BuildServerDisplayList",
+   "size": 1601,
+   "has_comment": true
+  },
+  {
+   "func": "0x741f10",
+   "name": "UI_DrawPlaylistDescription",
+   "size": 1184,
+   "has_comment": true
+  },
+  {
+   "func": "0x7425f0",
+   "name": "UI_DrawSpawnLocationMap",
+   "size": 1311,
+   "has_comment": true
+  },
+  {
+   "func": "0x742b10",
+   "name": "UI_DrawSpawnLocationMap_DrawSpawnPoint",
+   "size": 705,
+   "has_comment": true
+  },
+  {
+   "func": "0x743e40",
+   "name": "UI_GetMapDescByIndex",
+   "size": 87,
+   "has_comment": true
+  },
+  {
+   "func": "0x745ef0",
+   "name": "UI_RegisterDvars",
+   "size": 2804,
+   "has_comment": true
+  },
+  {
+   "func": "0x746a50",
+   "name": "UI_RunMenuScript",
+   "size": 4670,
+   "has_comment": true
+  },
+  {
+   "func": "0x74afe0",
+   "name": "RunOp",
+   "size": 185,
+   "has_comment": true
+  },
+  {
+   "func": "0x74b100",
+   "name": "PlayList_StartLobby",
+   "size": 488,
+   "has_comment": true
+  },
+  {
+   "func": "0x750240",
+   "name": "UI_TogglePlayerMute",
+   "size": 360,
+   "has_comment": true
+  },
+  {
+   "func": "0x7531a0",
+   "name": "fn",
+   "size": 264,
+   "has_comment": false
+  },
+  {
+   "func": "0x758540",
+   "name": "Alloc",
+   "size": 528,
+   "has_comment": true
+  },
+  {
+   "func": "0x75ee10",
+   "name": "AnglesToAxis",
+   "size": 719,
+   "has_comment": false
+  },
+  {
+   "func": "0x761830",
+   "name": "GScr_GetSndAliasValue",
+   "size": 723,
+   "has_comment": true
+  },
+  {
+   "func": "0x7660b0",
+   "name": "Content_Clear",
+   "size": 151,
+   "has_comment": true
+  },
+  {
+   "func": "0x766b00",
+   "name": "SegmentSentinelReadAndVerify",
+   "size": 508,
+   "has_comment": true
+  },
+  {
+   "func": "0x76c760",
+   "name": "_atoi64",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x76c7e0",
+   "name": "_itoa",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x76c8e0",
+   "name": "I_strncpyz",
+   "size": 44,
+   "has_comment": false
+  },
+  {
+   "func": "0x76fb10",
+   "name": "PakFile_Open",
+   "size": 719,
+   "has_comment": true
+  },
+  {
+   "func": "0x770360",
+   "name": "CompletionRoutine",
+   "size": 21,
+   "has_comment": false
+  },
+  {
+   "func": "0x770440",
+   "name": "CloseHandle",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x788ca0",
+   "name": "Live_CheckNetConnection",
+   "size": 1033,
+   "has_comment": true
+  },
+  {
+   "func": "0x7890b0",
+   "name": "Session_GetMeasuredPing",
+   "size": 69,
+   "has_comment": true
+  },
+  {
+   "func": "0x789860",
+   "name": "Session_GetMeasuredUploadBandwidth",
+   "size": 7,
+   "has_comment": true
+  },
+  {
+   "func": "0x78ac90",
+   "name": "DB_RaiseAssetLimitError",
+   "size": 166,
+   "has_comment": true
+  },
+  {
+   "func": "0x7b1290",
+   "name": "Sys_Milliseconds",
+   "size": 21,
+   "has_comment": false
+  },
+  {
+   "func": "0x7b12b0",
+   "name": "timeGetTime",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x7b5e90",
+   "name": "DObjCreateDuplicateParts",
+   "size": 1695,
+   "has_comment": true
+  },
+  {
+   "func": "0x7bfe30",
+   "name": "DObj_GetFlags",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x7ca384",
+   "name": "EliteClan_TransferOwnership",
+   "size": 12,
+   "has_comment": true
+  },
+  {
+   "func": "0x7d5910",
+   "name": "XAnimSetIKSettings",
+   "size": 374,
+   "has_comment": true
+  },
+  {
+   "func": "0x7f4500",
+   "name": "inflate",
+   "size": 6104,
+   "has_comment": true
+  },
+  {
+   "func": "0x7f8b50",
+   "name": "Ragdoll_InitDvars",
+   "size": 652,
+   "has_comment": true
+  },
+  {
+   "func": "0x82aea0",
+   "name": "Turret_PlaceSentry_SatCom_Hack",
+   "size": 376,
+   "has_comment": true
+  },
+  {
+   "func": "0x831d10",
+   "name": "LiveCounter_Init",
+   "size": 136,
+   "has_comment": true
+  },
+  {
+   "func": "0x839ca0",
+   "name": "dwAssertHandler",
+   "size": 369,
+   "has_comment": true
+  },
+  {
+   "func": "0x83e800",
+   "name": "EliteClan_Create",
+   "size": 84,
+   "has_comment": true
+  },
+  {
+   "func": "0x83e860",
+   "name": "EliteClan_CreateUpdate",
+   "size": 643,
+   "has_comment": true
+  },
+  {
+   "func": "0x84b6c0",
+   "name": "FriendsMenu_IsUserInvitable",
+   "size": 363,
+   "has_comment": true
+  },
+  {
+   "func": "0x84f100",
+   "name": "UserGroups_SendAck",
+   "size": 573,
+   "has_comment": true
+  },
+  {
+   "func": "0x8507d0",
+   "name": "LiveAntiCheat_DWPlayerBanned",
+   "size": 249,
+   "has_comment": true
+  },
+  {
+   "func": "0x850d20",
+   "name": "LiveAntiCheat_FeatureBanCheck",
+   "size": 584,
+   "has_comment": true
+  },
+  {
+   "func": "0x856770",
+   "name": "Com_IsSystemLink_2",
+   "size": 18,
+   "has_comment": false
+  },
+  {
+   "func": "0x856a20",
+   "name": "Live_SyncOnlineDataPopupTimeout",
+   "size": 467,
+   "has_comment": true
+  },
+  {
+   "func": "0x856f80",
+   "name": "Session_IsHostingEnabled",
+   "size": 8,
+   "has_comment": false
+  },
+  {
+   "func": "0x857a80",
+   "name": "Session_ClearHostingEnabled",
+   "size": 27,
+   "has_comment": false
+  },
+  {
+   "func": "0x857ad0",
+   "name": "Com_SetOnlineGame",
+   "size": 15,
+   "has_comment": true
+  },
+  {
+   "func": "0x857b90",
+   "name": "Com_IsPublicOnlineMatch",
+   "size": 74,
+   "has_comment": true
+  },
+  {
+   "func": "0x857ce0",
+   "name": "Live_SyncOnlineDataFrame",
+   "size": 1403,
+   "has_comment": true
+  },
+  {
+   "func": "0x86e0a0",
+   "name": "R_Cinematic_BinkLocalizedAudioTracksFromStringtable",
+   "size": 301,
+   "has_comment": true
+  },
+  {
+   "func": "0x86e600",
+   "name": "R_Cinematic_BinkOpenPath_MemoryResident",
+   "size": 364,
+   "has_comment": true
+  },
+  {
+   "func": "0x8abf50",
+   "name": "Material_Init",
+   "size": 527,
+   "has_comment": true
+  },
+  {
+   "func": "0x8bd1f0",
+   "name": "R_SyncRenderThread",
+   "size": 73,
+   "has_comment": false
+  },
+  {
+   "func": "0x8c8480",
+   "name": "R_RegisterSunDvars",
+   "size": 874,
+   "has_comment": true
+  },
+  {
+   "func": "0x90fc50",
+   "name": "CL_Demo_DeleteClip_f",
+   "size": 79,
+   "has_comment": false
+  },
+  {
+   "func": "0x910400",
+   "name": "CL_IsDemoPlaying",
+   "size": 49,
+   "has_comment": true
+  },
+  {
+   "func": "0x910480",
+   "name": "CL_Demo_JumpToStart_f",
+   "size": 312,
+   "has_comment": false
+  },
+  {
+   "func": "0x9105c0",
+   "name": "CL_Demo_KeyboardComplete_f",
+   "size": 74,
+   "has_comment": false
+  },
+  {
+   "func": "0x910610",
+   "name": "CL_Demo_Keyboard_f",
+   "size": 50,
+   "has_comment": false
+  },
+  {
+   "func": "0x910cb0",
+   "name": "CL_Demo_PreviewClip_f",
+   "size": 115,
+   "has_comment": false
+  },
+  {
+   "func": "0x910d30",
+   "name": "CL_Demo_PreviewSegment_f",
+   "size": 192,
+   "has_comment": false
+  },
+  {
+   "func": "0x910df0",
+   "name": "CL_Demo_RegisterCommands",
+   "size": 242,
+   "has_comment": false
+  },
+  {
+   "func": "0x911060",
+   "name": "CL_Demo_SaveSegment_f",
+   "size": 289,
+   "has_comment": false
+  },
+  {
+   "func": "0x9111b0",
+   "name": "CL_Demo_WriteConfigStrings",
+   "size": 265,
+   "has_comment": false
+  },
+  {
+   "func": "0x911340",
+   "name": "CL_Demo_DeallocateDemoDownloadMemory",
+   "size": 38,
+   "has_comment": false
+  },
+  {
+   "func": "0x9121d0",
+   "name": "CL_Demo_IsDemoDownloadMemoryAllocated",
+   "size": 12,
+   "has_comment": false
+  },
+  {
+   "func": "0x9121e0",
+   "name": "CL_Demo_OpenFileForRead",
+   "size": 80,
+   "has_comment": false
+  },
+  {
+   "func": "0x912260",
+   "name": "CL_Demo_Read",
+   "size": 108,
+   "has_comment": false
+  },
+  {
+   "func": "0x912440",
+   "name": "CL_Demo_SetMemoryFileHandlerSystemActive",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x912e50",
+   "name": "CL_Demo_AllocPlaybackState",
+   "size": 133,
+   "has_comment": false
+  },
+  {
+   "func": "0x9135d0",
+   "name": "CL_Demo_FollowCameraMove",
+   "size": 605,
+   "has_comment": false
+  },
+  {
+   "func": "0x913ae0",
+   "name": "CL_Demo_FreeCameraMove",
+   "size": 1460,
+   "has_comment": true
+  },
+  {
+   "func": "0x9140a0",
+   "name": "CL_Demo_FreeCameraIntegrate",
+   "size": 1763,
+   "has_comment": false
+  },
+  {
+   "func": "0x915990",
+   "name": "CL_Demo_GetClipPausedState",
+   "size": 59,
+   "has_comment": false
+  },
+  {
+   "func": "0x9159f0",
+   "name": "CL_Demo_GetJumpTimeFlag",
+   "size": 18,
+   "has_comment": false
+  },
+  {
+   "func": "0x915df0",
+   "name": "CL_Demo_GetPlaybackData",
+   "size": 8,
+   "has_comment": false
+  },
+  {
+   "func": "0x916cb0",
+   "name": "CL_Demo_IsClipPlaying",
+   "size": 39,
+   "has_comment": false
+  },
+  {
+   "func": "0x916ce0",
+   "name": "CL_Demo_IsClipPreviewRunning",
+   "size": 32,
+   "has_comment": false
+  },
+  {
+   "func": "0x916d00",
+   "name": "CL_Demo_IsClipRecording",
+   "size": 27,
+   "has_comment": false
+  },
+  {
+   "func": "0x916d20",
+   "name": "CL_Demo_IsCompleted",
+   "size": 18,
+   "has_comment": false
+  },
+  {
+   "func": "0x916d90",
+   "name": "CG_IsTheaterFreeCamera",
+   "size": 79,
+   "has_comment": false
+  },
+  {
+   "func": "0x916de0",
+   "name": "CG_IsTheaterOrbitCamera",
+   "size": 79,
+   "has_comment": false
+  },
+  {
+   "func": "0x916e30",
+   "name": "CL_Demo_IsPaused",
+   "size": 37,
+   "has_comment": false
+  },
+  {
+   "func": "0x917010",
+   "name": "CL_Demo_SeekToNextKeyFrame",
+   "size": 375,
+   "has_comment": false
+  },
+  {
+   "func": "0x918640",
+   "name": "CL_Demo_ProcessPacket_Type1",
+   "size": 454,
+   "has_comment": false
+  },
+  {
+   "func": "0x918810",
+   "name": "CL_Demo_ProcessPacket_Type4",
+   "size": 166,
+   "has_comment": false
+  },
+  {
+   "func": "0x9188c0",
+   "name": "CL_Demo_ReadDemoMessage",
+   "size": 1525,
+   "has_comment": false
+  },
+  {
+   "func": "0x918ec0",
+   "name": "CL_Demo_ReadFooter",
+   "size": 484,
+   "has_comment": false
+  },
+  {
+   "func": "0x919510",
+   "name": "CL_Demo_ProcessPacket_Type2_3",
+   "size": 491,
+   "has_comment": false
+  },
+  {
+   "func": "0x91a1a0",
+   "name": "CL_Demo_SetPlayingFlag",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0x91a470",
+   "name": "CL_Demo_ShouldReadMultipleNonDeltaSnapshots",
+   "size": 53,
+   "has_comment": false
+  },
+  {
+   "func": "0x91a970",
+   "name": "CL_StreamSync_BuildAndCommitLocalPackage",
+   "size": 472,
+   "has_comment": false
+  },
+  {
+   "func": "0x91ab50",
+   "name": "CL_Demo_SetCameraMode",
+   "size": 293,
+   "has_comment": true
+  },
+  {
+   "func": "0x91b120",
+   "name": "CL_Demo_UpdateTimeDemo",
+   "size": 3,
+   "has_comment": false
+  },
+  {
+   "func": "0x91bad0",
+   "name": "CL_Demo_WriteClipCommandsWhenPaused",
+   "size": 124,
+   "has_comment": false
+  },
+  {
+   "func": "0x91cec0",
+   "name": "CL_Demo_RecordMessage_End",
+   "size": 219,
+   "has_comment": true
+  },
+  {
+   "func": "0x91cfa0",
+   "name": "CL_Demo_RecordMessage_Begin",
+   "size": 431,
+   "has_comment": true
+  },
+  {
+   "func": "0x91d190",
+   "name": "CL_Demo_WriteGameState",
+   "size": 265,
+   "has_comment": false
+  },
+  {
+   "func": "0x91d2a0",
+   "name": "CL_Demo_RecordMessage_Data",
+   "size": 134,
+   "has_comment": true
+  },
+  {
+   "func": "0x9212f0",
+   "name": "build_huffman",
+   "size": 432,
+   "has_comment": true
+  },
+  {
+   "func": "0x921530",
+   "name": "decode_block",
+   "size": 899,
+   "has_comment": true
+  },
+  {
+   "func": "0x926060",
+   "name": "GetLocalizedMatchRulesName",
+   "size": 1118,
+   "has_comment": true
+  },
+  {
+   "func": "0x927370",
+   "name": "MatchRules_Notify",
+   "size": 1182,
+   "has_comment": true
+  },
+  {
+   "func": "0x927f70",
+   "name": "MatchRules_ValidateCustomClass",
+   "size": 478,
+   "has_comment": true
+  },
+  {
+   "func": "0x92ca30",
+   "name": "GetFileVersionInfoSizeW",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca40",
+   "name": "GetFileVersionInfoW",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca50",
+   "name": "VerQueryValueW",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca56",
+   "name": "agsInit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca5c",
+   "name": "agsDeInit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca62",
+   "name": "agsGetCrossfireGPUCount",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca68",
+   "name": "agsDriverExtensionsDX11_SetDepthBounds",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca6e",
+   "name": "agsDriverExtensionsDX11_BeginUAVOverlap",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca74",
+   "name": "agsDriverExtensionsDX11_EndUAVOverlap",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca7a",
+   "name": "agsDriverExtensionsDX11_Init",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca80",
+   "name": "agsDriverExtensionsDX11_DeInit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca86",
+   "name": "D3D11CreateDevice",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca8c",
+   "name": "CreateDXGIFactory",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca92",
+   "name": "DirectSoundCreate8",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca98",
+   "name": "DirectSoundCaptureCreate",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x92ca9e",
+   "name": "CallNtPowerInformation",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x93c690",
+   "name": "XInputGetState",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0x93c696",
+   "name": "XInputSetState",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c00",
+   "name": "HidP_GetCaps",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c10",
+   "name": "HidP_GetButtonCaps",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c20",
+   "name": "HidP_GetValueCaps",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c30",
+   "name": "HidD_GetAttributes",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c40",
+   "name": "HidD_GetHidGuid",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c50",
+   "name": "HidD_GetPreparsedData",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c60",
+   "name": "HidD_FreePreparsedData",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c70",
+   "name": "HidD_GetFeature",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c80",
+   "name": "HidD_SetFeature",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04c90",
+   "name": "HidD_GetManufacturerString",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04ca0",
+   "name": "HidD_GetProductString",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04cb0",
+   "name": "HidD_GetSerialNumberString",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04cb6",
+   "name": "K32GetModuleFileNameExW",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04cbc",
+   "name": "K32EnumProcessModulesEx",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04cc2",
+   "name": "K32GetModuleBaseNameA",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04cd0",
+   "name": "Com_sprintf",
+   "size": 103,
+   "has_comment": false
+  },
+  {
+   "func": "0xa04f90",
+   "name": "I_stricmp",
+   "size": 101,
+   "has_comment": false
+  },
+  {
+   "func": "0xa593e0",
+   "name": "bdAuth__handleAuthReply",
+   "size": 977,
+   "has_comment": true
+  },
+  {
+   "func": "0xa79d00",
+   "name": "bdBitBuffer__typeToString",
+   "size": 422,
+   "has_comment": true
+  },
+  {
+   "func": "0xa7a7c0",
+   "name": "qsort",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0xa7df10",
+   "name": "Sleep_0",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0xa9a700",
+   "name": "InitializeCriticalSectionAndSpinCount",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0xab5f5c",
+   "name": "__GSHandlerCheck",
+   "size": 29,
+   "has_comment": false
+  },
+  {
+   "func": "0xab5f7c",
+   "name": "__GSHandlerCheckCommon",
+   "size": 91,
+   "has_comment": false
+  },
+  {
+   "func": "0xab5ff0",
+   "name": "__alloca_probe",
+   "size": 78,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6050",
+   "name": "__security_check_cookie",
+   "size": 30,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6518",
+   "name": "__raise_securityfailure",
+   "size": 52,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6550",
+   "name": "__report_gsfailure",
+   "size": 210,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6630",
+   "name": "__report_rangecheckfailure",
+   "size": 19,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6644",
+   "name": "__report_securityfailure",
+   "size": 156,
+   "has_comment": false
+  },
+  {
+   "func": "0xab66e0",
+   "name": "capture_current_context",
+   "size": 109,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6750",
+   "name": "capture_previous_context",
+   "size": 113,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6a70",
+   "name": "__GSHandlerCheck_EH4",
+   "size": 127,
+   "has_comment": false
+  },
+  {
+   "func": "0xab6ccc",
+   "name": "__GSHandlerCheck_SEH",
+   "size": 133,
+   "has_comment": false
+  },
+  {
+   "func": "0xab7050",
+   "name": "__GSHandlerCheck_EH",
+   "size": 127,
+   "has_comment": false
+  },
+  {
+   "func": "0xab7400",
+   "name": "UserMathErrorFunction",
+   "size": 3,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8620",
+   "name": "_Xtime_get_ticks",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8626",
+   "name": "_Thrd_join",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab862c",
+   "name": "_Thrd_id",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8632",
+   "name": "_Mtx_init_in_situ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8638",
+   "name": "_Mtx_destroy_in_situ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab863e",
+   "name": "_Mtx_current_owns",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8644",
+   "name": "_Mtx_lock",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab864a",
+   "name": "_Mtx_unlock",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8650",
+   "name": "_Cnd_init_in_situ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8656",
+   "name": "_Cnd_destroy_in_situ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab865c",
+   "name": "_Cnd_timedwait",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8662",
+   "name": "_Cnd_broadcast",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8668",
+   "name": "_Cnd_do_broadcast_at_thread_exit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab866e",
+   "name": "?_Throw_C_error@std@@YAXH@Z",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8674",
+   "name": "?_Throw_Cpp_error@std@@YAXH@Z",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8680",
+   "name": "?_Xlength_error@std@@YAXPEBD@Z",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8690",
+   "name": "?_Xout_of_range@std@@YAXPEBD@Z",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab86a0",
+   "name": "_Query_perf_counter",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab86b0",
+   "name": "_Query_perf_frequency",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab86b6",
+   "name": "??1_Lockit@std@@QEAA@XZ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8700",
+   "name": "?classic@locale@std@@SAAEBV12@XZ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8710",
+   "name": "?_Getgloballocale@locale@std@@CAPEAV_Locimp@12@XZ",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8720",
+   "name": "__WSAFDIsSet",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8730",
+   "name": "WinVerifyTrust",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8900",
+   "name": "memcpy",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8910",
+   "name": "memmove",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8920",
+   "name": "memset",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8930",
+   "name": "__std_terminate",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8936",
+   "name": "__CxxFrameHandler4",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8940",
+   "name": "memcmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8950",
+   "name": "_purecall",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8960",
+   "name": "strchr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8970",
+   "name": "strstr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8980",
+   "name": "longjmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8990",
+   "name": "strrchr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8996",
+   "name": "__C_specific_handler",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89a0",
+   "name": "wcsrchr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89b0",
+   "name": "wcsstr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89c0",
+   "name": "memchr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89d0",
+   "name": "__std_exception_copy",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89e0",
+   "name": "__std_exception_destroy",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89f0",
+   "name": "_CxxThrowException",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89f6",
+   "name": "__CxxFrameHandler3",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab89fc",
+   "name": "__current_exception",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a02",
+   "name": "__current_exception_context",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a10",
+   "name": "__intrinsic_setjmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a20",
+   "name": "calloc",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a30",
+   "name": "free",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a40",
+   "name": "qsort_0",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a50",
+   "name": "malloc",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a60",
+   "name": "strtol",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a70",
+   "name": "strtoll",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a80",
+   "name": "strtoul",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8a90",
+   "name": "getenv",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8aa0",
+   "name": "isdigit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ab0",
+   "name": "isspace",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ac0",
+   "name": "isalnum",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ad0",
+   "name": "toupper",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ae0",
+   "name": "tolower",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8af0",
+   "name": "strncmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b00",
+   "name": "strncpy",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b10",
+   "name": "__acrt_iob_func",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b20",
+   "name": "_time64",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b30",
+   "name": "strcmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b40",
+   "name": "_beginthreadex",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b50",
+   "name": "fclose_0",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b60",
+   "name": "fopen",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b70",
+   "name": "fwrite",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b80",
+   "name": "_errno",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b86",
+   "name": "exit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8b90",
+   "name": "isalpha",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ba0",
+   "name": "fflush",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8bb0",
+   "name": "fgets",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8bc0",
+   "name": "fread",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8bd0",
+   "name": "fseek",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8be0",
+   "name": "ftell",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8bf0",
+   "name": "_gmtime64",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c00",
+   "name": "_stricmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c10",
+   "name": "realloc",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c20",
+   "name": "_waccess",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c30",
+   "name": "wcscmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c40",
+   "name": "_wcsnicmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c50",
+   "name": "_wcsicmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c60",
+   "name": "_wcsupr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c70",
+   "name": "_fstat64",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c80",
+   "name": "log",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8c90",
+   "name": "_strnicmp",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ca0",
+   "name": "strerror",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cb0",
+   "name": "__sys_nerr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cb6",
+   "name": "_configure_narrow_argv",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cbc",
+   "name": "_initialize_narrow_environment",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cc2",
+   "name": "_initialize_onexit_table",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cc8",
+   "name": "_register_onexit_function",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cce",
+   "name": "_crt_atexit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cd4",
+   "name": "_cexit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cda",
+   "name": "terminate",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ce0",
+   "name": "_seh_filter_exe",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8ce6",
+   "name": "_set_app_type",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cec",
+   "name": "__setusermatherr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cf2",
+   "name": "_get_narrow_winmain_command_line",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cf8",
+   "name": "_initterm",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8cfe",
+   "name": "_initterm_e",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d04",
+   "name": "_exit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d0a",
+   "name": "_set_fmode",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d10",
+   "name": "_c_exit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d16",
+   "name": "_register_thread_local_exe_atexit_callback",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d1c",
+   "name": "_configthreadlocale",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d22",
+   "name": "_set_new_mode",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xab8d28",
+   "name": "__p__commode",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xacb290",
+   "name": "bdXHTTP__prepareEndPoint",
+   "size": 5576,
+   "has_comment": true
+  },
+  {
+   "func": "0xad3640",
+   "name": "CloseHandle_0",
+   "size": 7,
+   "has_comment": false
+  },
+  {
+   "func": "0xae6d80",
+   "name": "error_to_string",
+   "size": 28,
+   "has_comment": true
+  },
+  {
+   "func": "0xaece20",
+   "name": "BCryptSetProperty",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece30",
+   "name": "BCryptGenerateSymmetricKey",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece40",
+   "name": "BCryptEncrypt",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece50",
+   "name": "BCryptDecrypt",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece60",
+   "name": "BCryptDestroyKey",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece70",
+   "name": "BCryptCreateHash",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece80",
+   "name": "BCryptHashData",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaece90",
+   "name": "BCryptFinishHash",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaecea0",
+   "name": "BCryptDestroyHash",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaeceb0",
+   "name": "BCryptOpenAlgorithmProvider",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9aa0",
+   "name": "fputs",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9ab0",
+   "name": "_mbschr",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9ac0",
+   "name": "_mbsnbcpy",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9ad0",
+   "name": "isxdigit",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9ae0",
+   "name": "fputc",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9af0",
+   "name": "_lseeki64",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9b00",
+   "name": "_stat64",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9b10",
+   "name": "_strdup",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9b20",
+   "name": "_read",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9b30",
+   "name": "_write",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9b40",
+   "name": "_close",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xaf9b50",
+   "name": "_open",
+   "size": 6,
+   "has_comment": false
+  },
+  {
+   "func": "0xb12890",
+   "name": "hks__execute2",
+   "size": 15360,
+   "has_comment": true
+  }
+ ],
+ "B_review": [
+  {
+   "func": "0x1762b0",
+   "idb": "CG_ParseFixedCameraToken",
+   "claimed": "CG_LoadCinematicCameraFile",
+   "source": "anchor:MWR",
+   "size": 639
+  },
+  {
+   "func": "0x176530",
+   "idb": "CG_ParsePanCameraToken",
+   "claimed": "CG_LoadCinematicCameraFile",
+   "source": "anchor:MWR",
+   "size": 1740
+  },
+  {
+   "func": "0x176cf0",
+   "idb": "CG_ParseRotateCameraToken",
+   "claimed": "CG_LoadCinematicCameraFile",
+   "source": "anchor:MWR",
+   "size": 1024
+  },
+  {
+   "func": "0x1770f0",
+   "idb": "CG_ParseZoomCameraToken",
+   "claimed": "CG_LoadCinematicCameraFile",
+   "source": "anchor:MWR",
+   "size": 1328
+  },
+  {
+   "func": "0x2389e0",
+   "idb": "AnimStateCmd_EnableAnimState",
+   "claimed": "G_SetAnimationClass",
+   "source": "anchor:MWR",
+   "size": 337
+  },
+  {
+   "func": "0x273990",
+   "idb": "CheckOngoingSessionTask",
+   "claimed": "InGameStore_RefreshStoreUI",
+   "source": "anchor:AW",
+   "size": 551
+  },
+  {
+   "func": "0x273990",
+   "idb": "CheckOngoingSessionTask",
+   "claimed": "InGameStore_RefreshStoreUI",
+   "source": "anchor:MWR",
+   "size": 551
+  },
+  {
+   "func": "0x2736c0",
+   "idb": "InGameStore_CmdInit",
+   "claimed": "InGameStore_GetProductListByCategory",
+   "source": "anchor:MWR",
+   "size": 86
+  },
+  {
+   "func": "0x6dee70",
+   "idb": "SV_ConnectionlessPacket",
+   "claimed": "SV_PacketEvent",
+   "source": "anchor:MWR",
+   "size": 1181
+  },
+  {
+   "func": "0xc790",
+   "idb": "hks__StaticStringCache__s_strings",
+   "claimed": "'hks::StaticStringCache::s_strings''",
+   "source": "anchor:AW",
+   "size": 2427
+  },
+  {
+   "func": "0x2e0ef0",
+   "idb": "hks__StructInst__insertNumber",
+   "claimed": "hks__settable_event_outofline_number",
+   "source": "anchor:MWR",
+   "size": 193
+  },
+  {
+   "func": "0x2ca140",
+   "idb": "hks__Parser__checkExectedClosing",
+   "claimed": "hks__Parser__signalTokenExpectedError",
+   "source": "anchor:MWR",
+   "size": 299
+  },
+  {
+   "func": "0x2f2350",
+   "idb": "hks__Parser__parseFor",
+   "claimed": "hks__Parser__parseForList",
+   "source": "anchor:MWR",
+   "size": 730
+  },
+  {
+   "func": "0x2f2d40",
+   "idb": "hks__Parser__parseFunctionBody",
+   "claimed": "hks__Parser__parseForList",
+   "source": "anchor:MWR",
+   "size": 977
+  },
+  {
+   "func": "0x2f3930",
+   "idb": "hks__Parser__parsePrefixExpression",
+   "claimed": "hks__Parser__parseDefstruct",
+   "source": "anchor:MWR",
+   "size": 1070
+  },
+  {
+   "func": "0x2f2bb0",
+   "idb": "hks__Parser__parseFunctionArguments",
+   "claimed": "hks__Parser__parseConstructor",
+   "source": "anchor:MWR",
+   "size": 392
+  },
+  {
+   "func": "0x2f1860",
+   "idb": "hks__Parser__parseAssignment",
+   "claimed": "hks__Parser__parseConstructor",
+   "source": "anchor:MWR",
+   "size": 332
+  },
+  {
+   "func": "0x2c8300",
+   "idb": "hks__Parser__parse",
+   "claimed": "hks__Parser__parseDelete",
+   "source": "anchor:MWR",
+   "size": 394
+  },
+  {
+   "func": "0x2e8c00",
+   "idb": "hks__CodeGenerator__onExpressionIntLiteral",
+   "claimed": "hks__CodeGenerator__onExpressionString",
+   "source": "anchor:MWR",
+   "size": 221
+  },
+  {
+   "func": "0x2e7190",
+   "idb": "hks__CodeGenerator__onConstructorListFieldEnd",
+   "claimed": "hks__CodeGenerator__onConstructorListFieldStart",
+   "source": "anchor:MWR",
+   "size": 102
+  },
+  {
+   "func": "0x2cbfc0",
+   "idb": "hks__CodeGenerator__createLocalVariable",
+   "claimed": "hks__CodeGenerator__createLocalVariable_0",
+   "source": "anchor:MWR",
+   "size": 826
+  },
+  {
+   "func": "0x2e77d0",
+   "idb": "hks__CodeGenerator__onDefstruct",
+   "claimed": "hks__CodeGenerator__emitJumpOnCondition",
+   "source": "anchor:MWR",
+   "size": 587
+  },
+  {
+   "func": "0x2ca480",
+   "idb": "hks::CodeGenerator::checkSlotAssign",
+   "claimed": "hks::CodeGenerator::signalError",
+   "source": "anchor:AW",
+   "size": 381
+  },
+  {
+   "func": "0x2e5a80",
+   "idb": "hks__StructUtil__newInstance",
+   "claimed": "hks__StructUtil__newInstance_0",
+   "source": "anchor:MWR",
+   "size": 228
+  },
+  {
+   "func": "0x302d90",
+   "idb": "hks__StructUtil__throwTypeError",
+   "claimed": "hks__StructUtil__throwTypeError_1",
+   "source": "anchor:MWR",
+   "size": 315
+  },
+  {
+   "func": "0x309150",
+   "idb": "hks__write_file",
+   "claimed": "hks__io_readnchar",
+   "source": "anchor:MWR",
+   "size": 416
+  },
+  {
+   "func": "0x2c02b0",
+   "idb": "hks__io_seek_file",
+   "claimed": "hks__io_read_file",
+   "source": "anchor:MWR",
+   "size": 311
+  },
+  {
+   "func": "0x2d2100",
+   "idb": "hks__createFunctionName",
+   "claimed": "hks__general_c_loader",
+   "source": "anchor:MWR",
+   "size": 589
+  },
+  {
+   "func": "0x2f16a0",
+   "idb": "hks__package_module_setfenv",
+   "claimed": "hks__package_module",
+   "source": "anchor:MWR",
+   "size": 446
+  },
+  {
+   "func": "0x2b6550",
+   "idb": "hks__string_dump",
+   "claimed": "hks__string_gmatch",
+   "source": "anchor:MWR",
+   "size": 1251
+  },
+  {
+   "func": "0x2b82b0",
+   "idb": "Lua_string_sort",
+   "claimed": "hks::table_sort",
+   "source": "anchor:AW",
+   "size": 215
+  },
+  {
+   "func": "0x2b82b0",
+   "idb": "Lua_string_sort",
+   "claimed": "hks__table_sort",
+   "source": "anchor:MWR",
+   "size": 215
+  },
+  {
+   "func": "0x2cbdc0",
+   "idb": "hks__GarbageCollector__createFinalizerState",
+   "claimed": "hks__GarbageCollector__finalizeUserdata",
+   "source": "anchor:MWR",
+   "size": 347
+  },
+  {
+   "func": "0x2d9be0",
+   "idb": "hks__Serializer__unpersist",
+   "claimed": "hks__Serializer__unpersistNext",
+   "source": "anchor:MWR",
+   "size": 528
+  },
+  {
+   "func": "0x2c5fe0",
+   "idb": "hks__HeapVisualizer__HeapVisualizer",
+   "claimed": "hks__HeapVisualizer__print_label",
+   "source": "anchor:MWR",
+   "size": 576
+  },
+  {
+   "func": "0xb12890",
+   "idb": "hks__execute2",
+   "claimed": "hks::execute<2>",
+   "source": "anchor:AW",
+   "size": 15360
+  },
+  {
+   "func": "0xb12890",
+   "idb": "hks__execute2",
+   "claimed": "int_hks__execute_1",
+   "source": "anchor:MWR",
+   "size": 15360
+  },
+  {
+   "func": "0xca0f0",
+   "idb": "LUI_ObituaryHandler",
+   "claimed": "LUI_Obituary",
+   "source": "anchor:AW",
+   "size": 824
+  },
+  {
+   "func": "0xca0f0",
+   "idb": "LUI_ObituaryHandler",
+   "claimed": "LUI_Obituary",
+   "source": "anchor:MWR",
+   "size": 824
+  },
+  {
+   "func": "0x315500",
+   "idb": "LUI_LuaCall_Clan_GetRemoteClanCardData",
+   "claimed": "PushClanInfoTable",
+   "source": "anchor:MWR",
+   "size": 434
+  },
+  {
+   "func": "0x318810",
+   "idb": "LUI_CoD_HandleKeyBind",
+   "claimed": "LUI_CoD_KeyEvent",
+   "source": "anchor:MWR",
+   "size": 475
+  },
+  {
+   "func": "0x325c20",
+   "idb": "LUI_LuaCall_Game_GetWeaponCrosshairColor",
+   "claimed": "LUI_LuaCall_Game_GetWeaponAltModeMaterial",
+   "source": "anchor:MWR",
+   "size": 193
+  },
+  {
+   "func": "0x33d3c0",
+   "idb": "LUI_SetLoadoutAndBroadcast",
+   "claimed": "LUI_FillLoadout",
+   "source": "anchor:MWR",
+   "size": 3536
+  },
+  {
+   "func": "0x33e1f0",
+   "idb": "Lua_Broadcaster_FollowNext",
+   "claimed": "LUI_CoD_LuaCall_FollowNext",
+   "source": "anchor:AW",
+   "size": 113
+  },
+  {
+   "func": "0x33e1f0",
+   "idb": "Lua_Broadcaster_FollowNext",
+   "claimed": "LUI_CoD_LuaCall_FollowNext",
+   "source": "anchor:MWR",
+   "size": 113
+  },
+  {
+   "func": "0x33e270",
+   "idb": "Lua_Broadcaster_FollowPrev",
+   "claimed": "LUI_CoD_LuaCall_FollowPrev",
+   "source": "anchor:AW",
+   "size": 113
+  },
+  {
+   "func": "0x33e270",
+   "idb": "Lua_Broadcaster_FollowPrev",
+   "claimed": "LUI_CoD_LuaCall_FollowPrev",
+   "source": "anchor:MWR",
+   "size": 113
+  },
+  {
+   "func": "0x3400e0",
+   "idb": "Lua_Broadcaster_StopFollow",
+   "claimed": "LUI_CoD_LuaCall_StopFollow",
+   "source": "anchor:AW",
+   "size": 122
+  },
+  {
+   "func": "0x3400e0",
+   "idb": "Lua_Broadcaster_StopFollow",
+   "claimed": "LUI_CoD_LuaCall_StopFollow",
+   "source": "anchor:MWR",
+   "size": 122
+  },
+  {
+   "func": "0x343500",
+   "idb": "LUI_CoD_UpdateLiveConnectionSystem",
+   "claimed": "LUI_CoD_UpdateWeaponChangeSystem",
+   "source": "anchor:MWR",
+   "size": 95
+  },
+  {
+   "func": "0x110570",
+   "idb": "LUI_CoD_LuaCall_GetCombatRecordWeaponStatsData",
+   "claimed": "LUI_CoD_LuaCall_CheckPlayerData",
+   "source": "anchor:MWR",
+   "size": 3478
+  },
+  {
+   "func": "0x11e210",
+   "idb": "LUI_CoD_LuaCall_Inventory_GetArmoryItems",
+   "claimed": "LUI_CoD_LuaCall_Inventory_GetAllItems",
+   "source": "anchor:MWR",
+   "size": 726
+  },
+  {
+   "func": "0x36e650",
+   "idb": "Lua_Store_GetCategoryInfo",
+   "claimed": "LUI_LuaCall_Store_GetCategoryInfo",
+   "source": "anchor:AW",
+   "size": 463
+  },
+  {
+   "func": "0x36e650",
+   "idb": "Lua_Store_GetCategoryInfo",
+   "claimed": "LUI_LuaCall_Store_GetCategoryInfo",
+   "source": "anchor:MWR",
+   "size": 463
+  },
+  {
+   "func": "0x36ec20",
+   "idb": "Lua_Store_GetItemInfoByCategory",
+   "claimed": "LUI_LuaCall_Store_GetItemInfoByCategory",
+   "source": "anchor:AW",
+   "size": 591
+  },
+  {
+   "func": "0x36ec20",
+   "idb": "Lua_Store_GetItemInfoByCategory",
+   "claimed": "LUI_LuaCall_Store_GetItemInfoByCategory",
+   "source": "anchor:MWR",
+   "size": 591
+  },
+  {
+   "func": "0x37c9f0",
+   "idb": "BG_ParseTransitionTrigger",
+   "claimed": "BG_AnimParseAnimScript",
+   "source": "anchor:MWR",
+   "size": 569
+  },
+  {
+   "func": "0x37c780",
+   "idb": "BG_ParseIdleTurn",
+   "claimed": "BG_ParseCommands",
+   "source": "anchor:MWR",
+   "size": 612
+  },
+  {
+   "func": "0x38dc60",
+   "idb": "G_InitGame",
+   "claimed": "BG_RegisterNetworkDvars",
+   "source": "anchor:AW",
+   "size": 1423
+  },
+  {
+   "func": "0x38dc60",
+   "idb": "G_InitGame",
+   "claimed": "BG_RegisterNetworkDvars",
+   "source": "anchor:MWR",
+   "size": 1423
+  },
+  {
+   "func": "0x3c9770",
+   "idb": "CG_DrawPlayerWeaponLowAmmoWarning",
+   "claimed": "CG_DrawPlayerWeaponBackground",
+   "source": "anchor:MWR",
+   "size": 1417
+  },
+  {
+   "func": "0x3cfbb0",
+   "idb": "CG_ParseVec3x2Finish",
+   "claimed": "CG_ParseClientEffects",
+   "source": "anchor:MWR",
+   "size": 210
+  },
+  {
+   "func": "0x3cf430",
+   "idb": "CG_ParseReactiveSound",
+   "claimed": "CG_ParseClientEffects",
+   "source": "anchor:MWR",
+   "size": 802
+  },
+  {
+   "func": "0x3cde30",
+   "idb": "CG_ParseDynamicAmbience",
+   "claimed": "CG_ParseClientEffects",
+   "source": "anchor:MWR",
+   "size": 758
+  },
+  {
+   "func": "0x3ce620",
+   "idb": "CG_ParseExploder",
+   "claimed": "CG_ParseClientEffects",
+   "source": "anchor:MWR",
+   "size": 1924
+  },
+  {
+   "func": "0x3cd500",
+   "idb": "CG_ParseClientEffectMapping",
+   "claimed": "CG_StartClientSideEffects",
+   "source": "anchor:MWR",
+   "size": 1231
+  },
+  {
+   "func": "0x3ece20",
+   "idb": "CG_ProcessClientNoteTracks",
+   "claimed": "CG_ProcessEntityNoteTracks",
+   "source": "anchor:AW",
+   "size": 3356
+  },
+  {
+   "func": "0x3ece20",
+   "idb": "CG_ProcessClientNoteTracks",
+   "claimed": "CG_ProcessEntityNoteTracks",
+   "source": "anchor:MWR",
+   "size": 3356
+  },
+  {
+   "func": "0x3f5df0",
+   "idb": "CG_Obituary",
+   "claimed": "CG_EntityEvent",
+   "source": "anchor:MWR",
+   "size": 1236
+  },
+  {
+   "func": "0x3fb670",
+   "idb": "CG_Draw2dHudElems",
+   "claimed": "CG_Draw2dHudElemList",
+   "source": "anchor:MWR",
+   "size": 1976
+  },
+  {
+   "func": "0x3d6f0",
+   "idb": "CG_DrawSpectatorControls",
+   "claimed": "CG_MaterialHandleForIndex",
+   "source": "anchor:MWR",
+   "size": 1300
+  },
+  {
+   "func": "0x3b230",
+   "idb": "CG_DrawMantleHint",
+   "claimed": "CG_OwnerDraw",
+   "source": "anchor:MWR",
+   "size": 603
+  },
+  {
+   "func": "0x3af00",
+   "idb": "CG_DrawInvalidCmdHint",
+   "claimed": "CG_OwnerDraw",
+   "source": "anchor:MWR",
+   "size": 816
+  },
+  {
+   "func": "0x42ef80",
+   "idb": "CG_LoadRumble",
+   "claimed": "CG_RegisterRumbles",
+   "source": "anchor:MWR",
+   "size": 742
+  },
+  {
+   "func": "0x431eb0",
+   "idb": "CG_ServerCommand",
+   "claimed": "CG_SetClientDvarFromServer",
+   "source": "anchor:AW",
+   "size": 12832
+  },
+  {
+   "func": "0x431eb0",
+   "idb": "CG_ServerCommand",
+   "claimed": "CG_DeployServerCommandString",
+   "source": "anchor:MWR",
+   "size": 12832
+  },
+  {
+   "func": "0x44da00",
+   "idb": "CG_ParseFog",
+   "claimed": "CG_ParseClientVisionSetTriggers",
+   "source": "anchor:MWR",
+   "size": 6289
+  },
+  {
+   "func": "0x36910",
+   "idb": "CG_ClientViewVisionSetUpdate",
+   "claimed": "CG_DrawActiveFrame",
+   "source": "anchor:MWR",
+   "size": 440
+  },
+  {
+   "func": "0x6b220",
+   "idb": "CL_CheckForResend_Challenging",
+   "claimed": "CL_CheckForResend",
+   "source": "anchor:MWR",
+   "size": 1886
+  },
+  {
+   "func": "0x6af20",
+   "idb": "Cl_CheckForResend_Connecting",
+   "claimed": "CL_CheckForResend",
+   "source": "anchor:MWR",
+   "size": 762
+  },
+  {
+   "func": "0x86bd0",
+   "idb": "CL_ServerTimedOut",
+   "claimed": "CL_PacketEvent",
+   "source": "anchor:MWR",
+   "size": 317
+  },
+  {
+   "func": "0x460620",
+   "idb": "CL_PC_RegisterCommands",
+   "claimed": "CL_Xenon_RegisterCommands",
+   "source": "anchor:AW",
+   "size": 86
+  },
+  {
+   "func": "0x460620",
+   "idb": "CL_PC_RegisterCommands",
+   "claimed": "CL_PS4_RegisterCommands",
+   "source": "anchor:MWR",
+   "size": 86
+  },
+  {
+   "func": "0x460bd0",
+   "idb": "HandlePingMsg",
+   "claimed": "CL_SendPingAck",
+   "source": "anchor:AW",
+   "size": 246
+  },
+  {
+   "func": "0x46dcd0",
+   "idb": "GamerProfile_UpdateProfileFromStats",
+   "claimed": "GamerProfile_UpdateProfileExperience",
+   "source": "anchor:AW",
+   "size": 433
+  },
+  {
+   "func": "0x478370",
+   "idb": "PartyClient_SendHeartbeatAck",
+   "claimed": "PartyClient_SetUpPartyForHost",
+   "source": "anchor:MWR",
+   "size": 169
+  },
+  {
+   "func": "0x4720b0",
+   "idb": "PartyClient_HandleKickedFromParty",
+   "claimed": "PartyClient_SendPartyStateAck",
+   "source": "anchor:MWR",
+   "size": 268
+  },
+  {
+   "func": "0x4726d0",
+   "idb": "PartyClient_SendHostBackoutMessage",
+   "claimed": "PartyClient_SendPartyStateAck",
+   "source": "anchor:MWR",
+   "size": 411
+  },
+  {
+   "func": "0x478990",
+   "idb": "PartyClient_SendQoSResults",
+   "claimed": "PartyClient_Frame",
+   "source": "anchor:MWR",
+   "size": 697
+  },
+  {
+   "func": "0x196d70",
+   "idb": "Party_SetLobbyParamFromCmd",
+   "claimed": "Party_Init",
+   "source": "anchor:AW",
+   "size": 662
+  },
+  {
+   "func": "0x4914e0",
+   "idb": "PartyHost_ShareSearchResults",
+   "claimed": "PartyHost_SearchComplete",
+   "source": "anchor:MWR",
+   "size": 461
+  },
+  {
+   "func": "0x485ed0",
+   "idb": "PartyHost_HandleClientPresence",
+   "claimed": "PartyHost_HandleCantHearMsg",
+   "source": "anchor:MWR",
+   "size": 264
+  },
+  {
+   "func": "0x489300",
+   "idb": "PartyAtomicHost_SendJoinFailedResponseWithPayload",
+   "claimed": "PartyAtomicHost_SendJoinFailedResponse",
+   "source": "anchor:MWR",
+   "size": 176
+  },
+  {
+   "func": "0x495c20",
+   "idb": "PartyAtomicClient_SendMemberActionResponse",
+   "claimed": "PartyAtomicClient_SendMemberActionResponse_Internal",
+   "source": "anchor:AW",
+   "size": 273
+  },
+  {
+   "func": "0x495c20",
+   "idb": "PartyAtomicClient_SendMemberActionResponse",
+   "claimed": "PartyAtomicClient_SendMemberActionResponse_Internal",
+   "source": "anchor:MWR",
+   "size": 273
+  },
+  {
+   "func": "0x495650",
+   "idb": "PartyAtomic_OnError_Failed",
+   "claimed": "PartyAtomic_HandleFailedJoinAttempt",
+   "source": "anchor:AW",
+   "size": 155
+  },
+  {
+   "func": "0x495650",
+   "idb": "PartyAtomic_OnError_Failed",
+   "claimed": "PartyAtomic_OnFrame_Success",
+   "source": "anchor:MWR",
+   "size": 155
+  },
+  {
+   "func": "0x496820",
+   "idb": "PartyAtomic_AskToJoinParty_Internal",
+   "claimed": "PartyAtomicClient_SendMemberActionResponse_Internal",
+   "source": "anchor:MWR",
+   "size": 495
+  },
+  {
+   "func": "0x495f80",
+   "idb": "PartyAtomic_OnFrame_WaitHost",
+   "claimed": "PartyAtomicHost_BuildJoinLobbyMessage",
+   "source": "anchor:AW",
+   "size": 470
+  },
+  {
+   "func": "0x495da0",
+   "idb": "PartyAtomicHost_SendJoinHostResponse",
+   "claimed": "PartyAtomicHost_BroadcastActionResponse",
+   "source": "anchor:MWR",
+   "size": 472
+  },
+  {
+   "func": "0x49d570",
+   "idb": "PartyMigrate_SendNomineeMsg",
+   "claimed": "PartyMigrate_SendOurNominee",
+   "source": "anchor:MWR",
+   "size": 295
+  },
+  {
+   "func": "0x49c790",
+   "idb": "PartyMigrate_TellNoNewHost",
+   "claimed": "PartyMigrate_NewHostDecided",
+   "source": "anchor:MWR",
+   "size": 639
+  },
+  {
+   "func": "0x49ba50",
+   "idb": "PartyMigrate_GetPings",
+   "claimed": "PartyMigrate_SelectOurNominee",
+   "source": "anchor:MWR",
+   "size": 569
+  },
+  {
+   "func": "0x4983b0",
+   "idb": "PartyMigrate_HandlePingMsg",
+   "claimed": "PartyMigrate_HandleSessionInfoMsg",
+   "source": "anchor:MWR",
+   "size": 184
+  },
+  {
+   "func": "0x499880",
+   "idb": "PartyMigrate_BuildSessionInfoMessage",
+   "claimed": "PartyMigrate_BroadcastNewSessionInfo",
+   "source": "anchor:MWR",
+   "size": 495
+  },
+  {
+   "func": "0x49aed0",
+   "idb": "PartyMigrate_DetermineBestHost_LogResults",
+   "claimed": "PartyMigrate_Frame",
+   "source": "anchor:MWR",
+   "size": 553
+  },
+  {
+   "func": "0x4a18a0",
+   "idb": "GuestSponsorErrorMessage",
+   "claimed": "CL_HandleSplitscreenSignIn",
+   "source": "anchor:MWR",
+   "size": 1076
+  },
+  {
+   "func": "0x4a2690",
+   "idb": "CL_Splitscreen_Init",
+   "claimed": "CL_Splitscreen_RegisterCommands",
+   "source": "anchor:AW",
+   "size": 257
+  },
+  {
+   "func": "0x897dd0",
+   "idb": "R_InitImages",
+   "claimed": "R_InitCodeImages",
+   "source": "anchor:AW",
+   "size": 681
+  },
+  {
+   "func": "0x897dd0",
+   "idb": "R_InitImages",
+   "claimed": "Image_SetSrgbTexture",
+   "source": "anchor:MWR",
+   "size": 681
+  },
+  {
+   "func": "0xa4390",
+   "idb": "DB_DelayedCloneXAsset",
+   "claimed": "DB_AddXAsset",
+   "source": "anchor:MWR",
+   "size": 1082
+  },
+  {
+   "func": "0xa58d0",
+   "idb": "DB_LoadXZone",
+   "claimed": "DB_LoadXAssets",
+   "source": "anchor:MWR",
+   "size": 893
+  },
+  {
+   "func": "0xace30",
+   "idb": "DB_TryLoadXFileInternal",
+   "claimed": "DB_Thread",
+   "source": "anchor:MWR",
+   "size": 1866
+  },
+  {
+   "func": "0x541340",
+   "idb": "ClientInactivityTimer",
+   "claimed": "SV_GameDropClient",
+   "source": "anchor:AW",
+   "size": 4751
+  },
+  {
+   "func": "0x5612b0",
+   "idb": "G_RegisterServerDemoDvars",
+   "claimed": "G_InitGame",
+   "source": "anchor:MWR",
+   "size": 1525
+  },
+  {
+   "func": "0x227b80",
+   "idb": "AddSoundSubmixParseDynamicArguments",
+   "claimed": "ScrCmd_AddSoundSubmix_Common",
+   "source": "anchor:MWR",
+   "size": 497
+  },
+  {
+   "func": "0x590460",
+   "idb": "GScr_GetCaCPlayerData",
+   "claimed": "GScr_IsItemUnlocked",
+   "source": "anchor:MWR",
+   "size": 345
+  },
+  {
+   "func": "0x590800",
+   "idb": "GScr_SetCaCPlayerData",
+   "claimed": "GScr_IsItemUnlocked",
+   "source": "anchor:MWR",
+   "size": 892
+  },
+  {
+   "func": "0x590e70",
+   "idb": "GScr_GetCaCPlayerDataForGroup",
+   "claimed": "GScr_IsItemUnlocked",
+   "source": "anchor:MWR",
+   "size": 414
+  },
+  {
+   "func": "0x5ad800",
+   "idb": "GScr_LoadAgentScript",
+   "claimed": "GScr_LoadScripts",
+   "source": "anchor:MWR",
+   "size": 689
+  },
+  {
+   "func": "0x5a5040",
+   "idb": "GScr_GetMatchRulesData",
+   "claimed": "GScr_SetMatchData",
+   "source": "anchor:MWR",
+   "size": 151
+  },
+  {
+   "func": "0x5b7460",
+   "idb": "G_CallSpawn",
+   "claimed": "G_SpawnEntitiesFromString",
+   "source": "anchor:MWR",
+   "size": 734
+  },
+  {
+   "func": "0x5cd440",
+   "idb": "G_ReadStruct",
+   "claimed": "ReadField",
+   "source": "anchor:AW",
+   "size": 1288
+  },
+  {
+   "func": "0x64ff00",
+   "idb": "UI_GetMapCustom",
+   "claimed": "GameInfo_GetMapCustom",
+   "source": "anchor:AW",
+   "size": 471
+  },
+  {
+   "func": "0x64ff00",
+   "idb": "UI_GetMapCustom",
+   "claimed": "GameInfo_GetCurrentMapCustom",
+   "source": "anchor:MWR",
+   "size": 471
+  },
+  {
+   "func": "0x651910",
+   "idb": "ComGroups_SetGroups",
+   "claimed": "ComGroups_UpdateGroupMemberships",
+   "source": "anchor:AW",
+   "size": 766
+  },
+  {
+   "func": "0xd3e90",
+   "idb": "LiveStorage_StatsInit",
+   "claimed": "LiveStorage_SetCustomClassNames",
+   "source": "anchor:AW",
+   "size": 3833
+  },
+  {
+   "func": "0x788ca0",
+   "idb": "Live_CheckNetConnection",
+   "claimed": "Live_Frame",
+   "source": "anchor:MWR",
+   "size": 1033
+  },
+  {
+   "func": "0x680550",
+   "idb": "ScriptableSv_DoEventExplosion",
+   "claimed": "ScriptableSv_RunActiveEvents",
+   "source": "anchor:MWR",
+   "size": 1196
+  },
+  {
+   "func": "0x6d6a90",
+   "idb": "SV_AddOperatorCommands",
+   "claimed": "SV_SendMatchData_f",
+   "source": "anchor:MWR",
+   "size": 192
+  },
+  {
+   "func": "0xf49d0",
+   "idb": "SV_FreeClients",
+   "claimed": "SV_ICantHear",
+   "source": "anchor:MWR",
+   "size": 805
+  },
+  {
+   "func": "0xf7110",
+   "idb": "SV_UserinfoChanged",
+   "claimed": "SV_UpdateUserSession",
+   "source": "anchor:AW",
+   "size": 937
+  },
+  {
+   "func": "0xf5070",
+   "idb": "SV_GeneratePresetTestClientCustomization",
+   "claimed": "Info_ForTestClient",
+   "source": "anchor:MWR",
+   "size": 150
+  },
+  {
+   "func": "0x6de420",
+   "idb": "SV_CalcPings",
+   "claimed": "SV_ServerThread",
+   "source": "anchor:MWR",
+   "size": 912
+  },
+  {
+   "func": "0x6de970",
+   "idb": "SV_Frame",
+   "claimed": "SV_CheckOverflow",
+   "source": "anchor:AW",
+   "size": 444
+  },
+  {
+   "func": "0x6dfeb0",
+   "idb": "MatchEnd_Party",
+   "claimed": "SV_MatchEnd",
+   "source": "anchor:MWR",
+   "size": 356
+  },
+  {
+   "func": "0x726d60",
+   "idb": "CODAnywhere_OpenSuccessPopup",
+   "claimed": "CODAnywhere_ControllerFrame",
+   "source": "anchor:MWR",
+   "size": 158
+  },
+  {
+   "func": "0x7425f0",
+   "idb": "UI_DrawSpawnLocationMap",
+   "claimed": "UI_OwnerDraw",
+   "source": "anchor:MWR",
+   "size": 1311
+  },
+  {
+   "func": "0x745ef0",
+   "idb": "UI_RegisterDvars",
+   "claimed": "UI_Init",
+   "source": "anchor:MWR",
+   "size": 2804
+  },
+  {
+   "func": "0x741f10",
+   "idb": "UI_DrawPlaylistDescription",
+   "claimed": "UI_OwnerDraw",
+   "source": "anchor:MWR",
+   "size": 1184
+  },
+  {
+   "func": "0x74afe0",
+   "idb": "RunOp",
+   "claimed": "GetPrivateLobbyStatus",
+   "source": "anchor:AW",
+   "size": 185
+  },
+  {
+   "func": "0x74afe0",
+   "idb": "RunOp",
+   "claimed": "GetPrivateLobbyStatus",
+   "source": "anchor:MWR",
+   "size": 185
+  },
+  {
+   "func": "0x74eb10",
+   "idb": "Script_GetHostMigrateQuestionString",
+   "claimed": "UI_GetHostMigrateQuestionString",
+   "source": "anchor:AW",
+   "size": 202
+  },
+  {
+   "func": "0x74eb10",
+   "idb": "Script_GetHostMigrateQuestionString",
+   "claimed": "UI_GetHostMigrateQuestionString",
+   "source": "anchor:MWR",
+   "size": 202
+  },
+  {
+   "func": "0x758540",
+   "idb": "Alloc",
+   "claimed": "Com_CreateRawImmutable",
+   "source": "anchor:MWR",
+   "size": 528
+  },
+  {
+   "func": "0x7660b0",
+   "idb": "Content_Clear",
+   "claimed": "Content_Init",
+   "source": "anchor:MWR",
+   "size": 151
+  },
+  {
+   "func": "0x765ed0",
+   "idb": "Content_RegisterEntitlements",
+   "claimed": "Content_GetContentPackNameByContentID",
+   "source": "anchor:AW",
+   "size": 354
+  },
+  {
+   "func": "0x765ed0",
+   "idb": "Content_RegisterEntitlements",
+   "claimed": "PS4_PumpThreadedEnumeration",
+   "source": "anchor:MWR",
+   "size": 354
+  },
+  {
+   "func": "0x766b00",
+   "idb": "SegmentSentinelReadAndVerify",
+   "claimed": "MemFile_MoveToSegment",
+   "source": "anchor:MWR",
+   "size": 508
+  },
+  {
+   "func": "0x7b5e90",
+   "idb": "DObjCreateDuplicateParts",
+   "claimed": "DObjCreate",
+   "source": "anchor:MWR",
+   "size": 1695
+  },
+  {
+   "func": "0x83e860",
+   "idb": "EliteClan_CreateUpdate",
+   "claimed": "EliteClan_Update",
+   "source": "anchor:MWR",
+   "size": 643
+  },
+  {
+   "func": "0x84b900",
+   "idb": "FriendsMenu_IsUserJoinable",
+   "claimed": "FriendsMenu_IsUserJoinable_Internal",
+   "source": "anchor:AW",
+   "size": 311
+  },
+  {
+   "func": "0x84c390",
+   "idb": "MeetPlayer_GetPresenceForSlot",
+   "claimed": "MeetPlayer_GetStatus",
+   "source": "anchor:AW",
+   "size": 292
+  },
+  {
+   "func": "0x856a20",
+   "idb": "Live_SyncOnlineDataPopupTimeout",
+   "claimed": "Live_SyncOnlineDataFrame",
+   "source": "anchor:MWR",
+   "size": 467
+  },
+  {
+   "func": "0x86e600",
+   "idb": "R_Cinematic_BinkOpenPath_MemoryResident",
+   "claimed": "R_Cinematic_BinkOpenPath",
+   "source": "anchor:MWR",
+   "size": 364
+  },
+  {
+   "func": "0x8e5c10",
+   "idb": "RB_InitCodeImages",
+   "claimed": "RB_InitBackendGlobalStructs",
+   "source": "anchor:MWR",
+   "size": 2588
+  },
+  {
+   "func": "0x923930",
+   "idb": "decode_jpeg_image",
+   "claimed": "process_scan_header",
+   "source": "anchor:AW",
+   "size": 716
+  },
+  {
+   "func": "0x922fb0",
+   "idb": "decode_jpeg_header",
+   "claimed": "process_frame_header",
+   "source": "anchor:AW",
+   "size": 1349
+  },
+  {
+   "func": "0x927f70",
+   "idb": "MatchRules_ValidateCustomClass",
+   "claimed": "ValidatePerkClass",
+   "source": "anchor:MWR",
+   "size": 478
+  },
+  {
+   "func": "0x71e1b0",
+   "idb": "SND_ParseDspBusesFile",
+   "claimed": "SND_Init",
+   "source": "anchor:MWR",
+   "size": 747
+  },
+  {
+   "func": "0x11c620",
+   "idb": "Lua_Engine_GetWeaponDamage",
+   "claimed": "BG_TurretCanShoot",
+   "source": "anchor:MWR",
+   "size": 480
+  },
+  {
+   "func": "0x18fc80",
+   "idb": "resetglobalcostume_f",
+   "claimed": "LiveStorage_ResetGlobalCostumeCmd",
+   "source": "anchor:MWR",
+   "size": 468
+  },
+  {
+   "func": "0x18f760",
+   "idb": "resetcostume_f",
+   "claimed": "LiveStorage_ResetCostumeCmd",
+   "source": "anchor:MWR",
+   "size": 1299
+  },
+  {
+   "func": "0x18fe60",
+   "idb": "setactivecostume_f",
+   "claimed": "LiveStorage_SetActiveCostumeCmd",
+   "source": "anchor:MWR",
+   "size": 372
+  },
+  {
+   "func": "0xca550",
+   "idb": "PartyClient_DisconnectFromHost",
+   "claimed": "LUI_OpenMenu",
+   "source": "anchor:MWR",
+   "size": 804
+  },
+  {
+   "func": "0x3122f0",
+   "idb": "Lua_Clan_GetProposalInfo",
+   "claimed": "LUI_LuaCall_Clan_GetProposalInfo",
+   "source": "anchor:MWR",
+   "size": 541
+  },
+  {
+   "func": "0x312c70",
+   "idb": "Lua_Clan_GetModifierForPlaylist",
+   "claimed": "LUI_LuaCall_Clan_GetModifierForPlaylist",
+   "source": "anchor:MWR",
+   "size": 691
+  },
+  {
+   "func": "0x33abd0",
+   "idb": "Lua_Lobby_BroadcastLoadout",
+   "claimed": "LUI_CoD_LuaCall_BroadcastLoadout",
+   "source": "anchor:MWR",
+   "size": 14
+  },
+  {
+   "func": "0x33a660",
+   "idb": "Lua_Lobby_GetBandwidth",
+   "claimed": "LUI_CoD_LuaCall_GetBandwidth",
+   "source": "anchor:MWR",
+   "size": 118
+  },
+  {
+   "func": "0x33a6e0",
+   "idb": "Lua_Lobby_GetIPAddress",
+   "claimed": "LUI_CoD_LuaCall_GetIPAddress",
+   "source": "anchor:MWR",
+   "size": 447
+  },
+  {
+   "func": "0x10cd70",
+   "idb": "Lua_Engine_Localize",
+   "claimed": "LUI_CoD_LuaCall_Localize",
+   "source": "anchor:MWR",
+   "size": 698
+  },
+  {
+   "func": "0x111310",
+   "idb": "Lua_Engine_GetScoreStreaksStatsData",
+   "claimed": "LUI_CoD_LuaCall_CheckPlayerData",
+   "source": "anchor:MWR",
+   "size": 968
+  },
+  {
+   "func": "0x36ee70",
+   "idb": "Lua_Store_GetProductGroupInfo",
+   "claimed": "LUI_LuaCall_Store_GetProductGroupInfo",
+   "source": "anchor:MWR",
+   "size": 432
+  },
+  {
+   "func": "0x4373f0",
+   "idb": "CG_ExecuteServerCommand",
+   "claimed": "CG_ExecuteNewServerCommands",
+   "source": "anchor:MWR",
+   "size": 477
+  },
+  {
+   "func": "0x462930",
+   "idb": "CL_ParseConfigStrings_Internal",
+   "claimed": "CL_ParseConfigStrings",
+   "source": "anchor:MWR",
+   "size": 455
+  },
+  {
+   "func": "0x4636e0",
+   "idb": "CL_ParseServerMessage_Internal",
+   "claimed": "CL_ParseMessage",
+   "source": "anchor:MWR",
+   "size": 832
+  },
+  {
+   "func": "0x471400",
+   "idb": "PartyAtomicClient_HandleHostPresence",
+   "claimed": "PartyClient_HandleDoQoS",
+   "source": "anchor:MWR",
+   "size": 1010
+  },
+  {
+   "func": "0x659b50",
+   "idb": "CL_GetRankIcon",
+   "claimed": "Com_GetCustomRankIcon",
+   "source": "anchor:MWR",
+   "size": 489
+  },
+  {
+   "func": "0x66ea70",
+   "idb": "CL_ServerInfoPacket",
+   "claimed": "StringToInt128",
+   "source": "anchor:MWR",
+   "size": 115
+  },
+  {
+   "func": "0x2999f0",
+   "idb": "Lua_Matchmaking_GetLiveDebuggingInfo",
+   "claimed": "SND_DumpSubmix",
+   "source": "anchor:MWR",
+   "size": 1057
+  },
+  {
+   "func": "0xb30c0",
+   "idb": "Dvar_SetVariant",
+   "claimed": "Dvar_MakeLatchedValueCurrent",
+   "source": "anchor:MWR",
+   "size": 1832
+  },
+  {
+   "func": "0x850d20",
+   "idb": "LiveAntiCheat_FeatureBanCheck",
+   "claimed": "LiveAntiCheat_FeatureBanCheck_0",
+   "source": "anchor:MWR",
+   "size": 584
+  }
+ ],
+ "C_near_duplicate": [
+  {
+   "normalised": "comscore_test_f",
+   "functions": [
+    {
+     "func": "0x1f2180",
+     "name": "comscore_test_f",
+     "size": 1577
+    },
+    {
+     "func": "0x733270",
+     "name": "ComScore_Test_f",
+     "size": 420
+    }
+   ]
+  }
+ ]
+}

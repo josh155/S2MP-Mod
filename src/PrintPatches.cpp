@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "Console.hpp"
 #include "PrintPatches.hpp"
+#include "demo/demo_playback.hpp" // demo_playback::verbose() gates the zone-load probe
 #include <FuncPointers.h>
 #include "Hook.hpp"
 #include "structs.h"
@@ -210,8 +211,22 @@ void hook_DB_TryLoadXFileInternal(const char* zoneName, int zoneFlags, int isBas
 }
 
 void hook_DB_LoadXZone(XZoneInfo* zoneInfo, __int64 zoneCount, __int64 waitAlloc, __int64 skipReadAlwaysLoadedAssets) {
+	// Zone-load probe: two lines per zone, so it fired on every fastfile at boot and
+	// on every map load. Gated behind demo_verbose; the useful "Adding fastfile"
+	// line still always prints.
+	if (demo_playback::verbose())
+	{
+		const auto byte_before = *reinterpret_cast<const std::uint8_t*>(0x27CDC67_b); // IDA byte_27CEC67
+		Console::printf("[probe] A58D0 ENTER 27CEC67_before=%u zoneCount=%lld waitAlloc=%lld",
+			static_cast<unsigned>(byte_before), zoneCount, waitAlloc);
+	}
     Console::printf("Adding fastfile '%s' to queue", zoneInfo->name);
     _DB_LoadXZone(zoneInfo, zoneCount, waitAlloc, skipReadAlwaysLoadedAssets);
+	if (demo_playback::verbose())
+	{
+		const auto byte_after = *reinterpret_cast<const std::uint8_t*>(0x27CDC67_b); // IDA byte_27CEC67
+		Console::printf("[probe] A58D0 LEAVE 27CEC67_after=%u", static_cast<unsigned>(byte_after));
+	}
 }
 
 void hook_G_InitGame(int levelTime, unsigned int randomSeed, int restart, int registerDvars, int savegame) {

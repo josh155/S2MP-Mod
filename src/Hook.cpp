@@ -112,8 +112,31 @@ bool Hook::create(const char* name, void* target, void* detour, void** original)
 	}
 
 	MH_STATUS status = MH_CreateHook(target, detour, original);
-	if (status != MH_OK && status != MH_ERROR_ALREADY_CREATED) {
+
+	// ⭐ A DUPLICATE HOOK IS A FAILURE, AND IT MUST BE LOUD (CLAUDE.md RULE A3.1).
+	//
+	// This used to treat MH_ERROR_ALREADY_CREATED as success. It is not: when
+	// another hook already owns the target, MinHook creates no trampoline, does
+	// NOT write `original`, and THIS DETOUR NEVER RUNS. Returning true made that
+	// indistinguishable from a working hook — the exact failure that cost a whole
+	// test cycle on 2026-08-08, and that hid a dead Com_Error handler in
+	// Errors.cpp for the entire life of the project (found by audit 2026-08-11).
+	//
+	// Console::printf, not DEV_PRINTF: DEV_PRINTF does not reach
+	// main/s2mp_console.log, so a failure written with it is invisible after the
+	// fact. This one line is what makes the whole class self-reporting.
+	if (status == MH_ERROR_ALREADY_CREATED) {
+		*original = nullptr;   // never leave the caller a stale/garbage trampoline
+		Console::printf("[hook] DUPLICATE: \"%s\" at %p is ALREADY HOOKED by another "
+			"module. This detour will NEVER RUN. Extend the existing stub instead "
+			"of installing a second hook (CLAUDE.md RULE A3.1).", safeName, target);
+		return false;
+	}
+
+	if (status != MH_OK) {
 		DEV_PRINTF("MH_CreateHook failed for %s at %p: %s", safeName, target, MH_StatusToString(status));
+		Console::printf("[hook] FAILED: \"%s\" at %p: %s", safeName, target,
+			MH_StatusToString(status));
 		return false;
 	}
 

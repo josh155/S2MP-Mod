@@ -1,0 +1,4166 @@
+{
+ "centity_s": {
+  "exists": true,
+  "size": 524,
+  "members": [
+   {
+    "name": "pose",
+    "offset": 0,
+    "size": 108,
+    "type": "cpose_t"
+   },
+   {
+    "name": "prevState",
+    "offset": 108,
+    "size": 108,
+    "type": "LerpEntityState"
+   },
+   {
+    "name": "nextState",
+    "offset": 216,
+    "size": 256,
+    "type": "entityState_s"
+   },
+   {
+    "name": "flags",
+    "offset": 472,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "tracerDrawRateCounter",
+    "offset": 476,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "weaponVisTestCounter",
+    "offset": 477,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "surfaceType",
+    "offset": 478,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "shotsFired",
+    "offset": 479,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "prevClientNum",
+    "offset": 480,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "previousEventSequence",
+    "offset": 484,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "pickupPredictionTime",
+    "offset": 488,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lightingOrigin",
+    "offset": 492,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "tree",
+    "offset": 504,
+    "size": 4,
+    "type": "XAnimTree *"
+   },
+   {
+    "name": "updateDelayedNext",
+    "offset": 508,
+    "size": 4,
+    "type": "centity_s *"
+   },
+   {
+    "name": "grenadeExplodeTime",
+    "offset": 512,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cloakTransitionStartTime",
+    "offset": 516,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "launcherWeapon",
+    "offset": 520,
+    "size": 4,
+    "type": "Weapon"
+   }
+  ]
+ },
+ "entityState_s": {
+  "exists": true,
+  "size": 256,
+  "members": [
+   {
+    "name": "number",
+    "offset": 0,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "otherEntityNum",
+    "offset": 2,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "attackerEntityNum",
+    "offset": 4,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "groundEntityNum",
+    "offset": 6,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "inAltWeaponMode",
+    "offset": 8,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "loopSound",
+    "offset": 10,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "eType",
+    "offset": 12,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "surfType",
+    "offset": 13,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "clientNum",
+    "offset": 14,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "laserIndex",
+    "offset": 15,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "index",
+    "offset": 16,
+    "size": 4,
+    "type": "entityState_s::entityState_s_index_union"
+   },
+   {
+    "name": "hudData",
+    "offset": 20,
+    "size": 4,
+    "type": "HudData"
+   },
+   {
+    "name": "time2",
+    "offset": 24,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "usingWeaponSignature",
+    "offset": 28,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "clientOwnerOriginal",
+    "offset": 29,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "solid",
+    "offset": 32,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "eventParm",
+    "offset": 36,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "eventSequence",
+    "offset": 40,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "events",
+    "offset": 44,
+    "size": 32,
+    "type": "EntityEvent[4]"
+   },
+   {
+    "name": "weapon",
+    "offset": 76,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "animInfo",
+    "offset": 80,
+    "size": 8,
+    "type": "animInfo_t"
+   },
+   {
+    "name": "lerp",
+    "offset": 88,
+    "size": 108,
+    "type": "LerpEntityState"
+   },
+   {
+    "name": "staticState",
+    "offset": 196,
+    "size": 4,
+    "type": "StaticEntityStateTypeUnion"
+   },
+   {
+    "name": "un1",
+    "offset": 200,
+    "size": 4,
+    "type": "entityState_s::entityState_s_un1_union"
+   },
+   {
+    "name": "un2",
+    "offset": 204,
+    "size": 4,
+    "type": "entityState_s::entityState_s_un2_union"
+   },
+   {
+    "name": "clientLinkInfo",
+    "offset": 208,
+    "size": 4,
+    "type": "clientLinkInfo_t"
+   },
+   {
+    "name": "partBits",
+    "offset": 212,
+    "size": 32,
+    "type": "unsigned int[8]"
+   },
+   {
+    "name": "clientMask",
+    "offset": 244,
+    "size": 4,
+    "type": "int[1]"
+   },
+   {
+    "name": "threatMask",
+    "offset": 248,
+    "size": 4,
+    "type": "int[1]"
+   },
+   {
+    "name": "un3",
+    "offset": 252,
+    "size": 4,
+    "type": "entityState_s::entityState_s_un3_union"
+   }
+  ]
+ },
+ "LerpEntityState": {
+  "exists": true,
+  "size": 108,
+  "members": [
+   {
+    "name": "eFlags",
+    "offset": 0,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "pos",
+    "offset": 4,
+    "size": 36,
+    "type": "trajectory_t"
+   },
+   {
+    "name": "apos",
+    "offset": 40,
+    "size": 36,
+    "type": "trajectory_t"
+   },
+   {
+    "name": "u",
+    "offset": 76,
+    "size": 32,
+    "type": "LerpEntityStateTypeUnion"
+   }
+  ]
+ },
+ "cpose_t": {
+  "exists": true,
+  "size": 108,
+  "members": [
+   {
+    "name": "lightingHandle",
+    "offset": 0,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "eType",
+    "offset": 2,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "cullIn",
+    "offset": 3,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "isRagdoll",
+    "offset": 4,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "ragdollHandle",
+    "offset": 8,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killcamRagdollHandle",
+    "offset": 12,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "physObjId",
+    "offset": 16,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "origin",
+    "offset": 20,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "angles",
+    "offset": 32,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "___u9",
+    "offset": 44,
+    "size": 64,
+    "type": "$5275659BE1EEB166FC391E9A154A8F19"
+   }
+  ]
+ },
+ "gentity_s": {
+  "exists": true,
+  "size": 640,
+  "members": [
+   {
+    "name": "s",
+    "offset": 0,
+    "size": 256,
+    "type": "entityState_s"
+   },
+   {
+    "name": "r",
+    "offset": 256,
+    "size": 88,
+    "type": "entityShared_t"
+   },
+   {
+    "name": "client",
+    "offset": 344,
+    "size": 4,
+    "type": "gclient_s *"
+   },
+   {
+    "name": "turret",
+    "offset": 348,
+    "size": 4,
+    "type": "Turret *"
+   },
+   {
+    "name": "agent",
+    "offset": 352,
+    "size": 4,
+    "type": "gagent_s *"
+   },
+   {
+    "name": "sentient",
+    "offset": 356,
+    "size": 4,
+    "type": "sentient_s *"
+   },
+   {
+    "name": "vehicle",
+    "offset": 360,
+    "size": 4,
+    "type": "Vehicle *"
+   },
+   {
+    "name": "physObjId",
+    "offset": 364,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "model",
+    "offset": 368,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "physicsObject",
+    "offset": 370,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "takedamage",
+    "offset": 371,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "active",
+    "offset": 372,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "handler",
+    "offset": 373,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "team",
+    "offset": 374,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "freeAfterEvent",
+    "offset": 375,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "disconnectedLinks",
+    "offset": 376,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "classname",
+    "offset": 378,
+    "size": 2,
+    "type": "scr_string_t"
+   },
+   {
+    "name": "script_classname",
+    "offset": 380,
+    "size": 2,
+    "type": "scr_string_t"
+   },
+   {
+    "name": "script_linkName",
+    "offset": 382,
+    "size": 2,
+    "type": "scr_string_t"
+   },
+   {
+    "name": "target",
+    "offset": 384,
+    "size": 2,
+    "type": "scr_string_t"
+   },
+   {
+    "name": "targetname",
+    "offset": 386,
+    "size": 2,
+    "type": "scr_string_t"
+   },
+   {
+    "name": "attachIgnoreCollision",
+    "offset": 388,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "spawnflags",
+    "offset": 392,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "flags",
+    "offset": 396,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "eventTime",
+    "offset": 400,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "clipmask",
+    "offset": 404,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "processedFrame",
+    "offset": 408,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "parent",
+    "offset": 412,
+    "size": 4,
+    "type": "EntHandle"
+   },
+   {
+    "name": "owner",
+    "offset": 416,
+    "size": 4,
+    "type": "EntHandle"
+   },
+   {
+    "name": "trackMovingPlatformEntity",
+    "offset": 420,
+    "size": 4,
+    "type": "EntHandle"
+   },
+   {
+    "name": "nextthink",
+    "offset": 424,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "health",
+    "offset": 428,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "maxHealth",
+    "offset": 432,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "___u33",
+    "offset": 436,
+    "size": 96,
+    "type": "$11D93F9F715C6547B2AE54303ACC4F08"
+   },
+   {
+    "name": "missileTargetEnt",
+    "offset": 532,
+    "size": 4,
+    "type": "EntHandle"
+   },
+   {
+    "name": "remoteControlledOwner",
+    "offset": 536,
+    "size": 4,
+    "type": "EntHandle"
+   },
+   {
+    "name": "tagInfo",
+    "offset": 540,
+    "size": 4,
+    "type": "tagInfo_s *"
+   },
+   {
+    "name": "tagChildren",
+    "offset": 544,
+    "size": 4,
+    "type": "gentity_s *"
+   },
+   {
+    "name": "attachModelNames",
+    "offset": 548,
+    "size": 40,
+    "type": "unsigned __int16[20]"
+   },
+   {
+    "name": "attachTagNames",
+    "offset": 588,
+    "size": 32,
+    "type": "scr_string_t[16]"
+   },
+   {
+    "name": "variants",
+    "offset": 620,
+    "size": 8,
+    "type": "unsigned int[2]"
+   },
+   {
+    "name": "useCount",
+    "offset": 628,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "birthTime",
+    "offset": 632,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "nextFree",
+    "offset": 636,
+    "size": 4,
+    "type": "gentity_s *"
+   }
+  ]
+ },
+ "entityShared_t": {
+  "exists": true,
+  "size": 88,
+  "members": [
+   {
+    "name": "isLinked",
+    "offset": 0,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "modelType",
+    "offset": 1,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "svFlags",
+    "offset": 2,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "isInUse",
+    "offset": 3,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "box",
+    "offset": 4,
+    "size": 24,
+    "type": "Bounds"
+   },
+   {
+    "name": "contents",
+    "offset": 28,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "absBox",
+    "offset": 32,
+    "size": 24,
+    "type": "Bounds"
+   },
+   {
+    "name": "currentOrigin",
+    "offset": 56,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "currentAngles",
+    "offset": 68,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "ownerNum",
+    "offset": 80,
+    "size": 4,
+    "type": "EntHandle"
+   },
+   {
+    "name": "eventTime",
+    "offset": 84,
+    "size": 4,
+    "type": "int"
+   }
+  ]
+ },
+ "playerEntity_t": {
+  "exists": true,
+  "size": 32,
+  "members": [
+   {
+    "name": "bPositionToADS",
+    "offset": 0,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "fLastIdleFactor",
+    "offset": 4,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "baseMoveOrigin",
+    "offset": 8,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "baseMoveAngles",
+    "offset": 20,
+    "size": 12,
+    "type": "float[3]"
+   }
+  ]
+ },
+ "archivedEntity_s": {
+  "exists": true,
+  "size": 412,
+  "members": [
+   {
+    "name": "s",
+    "offset": 0,
+    "size": 256,
+    "type": "entityState_s"
+   },
+   {
+    "name": "gap100",
+    "offset": 256,
+    "size": 128,
+    "type": "_BYTE[128]"
+   },
+   {
+    "name": "r",
+    "offset": 384,
+    "size": 28,
+    "type": "archivedEntityShared_t"
+   }
+  ]
+ },
+ "LerpEntityStatePlayer": {
+  "exists": true,
+  "size": 24,
+  "members": [
+   {
+    "name": "movementDir",
+    "offset": 0,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "flags",
+    "offset": 4,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "torsoPitch",
+    "offset": 8,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "waistPitch",
+    "offset": 12,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "offhandWeapon",
+    "offset": 16,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "lastSpawnTime",
+    "offset": 20,
+    "size": 4,
+    "type": "int"
+   }
+  ]
+ },
+ "LerpEntityStateTurret": {
+  "exists": true,
+  "size": 32,
+  "members": [
+   {
+    "name": "gunAngles",
+    "offset": 0,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "lastBarrelRotChangeTime",
+    "offset": 12,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastBarrelRotChangeRate",
+    "offset": 16,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "lastHeatChangeLevel",
+    "offset": 18,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "lastHeatChangeTime",
+    "offset": 20,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "heatPenaltyEndTime",
+    "offset": 24,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "groundAimEnt",
+    "offset": 28,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "isBarrelRotating",
+    "offset": 30,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "isHeatingUp",
+    "offset": 31,
+    "size": 1,
+    "type": "bool"
+   }
+  ]
+ },
+ "LerpEntityStateVehicle": {
+  "exists": true,
+  "size": 28,
+  "members": [
+   {
+    "name": "indices",
+    "offset": 0,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "flags",
+    "offset": 4,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "bodyPitch",
+    "offset": 8,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "bodyRoll",
+    "offset": 12,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "steerYaw",
+    "offset": 16,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "___u5",
+    "offset": 20,
+    "size": 4,
+    "type": "$7142469C9795861D6F4B87C373345320"
+   },
+   {
+    "name": "gunYaw",
+    "offset": 24,
+    "size": 4,
+    "type": "float"
+   }
+  ]
+ },
+ "LerpEntityStateTypeUnion": {
+  "exists": true,
+  "size": 32,
+  "members": [
+   {
+    "name": "turret",
+    "offset": 0,
+    "size": 32,
+    "type": "LerpEntityStateTurret"
+   },
+   {
+    "name": "fx",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateFx"
+   },
+   {
+    "name": "loopFx",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateLoopFx"
+   },
+   {
+    "name": "primaryLight",
+    "offset": 0,
+    "size": 24,
+    "type": "LerpEntityStatePrimaryLight"
+   },
+   {
+    "name": "player",
+    "offset": 0,
+    "size": 24,
+    "type": "LerpEntityStatePlayer"
+   },
+   {
+    "name": "agentCorpse",
+    "offset": 0,
+    "size": 32,
+    "type": "LerpEntityStateAgentCorpse"
+   },
+   {
+    "name": "vehicle",
+    "offset": 0,
+    "size": 28,
+    "type": "LerpEntityStateVehicle"
+   },
+   {
+    "name": "plane",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStatePlane"
+   },
+   {
+    "name": "missile",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateMissile"
+   },
+   {
+    "name": "soundBlend",
+    "offset": 0,
+    "size": 4,
+    "type": "LerpEntityStateSoundBlend"
+   },
+   {
+    "name": "bulletTracer",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateBulletTracer"
+   },
+   {
+    "name": "bulletHit",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateBulletHit"
+   },
+   {
+    "name": "earthquake",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateEarthquake"
+   },
+   {
+    "name": "customExplode",
+    "offset": 0,
+    "size": 4,
+    "type": "LerpEntityStateCustomExplode"
+   },
+   {
+    "name": "explosion",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateExplosion"
+   },
+   {
+    "name": "explosionJolt",
+    "offset": 0,
+    "size": 20,
+    "type": "LerpEntityStateExplosionJolt"
+   },
+   {
+    "name": "physicsJitter",
+    "offset": 0,
+    "size": 16,
+    "type": "LerpEntityStatePhysicsJitter"
+   },
+   {
+    "name": "physicsImpactSnd",
+    "offset": 0,
+    "size": 8,
+    "type": "LerpEntityStatePhysicsImpactSnd"
+   },
+   {
+    "name": "radiusDamage",
+    "offset": 0,
+    "size": 12,
+    "type": "LerpEntityStateRadiusDamage"
+   },
+   {
+    "name": "scriptMover",
+    "offset": 0,
+    "size": 24,
+    "type": "LerpEntityStateScriptMover"
+   },
+   {
+    "name": "anonymous",
+    "offset": 0,
+    "size": 32,
+    "type": "LerpEntityStateAnonymous"
+   }
+  ]
+ },
+ "StaticEntityStateTypeUnion": {
+  "exists": true,
+  "size": 4,
+  "members": [
+   {
+    "name": "player",
+    "offset": 0,
+    "size": 4,
+    "type": "StaticEntityStatePlayer"
+   },
+   {
+    "name": "vehicle",
+    "offset": 0,
+    "size": 4,
+    "type": "StaticEntityStateVehicle"
+   },
+   {
+    "name": "turret",
+    "offset": 0,
+    "size": 4,
+    "type": "StaticEntityStateTurret"
+   },
+   {
+    "name": "mover",
+    "offset": 0,
+    "size": 4,
+    "type": "StaticEntityStateMover"
+   },
+   {
+    "name": "fx",
+    "offset": 0,
+    "size": 4,
+    "type": "StaticEntityStateFX"
+   },
+   {
+    "name": "anonymous",
+    "offset": 0,
+    "size": 4,
+    "type": "StaticEntityStateAnonymous"
+   }
+  ]
+ },
+ "animInfo_t": {
+  "exists": true,
+  "size": 8,
+  "members": [
+   {
+    "name": "animTime",
+    "offset": 0,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "___u1",
+    "offset": 4,
+    "size": 4,
+    "type": "$D0773CB884BF6756BE31A854704A23C3"
+   }
+  ]
+ },
+ "clientLinkInfo_t": {
+  "exists": true,
+  "size": 4,
+  "members": [
+   {
+    "name": "parentId",
+    "offset": 0,
+    "size": 1,
+    "type": "unsigned __int32 : 11"
+   },
+   {
+    "name": "boneIndex",
+    "offset": 1,
+    "size": 1,
+    "type": "unsigned __int32 : 8"
+   },
+   {
+    "name": "flags",
+    "offset": 2,
+    "size": 0,
+    "type": "unsigned __int32 : 2"
+   },
+   {
+    "name": "padding",
+    "offset": 2,
+    "size": 1,
+    "type": "unsigned __int32 : 11"
+   }
+  ]
+ },
+ "HudData": {
+  "exists": true,
+  "size": 4,
+  "members": [
+   {
+    "name": "__s0",
+    "offset": 0,
+    "size": 4,
+    "type": "$6CBF376A1F2C29BE15F852ED9CD8756F"
+   },
+   {
+    "name": "data",
+    "offset": 0,
+    "size": 4,
+    "type": "unsigned int"
+   }
+  ]
+ },
+ "Weapon": {
+  "exists": true,
+  "size": 4,
+  "members": [
+   {
+    "name": "__s0",
+    "offset": 0,
+    "size": 4,
+    "type": "$3C73F3671BA3B9D7A6EC589A84C55B54"
+   },
+   {
+    "name": "data",
+    "offset": 0,
+    "size": 4,
+    "type": "unsigned int"
+   }
+  ]
+ },
+ "EntityEvent": {
+  "exists": true,
+  "size": 8,
+  "members": [
+   {
+    "name": "eventType",
+    "offset": 0,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "eventParm",
+    "offset": 4,
+    "size": 4,
+    "type": "int"
+   }
+  ]
+ },
+ "playerState_s": {
+  "exists": true,
+  "size": 14848,
+  "members": [
+   {
+    "name": "clientNum",
+    "offset": 0,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "cursorHintDualWield",
+    "offset": 1,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "pm_type",
+    "offset": 2,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "remoteEyesTagname",
+    "offset": 3,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "shellshockIndex",
+    "offset": 4,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "damageEvent",
+    "offset": 5,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "damageYaw",
+    "offset": 6,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "damagePitch",
+    "offset": 7,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "damageCount",
+    "offset": 8,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "damageFlags",
+    "offset": 9,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "cursorHint",
+    "offset": 10,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "meleeChargeDist",
+    "offset": 11,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "meleeServerResult",
+    "offset": 12,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "laserIndex",
+    "offset": 13,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "bobCycle",
+    "offset": 14,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "corpseIndex",
+    "offset": 15,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "radarMode",
+    "offset": 16,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "enemyRadarMode",
+    "offset": 17,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "perkSlots",
+    "offset": 18,
+    "size": 9,
+    "type": "unsigned __int8[9]"
+   },
+   {
+    "name": "remoteEyesEnt",
+    "offset": 28,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "remoteControlEnt",
+    "offset": 30,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "throwbackGrenadeOwner",
+    "offset": 32,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "viewlocked_entNum",
+    "offset": 34,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "groundEntityNum",
+    "offset": 36,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "linkWeaponEnt",
+    "offset": 38,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "cursorHintEntIndex",
+    "offset": 40,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "meleeChargeEnt",
+    "offset": 42,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "movingPlatformEntity",
+    "offset": 44,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "groundRefEnt",
+    "offset": 46,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "loopSound",
+    "offset": 48,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "linkFlags",
+    "offset": 50,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "remoteTurretEnt",
+    "offset": 52,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "gravity",
+    "offset": 54,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "speed",
+    "offset": 56,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "shellshockFlashDuration",
+    "offset": 58,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "shellshockMoveDuration",
+    "offset": 60,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "viewmodelIndex",
+    "offset": 62,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "cursorHintString",
+    "offset": 64,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "meleeChargeTime",
+    "offset": 68,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "shellshockTime",
+    "offset": 72,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "commandTime",
+    "offset": 76,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "pm_time",
+    "offset": 80,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "pm_flags",
+    "offset": 84,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "eFlags",
+    "offset": 88,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "otherFlags",
+    "offset": 92,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "foliageSoundTime",
+    "offset": 96,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "grenadeTimeLeft",
+    "offset": 100,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "throwbackGrenadeTimeLeft",
+    "offset": 104,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "varGrenadeSwitchTime",
+    "offset": 108,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "jumpTime",
+    "offset": 112,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "jumpOriginZ",
+    "offset": 116,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "origin",
+    "offset": 120,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "velocity",
+    "offset": 132,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "delta_angles",
+    "offset": 144,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "vLadderVec",
+    "offset": 156,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "throwbackWeapon",
+    "offset": 168,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "cursorHintWeapon",
+    "offset": 172,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "legsTimer",
+    "offset": 176,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "legsAnim",
+    "offset": 180,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "torsoTimer",
+    "offset": 184,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "torsoAnim",
+    "offset": 188,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "animMoveType",
+    "offset": 192,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "damageTimer",
+    "offset": 196,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "damageDuration",
+    "offset": 200,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "flinch",
+    "offset": 204,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "movementDir",
+    "offset": 208,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "turnStartTime",
+    "offset": 212,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "turnDirection",
+    "offset": 216,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "turnRemaining",
+    "offset": 220,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "vehicleState",
+    "offset": 224,
+    "size": 128,
+    "type": "PlayerVehicleState"
+   },
+   {
+    "name": "pe",
+    "offset": 352,
+    "size": 44,
+    "type": "playerEvents_t"
+   },
+   {
+    "name": "unpredictableEventSequence",
+    "offset": 396,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "unpredictableEventSequenceOld",
+    "offset": 400,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "unpredictableEvents",
+    "offset": 404,
+    "size": 32,
+    "type": "EntityEvent[4]"
+   },
+   {
+    "name": "viewangles",
+    "offset": 436,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "viewHeightDynamicStart",
+    "offset": 448,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "viewHeightTarget",
+    "offset": 452,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "viewHeightCurrent",
+    "offset": 456,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "viewHeightLerpTime",
+    "offset": 460,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "viewHeightLerpTarget",
+    "offset": 464,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "viewHeightLerpDown",
+    "offset": 468,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "viewAngleClampBase",
+    "offset": 472,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "viewAngleClampRange",
+    "offset": 480,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "stats",
+    "offset": 488,
+    "size": 16,
+    "type": "int[4]"
+   },
+   {
+    "name": "proneDirection",
+    "offset": 504,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "proneDirectionPitch",
+    "offset": 508,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "proneTorsoPitch",
+    "offset": 512,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "viewlocked",
+    "offset": 516,
+    "size": 4,
+    "type": "ViewLockTypes"
+   },
+   {
+    "name": "linkAngles",
+    "offset": 520,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "linkWeaponAngles",
+    "offset": 532,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "cursorHintString2",
+    "offset": 544,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "iCompassPlayerInfo",
+    "offset": 548,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "radarEnabled",
+    "offset": 552,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "enemyRadarEnabled",
+    "offset": 556,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "radarBlocked",
+    "offset": 560,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "radarStrength",
+    "offset": 564,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "radarShowEnemyDirection",
+    "offset": 568,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "sightedEnemyPlayersMask",
+    "offset": 572,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "locationSelectionInfo",
+    "offset": 576,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "sprintState",
+    "offset": 580,
+    "size": 20,
+    "type": "SprintState_s"
+   },
+   {
+    "name": "holdBreathScale",
+    "offset": 600,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "holdBreathTimer",
+    "offset": 604,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "stationaryZoomTimer",
+    "offset": 608,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "stationaryZoomScale",
+    "offset": 612,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "moveSpeedScaleMultiplier",
+    "offset": 616,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "grenadeCookScale",
+    "offset": 620,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "mantleState",
+    "offset": 624,
+    "size": 60,
+    "type": "MantleState"
+   },
+   {
+    "name": "mechEntryState",
+    "offset": 684,
+    "size": 24,
+    "type": "MechEntryState"
+   },
+   {
+    "name": "slideState",
+    "offset": 708,
+    "size": 12,
+    "type": "SlideState"
+   },
+   {
+    "name": "dodgeState",
+    "offset": 720,
+    "size": 28,
+    "type": "DodgeState"
+   },
+   {
+    "name": "highJumpState",
+    "offset": 748,
+    "size": 32,
+    "type": "HighJumpState"
+   },
+   {
+    "name": "hoverState",
+    "offset": 780,
+    "size": 8,
+    "type": "HoverState"
+   },
+   {
+    "name": "shieldState",
+    "offset": 788,
+    "size": 4,
+    "type": "ShieldState_s"
+   },
+   {
+    "name": "exoState",
+    "offset": 792,
+    "size": 8,
+    "type": "ExoState_s"
+   },
+   {
+    "name": "battery",
+    "offset": 800,
+    "size": 24,
+    "type": "BatteryState_s[2]"
+   },
+   {
+    "name": "weapState",
+    "offset": 824,
+    "size": 56,
+    "type": "PlayerActiveWeaponState[2]"
+   },
+   {
+    "name": "weaponsEquipped",
+    "offset": 880,
+    "size": 60,
+    "type": "Weapon[15]"
+   },
+   {
+    "name": "weapEquippedData",
+    "offset": 940,
+    "size": 420,
+    "type": "PlayerEquippedWeaponState[15]"
+   },
+   {
+    "name": "weapCommon",
+    "offset": 1360,
+    "size": 3500,
+    "type": "PlayerWeaponCommonState"
+   },
+   {
+    "name": "digitalDistortIntensity",
+    "offset": 4860,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "digitalDistortTimeScale",
+    "offset": 4864,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "digitalDistortType",
+    "offset": 4868,
+    "size": 4,
+    "type": "DigitalDistortType"
+   },
+   {
+    "name": "airburstMarkDistance",
+    "offset": 4872,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "perks",
+    "offset": 4876,
+    "size": 16,
+    "type": "unsigned int[4]"
+   },
+   {
+    "name": "actionSlotType",
+    "offset": 4892,
+    "size": 16,
+    "type": "ActionSlotType[4]"
+   },
+   {
+    "name": "actionSlotParam",
+    "offset": 4908,
+    "size": 16,
+    "type": "ActionSlotParam[4]"
+   },
+   {
+    "name": "weaponHudIconOverrides",
+    "offset": 4924,
+    "size": 12,
+    "type": "__int16[6]"
+   },
+   {
+    "name": "viewKickScale",
+    "offset": 4936,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "chargeTimer",
+    "offset": 4940,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "dofNearStart",
+    "offset": 4944,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofNearEnd",
+    "offset": 4948,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofFarStart",
+    "offset": 4952,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofFarEnd",
+    "offset": 4956,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofNearBlur",
+    "offset": 4960,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofFarBlur",
+    "offset": 4964,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofViewmodelStart",
+    "offset": 4968,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofViewmodelEnd",
+    "offset": 4972,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalScriptingState",
+    "offset": 4976,
+    "size": 4,
+    "type": "DofPhysicalScriptingState"
+   },
+   {
+    "name": "dofPhysicalFstop",
+    "offset": 4980,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalFocusDistance",
+    "offset": 4984,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalFocusSpeed",
+    "offset": 4988,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalApertureSpeed",
+    "offset": 4992,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalViewModelFstop",
+    "offset": 4996,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalViewModelFocusDistance",
+    "offset": 5000,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalAdsStart",
+    "offset": 5004,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "dofPhysicalAdsEnd",
+    "offset": 5008,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "objective",
+    "offset": 5012,
+    "size": 1152,
+    "type": "objective_s[32]"
+   },
+   {
+    "name": "deltaTime",
+    "offset": 6164,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamEntity",
+    "offset": 6168,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "killCamLookAtEntity",
+    "offset": 6170,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "killCamClientNum",
+    "offset": 6172,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "recoilScale",
+    "offset": 6173,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "hud",
+    "offset": 6176,
+    "size": 7740,
+    "type": "playerState_s::playerState_s_hud_struct"
+   },
+   {
+    "name": "rxvOmnvars",
+    "offset": 13916,
+    "size": 768,
+    "type": "OmnvarData[96]"
+   },
+   {
+    "name": "partBits",
+    "offset": 14684,
+    "size": 32,
+    "type": "unsigned int[8]"
+   },
+   {
+    "name": "stunTime",
+    "offset": 14716,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "isLeftFoot",
+    "offset": 14720,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "proneFootstepTime",
+    "offset": 14724,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "proneStanceSoundTime",
+    "offset": 14728,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "duckedStanceSoundTime",
+    "offset": 14732,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scuffState",
+    "offset": 14736,
+    "size": 12,
+    "type": "ScuffState"
+   },
+   {
+    "name": "ammoGenerationTimer",
+    "offset": 14748,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "outlineData",
+    "offset": 14752,
+    "size": 16,
+    "type": "ClientOutlineData"
+   },
+   {
+    "name": "hudData",
+    "offset": 14768,
+    "size": 4,
+    "type": "HudData"
+   },
+   {
+    "name": "boostEvent",
+    "offset": 14772,
+    "size": 16,
+    "type": "boostAccelEventInfo_s"
+   },
+   {
+    "name": "autoMantleEnabled",
+    "offset": 14788,
+    "size": 1,
+    "type": "bool"
+   }
+  ]
+ },
+ "clientInfo_t": {
+  "exists": true,
+  "size": 108,
+  "members": [
+   {
+    "name": "clientNum",
+    "offset": 0,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "name",
+    "offset": 1,
+    "size": 32,
+    "type": "char[32]"
+   },
+   {
+    "name": "rank_mp",
+    "offset": 36,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "prestige_mp",
+    "offset": 40,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "rank_alien",
+    "offset": 44,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "prestige_alien",
+    "offset": 48,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "clanAbbrev",
+    "offset": 52,
+    "size": 8,
+    "type": "char[8]"
+   },
+   {
+    "name": "location",
+    "offset": 60,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "health",
+    "offset": 64,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "playerCardPatch",
+    "offset": 68,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "playerCardBackground",
+    "offset": 72,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "use_elite_clan_tag",
+    "offset": 76,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "elite_clan_tag_text",
+    "offset": 77,
+    "size": 5,
+    "type": "char[5]"
+   },
+   {
+    "name": "elite_clan_level",
+    "offset": 84,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "braggingRights",
+    "offset": 88,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "isMLGSpectator",
+    "offset": 92,
+    "size": 1,
+    "type": "unsigned __int8"
+   },
+   {
+    "name": "game_extrainfo",
+    "offset": 96,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "rankIconHandle",
+    "offset": 100,
+    "size": 4,
+    "type": "Material *"
+   },
+   {
+    "name": "rankDisplayLevel",
+    "offset": 104,
+    "size": 4,
+    "type": "const char *"
+   }
+  ]
+ },
+ "cg_s": {
+  "exists": true,
+  "size": 789248,
+  "members": [
+   {
+    "name": "predictedPlayerState",
+    "offset": 0,
+    "size": 14848,
+    "type": "playerState_s"
+   },
+   {
+    "name": "predictedPlayerEntity",
+    "offset": 14848,
+    "size": 4,
+    "type": "centity_s *"
+   },
+   {
+    "name": "playerEntity",
+    "offset": 14852,
+    "size": 32,
+    "type": "playerEntity_t"
+   },
+   {
+    "name": "predictedErrorTime",
+    "offset": 14884,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "predictedError",
+    "offset": 14888,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "clientNum",
+    "offset": 14900,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "localClientNum",
+    "offset": 14904,
+    "size": 4,
+    "type": "LocalClientNum_t"
+   },
+   {
+    "name": "demoType",
+    "offset": 14908,
+    "size": 4,
+    "type": "DemoType"
+   },
+   {
+    "name": "cubemapShot",
+    "offset": 14912,
+    "size": 4,
+    "type": "CubemapShot"
+   },
+   {
+    "name": "cubemapSize",
+    "offset": 14916,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "hiResShotMode",
+    "offset": 14920,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "renderScreen",
+    "offset": 14924,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "latestSnapshotNum",
+    "offset": 14928,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "latestSnapshotTime",
+    "offset": 14932,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "snap",
+    "offset": 14936,
+    "size": 4,
+    "type": "snapshot_s *"
+   },
+   {
+    "name": "nextSnap",
+    "offset": 14940,
+    "size": 4,
+    "type": "snapshot_s *"
+   },
+   {
+    "name": "activeSnapshots",
+    "offset": 14976,
+    "size": 218368,
+    "type": "snapshot_s[2]"
+   },
+   {
+    "name": "frameInterpolation",
+    "offset": 233344,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "frametime",
+    "offset": 233348,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "time",
+    "offset": 233352,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "oldTime",
+    "offset": 233356,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "physicsTime",
+    "offset": 233360,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "groundEntityTime",
+    "offset": 233364,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastGroundSurfaceType",
+    "offset": 233368,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "mapRestart",
+    "offset": 233372,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "spectatingThirdPerson",
+    "offset": 233376,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "renderingThirdPerson",
+    "offset": 233380,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "landChange",
+    "offset": 233384,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "landTime",
+    "offset": 233388,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastMantleflags",
+    "offset": 233392,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastProneCrawlInputTime",
+    "offset": 233396,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "heightToCeiling",
+    "offset": 233400,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "refdef",
+    "offset": 233408,
+    "size": 28896,
+    "type": "refdef_t"
+   },
+   {
+    "name": "refdefViewAngles",
+    "offset": 262304,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "baseGunAngles",
+    "offset": 262316,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "aimAssistEyeOrigin",
+    "offset": 262328,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "aimAssistViewOrigin",
+    "offset": 262340,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "aimAssistViewAngles",
+    "offset": 262352,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "thirdPersonGunPitch",
+    "offset": 262364,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "thirdPersonGunYaw",
+    "offset": 262368,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "thirdPersonAdsLerp",
+    "offset": 262372,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "swayViewAngles",
+    "offset": 262376,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "swayAngles",
+    "offset": 262388,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "swayOffset",
+    "offset": 262400,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "recoilAngles",
+    "offset": 262412,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "recoilSpeed",
+    "offset": 262424,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "iEntityLastType",
+    "offset": 262436,
+    "size": 6144,
+    "type": "int[1536]"
+   },
+   {
+    "name": "pEntityLastXModel",
+    "offset": 268580,
+    "size": 6144,
+    "type": "const XModel *[1536]"
+   },
+   {
+    "name": "iEntityLastWeaponID",
+    "offset": 274724,
+    "size": 6144,
+    "type": "Weapon[1536]"
+   },
+   {
+    "name": "zoomSensitivity",
+    "offset": 280868,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "vehicleInitView",
+    "offset": 280872,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "prevVehicleInvAxis",
+    "offset": 280876,
+    "size": 36,
+    "type": "float[3][3]"
+   },
+   {
+    "name": "objectiveText",
+    "offset": 280912,
+    "size": 1024,
+    "type": "char[1024]"
+   },
+   {
+    "name": "scriptMainMenu",
+    "offset": 281936,
+    "size": 256,
+    "type": "char[256]"
+   },
+   {
+    "name": "numScores",
+    "offset": 282192,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "teamScores",
+    "offset": 282196,
+    "size": 16,
+    "type": "int[4]"
+   },
+   {
+    "name": "teamPings",
+    "offset": 282212,
+    "size": 16,
+    "type": "int[4]"
+   },
+   {
+    "name": "teamPlayers",
+    "offset": 282228,
+    "size": 16,
+    "type": "int[4]"
+   },
+   {
+    "name": "scores",
+    "offset": 282244,
+    "size": 816,
+    "type": "score_t[12]"
+   },
+   {
+    "name": "scoreFadeTime",
+    "offset": 283060,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scoresTop",
+    "offset": 283064,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scoresOffBottom",
+    "offset": 283068,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scoresBottom",
+    "offset": 283072,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "selectedGamerIndex",
+    "offset": 283076,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "bannerLines",
+    "offset": 283080,
+    "size": 16,
+    "type": "int[4]"
+   },
+   {
+    "name": "selectedGamerXuid",
+    "offset": 283096,
+    "size": 8,
+    "type": "unsigned __int64"
+   },
+   {
+    "name": "unmutableNoticeTime",
+    "offset": 283104,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "crosshairPreviousClientNum",
+    "offset": 283108,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "crosshairClientNum",
+    "offset": 283109,
+    "size": 1,
+    "type": "char"
+   },
+   {
+    "name": "crosshairTraceDistance",
+    "offset": 283112,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "crosshairClientType",
+    "offset": 283116,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "cursorHintType",
+    "offset": 283120,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cursorHintEntType",
+    "offset": 283124,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cursorHintTime",
+    "offset": 283128,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cursorHintFade",
+    "offset": 283132,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cursorHintString",
+    "offset": 283136,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "cursorHintDualWield",
+    "offset": 283140,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cursorHintString2",
+    "offset": 283144,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "lastClipFlashTime",
+    "offset": 283148,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "invalidCmdHintType",
+    "offset": 283152,
+    "size": 4,
+    "type": "InvalidCmdHintType"
+   },
+   {
+    "name": "invalidCmdHintWeapon",
+    "offset": 283156,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "invalidCmdHintTime",
+    "offset": 283160,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastHealthPulseTime",
+    "offset": 283164,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastHealthLerpDelay",
+    "offset": 283168,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastHealthClient",
+    "offset": 283172,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastHealth",
+    "offset": 283176,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "showHud",
+    "offset": 283180,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "bloodOverlayAlpha",
+    "offset": 283184,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "mechAnimTimer",
+    "offset": 283188,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "mechStepTimer",
+    "offset": 283192,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "contactEntity",
+    "offset": 283196,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "platformAngleVelocity",
+    "offset": 283200,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "clientSideVisionSetsEnabled",
+    "offset": 283212,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "voiceTime",
+    "offset": 283216,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "weaponSelect",
+    "offset": 283220,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "weaponSelectInAlt",
+    "offset": 283224,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "weaponSelectTime",
+    "offset": 283228,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "weaponForcedSelectTime",
+    "offset": 283232,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "weaponLatestPrimary",
+    "offset": 283236,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "fauxWeaponSelect",
+    "offset": 283240,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "lastWeaponState",
+    "offset": 283244,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "playerWeaponInfo",
+    "offset": 283248,
+    "size": 10328,
+    "type": "ClientPlayerWeaponInfo"
+   },
+   {
+    "name": "prevViewmodelWeapon",
+    "offset": 293576,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "prevWeaponFlags",
+    "offset": 293580,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "prevDualWielding",
+    "offset": 293584,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "hybridToggleScopeState",
+    "offset": 293588,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "hybridScopeFOVFrac",
+    "offset": 293592,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "weaponRecoilTime",
+    "offset": 293596,
+    "size": 8,
+    "type": "int[2]"
+   },
+   {
+    "name": "weaponWalkEndTime",
+    "offset": 293604,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "equippedOffHand",
+    "offset": 293608,
+    "size": 4,
+    "type": "Weapon"
+   },
+   {
+    "name": "viewDamage",
+    "offset": 293612,
+    "size": 816,
+    "type": "viewDamage_t[12]"
+   },
+   {
+    "name": "damageTime",
+    "offset": 294428,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "damageX",
+    "offset": 294432,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "damageY",
+    "offset": 294436,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "damageValue",
+    "offset": 294440,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "viewFade",
+    "offset": 294444,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "v_dmg_time",
+    "offset": 294448,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "v_dmg_stun_time",
+    "offset": 294452,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "v_dmg_pitch",
+    "offset": 294456,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "v_dmg_roll",
+    "offset": 294460,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "xyspeed",
+    "offset": 294464,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "kickAVel",
+    "offset": 294468,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "kickAngles",
+    "offset": 294480,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "offsetAngles",
+    "offset": 294492,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "weaponKickCenterSpeed",
+    "offset": 294504,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "gunPitch",
+    "offset": 294512,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "gunYaw",
+    "offset": 294516,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "gunXOfs",
+    "offset": 294520,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "gunYOfs",
+    "offset": 294524,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "gunZOfs",
+    "offset": 294528,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "viewModelAxis",
+    "offset": 294532,
+    "size": 48,
+    "type": "float[4][3]"
+   },
+   {
+    "name": "hideViewModel",
+    "offset": 294580,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "rumbleScale",
+    "offset": 294584,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "compassNorthYaw",
+    "offset": 294588,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "compassNorth",
+    "offset": 294592,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "compassMapMaterial",
+    "offset": 294600,
+    "size": 4,
+    "type": "Material *"
+   },
+   {
+    "name": "compassMapUpperLeft",
+    "offset": 294604,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "compassMapWorldSize",
+    "offset": 294612,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "compassFadeTime",
+    "offset": 294620,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "healthFadeTime",
+    "offset": 294624,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "ammoFadeTime",
+    "offset": 294628,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "sprintFadeTime",
+    "offset": 294632,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "offhandFadeTime",
+    "offset": 294636,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "offhandFlashTime",
+    "offset": 294640,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "shellshock",
+    "offset": 294644,
+    "size": 44,
+    "type": "shellshock_t"
+   },
+   {
+    "name": "testShock",
+    "offset": 294688,
+    "size": 8,
+    "type": "cg_s::<unnamed_type_testShock>"
+   },
+   {
+    "name": "holdBreathTime",
+    "offset": 294696,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "holdBreathInTime",
+    "offset": 294700,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "holdBreathDelay",
+    "offset": 294704,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "holdBreathFrac",
+    "offset": 294708,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "painVisionSoundActive",
+    "offset": 294712,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "diveView",
+    "offset": 294716,
+    "size": 8,
+    "type": "PlayerDiveView"
+   },
+   {
+    "name": "radarProgress",
+    "offset": 294724,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "enemyRadarProgress",
+    "offset": 294728,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "selectedLocation",
+    "offset": 294732,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "selectedLocationAngle",
+    "offset": 294740,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "adsViewErrorDone",
+    "offset": 294744,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "inKillCam",
+    "offset": 294748,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamStartTime",
+    "offset": 294752,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamEndTime",
+    "offset": 294756,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamFirstFrameRan",
+    "offset": 294760,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "killCamEntity",
+    "offset": 294762,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "invalidKillCamEntity",
+    "offset": 294764,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamEntityType",
+    "offset": 294768,
+    "size": 4,
+    "type": "KillCamEntityType"
+   },
+   {
+    "name": "killCamLastEntityNum",
+    "offset": 294772,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "killCamLastEntityOrg",
+    "offset": 294776,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamLastEntityAngles",
+    "offset": 294788,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamEntityRestState",
+    "offset": 294800,
+    "size": 4,
+    "type": "KillCamEntityRestState"
+   },
+   {
+    "name": "killCamLookAtEntity",
+    "offset": 294804,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "killCamLookAt",
+    "offset": 294808,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamHelicopterOffset",
+    "offset": 294820,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamStoppedTime",
+    "offset": 294832,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamStoppedDecelTime",
+    "offset": 294836,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "killCamStoppedPos",
+    "offset": 294840,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamStoppedVel",
+    "offset": 294852,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamPrevBombOrigin",
+    "offset": 294864,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamLerpEndTime",
+    "offset": 294876,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "killCamOldViewAngles",
+    "offset": 294880,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "killCamOldViewOrg",
+    "offset": 294892,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "sceneData",
+    "offset": 294904,
+    "size": 160,
+    "type": "CameraSceneData"
+   },
+   {
+    "name": "bgs",
+    "offset": 295064,
+    "size": 480496,
+    "type": "bgs_t"
+   },
+   {
+    "name": "viewModelPose",
+    "offset": 775560,
+    "size": 108,
+    "type": "cpose_t"
+   },
+   {
+    "name": "viewModelPoseLeftHand",
+    "offset": 775668,
+    "size": 108,
+    "type": "cpose_t"
+   },
+   {
+    "name": "cvsData",
+    "offset": 775776,
+    "size": 5860,
+    "type": "ClientVisionSetData"
+   },
+   {
+    "name": "clsData",
+    "offset": 781636,
+    "size": 300,
+    "type": "ClientLightSetData"
+   },
+   {
+    "name": "waterClientTriggerGlobals",
+    "offset": 781936,
+    "size": 20,
+    "type": "WaterClientTriggerGlobalData"
+   },
+   {
+    "name": "outlineMLGPlayers",
+    "offset": 781956,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "MLGMinimapHighlightClientNum",
+    "offset": 781960,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cgradData",
+    "offset": 781964,
+    "size": 40,
+    "type": "ClientColorGradingData"
+   },
+   {
+    "name": "stagedVisionStateTo",
+    "offset": 782004,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "stagedVisionStateFrom",
+    "offset": 782008,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "stagedVisionStateEndTime",
+    "offset": 782012,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "stagedVisionStateStartTime",
+    "offset": 782016,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "lastClientTriggerDuration",
+    "offset": 782020,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "extraButtons",
+    "offset": 782024,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "breathPressedLastFrame",
+    "offset": 782028,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "playerTeleported",
+    "offset": 782029,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "playerScriptTeleported",
+    "offset": 782030,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "stepViewStart",
+    "offset": 782032,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "stepViewChange",
+    "offset": 782036,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "lastFrame",
+    "offset": 782040,
+    "size": 4,
+    "type": "cg_s::<unnamed_type_lastFrame>"
+   },
+   {
+    "name": "lastFrameViewPos",
+    "offset": 782044,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "sunFxPosition",
+    "offset": 782056,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "oldCommandTime",
+    "offset": 782068,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "oldOrigin",
+    "offset": 782072,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "oldViewangles",
+    "offset": 782084,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "oldTransPlayerState",
+    "offset": 782096,
+    "size": 48,
+    "type": "transPlayerState_t"
+   },
+   {
+    "name": "playerEvents",
+    "offset": 782144,
+    "size": 44,
+    "type": "playerEvents_t"
+   },
+   {
+    "name": "weaponIdleTime",
+    "offset": 782188,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "hudElemSound",
+    "offset": 782192,
+    "size": 128,
+    "type": "hudElemSoundInfo_t[32]"
+   },
+   {
+    "name": "hudGrenades",
+    "offset": 782320,
+    "size": 1024,
+    "type": "HudGrenade[32]"
+   },
+   {
+    "name": "hudGrenadeCount",
+    "offset": 783344,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "splashes",
+    "offset": 783348,
+    "size": 64,
+    "type": "HudSplash[4]"
+   },
+   {
+    "name": "remoteMissileCamInitialized",
+    "offset": 783412,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "remoteMissileCamAngles",
+    "offset": 783416,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "remoteMissileCamEnt",
+    "offset": 783428,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "teamFxPlaying",
+    "offset": 783432,
+    "size": 8,
+    "type": "unsigned int[2]"
+   },
+   {
+    "name": "hasLinkedFx",
+    "offset": 783440,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "killcamFXWeapons",
+    "offset": 783444,
+    "size": 20,
+    "type": "Weapon[5]"
+   },
+   {
+    "name": "timeSpottedByEnemyRadar",
+    "offset": 783464,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "currentRadarJamLevel",
+    "offset": 783468,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "radarJammedDist",
+    "offset": 783472,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "turretFov",
+    "offset": 783476,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "motionTrackerPrevCenter",
+    "offset": 783480,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "motionTrackerProgress",
+    "offset": 783488,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "targetPosCached",
+    "offset": 783492,
+    "size": 8,
+    "type": "float[2]"
+   },
+   {
+    "name": "targetPosCachedTime",
+    "offset": 783500,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "delayedShieldHitEventsCount",
+    "offset": 783504,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "delayedShieldHitEvents",
+    "offset": 783508,
+    "size": 8,
+    "type": "ShieldHitDelayedEvent[2]"
+   },
+   {
+    "name": "thermalBodyMaterial",
+    "offset": 783516,
+    "size": 4,
+    "type": "Material *"
+   },
+   {
+    "name": "explosiveStuckWarningTime",
+    "offset": 783520,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "recentKilledByClientNum",
+    "offset": 783524,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "recentKilledByTime",
+    "offset": 783528,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "recentVictimClientNums",
+    "offset": 783532,
+    "size": 32,
+    "type": "int[8]"
+   },
+   {
+    "name": "recentVictimTimes",
+    "offset": 783564,
+    "size": 32,
+    "type": "int[8]"
+   },
+   {
+    "name": "recentVictimIndex",
+    "offset": 783596,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "playerVehicleEntity",
+    "offset": 783600,
+    "size": 2,
+    "type": "__int16"
+   },
+   {
+    "name": "playerVehicleAudioOverride",
+    "offset": 783604,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "cinematicAudioOverride",
+    "offset": 783608,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "streamOrigin",
+    "offset": 783612,
+    "size": 12,
+    "type": "float[3]"
+   },
+   {
+    "name": "streamOriginValid",
+    "offset": 783624,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "cachedPlayerCard",
+    "offset": 783628,
+    "size": 144,
+    "type": "CachedPlayerCard[12]"
+   },
+   {
+    "name": "prevViewIndex",
+    "offset": 783772,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "hudLightingState",
+    "offset": 783776,
+    "size": 60,
+    "type": "CG_HudLighting_State"
+   },
+   {
+    "name": "clientCollisionLinked",
+    "offset": 783836,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "sightedEnemyFools",
+    "offset": 783840,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "weapAnimArrays",
+    "offset": 783844,
+    "size": 2880,
+    "type": "PlayerWeaponAnimArrays"
+   },
+   {
+    "name": "radiometricScale",
+    "offset": 786724,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "sprintBreathNextTime",
+    "offset": 786728,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "sprintBreathPrevLevel",
+    "offset": 786732,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "sprintBreathOut",
+    "offset": 786736,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "slideSurfaceType",
+    "offset": 786737,
+    "size": 12,
+    "type": "char[12]"
+   },
+   {
+    "name": "slideRumblePlaying",
+    "offset": 786749,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "spawnTraceEntIndex",
+    "offset": 786750,
+    "size": 2,
+    "type": "unsigned __int16"
+   },
+   {
+    "name": "spawnTraceGlob",
+    "offset": 786816,
+    "size": 2176,
+    "type": "SpawnTraceGlob"
+   },
+   {
+    "name": "scriptAudioZoneOverride",
+    "offset": 788992,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scriptPrevAudioZoneOverride",
+    "offset": 788996,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scriptAudioZoneFadeTargetTime",
+    "offset": 789000,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scriptAudioZoneFadeStartTime",
+    "offset": 789004,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scriptVisionSetZoneOverride",
+    "offset": 789008,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "scriptVisionSetPrevZoneOverride",
+    "offset": 789012,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "scriptVisionSetLerpTime",
+    "offset": 789016,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scriptAudioZoneOverrideB",
+    "offset": 789020,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "scriptAudioZoneOverrideLerp",
+    "offset": 789024,
+    "size": 4,
+    "type": "float"
+   },
+   {
+    "name": "scriptAudioZoneOverrideFlags",
+    "offset": 789028,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "ctOcclusionZoneA",
+    "offset": 789032,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctOcclusionZoneB",
+    "offset": 789036,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctFilterZoneA",
+    "offset": 789040,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctFilterZoneB",
+    "offset": 789044,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctReverbZoneA",
+    "offset": 789048,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctReverbZoneB",
+    "offset": 789052,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctMixZoneA",
+    "offset": 789056,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctMixZoneB",
+    "offset": 789060,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctAmbientZoneA",
+    "offset": 789064,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctAmbientZoneB",
+    "offset": 789068,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctAmbientEventZoneA",
+    "offset": 789072,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ctAmbientEventZoneB",
+    "offset": 789076,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "bMotionTracker",
+    "offset": 789080,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "viewModelUVAnimTimeOverride",
+    "offset": 789084,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "viewModelUVAnimTimeOverrideEnabled",
+    "offset": 789088,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "clientVehicle",
+    "offset": 789092,
+    "size": 16,
+    "type": "ClientVehicleData"
+   },
+   {
+    "name": "scopeForceEnemyOutlines",
+    "offset": 789108,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "scopeForceEnemyOutlineColorIndex",
+    "offset": 789112,
+    "size": 4,
+    "type": "unsigned int"
+   },
+   {
+    "name": "ssr",
+    "offset": 789116,
+    "size": 8,
+    "type": "GfxSSRGlobals"
+   },
+   {
+    "name": "adsAudioState",
+    "offset": 789124,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "weaponCustomSoundState",
+    "offset": 789125,
+    "size": 1,
+    "type": "bool"
+   },
+   {
+    "name": "primaryLightOwnedByScriptable",
+    "offset": 789128,
+    "size": 32,
+    "type": "unsigned int[8]"
+   },
+   {
+    "name": "exoAbilityGlobals",
+    "offset": 789160,
+    "size": 12,
+    "type": "ExoAbilityClientGlobalData"
+   },
+   {
+    "name": "doubleTapDetonatableEndTime",
+    "offset": 789172,
+    "size": 4,
+    "type": "int"
+   }
+  ]
+ },
+ "snapshot_s": {
+  "exists": true,
+  "size": 109184,
+  "members": [
+   {
+    "name": "ps",
+    "offset": 0,
+    "size": 14848,
+    "type": "playerState_s"
+   },
+   {
+    "name": "scores",
+    "offset": 14848,
+    "size": 248,
+    "type": "ScoreboardInfo"
+   },
+   {
+    "name": "omnvars",
+    "offset": 15096,
+    "size": 2640,
+    "type": "OmnvarData[330]"
+   },
+   {
+    "name": "snapFlags",
+    "offset": 17736,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "ping",
+    "offset": 17740,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "serverTime",
+    "offset": 17744,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "numEntities",
+    "offset": 17748,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "numClients",
+    "offset": 17752,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "entities",
+    "offset": 17756,
+    "size": 81920,
+    "type": "entityState_s[320]"
+   },
+   {
+    "name": "clients",
+    "offset": 99676,
+    "size": 3600,
+    "type": "clientState_s[12]"
+   },
+   {
+    "name": "numAgents",
+    "offset": 103276,
+    "size": 4,
+    "type": "int"
+   },
+   {
+    "name": "agents",
+    "offset": 103280,
+    "size": 5280,
+    "type": "agentState_s[24]"
+   },
+   {
+    "name": "scriptableWorld",
+    "offset": 108560,
+    "size": 500,
+    "type": "ScriptableWorld"
+   },
+   {
+    "name": "serverCommandSequence",
+    "offset": 109060,
+    "size": 4,
+    "type": "int"
+   }
+  ]
+ }
+}

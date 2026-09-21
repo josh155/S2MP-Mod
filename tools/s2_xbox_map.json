@@ -1,0 +1,90 @@
+{
+  "0x36a2c": {
+    "name": "CG_ClientViewVisionSetUpdate",
+    "xbox": "0x32f10"
+  },
+  "0x4d35a": {
+    "name": "CG_OwnerDraw",
+    "xbox": "0x49240"
+  },
+  "0x5d0c0": {
+    "name": "CG_UpdateViewModel",
+    "xbox": "0x596c0"
+  },
+  "0x5e980": {
+    "name": "CG_BuildViewmodelDObj",
+    "xbox": "0x5af80"
+  },
+  "0x7bfd0": {
+    "name": "CL_InitCGame",
+    "xbox": "0x78250"
+  },
+  "0x86d30": {
+    "name": "CL_SetCGameTime",
+    "xbox": "0x82f80"
+  },
+  "0xa58d0": {
+    "name": "DB_LoadXZone",
+    "xbox": "0xa19c0"
+  },
+  "0xace30": {
+    "name": "DB_TryLoadXFileInternal",
+    "xbox": "0xa8ed0"
+  },
+  "0xc4460": {
+    "name": "LUI_Init",
+    "xbox": "0xc0500"
+  },
+  "0xc5dd0": {
+    "name": "LUI_Layout",
+    "xbox": "0xc1e70"
+  },
+  "0xca0f0": {
+    "name": "LUI_ObituaryHandler",
+    "xbox": "0xc6190"
+  },
+  "0x431b20": {
+    "name": "CG_ExecuteBinaryServerCommand",
+    "xbox": "0x42e5b0"
+  },
+  "0x4373f0": {
+    "name": "CG_ExecuteServerCommand",
+    "xbox": "0x433e70"
+  },
+  "0x462930": {
+    "name": "CL_ParseConfigStrings_Internal",
+    "xbox": "0x45f3b0"
+  },
+  "0x4636e0": {
+    "name": "CL_ParseServerMessage_Internal",
+    "xbox": "0x460160"
+  },
+  "0x48cd70": {
+    "name": "PartyHost_KickPlayer",
+    "xbox": "0x489cb0"
+  },
+  "0x55fc90": {
+    "name": "G_RegisterGametypeDvars",
+    "xbox": "0x55cb90"
+  },
+  "0x66b9e0": {
+    "name": "MSG_ReadMonotonicDeltaIndex",
+    "xbox": "0x668aa0"
+  },
+  "0x6dc350": {
+    "name": "SV_SpawnServer",
+    "xbox": "0x6d92f0"
+  },
+  "0x910650": {
+    "name": "CL_Demo_Play_f",
+    "xbox": "0x9062f0"
+  },
+  "0x9188c0": {
+    "name": "CL_Demo_ReadDemoMessage",
+    "xbox": "0x90e560"
+  },
+  "0x91e310": {
+    "name": "CL_Demo_SetupNetFieldListsForDemo",
+    "xbox": "0x913fb0"
+  }
+}

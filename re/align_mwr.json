@@ -1,0 +1,59 @@
+[
+ {
+  "s2_func": "0x2d9740",
+  "name": "hks_obj_tolstring",
+  "votes": 2,
+  "via": [
+   "LuaPlus::ReportStackTrace",
+   "hks__package_require"
+  ]
+ },
+ {
+  "s2_func": "0x76d2a0",
+  "name": "Info_ValueForKey",
+  "votes": 1,
+  "via": [
+   "CL_InitCGame"
+  ]
+ },
+ {
+  "s2_func": "0xaf9b70",
+  "name": "hksi_lua_getlocal",
+  "votes": 1,
+  "via": [
+   "hksDefaultPanic"
+  ]
+ },
+ {
+  "s2_func": "0x789870",
+  "name": "Live_GetXuid",
+  "votes": 1,
+  "via": [
+   "PartyMigrate_AskForPredeterminedHostNominee"
+  ]
+ },
+ {
+  "s2_func": "0x767240",
+  "name": "MemFile_ReadData",
+  "votes": 1,
+  "via": [
+   "FX_Restore"
+  ]
+ },
+ {
+  "s2_func": "0x4813d0",
+  "name": "Party_IsPlayerMLGSpectator",
+  "votes": 1,
+  "via": [
+   "Dvar_InfoString"
+  ]
+ },
+ {
+  "s2_func": "0x661760",
+  "name": "Com_PrintError",
+  "votes": 1,
+  "via": [
+   "UI_ReplaceDirective"
+  ]
+ }
+]

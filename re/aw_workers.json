@@ -1,0 +1,1682 @@
+{
+ "hide": {
+  "aw_marshaller": "0x8239b090",
+  "aw_worker": "0x82397968",
+  "worker_name": "Menu_ShowItemByName",
+  "worker_size": 256,
+  "aw_slot": "0x82058090"
+ },
+ "showMenu": {
+  "aw_marshaller": "0x8239aed0",
+  "aw_worker": "0x82396f50",
+  "worker_name": "Menus_ShowByName",
+  "worker_size": 80,
+  "aw_slot": "0x82058098"
+ },
+ "hideMenu": {
+  "aw_marshaller": "0x8239ae70",
+  "aw_worker": "0x82396fa0",
+  "worker_name": "Menus_HideByName",
+  "worker_size": 80,
+  "aw_slot": "0x820580a0"
+ },
+ "setcolor": {
+  "aw_marshaller": "0x8239b3b8",
+  "aw_worker": "0x82393ac0",
+  "worker_name": "Float_Parse",
+  "worker_size": 184,
+  "aw_slot": "0x820580a8"
+ },
+ "luiLeaveMenu": {
+  "aw_marshaller": "0x8239e7c0",
+  "aw_worker": "0x82738a78",
+  "worker_name": "LUI_LeaveMenu",
+  "worker_size": 160,
+  "aw_slot": "0x820583b8"
+ },
+ "nomigrate": {
+  "aw_marshaller": "0x825bd2f0",
+  "aw_worker": "0x825bcf48",
+  "worker_name": "PartyMigrate_CancelMigration",
+  "worker_size": 148,
+  "aw_slot": "0x8205d190"
+ },
+ "mpng": {
+  "aw_marshaller": "0x825bee20",
+  "aw_worker": "0x82475468",
+  "worker_name": "NET_OutOfBandPrint",
+  "worker_size": 236,
+  "aw_slot": "0x8205d1a0"
+ },
+ "voicefail": {
+  "aw_marshaller": "0x825d9f48",
+  "aw_worker": "0x825e9ad8",
+  "worker_name": "CL_UpdateConnectivityBits",
+  "worker_size": 540,
+  "aw_slot": "0x8205d240"
+ },
+ "endparty": {
+  "aw_marshaller": "0x825de9d0",
+  "aw_worker": "0x825de8b8",
+  "worker_name": "PartyClient_EndParty_Internal",
+  "worker_size": 136,
+  "aw_slot": "0x8205d268"
+ },
+ "ping": {
+  "aw_marshaller": "0x825ef6f8",
+  "aw_worker": "0x825ef4e0",
+  "worker_name": "CL_SendPingAck",
+  "worker_size": 312,
+  "aw_slot": "0x8205dbec"
+ },
+ "ClearContentCache": {
+  "aw_marshaller": "0x82800af8",
+  "aw_worker": "0x8278d5e0",
+  "worker_name": "InGameStore_ClearCachedContent",
+  "worker_size": 100,
+  "aw_slot": "0x8205eec0"
+ },
+ "GetCategoryForDLCName": {
+  "aw_marshaller": "0x82800fb0",
+  "aw_worker": "0x8278f658",
+  "worker_name": "InGameStore_GetCategoryForDLCName",
+  "worker_size": 252,
+  "aw_slot": "0x8205eef8"
+ },
+ "FindPlayerPurchases": {
+  "aw_marshaller": "0x82800a70",
+  "aw_worker": "0x8278c7e0",
+  "worker_name": "InGameStore_FindPlayersPurchases",
+  "worker_size": 324,
+  "aw_slot": "0x8205ef08"
+ },
+ "FoundPlayerPurchases": {
+  "aw_marshaller": "0x82800a18",
+  "aw_worker": "0x8278c928",
+  "worker_name": "InGameStore_FindPlayersPurchasesComplete",
+  "worker_size": 84,
+  "aw_slot": "0x8205ef10"
+ },
+ "StopSound": {
+  "aw_marshaller": "0x826ff148",
+  "aw_worker": "0x8220f3d8",
+  "worker_name": "SND_StopLocalSoundAliasById",
+  "worker_size": 120,
+  "aw_slot": "0x8205ef30"
+ },
+ "FadeSound": {
+  "aw_marshaller": "0x826f3bb8",
+  "aw_worker": "0x82207250",
+  "worker_name": "SND_FadeLocalSoundAliasById",
+  "worker_size": 112,
+  "aw_slot": "0x8205ef38"
+ },
+ "IsSoundPlaying": {
+  "aw_marshaller": "0x826f3ae0",
+  "aw_worker": "0x822082f8",
+  "worker_name": "SND_IsLocalSoundAliasPlayingById",
+  "worker_size": 80,
+  "aw_slot": "0x8205ef40"
+ },
+ "StopMusic": {
+  "aw_marshaller": "0x826ff2d0",
+  "aw_worker": "0x8220f2e0",
+  "worker_name": "SND_StopBackground",
+  "worker_size": 248,
+  "aw_slot": "0x8205ef50"
+ },
+ "GetLuiRoot": {
+  "aw_marshaller": "0x826f36d8",
+  "aw_worker": "0x8272ca20",
+  "worker_name": "LUI_GetRootElement",
+  "worker_size": 316,
+  "aw_slot": "0x8205ef70"
+ },
+ "RemoveKeyCatcherSubscriber": {
+  "aw_marshaller": "0x826f3500",
+  "aw_worker": "0x8271db40",
+  "worker_name": "LUI_CoD_RemoveKeyCatcherSubscriber",
+  "worker_size": 108,
+  "aw_slot": "0x8205ef88"
+ },
+ "GetDvarFloat": {
+  "aw_marshaller": "0x826f4610",
+  "aw_worker": "0x8237de80",
+  "worker_name": "Dvar_GetFloat",
+  "worker_size": 112,
+  "aw_slot": "0x8205efd0"
+ },
+ "SetDvarFloat": {
+  "aw_marshaller": "0x826ffc00",
+  "aw_worker": "0x8237f8f0",
+  "worker_name": "Dvar_SetFloatFromSource",
+  "worker_size": 148,
+  "aw_slot": "0x8205f010"
+ },
+ "IsEliteAppAvailable": {
+  "aw_marshaller": "0x826f7ee0",
+  "aw_worker": "0x82351d20",
+  "worker_name": "Live_IsEliteAppPresent",
+  "worker_size": 200,
+  "aw_slot": "0x8205f070"
+ },
+ "UserCanPlayOnline": {
+  "aw_marshaller": "0x826f7758",
+  "aw_worker": "0x82352a60",
+  "worker_name": "Live_CanUserPlayOnline",
+  "worker_size": 268,
+  "aw_slot": "0x8205f0b0"
+ },
+ "UserCanAccessMPLiveMenu": {
+  "aw_marshaller": "0x826fef30",
+  "aw_worker": "0x822ce780",
+  "worker_name": "Live_CanAccessMPLiveMenu",
+  "worker_size": 160,
+  "aw_slot": "0x8205f0c0"
+ },
+ "UserCanAccessSystemLinkMenu": {
+  "aw_marshaller": "0x826f7860",
+  "aw_worker": "0x822cc4b8",
+  "worker_name": "Live_CanAccessSystemLinkMenu",
+  "worker_size": 92,
+  "aw_slot": "0x8205f0c8"
+ },
+ "OfflineProfileCanSave": {
+  "aw_marshaller": "0x826f7598",
+  "aw_worker": "0x827f8e50",
+  "worker_name": "LiveStorage_LocalClientOfflineProfileCanSave",
+  "worker_size": 164,
+  "aw_slot": "0x8205f0d8"
+ },
+ "LocalClientProfileCanSave": {
+  "aw_marshaller": "0x826f74b8",
+  "aw_worker": "0x827f9128",
+  "worker_name": "LiveStorage_CheckLocalClientProfileCanSave",
+  "worker_size": 148,
+  "aw_slot": "0x8205f0e0"
+ },
+ "AllSplitscreenProfilesSignedIn": {
+  "aw_marshaller": "0x826ecf90",
+  "aw_worker": "0x825b0ea8",
+  "worker_name": "CL_AllSplitScreenPlayersAreSignedIn",
+  "worker_size": 80,
+  "aw_slot": "0x8205f0f0"
+ },
+ "AllSplitscreenProfilesCanSave": {
+  "aw_marshaller": "0x826ecf38",
+  "aw_worker": "0x825b12e8",
+  "worker_name": "CL_AllSplitScreenPlayersCanSaveProgress",
+  "worker_size": 104,
+  "aw_slot": "0x8205f0f8"
+ },
+ "UserCanAccessStore": {
+  "aw_marshaller": "0x826f73b8",
+  "aw_worker": "0x82352970",
+  "worker_name": "Live_CanUserAccessStore",
+  "worker_size": 236,
+  "aw_slot": "0x8205f108"
+ },
+ "AddAchievement": {
+  "aw_marshaller": "0x82705460",
+  "aw_worker": "0x82357c28",
+  "worker_name": "Live_GiveAchievement",
+  "worker_size": 288,
+  "aw_slot": "0x8205f128"
+ },
+ "SetAndEnableCustomClanTag": {
+  "aw_marshaller": "0x82707330",
+  "aw_worker": "0x823a1370",
+  "worker_name": "UI_ClanKeyboard_callback",
+  "worker_size": 896,
+  "aw_slot": "0x8205f188"
+ },
+ "ResetStatsCancel": {
+  "aw_marshaller": "0x82705b28",
+  "aw_worker": "0x82492848",
+  "worker_name": "LiveStorage_ResetStatsCancel",
+  "worker_size": 296,
+  "aw_slot": "0x8205f1c0"
+ },
+ "ToggleAutoMantle": {
+  "aw_marshaller": "0x82707180",
+  "aw_worker": "0x825e5ac8",
+  "worker_name": "GamerProfile_ToggleAutoMantle",
+  "worker_size": 140,
+  "aw_slot": "0x8205f268"
+ },
+ "MenuDvarsSetup": {
+  "aw_marshaller": "0x82700048",
+  "aw_worker": "0x825e4728",
+  "worker_name": "GamerProfile_OptionsMenuDvarsSetup",
+  "worker_size": 280,
+  "aw_slot": "0x8205f288"
+ },
+ "MenuDvarsFinish": {
+  "aw_marshaller": "0x826f5088",
+  "aw_worker": "0x825e1220",
+  "worker_name": "GamerProfile_OptionsMenuDvarsFinish",
+  "worker_size": 164,
+  "aw_slot": "0x8205f290"
+ },
+ "IsVideoPlaying": {
+  "aw_marshaller": "0x826ec8d8",
+  "aw_worker": "0x822c34d8",
+  "worker_name": "R_Cinematic_IsStarted",
+  "worker_size": 84,
+  "aw_slot": "0x8205f330"
+ },
+ "InLoadingScreen": {
+  "aw_marshaller": "0x826f2cc8",
+  "aw_worker": "0x822ccc08",
+  "worker_name": "Live_InLoadingScreen",
+  "worker_size": 132,
+  "aw_slot": "0x8205f338"
+ },
+ "ClearError": {
+  "aw_marshaller": "0x82700800",
+  "aw_worker": "0x8239d3a8",
+  "worker_name": "UIScript_ClearError",
+  "worker_size": 228,
+  "aw_slot": "0x8205f348"
+ },
+ "ReportMemory": {
+  "aw_marshaller": "0x826ebdd0",
+  "aw_worker": "0x8272a6c8",
+  "worker_name": "LUI_ReportMemoryUsage",
+  "worker_size": 92,
+  "aw_slot": "0x8205f358"
+ },
+ "SwitchToCoreMode": {
+  "aw_marshaller": "0x82700b68",
+  "aw_worker": "0x8247f038",
+  "worker_name": "Com_ExecCodPlayModeSwitchScripts",
+  "worker_size": 308,
+  "aw_slot": "0x8205f3b0"
+ },
+ "GetUI3DWindowAspectRatio": {
+  "aw_marshaller": "0x826ee340",
+  "aw_worker": "0x82791ae8",
+  "worker_name": "R_UI3D_GetTextureWindowAspectRatio",
+  "worker_size": 120,
+  "aw_slot": "0x8205f430"
+ },
+ "IsProfanity": {
+  "aw_marshaller": "0x826f2090",
+  "aw_worker": "0x827eba90",
+  "worker_name": "Xenon_ProfanityFilter_IsBadWord",
+  "worker_size": 260,
+  "aw_slot": "0x8205f4a8"
+ },
+ "CollectGarbage": {
+  "aw_marshaller": "0x826f9500",
+  "aw_worker": "0x82721f80",
+  "worker_name": "LUI_CoD_CollectGarbage",
+  "worker_size": 128,
+  "aw_slot": "0x8205f4c8"
+ },
+ "GetStatsGroupForGameMode": {
+  "aw_marshaller": "0x826ec160",
+  "aw_worker": "0x824873b8",
+  "worker_name": "LiveStorage_GetStatsGroupForGameMode",
+  "worker_size": 140,
+  "aw_slot": "0x8205f4f8"
+ },
+ "GetMaterialAspectRatio": {
+  "aw_marshaller": "0x826f1198",
+  "aw_worker": "0x8271cce0",
+  "worker_name": "LUI_Interface_GetMaterialAspectRatio",
+  "worker_size": 120,
+  "aw_slot": "0x8205f500"
+ },
+ "DepthFromViewZ": {
+  "aw_marshaller": "0x826f15f0",
+  "aw_worker": "0x826e0a38",
+  "worker_name": "LUI_Matrix_MultiplyVector",
+  "worker_size": 212,
+  "aw_slot": "0x8205f520"
+ },
+ "IsAnyEmblemIconNew": {
+  "aw_marshaller": "0x826ebfd0",
+  "aw_worker": "0x827bda08",
+  "worker_name": "BG_EmblemsIsAnyIconNew",
+  "worker_size": 68,
+  "aw_slot": "0x8205f550"
+ },
+ "GetSelectedLayerColor": {
+  "aw_marshaller": "0x826f8e10",
+  "aw_worker": "0x823cc4b0",
+  "worker_name": "UI_EmblemGetLayerColor",
+  "worker_size": 104,
+  "aw_slot": "0x8205f560"
+ },
+ "GetEmblemIconIndexInCategory": {
+  "aw_marshaller": "0x82703600",
+  "aw_worker": "0x823ceb50",
+  "worker_name": "UI_EmblemGetIconIndex",
+  "worker_size": 120,
+  "aw_slot": "0x8205f5a0"
+ },
+ "EmblemIconIsLocked": {
+  "aw_marshaller": "0x82702860",
+  "aw_worker": "0x827be860",
+  "worker_name": "BG_EmblemsIsIconLocked",
+  "worker_size": 236,
+  "aw_slot": "0x8205f5d0"
+ },
+ "GetRankName": {
+  "aw_marshaller": "0x826f9db8",
+  "aw_worker": "0x828119f8",
+  "worker_name": "Com_GetRankDataMP",
+  "worker_size": 96,
+  "aw_slot": "0x8205f5d8"
+ },
+ "EmblemFilterCount": {
+  "aw_marshaller": "0x82703480",
+  "aw_worker": "0x823cec70",
+  "worker_name": "UI_EmblemGetFilterCount",
+  "worker_size": 188,
+  "aw_slot": "0x8205f5e0"
+ },
+ "EmblemFilterIconID": {
+  "aw_marshaller": "0x827032a0",
+  "aw_worker": "0x823cebc8",
+  "worker_name": "UI_EmblemGetFilterIconID",
+  "worker_size": 168,
+  "aw_slot": "0x8205f5e8"
+ },
+ "Inventory_GetItemQuantity": {
+  "aw_marshaller": "0x826f9cb0",
+  "aw_worker": "0x82789398",
+  "worker_name": "Inventory_GetItemQuantity",
+  "worker_size": 124,
+  "aw_slot": "0x8205f608"
+ },
+ "Inventory_ConvertItemToXP": {
+  "aw_marshaller": "0x82705530",
+  "aw_worker": "0x8278b3d0",
+  "worker_name": "Inventory_ConvertItemToXP",
+  "worker_size": 292,
+  "aw_slot": "0x8205f630"
+ },
+ "Inventory_ConsumeItem": {
+  "aw_marshaller": "0x82705338",
+  "aw_worker": "0x8278b098",
+  "worker_name": "Inventory_ConsumePlayerInventoryItems",
+  "worker_size": 308,
+  "aw_slot": "0x8205f638"
+ },
+ "Inventory_GetDoubleXPExpiryDuration": {
+  "aw_marshaller": "0x827060d0",
+  "aw_worker": "0x8278baa0",
+  "worker_name": "CL_GameInventory_GetDoubleXPTimeLeft",
+  "worker_size": 88,
+  "aw_slot": "0x8205f640"
+ },
+ "Inventory_GetItemExpirationDateTime": {
+  "aw_marshaller": "0x82705d68",
+  "aw_worker": "0x827874c0",
+  "worker_name": "Inventory_GetItemExpirationDateTime",
+  "worker_size": 92,
+  "aw_slot": "0x8205f658"
+ },
+ "Loot_GetUnopenedSupplyPackageCount": {
+  "aw_marshaller": "0x826ed540",
+  "aw_worker": "0x8277eeb0",
+  "worker_name": "Live_LootService_GetNumSupplyPackagesWithStatus",
+  "worker_size": 120,
+  "aw_slot": "0x8205f668"
+ },
+ "DownloadXenonDiscContent": {
+  "aw_marshaller": "0x826f5328",
+  "aw_worker": "0x82381b40",
+  "worker_name": "Content_DownloadDiscContent",
+  "worker_size": 296,
+  "aw_slot": "0x8205f700"
+ },
+ "IsDownloadingXenonDiscContent": {
+  "aw_marshaller": "0x826f5228",
+  "aw_worker": "0x82381188",
+  "worker_name": "Content_IsDownloadingDiscContent",
+  "worker_size": 148,
+  "aw_slot": "0x8205f708"
+ },
+ "SetActiveMenu": {
+  "aw_marshaller": "0x82705658",
+  "aw_worker": "0x823b56f8",
+  "worker_name": "UI_SetActiveMenu",
+  "worker_size": 6104,
+  "aw_slot": "0x8205f778"
+ },
+ "ToUpperCase": {
+  "aw_marshaller": "0x826f1e38",
+  "aw_worker": "0x820f0390",
+  "worker_name": "Com_UTF8_ToUpperCase",
+  "worker_size": 132,
+  "aw_slot": "0x8205f7a0"
+ },
+ "GetBuildNumber": {
+  "aw_marshaller": "0x827068f8",
+  "aw_worker": "0x823a12e8",
+  "worker_name": "UI_FormattedBuildNumber",
+  "worker_size": 136,
+  "aw_slot": "0x8205f7a8"
+ },
+ "UsingSplitscreenUpscaling": {
+  "aw_marshaller": "0x826ed1a8",
+  "aw_worker": "0x825b0cc8",
+  "worker_name": "CL_IsSplitscreenInGame",
+  "worker_size": 140,
+  "aw_slot": "0x8205f810"
+ },
+ "AnyoneHasSeasonPass": {
+  "aw_marshaller": "0x826ec2a8",
+  "aw_worker": "0x82381948",
+  "worker_name": "Content_GetAvailableContentPacks",
+  "worker_size": 72,
+  "aw_slot": "0x8205f890"
+ },
+ "MarketingReportMessageViewed": {
+  "aw_marshaller": "0x82705220",
+  "aw_worker": "0x826dfc88",
+  "worker_name": "Marketing_ReportMessageViewed",
+  "worker_size": 144,
+  "aw_slot": "0x8205f8c8"
+ },
+ "CacheMaterial": {
+  "aw_marshaller": "0x826ed288",
+  "aw_worker": "0x823ad058",
+  "worker_name": "UI_AddCachedMaterial",
+  "worker_size": 240,
+  "aw_slot": "0x8205f908"
+ },
+ "ToggleExoShieldHold": {
+  "aw_marshaller": "0x827070c0",
+  "aw_worker": "0x825e5a18",
+  "worker_name": "GamerProfile_ToggleExoShieldHold",
+  "worker_size": 140,
+  "aw_slot": "0x8205f930"
+ },
+ "GetOnlineFriendGamertag": {
+  "aw_marshaller": "0x826f0d30",
+  "aw_worker": "0x82359468",
+  "worker_name": "Friends_Gamertag_Platform",
+  "worker_size": 120,
+  "aw_slot": "0x8205f9b8"
+ },
+ "GetOnlineFriendPresence": {
+  "aw_marshaller": "0x826fde00",
+  "aw_worker": "0x82359a50",
+  "worker_name": "Friends_GetPresence_Platform",
+  "worker_size": 332,
+  "aw_slot": "0x8205f9c0"
+ },
+ "InviteOnlineFriend": {
+  "aw_marshaller": "0x82703200",
+  "aw_worker": "0x822daee8",
+  "worker_name": "FriendsMenu_FeederOnInviteRequest",
+  "worker_size": 232,
+  "aw_slot": "0x8205fa10"
+ },
+ "IsFriendInvitable": {
+  "aw_marshaller": "0x826f0870",
+  "aw_worker": "0x822dac08",
+  "worker_name": "FriendsMenu_FeederFriendInvitable",
+  "worker_size": 176,
+  "aw_slot": "0x8205fa18"
+ },
+ "IsFriendJoinable": {
+  "aw_marshaller": "0x826f0770",
+  "aw_worker": "0x822dab40",
+  "worker_name": "FriendsMenu_FeederFriendJoinable",
+  "worker_size": 196,
+  "aw_slot": "0x8205fa20"
+ },
+ "JoinOnlineFriend": {
+  "aw_marshaller": "0x82703a48",
+  "aw_worker": "0x822db0a8",
+  "worker_name": "FriendsMenu_FeederOnJoinRequest",
+  "worker_size": 128,
+  "aw_slot": "0x8205fa28"
+ },
+ "GetRecentPlayerPresence": {
+  "aw_marshaller": "0x826fd258",
+  "aw_worker": "0x822d9870",
+  "worker_name": "MeetPlayer_GetStatus",
+  "worker_size": 204,
+  "aw_slot": "0x8205fa48"
+ },
+ "InviteRecentPlayer": {
+  "aw_marshaller": "0x82703148",
+  "aw_worker": "0x822d9d48",
+  "worker_name": "MeetPlayer_Invite",
+  "worker_size": 164,
+  "aw_slot": "0x8205fa80"
+ },
+ "JoinRecentPlayer": {
+  "aw_marshaller": "0x82703990",
+  "aw_worker": "0x822d9e20",
+  "worker_name": "MeetPlayer_Join",
+  "worker_size": 228,
+  "aw_slot": "0x8205fa88"
+ },
+ "SetRecentPlayerStoredXUID": {
+  "aw_marshaller": "0x826f0350",
+  "aw_worker": "0x822de940",
+  "worker_name": "PlayercardCache_UpdateRecentPlayersCaching",
+  "worker_size": 300,
+  "aw_slot": "0x8205fa90"
+ },
+ "ShowRecentPlayerGroups": {
+  "aw_marshaller": "0x826ff910",
+  "aw_worker": "0x822d9cc8",
+  "worker_name": "MeetPlayer_FeederOnShowGroups",
+  "worker_size": 128,
+  "aw_slot": "0x8205faa0"
+ },
+ "RequestRecentPlayerAsFriend": {
+  "aw_marshaller": "0x826f01e8",
+  "aw_worker": "0x822d8b40",
+  "worker_name": "MeetPlayer_FeederOnFriendRequest",
+  "worker_size": 156,
+  "aw_slot": "0x8205faa8"
+ },
+ "IsRecentPlayerAFriend": {
+  "aw_marshaller": "0x826f0128",
+  "aw_worker": "0x822d89e8",
+  "worker_name": "MeetPlayer_IsPlatformFriend",
+  "worker_size": 100,
+  "aw_slot": "0x8205fab8"
+ },
+ "GetGroupPopupText": {
+  "aw_marshaller": "0x826fb4f0",
+  "aw_worker": "0x822d6178",
+  "worker_name": "UserGroups_GetGroupPopupText",
+  "worker_size": 380,
+  "aw_slot": "0x8205fac8"
+ },
+ "GetLivePartyFriendPresence": {
+  "aw_marshaller": "0x826fd120",
+  "aw_worker": "0x824a8fa0",
+  "worker_name": "LiveParty_GetPresenceForSlot",
+  "worker_size": 248,
+  "aw_slot": "0x8205fae0"
+ },
+ "OpenLivePartyUI": {
+  "aw_marshaller": "0x826efda0",
+  "aw_worker": "0x821a6438",
+  "worker_name": "XShowPartyUI",
+  "worker_size": 40,
+  "aw_slot": "0x8205fb18"
+ },
+ "InviteAllLiveParty": {
+  "aw_marshaller": "0x826efd08",
+  "aw_worker": "0x82351548",
+  "worker_name": "LiveParty_InviteAll",
+  "worker_size": 244,
+  "aw_slot": "0x8205fb20"
+ },
+ "IsLivePartyLocal": {
+  "aw_marshaller": "0x826efc48",
+  "aw_worker": "0x824a8ca8",
+  "worker_name": "LiveParty_IsLocal",
+  "worker_size": 96,
+  "aw_slot": "0x8205fb28"
+ },
+ "IsLivePartyFriendMe": {
+  "aw_marshaller": "0x826efb10",
+  "aw_worker": "0x824a8d08",
+  "worker_name": "LiveParty_IsMe",
+  "worker_size": 112,
+  "aw_slot": "0x8205fb30"
+ },
+ "SetLivePartyFriendStoredXUID": {
+  "aw_marshaller": "0x826ef9f8",
+  "aw_worker": "0x822de830",
+  "worker_name": "PlayercardCache_UpdateLivePartyFriendsCaching",
+  "worker_size": 272,
+  "aw_slot": "0x8205fb38"
+ },
+ "InviteLivePartyFriend": {
+  "aw_marshaller": "0x827030b0",
+  "aw_worker": "0x824a9140",
+  "worker_name": "LiveParty_FeederOnInviteRequest",
+  "worker_size": 180,
+  "aw_slot": "0x8205fb48"
+ },
+ "JoinLivePartyFriend": {
+  "aw_marshaller": "0x827038f8",
+  "aw_worker": "0x824a9420",
+  "worker_name": "LiveParty_FeederOnJoinRequest",
+  "worker_size": 92,
+  "aw_slot": "0x8205fb50"
+ },
+ "GetEliteClanFriendGamertag": {
+  "aw_marshaller": "0x826ef6f8",
+  "aw_worker": "0x822e6800",
+  "worker_name": "EliteClan_GetCurrentIndexName",
+  "worker_size": 112,
+  "aw_slot": "0x8205fb78"
+ },
+ "GetEliteClanFriendPresence": {
+  "aw_marshaller": "0x826fe7a0",
+  "aw_worker": "0x822e98d8",
+  "worker_name": "EliteClan_GetPresenceForSlot",
+  "worker_size": 188,
+  "aw_slot": "0x8205fb80"
+ },
+ "InviteEliteClanFriend": {
+  "aw_marshaller": "0x82703018",
+  "aw_worker": "0x822ec450",
+  "worker_name": "EliteClan_FeederOnInvite",
+  "worker_size": 444,
+  "aw_slot": "0x8205fbc8"
+ },
+ "JoinEliteClanFriend": {
+  "aw_marshaller": "0x82703860",
+  "aw_worker": "0x822ecb70",
+  "worker_name": "EliteClan_FeederOnJoin",
+  "worker_size": 408,
+  "aw_slot": "0x8205fbd0"
+ },
+ "ShowEliteClanFriendGamercard": {
+  "aw_marshaller": "0x826ef268",
+  "aw_worker": "0x822e7790",
+  "worker_name": "EliteClan_FeederOnShowCard",
+  "worker_size": 260,
+  "aw_slot": "0x8205fbe0"
+ },
+ "IsEliteClanPlayerAFriend": {
+  "aw_marshaller": "0x826ef1b0",
+  "aw_worker": "0x822e6950",
+  "worker_name": "EliteClan_IsPlatformFriend",
+  "worker_size": 204,
+  "aw_slot": "0x8205fbe8"
+ },
+ "RequestEliteClanPlayerAsFriend": {
+  "aw_marshaller": "0x826ef118",
+  "aw_worker": "0x822e7c40",
+  "worker_name": "EliteClan_FeederOnFriendRequest",
+  "worker_size": 316,
+  "aw_slot": "0x8205fbf0"
+ },
+ "IsFacebookAllowed": {
+  "aw_marshaller": "0x826eede0",
+  "aw_worker": "0x822e1158",
+  "worker_name": "Facebook_IsAllowed",
+  "worker_size": 208,
+  "aw_slot": "0x8205fc10"
+ },
+ "LoadMatchRulesDataDefault": {
+  "aw_marshaller": "0x827068b0",
+  "aw_worker": "0x823a2130",
+  "worker_name": "LoadMatchRulesDataDefaults",
+  "worker_size": 244,
+  "aw_slot": "0x8205fc30"
+ },
+ "AreMatchRulesDefaultFromFF": {
+  "aw_marshaller": "0x826fe630",
+  "aw_worker": "0x82244080",
+  "worker_name": "AreMatchRulesDefaultFromFF",
+  "worker_size": 224,
+  "aw_slot": "0x8205fc58"
+ },
+ "CustomClassIsRestricted": {
+  "aw_marshaller": "0x82702c58",
+  "aw_worker": "0x82245fe0",
+  "worker_name": "MatchRules_ValidateCustomClass",
+  "worker_size": 2740,
+  "aw_slot": "0x8205fc68"
+ },
+ "WeaponIsRestricted": {
+  "aw_marshaller": "0x826ff038",
+  "aw_worker": "0x822449f8",
+  "worker_name": "MatchRules_ValidateWeapon",
+  "worker_size": 388,
+  "aw_slot": "0x8205fc70"
+ },
+ "SaveDataToHistory": {
+  "aw_marshaller": "0x826ff228",
+  "aw_worker": "0x82244b80",
+  "worker_name": "SaveMatchRulesToDiskAppendToFront",
+  "worker_size": 612,
+  "aw_slot": "0x8205fcb8"
+ },
+ "Open": {
+  "aw_marshaller": "0x826f9528",
+  "aw_worker": "0x822fd908",
+  "worker_name": "LB_OpenLeaderboardExt",
+  "worker_size": 248,
+  "aw_slot": "0x8205fce0"
+ },
+ "GetPlayerValue": {
+  "aw_marshaller": "0x826fcf10",
+  "aw_worker": "0x822fe080",
+  "worker_name": "LB_FeederItemText_Player",
+  "worker_size": 168,
+  "aw_slot": "0x8205fd00"
+ },
+ "UpdateLeaderboard": {
+  "aw_marshaller": "0x827012c0",
+  "aw_worker": "0x82300868",
+  "worker_name": "LB_UpdateLeaderboard",
+  "worker_size": 1184,
+  "aw_slot": "0x8205fd20"
+ },
+ "Clear": {
+  "aw_marshaller": "0x827001b0",
+  "aw_worker": "0x822fe128",
+  "worker_name": "LB_ClearLeaderboard",
+  "worker_size": 96,
+  "aw_slot": "0x8205fd38"
+ },
+ "ShowGamercard": {
+  "aw_marshaller": "0x82702238",
+  "aw_worker": "0x82301550",
+  "worker_name": "LB_ShowGamercardForSelectedPlayer",
+  "worker_size": 128,
+  "aw_slot": "0x8205fd40"
+ },
+ "IsPlayerAFriend": {
+  "aw_marshaller": "0x826eea60",
+  "aw_worker": "0x822da140",
+  "worker_name": "Friends_FindIndex",
+  "worker_size": 88,
+  "aw_slot": "0x8205fd58"
+ },
+ "IsPlayerMe": {
+  "aw_marshaller": "0x826ee960",
+  "aw_worker": "0x822fea28",
+  "worker_name": "LB_IsPlayerMe",
+  "worker_size": 140,
+  "aw_slot": "0x8205fd60"
+ },
+ "SendFriendRequest": {
+  "aw_marshaller": "0x826ee878",
+  "aw_worker": "0x82136070",
+  "worker_name": "XShowFriendRequestUI",
+  "worker_size": 4,
+  "aw_slot": "0x8205fd68"
+ },
+ "GetPreselectedCategory": {
+  "aw_marshaller": "0x828024f0",
+  "aw_worker": "0x823aabf0",
+  "worker_name": "PlaylistFeeder_GetPreselectedPlaylistCategory",
+  "worker_size": 272,
+  "aw_slot": "0x8205fd78"
+ },
+ "GetPreselectedIndexInCategory": {
+  "aw_marshaller": "0x828024b8",
+  "aw_worker": "0x823aaad8",
+  "worker_name": "PlaylistFeeder_GetPreselectedPlaylistIndexInCategory",
+  "worker_size": 280,
+  "aw_slot": "0x8205fd80"
+ },
+ "GetPreselectedCategoryClass": {
+  "aw_marshaller": "0x82802480",
+  "aw_worker": "0x823aa9b0",
+  "worker_name": "PlaylistFeeder_GetPreselectedPlaylistCategoryClass",
+  "worker_size": 292,
+  "aw_slot": "0x8205fd88"
+ },
+ "GetCategoryParent": {
+  "aw_marshaller": "0x82801a50",
+  "aw_worker": "0x823a99d0",
+  "worker_name": "PlaylistFeeder_GetCategoryParent",
+  "worker_size": 144,
+  "aw_slot": "0x8205fd90"
+ },
+ "GetPlaylistCount": {
+  "aw_marshaller": "0x82801a18",
+  "aw_worker": "0x82495820",
+  "worker_name": "Playlist_GetPlaylistCount",
+  "worker_size": 52,
+  "aw_slot": "0x8205fd98"
+ },
+ "GetItemPlaylistId": {
+  "aw_marshaller": "0x828020a8",
+  "aw_worker": "0x823a9f50",
+  "worker_name": "Playlist_GetItemPlaylistId",
+  "worker_size": 120,
+  "aw_slot": "0x8205fdb8"
+ },
+ "GetActivePlayersCount": {
+  "aw_marshaller": "0x82802650",
+  "aw_worker": "0x823ab8f0",
+  "worker_name": "Playlist_GetActivePlayersCount",
+  "worker_size": 264,
+  "aw_slot": "0x8205fdc8"
+ },
+ "GetPlayerLimits": {
+  "aw_marshaller": "0x82801fe0",
+  "aw_worker": "0x823a9eb0",
+  "worker_name": "Playlist_GetPlayerLimits",
+  "worker_size": 160,
+  "aw_slot": "0x8205fdd0"
+ },
+ "GetPartyLimits": {
+  "aw_marshaller": "0x82801f18",
+  "aw_worker": "0x823a9e10",
+  "worker_name": "Playlist_GetPartyLimits",
+  "worker_size": 160,
+  "aw_slot": "0x8205fdd8"
+ },
+ "GetItemCategoryClass": {
+  "aw_marshaller": "0x82801c90",
+  "aw_worker": "0x823aa1f8",
+  "worker_name": "Playlist_GetItemCategoryClass",
+  "worker_size": 100,
+  "aw_slot": "0x8205fde8"
+ },
+ "GetCategory": {
+  "aw_marshaller": "0x82801d38",
+  "aw_worker": "0x823aa260",
+  "worker_name": "Playlist_GetCategory",
+  "worker_size": 68,
+  "aw_slot": "0x8205fdf0"
+ },
+ "SetThirdPerson": {
+  "aw_marshaller": "0x827f1840",
+  "aw_worker": "0x827ec480",
+  "worker_name": "SetSpectatorPersoness",
+  "worker_size": 240,
+  "aw_slot": "0x8205fe68"
+ },
+ "GetMemberBackground": {
+  "aw_marshaller": "0x82710718",
+  "aw_worker": "0x8248f870",
+  "worker_name": "LiveStorage_PlayerDataGetIntByName",
+  "worker_size": 116,
+  "aw_slot": "0x8205fef0"
+ },
+ "IsPartyHostWaitingOnMembers": {
+  "aw_marshaller": "0x8270af58",
+  "aw_worker": "0x825d21b0",
+  "worker_name": "Party_IsWaitingForMembers",
+  "worker_size": 140,
+  "aw_slot": "0x8205ffe8"
+ },
+ "HowManyPlayersCanWeHost": {
+  "aw_marshaller": "0x8270c018",
+  "aw_worker": "0x8247ce98",
+  "worker_name": "Live_HowManyPlayersCanWeHost",
+  "worker_size": 96,
+  "aw_slot": "0x8205fff0"
+ },
+ "PartyClientsUpToDate": {
+  "aw_marshaller": "0x8270f4e0",
+  "aw_worker": "0x825c6308",
+  "worker_name": "PartyHost_ArePresentClientsUpToDate",
+  "worker_size": 160,
+  "aw_slot": "0x82060010"
+ },
+ "GetBotsTeamLimit": {
+  "aw_marshaller": "0x8270ee98",
+  "aw_worker": "0x826cb540",
+  "worker_name": "BG_BotsTeamLimit",
+  "worker_size": 112,
+  "aw_slot": "0x82060068"
+ },
+ "GetPartyStatus": {
+  "aw_marshaller": "0x82715330",
+  "aw_worker": "0x825d5e70",
+  "worker_name": "Party_GetStatus",
+  "worker_size": 1348,
+  "aw_slot": "0x820600c0"
+ },
+ "GetSearchStatus": {
+  "aw_marshaller": "0x8270e658",
+  "aw_worker": "0x825d27c8",
+  "worker_name": "Party_GetLobbySearchParams",
+  "worker_size": 188,
+  "aw_slot": "0x820600c8"
+ },
+ "IsItemOfTypeUnlocked": {
+  "aw_marshaller": "0x82710368",
+  "aw_worker": "0x823c56c0",
+  "worker_name": "GetIsItemOfTypeUnlockedStr",
+  "worker_size": 356,
+  "aw_slot": "0x820600f0"
+ },
+ "GetItemsUnlockedLastGame": {
+  "aw_marshaller": "0x8270ff58",
+  "aw_worker": "0x828156c8",
+  "worker_name": "CG_FindItemsUnlockedLastGame",
+  "worker_size": 224,
+  "aw_slot": "0x820600f8"
+ },
+ "UnlockedItemCount": {
+  "aw_marshaller": "0x82710228",
+  "aw_worker": "0x823c5b00",
+  "worker_name": "GetNumUnlockedItems",
+  "worker_size": 236,
+  "aw_slot": "0x82060108"
+ },
+ "UpdateServerDisplayList": {
+  "aw_marshaller": "0x8270fc50",
+  "aw_worker": "0x823b2318",
+  "worker_name": "UI_DoServerRefresh",
+  "worker_size": 184,
+  "aw_slot": "0x82060120"
+ },
+ "GetServerData": {
+  "aw_marshaller": "0x82715be0",
+  "aw_worker": "0x823b88a0",
+  "worker_name": "UI_FeederItemText",
+  "worker_size": 1996,
+  "aw_slot": "0x82060130"
+ },
+ "GetDLCMapCount": {
+  "aw_marshaller": "0x8270a6c0",
+  "aw_worker": "0x823964b8",
+  "worker_name": "UI_GetAvailableDlcMapCount",
+  "worker_size": 168,
+  "aw_slot": "0x82060158"
+ },
+ "GetMapNameByIndex": {
+  "aw_marshaller": "0x8270e530",
+  "aw_worker": "0x82399ff0",
+  "worker_name": "UI_FeederItemText_Maps",
+  "worker_size": 212,
+  "aw_slot": "0x82060160"
+ },
+ "GetMapSupportsAliensByIdx": {
+  "aw_marshaller": "0x8270bd98",
+  "aw_worker": "0x82395640",
+  "worker_name": "UI_GetMapIdForNum",
+  "worker_size": 260,
+  "aw_slot": "0x82060168"
+ },
+ "GetMapDescByIndex": {
+  "aw_marshaller": "0x8270bc78",
+  "aw_worker": "0x823abe60",
+  "worker_name": "UI_GetMapDescByIndex",
+  "worker_size": 148,
+  "aw_slot": "0x82060170"
+ },
+ "GetNonPlayingLocalClientCount": {
+  "aw_marshaller": "0x8270e0b0",
+  "aw_worker": "0x823ade48",
+  "worker_name": "UI_FeederCount_NonPlayingLocalClients",
+  "worker_size": 196,
+  "aw_slot": "0x82060198"
+ },
+ "GetNonPlayingLocalClientText": {
+  "aw_marshaller": "0x8270e6d8",
+  "aw_worker": "0x823ae728",
+  "worker_name": "UI_FeederItemText_NonPlayingLocalClients",
+  "worker_size": 224,
+  "aw_slot": "0x820601a0"
+ },
+ "SetUsingMLGRules": {
+  "aw_marshaller": "0x8270fd40",
+  "aw_worker": "0x825d7dc8",
+  "worker_name": "Party_SetUsesMLGRules",
+  "worker_size": 84,
+  "aw_slot": "0x82060200"
+ },
+ "GenerateRandomCostume": {
+  "aw_marshaller": "0x8270e168",
+  "aw_worker": "0x827c0b50",
+  "worker_name": "BG_Customization_SetDefaultNonTransientCustomization",
+  "worker_size": 184,
+  "aw_slot": "0x82060280"
+ },
+ "SelectedMember_IsAway": {
+  "aw_marshaller": "0x8270ade0",
+  "aw_worker": "0x823bf838",
+  "worker_name": "UI_IsSelectedPlayerAway",
+  "worker_size": 124,
+  "aw_slot": "0x820602e8"
+ },
+ "SelectedMember_ShowGamerCard": {
+  "aw_marshaller": "0x8270ff20",
+  "aw_worker": "0x8239ed28",
+  "worker_name": "UI_ShowGamerCard",
+  "worker_size": 208,
+  "aw_slot": "0x820602f0"
+ },
+ "SelectedMember_ToggleMute": {
+  "aw_marshaller": "0x82715030",
+  "aw_worker": "0x823a1198",
+  "worker_name": "UI_TogglePlayerMute",
+  "worker_size": 320,
+  "aw_slot": "0x82060300"
+ },
+ "SelectedMember_TryKick": {
+  "aw_marshaller": "0x8270fee8",
+  "aw_worker": "0x8239ebe8",
+  "worker_name": "UI_GetKickPlayerQuestionString",
+  "worker_size": 316,
+  "aw_slot": "0x82060308"
+ },
+ "SelectedMember_Kick": {
+  "aw_marshaller": "0x827156f8",
+  "aw_worker": "0x823a2cc0",
+  "worker_name": "UI_KickPlayer",
+  "worker_size": 252,
+  "aw_slot": "0x82060310"
+ },
+ "SelectedMember_TryMigrateHost": {
+  "aw_marshaller": "0x8270feb0",
+  "aw_worker": "0x8239eab0",
+  "worker_name": "UI_GetHostMigrateQuestionString",
+  "worker_size": 308,
+  "aw_slot": "0x82060318"
+ },
+ "SelectedMember_MigrateHost": {
+  "aw_marshaller": "0x827156d0",
+  "aw_worker": "0x823a2bc0",
+  "worker_name": "UI_MakeHost",
+  "worker_size": 256,
+  "aw_slot": "0x82060320"
+ },
+ "SelectedMember_FetchClan": {
+  "aw_marshaller": "0x8270b430",
+  "aw_worker": "0x822e6320",
+  "worker_name": "EliteClan_FetchRemoteClan",
+  "worker_size": 152,
+  "aw_slot": "0x82060348"
+ },
+ "UnderWater": {
+  "aw_marshaller": "0x82716548",
+  "aw_worker": "0x82631c90",
+  "worker_name": "CG_ClientInWaterTriggerBelowWater",
+  "worker_size": 220,
+  "aw_slot": "0x82060420"
+ },
+ "GetClientnumForTalkerSlot": {
+  "aw_marshaller": "0x82717900",
+  "aw_worker": "0x823acad0",
+  "worker_name": "UI_GetTalkerClientNum",
+  "worker_size": 236,
+  "aw_slot": "0x82060428"
+ },
+ "GetPlayerIsSelectedWeaponEquipped": {
+  "aw_marshaller": "0x82717890",
+  "aw_worker": "0x82658250",
+  "worker_name": "CG_IsSelectedWeaponEquipped",
+  "worker_size": 120,
+  "aw_slot": "0x82060438"
+ },
+ "GetPlayerMaxClipAmmo": {
+  "aw_marshaller": "0x82718130",
+  "aw_worker": "0x82717c00",
+  "worker_name": "Game_GetPlayerMaxClipAmmo",
+  "worker_size": 116,
+  "aw_slot": "0x82060458"
+ },
+ "GetPlayerStockAmmo": {
+  "aw_marshaller": "0x82718218",
+  "aw_worker": "0x827edd88",
+  "worker_name": "CG_GetPlayerWeaponAmmoStock",
+  "worker_size": 172,
+  "aw_slot": "0x82060460"
+ },
+ "GetPlayerFragAmmo": {
+  "aw_marshaller": "0x827180c0",
+  "aw_worker": "0x826074e8",
+  "worker_name": "CG_UIGetLethalAmmo",
+  "worker_size": 120,
+  "aw_slot": "0x82060468"
+ },
+ "GetPlayerSmokeAmmo": {
+  "aw_marshaller": "0x82718050",
+  "aw_worker": "0x82607470",
+  "worker_name": "CG_UIGetTacticalAmmo",
+  "worker_size": 120,
+  "aw_slot": "0x82060470"
+ },
+ "GetActionSlotIsSelected": {
+  "aw_marshaller": "0x82718cd8",
+  "aw_worker": "0x827ed768",
+  "worker_name": "CG_GetActionSlotIsSelected",
+  "worker_size": 256,
+  "aw_slot": "0x82060478"
+ },
+ "GetPlayerStance": {
+  "aw_marshaller": "0x82717090",
+  "aw_worker": "0x82716048",
+  "worker_name": "Game_GetPlayerStance",
+  "worker_size": 100,
+  "aw_slot": "0x820604a0"
+ },
+ "GetPlayerActionSlotMaterial": {
+  "aw_marshaller": "0x8271b1e8",
+  "aw_worker": "0x8271ac78",
+  "worker_name": "Game_GetPlayerActionSlotMaterial",
+  "worker_size": 632,
+  "aw_slot": "0x820604b0"
+ },
+ "GetPlayerActionSlotAmmo": {
+  "aw_marshaller": "0x82718fb8",
+  "aw_worker": "0x82717db8",
+  "worker_name": "Game_GetPlayerActionSlotAmmo",
+  "worker_size": 472,
+  "aw_slot": "0x820604b8"
+ },
+ "GetPlayerActionSlotActive": {
+  "aw_marshaller": "0x82718ed8",
+  "aw_worker": "0x82717a98",
+  "worker_name": "Game_GetPlayerActionSlotActive",
+  "worker_size": 288,
+  "aw_slot": "0x820604c0"
+ },
+ "GetPlayerWeaponDisplayName": {
+  "aw_marshaller": "0x8271b9f0",
+  "aw_worker": "0x8271b948",
+  "worker_name": "Game_GetPlayerWeaponDisplayName",
+  "worker_size": 164,
+  "aw_slot": "0x820604c8"
+ },
+ "GetPlayerWeaponName": {
+  "aw_marshaller": "0x8271a740",
+  "aw_worker": "0x826181e8",
+  "worker_name": "CG_GetWeaponName",
+  "worker_size": 176,
+  "aw_slot": "0x820604d0"
+ },
+ "GetPlayerWeaponGreebleName": {
+  "aw_marshaller": "0x82718280",
+  "aw_worker": "0x8260efa8",
+  "worker_name": "CG_GetWeaponGreebleName",
+  "worker_size": 188,
+  "aw_slot": "0x820604e0"
+ },
+ "IsWeaponAltModeUsable": {
+  "aw_marshaller": "0x82718198",
+  "aw_worker": "0x827edc58",
+  "worker_name": "CG_ActionSlotIsUsable",
+  "worker_size": 304,
+  "aw_slot": "0x820604e8"
+ },
+ "PlayerReticleZoom": {
+  "aw_marshaller": "0x8271a6b0",
+  "aw_worker": "0x8267e4e8",
+  "worker_name": "CG_GetWeapReticleZoom",
+  "worker_size": 264,
+  "aw_slot": "0x82060518"
+ },
+ "GetWeaponAltModeAmmo": {
+  "aw_marshaller": "0x82717d28",
+  "aw_worker": "0x827179a8",
+  "worker_name": "Game_GetWeaponAltModeAmmo",
+  "worker_size": 240,
+  "aw_slot": "0x82060550"
+ },
+ "GetCrosshairColor": {
+  "aw_marshaller": "0x82719d10",
+  "aw_worker": "0x8267da88",
+  "worker_name": "CG_CalcCrosshairColor",
+  "worker_size": 308,
+  "aw_slot": "0x82060558"
+ },
+ "GetPlayerWeaponClass": {
+  "aw_marshaller": "0x82717800",
+  "aw_worker": "0x82716fc8",
+  "worker_name": "Game_GetPlayerWeaponClass",
+  "worker_size": 112,
+  "aw_slot": "0x82060568"
+ },
+ "CanChangePlayerMute": {
+  "aw_marshaller": "0x827186b0",
+  "aw_worker": "0x825e6d20",
+  "worker_name": "CL_CanChangePlayerMute",
+  "worker_size": 232,
+  "aw_slot": "0x820605b8"
+ },
+ "GetMigrationStatus": {
+  "aw_marshaller": "0x8271a520",
+  "aw_worker": "0x825efb18",
+  "worker_name": "CL_GetLocalClientMigrationString",
+  "worker_size": 556,
+  "aw_slot": "0x82060618"
+ },
+ "IsCinematicCameraActive": {
+  "aw_marshaller": "0x827173d0",
+  "aw_worker": "0x827b2498",
+  "worker_name": "CG_IsCinematicCameraWaiting",
+  "worker_size": 152,
+  "aw_slot": "0x82060620"
+ },
+ "StartBlur": {
+  "aw_marshaller": "0x82718308",
+  "aw_worker": "0x826939a0",
+  "worker_name": "CG_Blur",
+  "worker_size": 196,
+  "aw_slot": "0x82060638"
+ },
+ "PlayerHasPerk": {
+  "aw_marshaller": "0x82718dd0",
+  "aw_worker": "0x827f0ae8",
+  "worker_name": "BG_GetPerkCodeIndexForName",
+  "worker_size": 132,
+  "aw_slot": "0x82060640"
+ },
+ "StartAccountCreation": {
+  "aw_marshaller": "0x8271bb50",
+  "aw_worker": "0x823d9940",
+  "worker_name": "CODAnywhere_StartAccountCreation",
+  "worker_size": 696,
+  "aw_slot": "0x82060678"
+ },
+ "StartAccountLinking": {
+  "aw_marshaller": "0x8271baa8",
+  "aw_worker": "0x823d9870",
+  "worker_name": "CODAnywhere_StartAccountLinking",
+  "worker_size": 208,
+  "aw_slot": "0x82060680"
+ },
+ "ShouldShowLinkCreatePopup": {
+  "aw_marshaller": "0x8271c5f8",
+  "aw_worker": "0x823d9680",
+  "worker_name": "CODAnywhere_ShouldShowLinkCreatePopup",
+  "worker_size": 216,
+  "aw_slot": "0x82060690"
+ },
+ "ShouldShowLinkUCDPopup": {
+  "aw_marshaller": "0x8271c4a0",
+  "aw_worker": "0x823d9588",
+  "worker_name": "CODAnywhere_ShouldShowLinkUCDPopup",
+  "worker_size": 244,
+  "aw_slot": "0x82060698"
+ },
+ "DownloadNonUCDPlatforms": {
+  "aw_marshaller": "0x8271c868",
+  "aw_worker": "0x823da588",
+  "worker_name": "CODAnywhere_DownloadNonUCDPlatforms",
+  "worker_size": 296,
+  "aw_slot": "0x820606a0"
+ },
+ "GetPlatformDescriptionString": {
+  "aw_marshaller": "0x8271c920",
+  "aw_worker": "0x823dcfc0",
+  "worker_name": "CODAnywhere_GetPlatformString",
+  "worker_size": 460,
+  "aw_slot": "0x820606b0"
+ },
+ "IsDownloadingData": {
+  "aw_marshaller": "0x82727c50",
+  "aw_worker": "0x822e7b48",
+  "worker_name": "EliteClan_IsDownloadingData",
+  "worker_size": 248,
+  "aw_slot": "0x82060710"
+ },
+ "Create": {
+  "aw_marshaller": "0x82729858",
+  "aw_worker": "0x822ec1b8",
+  "worker_name": "EliteClan_Create",
+  "worker_size": 96,
+  "aw_slot": "0x82060728"
+ },
+ "GetMotto": {
+  "aw_marshaller": "0x82728b80",
+  "aw_worker": "0x822e96b0",
+  "worker_name": "EliteClan_GetClanMotto",
+  "worker_size": 96,
+  "aw_slot": "0x82060760"
+ },
+ "AcceptClanProposal": {
+  "aw_marshaller": "0x82729350",
+  "aw_worker": "0x822ea0c0",
+  "worker_name": "EliteClan_AcceptClanProposal",
+  "worker_size": 416,
+  "aw_slot": "0x820607e8"
+ },
+ "DeclineClanProposal": {
+  "aw_marshaller": "0x82729230",
+  "aw_worker": "0x822e9f20",
+  "worker_name": "EliteClan_DeclineClanProposal",
+  "worker_size": 416,
+  "aw_slot": "0x820607f0"
+ },
+ "KickMemberFromClan": {
+  "aw_marshaller": "0x82729178",
+  "aw_worker": "0x822ea260",
+  "worker_name": "EliteClan_KickMemberFromClan",
+  "worker_size": 432,
+  "aw_slot": "0x82060800"
+ },
+ "SetTag": {
+  "aw_marshaller": "0x82729080",
+  "aw_worker": "0x822e9eb0",
+  "worker_name": "EliteClan_SetClanTag",
+  "worker_size": 112,
+  "aw_slot": "0x82060808"
+ },
+ "TransferLeadership": {
+  "aw_marshaller": "0x82728e48",
+  "aw_worker": "0x822ea5b8",
+  "worker_name": "EliteClan_TransferOwnership",
+  "worker_size": 432,
+  "aw_slot": "0x82060830"
+ },
+ "LeaveClan": {
+  "aw_marshaller": "0x82728d90",
+  "aw_worker": "0x822ea410",
+  "worker_name": "EliteClan_LeaveClan",
+  "worker_size": 420,
+  "aw_slot": "0x82060838"
+ },
+ "removeElementInC": {
+  "aw_marshaller": "0x82734da8",
+  "aw_worker": "0x827347e8",
+  "worker_name": "LUI_LUIElement_RemoveElement",
+  "worker_size": 252,
+  "aw_slot": "0x82060a00"
+ },
+ "removeAllChildren": {
+  "aw_marshaller": "0x82734d68",
+  "aw_worker": "0x827346d0",
+  "worker_name": "LUI_LUIElement_RemoveAllChildren",
+  "worker_size": 280,
+  "aw_slot": "0x82060a08"
+ },
+ "isChainInFocus": {
+  "aw_marshaller": "0x827301d0",
+  "aw_worker": "0x82729f98",
+  "worker_name": "LUI_LUIElement_ChainHasFocus",
+  "worker_size": 124,
+  "aw_slot": "0x82060a18"
+ },
+ "undoElementTransform": {
+  "aw_marshaller": "0x8272e4c8",
+  "aw_worker": "0x8272d308",
+  "worker_name": "LUIElement_UndoTransform",
+  "worker_size": 444,
+  "aw_slot": "0x82060b68"
+ },
+ "getElementTextDims": {
+  "aw_marshaller": "0x8272c5d0",
+  "aw_worker": "0x8272c130",
+  "worker_name": "LUI_MeasureTextElement",
+  "worker_size": 360,
+  "aw_slot": "0x82060b88"
+ },
+ "__gc": {
+  "aw_marshaller": "0x8272aba0",
+  "aw_worker": "0x820f0650",
+  "worker_name": "RootUserData,0,5>::ToData",
+  "worker_size": 120,
+  "aw_slot": "0x82060db8"
+ },
+ "next": {
+  "aw_marshaller": "0x8275d3a8",
+  "aw_worker": "0x8275a5e8",
+  "worker_name": "vm_intern_next",
+  "worker_size": 172,
+  "aw_slot": "0x820610b0"
+ },
+ "loadstring": {
+  "aw_marshaller": "0x8277e408",
+  "aw_worker": "0x8277dbb0",
+  "worker_name": "hksi_hksL_loadbuffer",
+  "worker_size": 228,
+  "aw_slot": "0x82061168"
+ },
+ "create": {
+  "aw_marshaller": "0x8276c608",
+  "aw_worker": "0x82768110",
+  "worker_name": "hksi_lua_newthread",
+  "worker_size": 240,
+  "aw_slot": "0x82061178"
+ },
+ "status": {
+  "aw_marshaller": "0x82759da8",
+  "aw_worker": "0x82749d70",
+  "worker_name": "hks::threadGetStatus",
+  "worker_size": 108,
+  "aw_slot": "0x82061190"
+ },
+ "wrap": {
+  "aw_marshaller": "0x8277bc08",
+  "aw_worker": "0x8276c608",
+  "worker_name": "hks::coroutine_create",
+  "worker_size": 224,
+  "aw_slot": "0x82061198"
+ },
+ "getupvalue": {
+  "aw_marshaller": "0x82759970",
+  "aw_worker": "0x82745f78",
+  "worker_name": "hksi_lua_getupvalue",
+  "worker_size": 428,
+  "aw_slot": "0x820611e8"
+ },
+ "setupvalue": {
+  "aw_marshaller": "0x827612c0",
+  "aw_worker": "0x8275f3d8",
+  "worker_name": "hksi_lua_setupvalue",
+  "worker_size": 372,
+  "aw_slot": "0x82061210"
+ },
+ "isdeletable": {
+  "aw_marshaller": "0x827596b8",
+  "aw_worker": "0x82744078",
+  "worker_name": "hksi_hks_isDeletable",
+  "worker_size": 100,
+  "aw_slot": "0x82061268"
+ },
+ "inspectgarbage": {
+  "aw_marshaller": "0x82759658",
+  "aw_worker": "0x82756328",
+  "worker_name": "hksi_hks_inspectGarbage",
+  "worker_size": 140,
+  "aw_slot": "0x82061270"
+ },
+ "acos": {
+  "aw_marshaller": "0x82759298",
+  "aw_worker": "0x821e3898",
+  "worker_name": "acos",
+  "worker_size": 8,
+  "aw_slot": "0x82061330"
+ },
+ "asin": {
+  "aw_marshaller": "0x82759240",
+  "aw_worker": "0x821e37d0",
+  "worker_name": "asin",
+  "worker_size": 200,
+  "aw_slot": "0x82061338"
+ },
+ "atan": {
+  "aw_marshaller": "0x827591e8",
+  "aw_worker": "0x821de9c0",
+  "worker_name": "atan",
+  "worker_size": 228,
+  "aw_slot": "0x82061340"
+ },
+ "atan2": {
+  "aw_marshaller": "0x82759170",
+  "aw_worker": "0x821deaa8",
+  "worker_name": "atan2",
+  "worker_size": 304,
+  "aw_slot": "0x82061348"
+ },
+ "ceil": {
+  "aw_marshaller": "0x82759118",
+  "aw_worker": "0x821e38a0",
+  "worker_name": "ceil",
+  "worker_size": 60,
+  "aw_slot": "0x82061350"
+ },
+ "cos": {
+  "aw_marshaller": "0x827590c0",
+  "aw_worker": "0x821de8e0",
+  "worker_name": "cos",
+  "worker_size": 224,
+  "aw_slot": "0x82061358"
+ },
+ "cosh": {
+  "aw_marshaller": "0x82759068",
+  "aw_worker": "0x821e3b48",
+  "worker_name": "cosh",
+  "worker_size": 452,
+  "aw_slot": "0x82061360"
+ },
+ "exp": {
+  "aw_marshaller": "0x82758fb0",
+  "aw_worker": "0x821def68",
+  "worker_name": "exp",
+  "worker_size": 220,
+  "aw_slot": "0x82061370"
+ },
+ "fmod": {
+  "aw_marshaller": "0x82758ee0",
+  "aw_worker": "0x821dec20",
+  "worker_name": "fmod",
+  "worker_size": 388,
+  "aw_slot": "0x82061380"
+ },
+ "frexp": {
+  "aw_marshaller": "0x82758e60",
+  "aw_worker": "0x821e3d10",
+  "worker_name": "frexp",
+  "worker_size": 276,
+  "aw_slot": "0x82061388"
+ },
+ "ldexp": {
+  "aw_marshaller": "0x82758d88",
+  "aw_worker": "0x821e3e28",
+  "worker_name": "ldexp",
+  "worker_size": 468,
+  "aw_slot": "0x82061390"
+ },
+ "log": {
+  "aw_marshaller": "0x82758d30",
+  "aw_worker": "0x821deda8",
+  "worker_name": "log",
+  "worker_size": 396,
+  "aw_slot": "0x82061398"
+ },
+ "log10": {
+  "aw_marshaller": "0x82758cd8",
+  "aw_worker": "0x821def38",
+  "worker_name": "log10",
+  "worker_size": 44,
+  "aw_slot": "0x820613a0"
+ },
+ "modf": {
+  "aw_marshaller": "0x82758b58",
+  "aw_worker": "0x821e4000",
+  "worker_name": "modf",
+  "worker_size": 304,
+  "aw_slot": "0x820613b8"
+ },
+ "pow": {
+  "aw_marshaller": "0x82758ae0",
+  "aw_worker": "0x821de100",
+  "worker_name": "pow",
+  "worker_size": 1252,
+  "aw_slot": "0x820613c0"
+ },
+ "randomseed": {
+  "aw_marshaller": "0x82758820",
+  "aw_worker": "0x821de668",
+  "worker_name": "srand",
+  "worker_size": 48,
+  "aw_slot": "0x820613d8"
+ },
+ "sin": {
+  "aw_marshaller": "0x827587c8",
+  "aw_worker": "0x821de800",
+  "worker_name": "sin",
+  "worker_size": 224,
+  "aw_slot": "0x820613e8"
+ },
+ "sinh": {
+  "aw_marshaller": "0x82758770",
+  "aw_worker": "0x821e38e0",
+  "worker_name": "sinh",
+  "worker_size": 612,
+  "aw_slot": "0x820613f0"
+ },
+ "tan": {
+  "aw_marshaller": "0x827586c8",
+  "aw_worker": "0x821dd2f0",
+  "worker_name": "tan",
+  "worker_size": 212,
+  "aw_slot": "0x820613f8"
+ },
+ "tanh": {
+  "aw_marshaller": "0x82758670",
+  "aw_worker": "0x821e4130",
+  "worker_name": "tanh",
+  "worker_size": 256,
+  "aw_slot": "0x82061400"
+ },
+ "exit": {
+  "aw_marshaller": "0x8275c098",
+  "aw_worker": "0x821e49f0",
+  "worker_name": "exit_85",
+  "worker_size": 12,
+  "aw_slot": "0x82061418"
+ },
+ "remove": {
+  "aw_marshaller": "0x82758568",
+  "aw_worker": "0x82743b00",
+  "worker_name": "hksf_remove",
+  "worker_size": 100,
+  "aw_slot": "0x82061420"
+ },
+ "rename": {
+  "aw_marshaller": "0x82758418",
+  "aw_worker": "0x82743a70",
+  "worker_name": "hksf_rename",
+  "worker_size": 140,
+  "aw_slot": "0x82061428"
+ },
+ "difftime": {
+  "aw_marshaller": "0x827582d0",
+  "aw_worker": "0x821dfa90",
+  "worker_name": "_difftime64",
+  "worker_size": 84,
+  "aw_slot": "0x82061440"
+ },
+ "tmpname": {
+  "aw_marshaller": "0x8275c0d8",
+  "aw_worker": "0x821e46a0",
+  "worker_name": "tmpnam",
+  "worker_size": 60,
+  "aw_slot": "0x82061460"
+ },
+ "preload": {
+  "aw_marshaller": "0x8275b960",
+  "aw_worker": "0x820e3ed8",
+  "worker_name": "lua_getglobal",
+  "worker_size": 164,
+  "aw_slot": "0x820614a0"
+ },
+ "stats": {
+  "aw_marshaller": "0x8274cdd8",
+  "aw_worker": "0x82748208",
+  "worker_name": "hksi_hks_dumpstats",
+  "worker_size": 228,
+  "aw_slot": "0x820614d0"
+ },
+ "memorystats": {
+  "aw_marshaller": "0x8275b8b0",
+  "aw_worker": "0x82756ac8",
+  "worker_name": "hksi_hks_memorystats",
+  "worker_size": 160,
+  "aw_slot": "0x820614d8"
+ },
+ "graphheap": {
+  "aw_marshaller": "0x8275b828",
+  "aw_worker": "0x82756b68",
+  "worker_name": "hksi_hks_graphheap",
+  "worker_size": 92,
+  "aw_slot": "0x820614e0"
+ },
+ "totable": {
+  "aw_marshaller": "0x827689e8",
+  "aw_worker": "0x82768200",
+  "worker_name": "hksL_totable",
+  "worker_size": 444,
+  "aw_slot": "0x820618a0"
+ },
+ "sort": {
+  "aw_marshaller": "0x8277bf78",
+  "aw_worker": "0x8277b5d0",
+  "worker_name": "hks::quicksort",
+  "worker_size": 1396,
+  "aw_slot": "0x82061900"
+ }
+}

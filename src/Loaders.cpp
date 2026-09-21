@@ -1,12 +1,10 @@
 #include "pch.h"
 #include "Loaders.hpp"
 #include "Console.hpp"
-#include "FontLoader.hpp"
 #include "FuncPointers.h"
 #include "Hook.hpp"
 #include "ImageLoader.hpp"
 #include "LuiLoader.hpp"
-#include "MapEntLoader.hpp"
 #include "RawFileLoader.hpp"
 #include "ScriptLoader.hpp"
 #include "StringTableLoader.hpp"
@@ -111,8 +109,6 @@ void Loaders::initAssetLoaders() {
     Hook::create("DB_IsXAssetDefault", 0xA2C90_b, &hook_DB_IsXAssetDefault, &_DB_IsXAssetDefault);
 
 	LuiLoader::init();
-	FontLoader::init();
 	ScriptLoader::init();
     ImageLoader::init();
-    MapEntLoader::init();
 }

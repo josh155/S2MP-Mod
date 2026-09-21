@@ -1,0 +1,9 @@
+[
+ {
+  "addr": "0xeb4c26",
+  "text": "mp/splashTable.csv",
+  "refs": [
+   "CG_CloseSplashes"
+  ]
+ }
+]

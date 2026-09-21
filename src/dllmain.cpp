@@ -4,6 +4,7 @@
 #include <Hook.hpp>
 #include "LogFile.hpp"
 #include "DevDef.h"
+#include "time_scale_hook.hpp"  // Include time scale hook interface
 #include "Arxan.hpp"
 
 HMODULE hm;
@@ -46,6 +47,8 @@ DWORD WINAPI modInitWrapper(LPVOID module) {
 		CloseHandle(extConsoleThread);
 	}
 
+	TimeScale_Init(); // Initialize time scale support
+	
 	return 0;
 }
 

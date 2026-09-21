@@ -1,0 +1,214 @@
+[
+ {
+  "s2_func": "0x93c5c0",
+  "name": "PL_FSin",
+  "callers": 4,
+  "size": 6,
+  "via": [
+   "FX_GenParticleSimAnimationVerts",
+   "GScr_SetMiniMap",
+   "LUIElement_UIHorizontalListLayout",
+   "jpeg_encode__write_header"
+  ]
+ },
+ {
+  "s2_func": "0x3b73c0",
+  "name": "BG_GetWeaponName",
+  "callers": 3,
+  "size": 13,
+  "via": [
+   "CG_GetWeaponName",
+   "G_GetItemClassname",
+   "LUI_CoD_UpdateWeaponChangeSystem"
+  ]
+ },
+ {
+  "s2_func": "0x7505e0",
+  "name": "DrawWrappedText",
+  "callers": 1,
+  "size": 1856,
+  "via": [
+   "UI_DrawWrappedText"
+  ]
+ },
+ {
+  "s2_func": "0x2cb7d0",
+  "name": "hks__HashTable__contiguousArraySize",
+  "callers": 1,
+  "size": 543,
+  "via": [
+   "hksi_hks_dumpstats"
+  ]
+ },
+ {
+  "s2_func": "0xdfcd0",
+  "name": "NetConstStrings_ProcessNetConstStringMap",
+  "callers": 1,
+  "size": 418,
+  "via": [
+   "NetConstStrings_BuildDvarMaps"
+  ]
+ },
+ {
+  "s2_func": "0x14d920",
+  "name": "BG_Customization_SetDefaultNonTransientCustomization",
+  "callers": 1,
+  "size": 316,
+  "via": [
+   "BG_Customization_SetRandomCustomization"
+  ]
+ },
+ {
+  "s2_func": "0x281010",
+  "name": "PL_longjmp",
+  "callers": 1,
+  "size": 247,
+  "via": [
+   "Json_PrimitiveString"
+  ]
+ },
+ {
+  "s2_func": "0x2d2f50",
+  "name": "hks__StructProto__getLoadedSlotName",
+  "callers": 1,
+  "size": 245,
+  "via": [
+   "hks__StructProto__isEqualForLoading"
+  ]
+ },
+ {
+  "s2_func": "0x68c050",
+  "name": "Scr_GetConstString",
+  "callers": 1,
+  "size": 233,
+  "via": [
+   "Scr_GetString"
+  ]
+ },
+ {
+  "s2_func": "0x660780",
+  "name": "Com_StreamSync_InitModelLists",
+  "callers": 1,
+  "size": 227,
+  "via": [
+   "Com_StreamSync_InitModelPackage"
+  ]
+ },
+ {
+  "s2_func": "0x59cfe0",
+  "name": "GetPlayerEntity",
+  "callers": 1,
+  "size": 204,
+  "via": [
+   "Scr_PlayerSetAtmosphericFog"
+  ]
+ },
+ {
+  "s2_func": "0x3b63b0",
+  "name": "BG_PlayerHasWeapon",
+  "callers": 1,
+  "size": 151,
+  "via": [
+   "CG_GetWeaponForHud"
+  ]
+ },
+ {
+  "s2_func": "0x5dc4b0",
+  "name": "NetConstStrings_HasConfigStringIndex",
+  "callers": 1,
+  "size": 125,
+  "via": [
+   "CL_GetConfigString"
+  ]
+ },
+ {
+  "s2_func": "0xa2c740",
+  "name": "bdUserAccountID__reset",
+  "callers": 1,
+  "size": 114,
+  "via": [
+   "bdUserAccountID::bdUserAccountID"
+  ]
+ },
+ {
+  "s2_func": "0x721420",
+  "name": "SND_PlayLocalSoundAliasByName",
+  "callers": 1,
+  "size": 93,
+  "via": [
+   "CL_PlayTextFXPulseSounds"
+  ]
+ },
+ {
+  "s2_func": "0x839110",
+  "name": "TaskManager_ClearTask",
+  "callers": 1,
+  "size": 73,
+  "via": [
+   "TaskManager_ConstructTaskSet"
+  ]
+ },
+ {
+  "s2_func": "0x5beaa0",
+  "name": "G_DObjUpdate",
+  "callers": 1,
+  "size": 67,
+  "via": [
+   "SP_script_model"
+  ]
+ },
+ {
+  "s2_func": "0x856f20",
+  "name": "Live_IsAnybodySignedIn",
+  "callers": 1,
+  "size": 45,
+  "via": [
+   "UI_GetAvailableDlcMapCount"
+  ]
+ },
+ {
+  "s2_func": "0x76c7b0",
+  "name": "I_iscsym",
+  "callers": 1,
+  "size": 38,
+  "via": [
+   "Scr_IsIdentifier"
+  ]
+ },
+ {
+  "s2_func": "0x287890",
+  "name": "Hunk_UserDestroy",
+  "callers": 1,
+  "size": 34,
+  "via": [
+   "SV_FreeClientMemory"
+  ]
+ },
+ {
+  "s2_func": "0x471270",
+  "name": "Lobby_IsLoadingServer",
+  "callers": 1,
+  "size": 33,
+  "via": [
+   "IsServerRunning"
+  ]
+ },
+ {
+  "s2_func": "0x91440",
+  "name": "Live_ThrowError_Helper",
+  "callers": 1,
+  "size": 11,
+  "via": [
+   "Live_ThrowError"
+  ]
+ },
+ {
+  "s2_func": "0x3c3a70",
+  "name": "BG_UsingSniperScope",
+  "callers": 1,
+  "size": 11,
+  "via": [
+   "BG_IsThirdPersonMode"
+  ]
+ }
+]

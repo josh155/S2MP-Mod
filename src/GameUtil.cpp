@@ -151,7 +151,7 @@ void GameUtil::blockGameInput(bool b) {
 /**
  * @brief Converts a color array to a normalized string representation.
  *
- * Converts RGBA color values (0–255) to normalized floats (0.0–1.0)
+ * Converts RGBA color values (0ï¿½255) to normalized floats (0.0ï¿½1.0)
  * and formats them as a space-separated string.
  *
  * @param color RGBA color array.
@@ -264,6 +264,13 @@ float decodeDvarSecureFloat(const dvar_t* dvar) {
     float out;
     std::memcpy(&out, &raw, sizeof(out));
     return out;
+}
+
+// The decode is the exact inverse of Dvar_SetVariant's case 0xB (IDA 0xB30C0):
+// same keys (IDA 0xD90164..0xD90170), same per-session slot offset
+// (dword_14DB5E8), same XOR chain run backwards.
+float GameUtil::getDvarSecureFloat(const dvar_t* dvar) {
+    return decodeDvarSecureFloat(dvar);
 }
 
 void GameUtil::setDvarSecureFloat(dvar_t* dvar, float newValue) {

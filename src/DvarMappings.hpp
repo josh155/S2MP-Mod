@@ -340,6 +340,8 @@ inline constexpr auto entries = std::to_array<DvarMappingEntry>({
 	{ "dw_presence_get_rate", "3602", "Number of milliseconds to wait between fetching presence state from demonware" },
 	{ "dw_presence_put_delay", "3550", "Number of milliseconds to wait in a presence state before sending to demonware" },
 	{ "dw_presence_put_rate", "561", "Number of milliseconds to wait between sending presence state to demonware" },
+	{ "cl_demo_client", "2669", "Client slot a demo is viewed from (header +0x08)." },
+	{ "cl_demo_pause", "5816", "Pauses native demo playback." },
 	{ "e3demo", "2803", "" },
 	{ "e3demo_client", "1303", "" },
 	{ "e3demo_host", "4605", "" },

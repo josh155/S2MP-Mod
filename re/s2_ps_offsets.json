@@ -1,0 +1,2108 @@
+[
+ {
+  "offset": 0,
+  "hex": "0x0",
+  "type": "char",
+  "width": 1,
+  "hits": 27,
+  "types": {
+   "_WORD": 2,
+   "float": 6,
+   "char": 15,
+   "_OWORD": 2,
+   "_BYTE": 2
+  },
+  "funcs": [
+   "CG_ServerCommand",
+   "sub_30690",
+   "sub_33BF0",
+   "sub_34710",
+   "sub_37F00",
+   "sub_39EAA0"
+  ]
+ },
+ {
+  "offset": 1,
+  "hex": "0x1",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_32DEA0"
+  ]
+ },
+ {
+  "offset": 2,
+  "hex": "0x2",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 39,
+  "types": {
+   "_BYTE": 35,
+   "(inline)": 4
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_DrawActiveFrame",
+   "CG_DrawPlayerWeaponLowAmmoWarning",
+   "CG_DrawViewWeapon",
+   "CG_PredictPlayerState",
+   "CG_UIGetLethalAmmo"
+  ]
+ },
+ {
+  "offset": 4,
+  "hex": "0x4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 13,
+  "types": {
+   "float": 4,
+   "_DWORD": 5,
+   "(inline)": 3,
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_30690",
+   "sub_32D980",
+   "sub_32E460",
+   "sub_34710",
+   "sub_3D41D0",
+   "sub_403D0"
+  ]
+ },
+ {
+  "offset": 8,
+  "hex": "0x8",
+  "type": "float",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "float": 3,
+   "(inline)": 1
+  },
+  "funcs": [
+   "sub_30690",
+   "sub_34710",
+   "sub_428F20",
+   "sub_768D40"
+  ]
+ },
+ {
+  "offset": 11,
+  "hex": "0xb",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 3,
+  "types": {
+   "_BYTE": 3
+  },
+  "funcs": [
+   "sub_32C740",
+   "sub_32E280",
+   "sub_5A5B0"
+  ]
+ },
+ {
+  "offset": 12,
+  "hex": "0xc",
+  "type": "float",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "float": 3,
+   "(inline)": 1
+  },
+  "funcs": [
+   "sub_30690",
+   "sub_34710",
+   "sub_3CC0C0",
+   "sub_428F20"
+  ]
+ },
+ {
+  "offset": 15,
+  "hex": "0xf",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 16,
+  "hex": "0x10",
+  "type": "float",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "float": 2,
+   "_OWORD": 1
+  },
+  "funcs": [
+   "sub_31C30",
+   "sub_34710",
+   "sub_3CFC90"
+  ]
+ },
+ {
+  "offset": 18,
+  "hex": "0x12",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_3D9E10"
+  ]
+ },
+ {
+  "offset": 20,
+  "hex": "0x14",
+  "type": "float",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "float": 1,
+   "_OWORD": 1,
+   "(inline)": 1
+  },
+  "funcs": [
+   "sub_32D490",
+   "sub_34710",
+   "sub_403D0"
+  ]
+ },
+ {
+  "offset": 24,
+  "hex": "0x18",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_34710",
+   "sub_8292B0"
+  ]
+ },
+ {
+  "offset": 28,
+  "hex": "0x1c",
+  "type": "float",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "float": 3
+  },
+  "funcs": [
+   "sub_30690",
+   "sub_34710",
+   "sub_428F20"
+  ]
+ },
+ {
+  "offset": 30,
+  "hex": "0x1e",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 5,
+  "types": {
+   "_WORD": 3,
+   "__int16": 2
+  },
+  "funcs": [
+   "CG_EntityEvent",
+   "sub_4DF40",
+   "sub_B6790"
+  ]
+ },
+ {
+  "offset": 32,
+  "hex": "0x20",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 2,
+  "types": {
+   "_WORD": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "Lua_Game_PlayerVehicleRoll",
+   "sub_B6790"
+  ]
+ },
+ {
+  "offset": 36,
+  "hex": "0x24",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 6,
+  "types": {
+   "_WORD": 3,
+   "(inline)": 2,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "Lua_Game_GetVehicleType",
+   "sub_32D900",
+   "sub_3CFC90",
+   "sub_403D0",
+   "sub_427B90",
+   "sub_8144F0"
+  ]
+ },
+ {
+  "offset": 40,
+  "hex": "0x28",
+  "type": "__int16",
+  "width": 2,
+  "hits": 6,
+  "types": {
+   "_WORD": 2,
+   "__int16": 4
+  },
+  "funcs": [
+   "sub_42FF0",
+   "sub_53610"
+  ]
+ },
+ {
+  "offset": 42,
+  "hex": "0x2a",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 44,
+  "hex": "0x2c",
+  "type": "__int16",
+  "width": 2,
+  "hits": 4,
+  "types": {
+   "__int16": 3,
+   "_WORD": 1
+  },
+  "funcs": [
+   "sub_3F8440",
+   "sub_427D00",
+   "sub_4AA40",
+   "sub_678710"
+  ]
+ },
+ {
+  "offset": 46,
+  "hex": "0x2e",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 4,
+  "types": {
+   "_WORD": 4
+  },
+  "funcs": [
+   "CG_CalcEntityLerpOrigins",
+   "CG_CalcViewValues",
+   "CG_PredictPlayerState"
+  ]
+ },
+ {
+  "offset": 50,
+  "hex": "0x32",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "sub_B48F0"
+  ]
+ },
+ {
+  "offset": 54,
+  "hex": "0x36",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 15,
+  "types": {
+   "_BYTE": 15
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "sub_3EEFA0",
+   "sub_42FF0",
+   "sub_48460",
+   "sub_49F80",
+   "sub_4DF40"
+  ]
+ },
+ {
+  "offset": 56,
+  "hex": "0x38",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 17,
+  "types": {
+   "_WORD": 11,
+   "__int16": 5,
+   "(inline)": 1
+  },
+  "funcs": [
+   "Lua_Game_GetTurretEntNum",
+   "sub_3E1800",
+   "sub_3E9080",
+   "sub_3EEC70",
+   "sub_3EEFA0",
+   "sub_3FC480"
+  ]
+ },
+ {
+  "offset": 68,
+  "hex": "0x44",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_38340"
+  ]
+ },
+ {
+  "offset": 88,
+  "hex": "0x58",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 5
+  },
+  "funcs": [
+   "CG_PredictPlayerState",
+   "sub_3D8950",
+   "sub_403D0",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 96,
+  "hex": "0x60",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 30,
+  "types": {
+   "_BYTE": 7,
+   "_DWORD": 12,
+   "(inline)": 11
+  },
+  "funcs": [
+   "CG_DrawSpectatorControls",
+   "CG_DrawViewWeapon",
+   "CG_PredictPlayerState",
+   "CG_UpdateViewModel",
+   "CL_ExecBinding",
+   "Game_GetPlayerActionSlotMaterial"
+  ]
+ },
+ {
+  "offset": 100,
+  "hex": "0x64",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CG_UpdateViewModel",
+   "sub_3F7E00"
+  ]
+ },
+ {
+  "offset": 104,
+  "hex": "0x68",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 47,
+  "types": {
+   "_DWORD": 44,
+   "(inline)": 2,
+   "_BYTE": 1
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_DrawPlayerWeaponLowAmmoWarning",
+   "CG_DrawViewWeapon",
+   "CG_GetWeaponGreebleName",
+   "CG_GetWeaponName",
+   "CG_ProcessClientNoteTracks"
+  ]
+ },
+ {
+  "offset": 108,
+  "hex": "0x6c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 56,
+  "types": {
+   "_DWORD": 42,
+   "(inline)": 3,
+   "_BYTE": 11
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_ClientViewVisionSetUpdate",
+   "CG_DrawSpectatorControls",
+   "CG_EntityEvent",
+   "CG_PredictPlayerState",
+   "Lua_Game_IsFreeLookAllowed"
+  ]
+ },
+ {
+  "offset": 116,
+  "hex": "0x74",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "_DWORD": 2,
+   "int": 1
+  },
+  "funcs": [
+   "sub_3E2390",
+   "sub_3E25B0"
+  ]
+ },
+ {
+  "offset": 132,
+  "hex": "0x84",
+  "type": "float",
+  "width": 4,
+  "hits": 23,
+  "types": {
+   "float": 16,
+   "_DWORD": 7
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "sub_12B80",
+   "sub_3D18B0",
+   "sub_3D2C20",
+   "sub_3D42D0"
+  ]
+ },
+ {
+  "offset": 136,
+  "hex": "0x88",
+  "type": "float",
+  "width": 4,
+  "hits": 22,
+  "types": {
+   "float": 14,
+   "_DWORD": 8
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "sub_12B80",
+   "sub_3D18B0",
+   "sub_3D2C20",
+   "sub_3D42D0"
+  ]
+ },
+ {
+  "offset": 140,
+  "hex": "0x8c",
+  "type": "float",
+  "width": 4,
+  "hits": 20,
+  "types": {
+   "float": 12,
+   "_DWORD": 8
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "sub_12B80",
+   "sub_3D2C20",
+   "sub_3EDD50",
+   "sub_3EFD90"
+  ]
+ },
+ {
+  "offset": 144,
+  "hex": "0x90",
+  "type": "float",
+  "width": 4,
+  "hits": 9,
+  "types": {
+   "_DWORD": 3,
+   "float": 6
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_3E9620",
+   "sub_3E9760",
+   "sub_3F8440",
+   "sub_4AA40",
+   "sub_51440"
+  ]
+ },
+ {
+  "offset": 148,
+  "hex": "0x94",
+  "type": "float",
+  "width": 4,
+  "hits": 10,
+  "types": {
+   "_DWORD": 3,
+   "float": 7
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_3E9620",
+   "sub_3E9760",
+   "sub_3F8440",
+   "sub_4AA40",
+   "sub_51440"
+  ]
+ },
+ {
+  "offset": 152,
+  "hex": "0x98",
+  "type": "float",
+  "width": 4,
+  "hits": 9,
+  "types": {
+   "_DWORD": 3,
+   "float": 5,
+   "(inline)": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_3E9620",
+   "sub_3F8440",
+   "sub_4AA40",
+   "sub_51440",
+   "sub_547E70"
+  ]
+ },
+ {
+  "offset": 156,
+  "hex": "0x9c",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 160,
+  "hex": "0xa0",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 164,
+  "hex": "0xa4",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 268,
+  "hex": "0x10c",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 18,
+  "types": {
+   "_WORD": 16,
+   "(inline)": 2
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "Lua_Game_PlayerVehicleRoll",
+   "sub_1006B0",
+   "sub_12B80",
+   "sub_403D0"
+  ]
+ },
+ {
+  "offset": 272,
+  "hex": "0x110",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 276,
+  "hex": "0x114",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "sub_814B20"
+  ]
+ },
+ {
+  "offset": 280,
+  "hex": "0x118",
+  "type": "float",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "float": 5
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_12B80",
+   "sub_528C0",
+   "sub_814B20"
+  ]
+ },
+ {
+  "offset": 284,
+  "hex": "0x11c",
+  "type": "float",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "float": 5
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_12B80",
+   "sub_528C0",
+   "sub_814B20"
+  ]
+ },
+ {
+  "offset": 288,
+  "hex": "0x120",
+  "type": "float",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "float": 5
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_12B80",
+   "sub_528C0",
+   "sub_814B20"
+  ]
+ },
+ {
+  "offset": 292,
+  "hex": "0x124",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 296,
+  "hex": "0x128",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 300,
+  "hex": "0x12c",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 304,
+  "hex": "0x130",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 308,
+  "hex": "0x134",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "sub_813CB0"
+  ]
+ },
+ {
+  "offset": 312,
+  "hex": "0x138",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 2,
+  "types": {
+   "_QWORD": 1,
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_813CB0"
+  ]
+ },
+ {
+  "offset": 316,
+  "hex": "0x13c",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_815830"
+  ]
+ },
+ {
+  "offset": 320,
+  "hex": "0x140",
+  "type": "float",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "float": 1,
+   "_QWORD": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_815830"
+  ]
+ },
+ {
+  "offset": 324,
+  "hex": "0x144",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_815830"
+  ]
+ },
+ {
+  "offset": 328,
+  "hex": "0x148",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_QWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 332,
+  "hex": "0x14c",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 336,
+  "hex": "0x150",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_QWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 340,
+  "hex": "0x154",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 344,
+  "hex": "0x158",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_QWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 348,
+  "hex": "0x15c",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 352,
+  "hex": "0x160",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 356,
+  "hex": "0x164",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 360,
+  "hex": "0x168",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 364,
+  "hex": "0x16c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 368,
+  "hex": "0x170",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 372,
+  "hex": "0x174",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 374,
+  "hex": "0x176",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 376,
+  "hex": "0x178",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 380,
+  "hex": "0x17c",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_QWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 384,
+  "hex": "0x180",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 388,
+  "hex": "0x184",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 392,
+  "hex": "0x188",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 1,
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 396,
+  "hex": "0x18c",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 3,
+  "types": {
+   "_OWORD": 3
+  },
+  "funcs": [
+   "sub_4E460",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 412,
+  "hex": "0x19c",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 3,
+  "types": {
+   "_OWORD": 3
+  },
+  "funcs": [
+   "sub_4E460",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 428,
+  "hex": "0x1ac",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 3,
+  "types": {
+   "_OWORD": 3
+  },
+  "funcs": [
+   "sub_4E460",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 444,
+  "hex": "0x1bc",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 3,
+  "types": {
+   "_OWORD": 3
+  },
+  "funcs": [
+   "sub_4E460",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 460,
+  "hex": "0x1cc",
+  "type": "_OWORD",
+  "width": 0,
+  "hits": 3,
+  "types": {
+   "_OWORD": 3
+  },
+  "funcs": [
+   "sub_4E460",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 476,
+  "hex": "0x1dc",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 3,
+  "types": {
+   "_QWORD": 3
+  },
+  "funcs": [
+   "sub_4E460",
+   "sub_51440",
+   "sub_84AD0"
+  ]
+ },
+ {
+  "offset": 576,
+  "hex": "0x240",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 11,
+  "types": {
+   "_DWORD": 10,
+   "float": 1
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "CG_PredictPlayerState",
+   "Lua_Game_PlayerViewPitch",
+   "sub_3F8440",
+   "sub_4AA40"
+  ]
+ },
+ {
+  "offset": 580,
+  "hex": "0x244",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 10,
+  "types": {
+   "_DWORD": 9,
+   "float": 1
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "CG_PredictPlayerState",
+   "sub_3F8440",
+   "sub_4AA40",
+   "sub_51440"
+  ]
+ },
+ {
+  "offset": 584,
+  "hex": "0x248",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 10,
+  "types": {
+   "_DWORD": 9,
+   "float": 1
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "CG_PredictPlayerState",
+   "sub_3F8440",
+   "sub_4AA40",
+   "sub_51440"
+  ]
+ },
+ {
+  "offset": 636,
+  "hex": "0x27c",
+  "type": "float",
+  "width": 4,
+  "hits": 6,
+  "types": {
+   "float": 6
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_InterpolatePlayerState",
+   "sub_5C700",
+   "sub_5D5C0"
+  ]
+ },
+ {
+  "offset": 660,
+  "hex": "0x294",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 664,
+  "hex": "0x298",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 668,
+  "hex": "0x29c",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 672,
+  "hex": "0x2a0",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 708,
+  "hex": "0x2c4",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 2,
+  "types": {
+   "_BYTE": 2
+  },
+  "funcs": [
+   "sub_5C700"
+  ]
+ },
+ {
+  "offset": 712,
+  "hex": "0x2c8",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 4,
+   "(inline)": 1
+  },
+  "funcs": [
+   "Lua_Game_GetPlayerHealth",
+   "sub_32D1F0",
+   "sub_3D3B00",
+   "sub_427D60",
+   "sub_87AD0"
+  ]
+ },
+ {
+  "offset": 720,
+  "hex": "0x2d0",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 1,
+   "(inline)": 1
+  },
+  "funcs": [
+   "Lua_Game_GetPlayerMaxHealth",
+   "sub_32D240"
+  ]
+ },
+ {
+  "offset": 740,
+  "hex": "0x2e4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 16,
+  "types": {
+   "_DWORD": 16
+  },
+  "funcs": [
+   "sub_100510",
+   "sub_2D470",
+   "sub_343D0",
+   "sub_34710",
+   "sub_3E1800",
+   "sub_3EEFA0"
+  ]
+ },
+ {
+  "offset": 744,
+  "hex": "0x2e8",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 748,
+  "hex": "0x2ec",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 752,
+  "hex": "0x2f0",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 768,
+  "hex": "0x300",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_38340"
+  ]
+ },
+ {
+  "offset": 772,
+  "hex": "0x304",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_38340"
+  ]
+ },
+ {
+  "offset": 784,
+  "hex": "0x310",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "(inline)": 1,
+   "_DWORD": 3
+  },
+  "funcs": [
+   "sub_3D6AF0",
+   "sub_3D9660",
+   "sub_3D9E10",
+   "sub_4A210"
+  ]
+ },
+ {
+  "offset": 792,
+  "hex": "0x318",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 4,
+  "types": {
+   "_DWORD": 4
+  },
+  "funcs": [
+   "sub_3EDD50",
+   "sub_3EFD00",
+   "sub_47E50",
+   "sub_5AB30"
+  ]
+ },
+ {
+  "offset": 808,
+  "hex": "0x328",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "sub_3DF440"
+  ]
+ },
+ {
+  "offset": 816,
+  "hex": "0x330",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 5,
+  "types": {
+   "_DWORD": 4,
+   "int": 1
+  },
+  "funcs": [
+   "sub_3D1D70",
+   "sub_3D21A0",
+   "sub_DB780"
+  ]
+ },
+ {
+  "offset": 884,
+  "hex": "0x374",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 5,
+  "types": {
+   "_DWORD": 1,
+   "_BYTE": 4
+  },
+  "funcs": [
+   "Game_GetPlayerActionSlotMaterial",
+   "Lua_Game_PlayerPeekingOnLadder",
+   "sub_3C89E0"
+  ]
+ },
+ {
+  "offset": 900,
+  "hex": "0x384",
+  "type": "(inline)",
+  "width": 0,
+  "hits": 1,
+  "types": {
+   "(inline)": 1
+  },
+  "funcs": [
+   "sub_32BE00"
+  ]
+ },
+ {
+  "offset": 984,
+  "hex": "0x3d8",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 988,
+  "hex": "0x3dc",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 1008,
+  "hex": "0x3f0",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_UpdateViewModel"
+  ]
+ },
+ {
+  "offset": 1012,
+  "hex": "0x3f4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_UpdateViewModel"
+  ]
+ },
+ {
+  "offset": 1016,
+  "hex": "0x3f8",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 12,
+  "types": {
+   "_DWORD": 10,
+   "(inline)": 2
+  },
+  "funcs": [
+   "CG_OwnerDraw",
+   "CG_UpdateViewModel",
+   "Lua_Game_PlayerCanAttachToViewmodel",
+   "sub_103620",
+   "sub_32E510",
+   "sub_32E530"
+  ]
+ },
+ {
+  "offset": 1028,
+  "hex": "0x404",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "CG_UpdateViewModel"
+  ]
+ },
+ {
+  "offset": 1052,
+  "hex": "0x41c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_3E1800"
+  ]
+ },
+ {
+  "offset": 1168,
+  "hex": "0x490",
+  "type": "__int16",
+  "width": 2,
+  "hits": 3,
+  "types": {
+   "_WORD": 1,
+   "__int16": 2
+  },
+  "funcs": [
+   "sub_137A0",
+   "sub_428F20",
+   "sub_81CBA0"
+  ]
+ },
+ {
+  "offset": 1178,
+  "hex": "0x49a",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_4AA40"
+  ]
+ },
+ {
+  "offset": 1340,
+  "hex": "0x53c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 1,
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_137A0",
+   "sub_81CBA0"
+  ]
+ },
+ {
+  "offset": 1464,
+  "hex": "0x5b8",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "CG_OwnerDraw"
+  ]
+ },
+ {
+  "offset": 1476,
+  "hex": "0x5c4",
+  "type": "_QWORD",
+  "width": 8,
+  "hits": 1,
+  "types": {
+   "_QWORD": 1
+  },
+  "funcs": [
+   "CG_EntityEvent"
+  ]
+ },
+ {
+  "offset": 1500,
+  "hex": "0x5dc",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 1,
+  "types": {
+   "_WORD": 1
+  },
+  "funcs": [
+   "sub_32DEA0"
+  ]
+ },
+ {
+  "offset": 1512,
+  "hex": "0x5e8",
+  "type": "_WORD",
+  "width": 2,
+  "hits": 5,
+  "types": {
+   "_WORD": 3,
+   "_QWORD": 2
+  },
+  "funcs": [
+   "CG_DrawPlayerWeaponLowAmmoWarning",
+   "Game_GetPlayerActionSlotMaterial",
+   "Lua_Game_IsWeaponAutoReload",
+   "sub_433E0",
+   "sub_4CA40"
+  ]
+ },
+ {
+  "offset": 1520,
+  "hex": "0x5f0",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "_DWORD": 2
+  },
+  "funcs": [
+   "Game_GetPlayerActionSlotMaterial",
+   "Lua_Game_IsWeaponAutoReload"
+  ]
+ },
+ {
+  "offset": 1524,
+  "hex": "0x5f4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 67,
+  "types": {
+   "_BYTE": 3,
+   "_DWORD": 54,
+   "char": 8,
+   "(inline)": 2
+  },
+  "funcs": [
+   "CG_AddPlayerWeapon",
+   "CG_DrawActiveFrame",
+   "CG_DrawPlayerWeaponLowAmmoWarning",
+   "CG_DrawViewWeapon",
+   "CG_GetActionSlotIsSelected",
+   "CG_OwnerDraw"
+  ]
+ },
+ {
+  "offset": 1544,
+  "hex": "0x608",
+  "type": "float",
+  "width": 4,
+  "hits": 16,
+  "types": {
+   "float": 12,
+   "_DWORD": 1,
+   "(inline)": 3
+  },
+  "funcs": [
+   "CG_DrawViewWeapon",
+   "CG_InterpolatePlayerState",
+   "CG_OwnerDraw",
+   "Lua_Game_PlayerADS",
+   "sub_32CB70",
+   "sub_32D0F0"
+  ]
+ },
+ {
+  "offset": 1552,
+  "hex": "0x610",
+  "type": "float",
+  "width": 4,
+  "hits": 2,
+  "types": {
+   "float": 2
+  },
+  "funcs": [
+   "CG_InterpolatePlayerState",
+   "sub_3E25B0"
+  ]
+ },
+ {
+  "offset": 1576,
+  "hex": "0x628",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "_DWORD": 7
+  },
+  "funcs": [
+   "sub_32D4D0",
+   "sub_32E490",
+   "sub_3E1800",
+   "sub_455330",
+   "sub_456780",
+   "sub_E7980"
+  ]
+ },
+ {
+  "offset": 1680,
+  "hex": "0x690",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_43ABC0"
+  ]
+ },
+ {
+  "offset": 1696,
+  "hex": "0x6a0",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 11,
+  "types": {
+   "_BYTE": 7,
+   "_DWORD": 4
+  },
+  "funcs": [
+   "sub_137A0",
+   "sub_3EF9D0",
+   "sub_428150",
+   "sub_428220",
+   "sub_428F20",
+   "sub_42B5C0"
+  ]
+ },
+ {
+  "offset": 2260,
+  "hex": "0x8d4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 3,
+  "types": {
+   "_DWORD": 3
+  },
+  "funcs": [
+   "CG_DrawViewWeapon",
+   "CG_InterpolatePlayerState"
+  ]
+ },
+ {
+  "offset": 3986,
+  "hex": "0xf92",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_3C8FF0"
+  ]
+ },
+ {
+  "offset": 4011,
+  "hex": "0xfab",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "CG_OwnerDraw"
+  ]
+ },
+ {
+  "offset": 4025,
+  "hex": "0xfb9",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 1,
+  "types": {
+   "_BYTE": 1
+  },
+  "funcs": [
+   "sub_377A0"
+  ]
+ },
+ {
+  "offset": 4596,
+  "hex": "0x11f4",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_8296C0"
+  ]
+ },
+ {
+  "offset": 4704,
+  "hex": "0x1260",
+  "type": "(inline)",
+  "width": 0,
+  "hits": 10,
+  "types": {
+   "(inline)": 10
+  },
+  "funcs": [
+   "CG_ProcessClientNoteTracks",
+   "sub_284630",
+   "sub_3E47F0",
+   "sub_3E6A30",
+   "sub_403D0",
+   "sub_42B670"
+  ]
+ },
+ {
+  "offset": 8300,
+  "hex": "0x206c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_17AA80"
+  ]
+ },
+ {
+  "offset": 8304,
+  "hex": "0x2070",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "sub_34F60"
+  ]
+ },
+ {
+  "offset": 8308,
+  "hex": "0x2074",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "sub_34F60"
+  ]
+ },
+ {
+  "offset": 8312,
+  "hex": "0x2078",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "sub_34F60"
+  ]
+ },
+ {
+  "offset": 8316,
+  "hex": "0x207c",
+  "type": "float",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "float": 1
+  },
+  "funcs": [
+   "sub_34F60"
+  ]
+ },
+ {
+  "offset": 8320,
+  "hex": "0x2080",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_34F60"
+  ]
+ },
+ {
+  "offset": 8324,
+  "hex": "0x2084",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "_DWORD": 1
+  },
+  "funcs": [
+   "sub_34F60"
+  ]
+ },
+ {
+  "offset": 8332,
+  "hex": "0x208c",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 7,
+  "types": {
+   "(inline)": 2,
+   "_DWORD": 5
+  },
+  "funcs": [
+   "sub_367B0",
+   "sub_3D0B70",
+   "sub_3D4F20",
+   "sub_3E1F0",
+   "sub_3EDD50",
+   "sub_3EFD00"
+  ]
+ },
+ {
+  "offset": 8336,
+  "hex": "0x2090",
+  "type": "_BYTE",
+  "width": 1,
+  "hits": 4,
+  "types": {
+   "_BYTE": 2,
+   "_DWORD": 2
+  },
+  "funcs": [
+   "sub_3D0B70",
+   "sub_3D3B00",
+   "sub_3D4F20",
+   "sub_3DF320"
+  ]
+ },
+ {
+  "offset": 10144,
+  "hex": "0x27a0",
+  "type": "_DWORD",
+  "width": 4,
+  "hits": 15,
+  "types": {
+   "_DWORD": 12,
+   "(inline)": 3
+  },
+  "funcs": [
+   "CG_CalcViewValues",
+   "CG_DrawViewWeapon",
+   "sub_3F7C40",
+   "sub_3F8680",
+   "sub_429F80",
+   "sub_42ACD0"
+  ]
+ },
+ {
+  "offset": 10148,
+  "hex": "0x27a4",
+  "type": "int",
+  "width": 4,
+  "hits": 1,
+  "types": {
+   "int": 1
+  },
+  "funcs": [
+   "sub_B6790"
+  ]
+ }
+]

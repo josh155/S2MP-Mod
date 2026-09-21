@@ -1,0 +1,809 @@
+[
+ {
+  "offset": 0,
+  "hex": "0x0",
+  "hits": 7,
+  "funcs": [
+   "CG_InterpolatePlayerState_S2",
+   "CL_FirstSnapshot",
+   "CL_WritePeerToPeerOOBData",
+   "sub_91D650"
+  ]
+ },
+ {
+  "offset": 4,
+  "hex": "0x4",
+  "hits": 10,
+  "funcs": [
+   "CL_Demo_StartRecord",
+   "CL_Demo_WriteGameState",
+   "CL_InitCGame",
+   "CL_ParseGamestate",
+   "sub_4613A0",
+   "sub_70830"
+  ]
+ },
+ {
+  "offset": 8,
+  "hex": "0x8",
+  "hits": 8,
+  "funcs": [
+   "CL_Demo_ProcessPacket_Type2_3",
+   "sub_7537D",
+   "sub_83310",
+   "sub_90200",
+   "sub_919C50",
+   "sub_99960"
+  ]
+ },
+ {
+  "offset": 12,
+  "hex": "0xc",
+  "hits": 2,
+  "funcs": [
+   "sub_85DF0",
+   "sub_900C0"
+  ]
+ },
+ {
+  "offset": 16,
+  "hex": "0x10",
+  "hits": 20,
+  "funcs": [
+   "CL_SendPeerVoiceData",
+   "CL_WritePeerToPeerOOBData",
+   "Cl_CheckForResend_Connecting",
+   "HandleHeaderMsg",
+   "sub_4613A0",
+   "sub_461530"
+  ]
+ },
+ {
+  "offset": 24,
+  "hex": "0x18",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 32,
+  "hex": "0x20",
+  "hits": 15,
+  "funcs": [
+   "CL_SendPeerVoiceData",
+   "Cl_CheckForResend_Connecting",
+   "HandleHeaderMsg",
+   "sub_4613A0",
+   "sub_461D30",
+   "sub_461DF0"
+  ]
+ },
+ {
+  "offset": 36,
+  "hex": "0x24",
+  "hits": 7,
+  "funcs": [
+   "Cl_CheckForResend_Connecting",
+   "sub_4613A0",
+   "sub_6CCA0",
+   "sub_7BA30",
+   "sub_7BDD0",
+   "sub_80DF0"
+  ]
+ },
+ {
+  "offset": 40,
+  "hex": "0x28",
+  "hits": 8,
+  "funcs": [
+   "CL_ParseGamestate",
+   "Cl_CheckForResend_Connecting",
+   "sub_4613A0",
+   "sub_466750",
+   "sub_6CCA0",
+   "sub_7537D"
+  ]
+ },
+ {
+  "offset": 44,
+  "hex": "0x2c",
+  "hits": 2,
+  "funcs": [
+   "sub_466750",
+   "sub_80DF0"
+  ]
+ },
+ {
+  "offset": 304,
+  "hex": "0x130",
+  "hits": 10,
+  "funcs": [
+   "CL_Demo_StartRecord",
+   "CL_Demo_WriteGameState",
+   "CL_Disconnect",
+   "CL_ParseGamestate",
+   "CL_WritePacket",
+   "sub_462E70"
+  ]
+ },
+ {
+  "offset": 308,
+  "hex": "0x134",
+  "hits": 24,
+  "funcs": [
+   "CL_Demo_ProcessPacket_Type2_3",
+   "CL_Demo_StartRecord",
+   "CL_Demo_WriteGameState",
+   "CL_Disconnect",
+   "CL_WritePacket",
+   "sub_606B0"
+  ]
+ },
+ {
+  "offset": 312,
+  "hex": "0x138",
+  "hits": 25,
+  "funcs": [
+   "CL_Demo_ProcessPacket_Type2_3",
+   "CL_Disconnect",
+   "CL_WritePacket",
+   "sub_606B0",
+   "sub_60740",
+   "sub_70830"
+  ]
+ },
+ {
+  "offset": 316,
+  "hex": "0x13c",
+  "hits": 7,
+  "funcs": [
+   "CL_Disconnect",
+   "CL_WritePacket",
+   "sub_606B0",
+   "sub_60740",
+   "sub_70830",
+   "sub_85ED0"
+  ]
+ },
+ {
+  "offset": 22932,
+  "hex": "0x5994",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 25380,
+  "hex": "0x6324",
+  "hits": 2,
+  "funcs": [
+   "sub_90FCA0",
+   "sub_910010"
+  ]
+ },
+ {
+  "offset": 25488,
+  "hex": "0x6390",
+  "hits": 1,
+  "funcs": [
+   "sub_4613A0"
+  ]
+ },
+ {
+  "offset": 62972,
+  "hex": "0xf5fc",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 63092,
+  "hex": "0xf674",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 70244,
+  "hex": "0x11264",
+  "hits": 1,
+  "funcs": [
+   "CL_Demo_ReadDemoMessage"
+  ]
+ },
+ {
+  "offset": 82520,
+  "hex": "0x14258",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 82540,
+  "hex": "0x1426c",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 85656,
+  "hex": "0x14e98",
+  "hits": 1,
+  "funcs": [
+   "sub_919CE0"
+  ]
+ },
+ {
+  "offset": 90484,
+  "hex": "0x16174",
+  "hits": 1,
+  "funcs": [
+   "sub_4613A0"
+  ]
+ },
+ {
+  "offset": 130176,
+  "hex": "0x1fc80",
+  "hits": 1,
+  "funcs": [
+   "CL_Demo_SaveSegment_f"
+  ]
+ },
+ {
+  "offset": 131388,
+  "hex": "0x2013c",
+  "hits": 12,
+  "funcs": [
+   "CL_Demo_ProcessPacket_Type2_3",
+   "CL_Demo_StartClipRecord",
+   "CL_Demo_StartRecord",
+   "CL_ParseServerMessage",
+   "sub_83310",
+   "sub_90200"
+  ]
+ },
+ {
+  "offset": 131392,
+  "hex": "0x20140",
+  "hits": 16,
+  "funcs": [
+   "CL_Disconnect",
+   "CL_InitCGame",
+   "CL_ParseSnapshot",
+   "CL_WritePacket",
+   "sub_70830"
+  ]
+ },
+ {
+  "offset": 131396,
+  "hex": "0x20144",
+  "hits": 18,
+  "funcs": [
+   "CG_ExecuteServerCommand",
+   "CL_Demo_StartRecord",
+   "CL_Demo_WriteGameState",
+   "CL_Disconnect",
+   "CL_ParseGamestate",
+   "CL_ParseServerMessage_Internal"
+  ]
+ },
+ {
+  "offset": 131400,
+  "hex": "0x20148",
+  "hits": 4,
+  "funcs": [
+   "CG_ExecuteServerCommand",
+   "CL_Demo_ProcessPacket_Type2_3",
+   "CL_InitCGame",
+   "sub_70830"
+  ]
+ },
+ {
+  "offset": 131404,
+  "hex": "0x2014c",
+  "hits": 3,
+  "funcs": [
+   "CG_ExecuteServerCommand",
+   "CL_ParseServerMessage_Internal",
+   "CL_WritePacket"
+  ]
+ },
+ {
+  "offset": 262480,
+  "hex": "0x40150",
+  "hits": 6,
+  "funcs": [
+   "CL_Demo_Play_f",
+   "CL_Demo_StartRecord",
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_F1A00"
+  ]
+ },
+ {
+  "offset": 262736,
+  "hex": "0x40250",
+  "hits": 10,
+  "funcs": [
+   "CL_Demo_StartRecord",
+   "sub_90FCA0",
+   "sub_910010"
+  ]
+ },
+ {
+  "offset": 262744,
+  "hex": "0x40258",
+  "hits": 18,
+  "funcs": [
+   "CL_Demo_Read",
+   "CL_Demo_ReadFooter",
+   "CL_Demo_StartRecord",
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_F1A00"
+  ]
+ },
+ {
+  "offset": 262752,
+  "hex": "0x40260",
+  "hits": 6,
+  "funcs": [
+   "CL_Demo_Play_f",
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_911190"
+  ]
+ },
+ {
+  "offset": 262760,
+  "hex": "0x40268",
+  "hits": 8,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "CL_Demo_StartClipRecord",
+   "CL_Demo_StartRecord",
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_9192E0"
+  ]
+ },
+ {
+  "offset": 262764,
+  "hex": "0x4026c",
+  "hits": 1,
+  "funcs": [
+   "CL_Demo_StartRecord"
+  ]
+ },
+ {
+  "offset": 262768,
+  "hex": "0x40270",
+  "hits": 4,
+  "funcs": [
+   "CL_Demo_SeekToNextKeyFrame",
+   "CL_Demo_SetCameraMode",
+   "CL_Demo_StartRecord",
+   "sub_915A10"
+  ]
+ },
+ {
+  "offset": 262772,
+  "hex": "0x40274",
+  "hits": 11,
+  "funcs": [
+   "CL_Demo_ProcessPacket_Type2_3",
+   "CL_Demo_StartRecord",
+   "sub_914790",
+   "sub_917570",
+   "sub_917ED0",
+   "sub_91B130"
+  ]
+ },
+ {
+  "offset": 262773,
+  "hex": "0x40275",
+  "hits": 1,
+  "funcs": [
+   "CL_Demo_StartRecord"
+  ]
+ },
+ {
+  "offset": 262776,
+  "hex": "0x40278",
+  "hits": 1,
+  "funcs": [
+   "CL_Demo_StartRecord"
+  ]
+ },
+ {
+  "offset": 262784,
+  "hex": "0x40280",
+  "hits": 1,
+  "funcs": [
+   "CL_Demo_StartRecord"
+  ]
+ },
+ {
+  "offset": 262788,
+  "hex": "0x40284",
+  "hits": 2,
+  "funcs": [
+   "CL_Demo_Play_f",
+   "CL_Demo_StartRecord"
+  ]
+ },
+ {
+  "offset": 342144,
+  "hex": "0x53880",
+  "hits": 5,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "CL_Demo_StartRecord",
+   "sub_90FCA0",
+   "sub_910010"
+  ]
+ },
+ {
+  "offset": 342148,
+  "hex": "0x53884",
+  "hits": 3,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "sub_90FCA0",
+   "sub_910010"
+  ]
+ },
+ {
+  "offset": 342152,
+  "hex": "0x53888",
+  "hits": 2,
+  "funcs": [
+   "sub_91C6E0",
+   "sub_91D8E0"
+  ]
+ },
+ {
+  "offset": 342156,
+  "hex": "0x5388c",
+  "hits": 5,
+  "funcs": [
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_91D8E0"
+  ]
+ },
+ {
+  "offset": 342160,
+  "hex": "0x53890",
+  "hits": 4,
+  "funcs": [
+   "CL_Demo_HiResScreenshot",
+   "CL_Demo_Play_f",
+   "CL_Demo_StartClipRecord"
+  ]
+ },
+ {
+  "offset": 342416,
+  "hex": "0x53990",
+  "hits": 3,
+  "funcs": [
+   "CL_Demo_Play_f",
+   "CL_Demo_StartClipRecord"
+  ]
+ },
+ {
+  "offset": 342704,
+  "hex": "0x53ab0",
+  "hits": 2,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342708,
+  "hex": "0x53ab4",
+  "hits": 1,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342724,
+  "hex": "0x53ac4",
+  "hits": 1,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342732,
+  "hex": "0x53acc",
+  "hits": 1,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342736,
+  "hex": "0x53ad0",
+  "hits": 1,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342740,
+  "hex": "0x53ad4",
+  "hits": 1,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342744,
+  "hex": "0x53ad8",
+  "hits": 1,
+  "funcs": [
+   "sub_91CEC0"
+  ]
+ },
+ {
+  "offset": 342752,
+  "hex": "0x53ae0",
+  "hits": 2,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "sub_91CC80"
+  ]
+ },
+ {
+  "offset": 342768,
+  "hex": "0x53af0",
+  "hits": 4,
+  "funcs": [
+   "sub_91CC80",
+   "sub_91D570",
+   "sub_91D650"
+  ]
+ },
+ {
+  "offset": 342772,
+  "hex": "0x53af4",
+  "hits": 6,
+  "funcs": [
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_91CC80",
+   "sub_91D570",
+   "sub_91D650"
+  ]
+ },
+ {
+  "offset": 343712,
+  "hex": "0x53ea0",
+  "hits": 11,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_91CC80",
+   "sub_91D570",
+   "sub_91D830"
+  ]
+ },
+ {
+  "offset": 343720,
+  "hex": "0x53ea8",
+  "hits": 2,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "sub_91C680"
+  ]
+ },
+ {
+  "offset": 343721,
+  "hex": "0x53ea9",
+  "hits": 1,
+  "funcs": [
+   "sub_91C680"
+  ]
+ },
+ {
+  "offset": 343724,
+  "hex": "0x53eac",
+  "hits": 1,
+  "funcs": [
+   "sub_91C680"
+  ]
+ },
+ {
+  "offset": 346120,
+  "hex": "0x54808",
+  "hits": 5,
+  "funcs": [
+   "CL_Demo_ReadFooter",
+   "sub_91C680",
+   "sub_91D650"
+  ]
+ },
+ {
+  "offset": 346128,
+  "hex": "0x54810",
+  "hits": 4,
+  "funcs": [
+   "CL_Demo_StartRecord",
+   "sub_91BD20",
+   "sub_91CFA0"
+  ]
+ },
+ {
+  "offset": 346132,
+  "hex": "0x54814",
+  "hits": 4,
+  "funcs": [
+   "CL_Demo_StartRecord",
+   "sub_91C6C0",
+   "sub_91C6E0"
+  ]
+ },
+ {
+  "offset": 346136,
+  "hex": "0x54818",
+  "hits": 23,
+  "funcs": [
+   "CL_Demo_StartClipRecord",
+   "CL_Demo_StartRecord",
+   "sub_90200",
+   "sub_90FCA0",
+   "sub_910010",
+   "sub_99960"
+  ]
+ },
+ {
+  "offset": 346144,
+  "hex": "0x54820",
+  "hits": 28,
+  "funcs": [
+   "CL_Demo_ProcessPacket_Type1",
+   "CL_Demo_ProcessPacket_Type2_3",
+   "CL_Demo_ProcessPacket_Type4",
+   "CL_Demo_ReadFooter",
+   "CL_Demo_StartRecord",
+   "sub_917D40"
+  ]
+ },
+ {
+  "offset": 346152,
+  "hex": "0x54828",
+  "hits": 1,
+  "funcs": [
+   "sub_916D40"
+  ]
+ },
+ {
+  "offset": 346160,
+  "hex": "0x54830",
+  "hits": 7,
+  "funcs": [
+   "CL_Disconnect",
+   "CL_ParseSnapshot",
+   "CL_WritePacket",
+   "sub_70830",
+   "sub_83310",
+   "sub_90200"
+  ]
+ },
+ {
+  "offset": 346164,
+  "hex": "0x54834",
+  "hits": 6,
+  "funcs": [
+   "CL_SendPeerVoiceData",
+   "HandleHeaderMsg",
+   "sub_461D30",
+   "sub_461DF0",
+   "sub_828300",
+   "sub_828F20"
+  ]
+ },
+ {
+  "offset": 346168,
+  "hex": "0x54838",
+  "hits": 3,
+  "funcs": [
+   "sub_83310",
+   "sub_90200",
+   "sub_99960"
+  ]
+ },
+ {
+  "offset": 346176,
+  "hex": "0x54840",
+  "hits": 3,
+  "funcs": [
+   "sub_83310",
+   "sub_90200",
+   "sub_99960"
+  ]
+ },
+ {
+  "offset": 346180,
+  "hex": "0x54844",
+  "hits": 1,
+  "funcs": [
+   "sub_436550"
+  ]
+ },
+ {
+  "offset": 346192,
+  "hex": "0x54850",
+  "hits": 4,
+  "funcs": [
+   "sub_436550",
+   "sub_83310",
+   "sub_90200",
+   "sub_99960"
+  ]
+ },
+ {
+  "offset": 425048,
+  "hex": "0x67c58",
+  "hits": 3,
+  "funcs": [
+   "CL_Demo_FreeCameraMove"
+  ]
+ },
+ {
+  "offset": 425052,
+  "hex": "0x67c5c",
+  "hits": 4,
+  "funcs": [
+   "CL_Demo_FreeCameraMove"
+  ]
+ },
+ {
+  "offset": 425056,
+  "hex": "0x67c60",
+  "hits": 4,
+  "funcs": [
+   "CL_Demo_FreeCameraMove"
+  ]
+ },
+ {
+  "offset": 482376,
+  "hex": "0x75c48",
+  "hits": 18,
+  "funcs": [
+   "CL_Disconnect",
+   "CL_WritePacket",
+   "sub_70830",
+   "sub_83310",
+   "sub_90200",
+   "sub_99960"
+  ]
+ },
+ {
+  "offset": 482377,
+  "hex": "0x75c49",
+  "hits": 3,
+  "funcs": [
+   "CL_Disconnect",
+   "CL_WritePacket",
+   "sub_70830"
+  ]
+ },
+ {
+  "offset": 482384,
+  "hex": "0x75c50",
+  "hits": 1,
+  "funcs": [
+   "Cl_CheckForResend_Connecting"
+  ]
+ }
+]
